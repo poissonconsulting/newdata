@@ -4,15 +4,15 @@
 \alias{new_data}
 \title{New Data}
 \usage{
-new_data(data, seq = character(0), values = data.frame(),
-  obs_only = FALSE, length_out = 30L)
+new_data(data, seq = character(0), values = list(), obs_only = FALSE,
+  length_out = 30L)
 }
 \arguments{
 \item{data}{The data frame to generate the new data from.}
 
 \item{seq}{A character vector of the variables to represent using a sequence in the new data.}
 
-\item{values}{A list}
+\item{values}{A named list of values for variables that are not in seq.}
 
 \item{obs_only}{A flag indicating whether to only allow observed combinations of factor levels in the new data.}
 

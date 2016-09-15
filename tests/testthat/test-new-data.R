@@ -20,7 +20,7 @@ test_that("newdata", {
   expect_equal(nrow(new_data(datasets::chickwts, c("weight", "feed"))), 30 * nlevels(feed))
 })
 
-test_that("generates data frame with correct number of rows", {
+test_that("new_data generates data frame with correct number of rows", {
   data <- data.frame(
     dlogical = as.logical(0:9),
     dinteger = 1:10,
@@ -34,3 +34,26 @@ test_that("generates data frame with correct number of rows", {
   expect_that(nrow(new_data(data, c("dnumeric","dinteger"))), equals(300))
   expect_that(nrow(new_data(data, c("dfactor","dinteger"), length_out = 5)), equals(50))
 })
+
+test_that("new_data values works", {
+  expect_identical(new_data(Orange),
+                   data_frame(Tree = factor(levels(Orange$Tree)[1], levels(Orange$Tree)),
+                              age = mean(Orange$age),
+                              circumference = mean(Orange$circumference)))
+
+  expect_identical(new_data(Orange, values = list(age = 1)),
+                   data_frame(Tree = factor(levels(Orange$Tree)[1], levels(Orange$Tree)),
+                              age = 1,
+                              circumference = mean(Orange$circumference)))
+
+  expect_identical(new_data(Orange, values = list(age = c(1,2))),
+                   data_frame(Tree = factor(levels(Orange$Tree)[1], levels(Orange$Tree)),
+                              age = c(1,2),
+                              circumference = mean(Orange$circumference)))
+})
+
+test_that("new_data values errors", {
+  expect_error(new_data(Orange, values = list(c(1,2))), "values must be a named list")
+  expect_error(new_data(Orange, values = list(age = TRUE)), "classes of variables in values must match those in data")
+})
+

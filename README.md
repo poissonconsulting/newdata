@@ -13,7 +13,22 @@ Introduction
 Utilization
 -----------
 
-    newdata()
+``` r
+library(datasets)
+library(ggplot2)
+library(newdata)
+
+model <- lm(circumference ~ age + Tree + age:Tree, data = Orange)
+
+age <- new_data(Orange, c("age", "Tree"))
+
+age$circumference <- predict(model, newdata = age)
+
+ggplot(data = Orange, aes(x = age, y = circumference, color = Tree)) + 
+  geom_point() + geom_line(data = age)
+```
+
+![](README-unnamed-chunk-2-1.png)
 
 Installation
 ------------

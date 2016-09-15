@@ -17,6 +17,7 @@ Imports:
     tibble
 Suggests:
     datasets,
+    stats,
     testthat
 Encoding: UTF-8
 LazyData: true
