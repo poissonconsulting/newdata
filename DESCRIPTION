@@ -1,0 +1,23 @@
+Package: newdata
+Title: Generate New Data Frames for Predictive Purposes
+Version: 0.0.0.9000
+Date: 2016-09-15
+Authors@R: person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre"))
+Description: Generates newdata frames for predict functions.
+License: MIT + file LICENSE
+URL: https://github.com/poissonconsulting/newdata
+BugReports: https://github.com/poissonconsulting/newdata/issues
+Depends:
+    R (>= 3.3.1)
+Imports:
+    datacheckr,
+    lubridate,
+    magrittr,
+    dplyr,
+    tibble
+Suggests:
+    datasets,
+    testthat
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 5.0.1
