@@ -39,7 +39,7 @@ new_data <- function(data, seq = character(0), values = list(),
   new_data <- expand.grid(c(new_seqs, new_values, values),
                           KEEP.OUT.ATTRS = FALSE, stringsAsFactors = FALSE)
 
-  #  if (obs_only) new_data %<>% obs_only(data)
+  if (obs_only) new_data %<>% obs_only(data)
 
   new_data <- new_data[names(data)] %>% tibble::as_data_frame()
   new_data
