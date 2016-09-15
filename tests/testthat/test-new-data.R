@@ -35,25 +35,25 @@ test_that("new_data generates data frame with correct number of rows", {
   expect_that(nrow(new_data(data, c("dfactor","dinteger"), length_out = 5)), equals(50))
 })
 
-test_that("new_data values works", {
+test_that("new_data ref works", {
   expect_identical(new_data(Orange),
                    data_frame(Tree = factor(levels(Orange$Tree)[1], levels(Orange$Tree)),
                               age = mean(Orange$age),
                               circumference = mean(Orange$circumference)))
 
-  expect_identical(new_data(Orange, values = list(age = 1)),
+  expect_identical(new_data(Orange, ref = list(age = 1)),
                    data_frame(Tree = factor(levels(Orange$Tree)[1], levels(Orange$Tree)),
                               age = 1,
                               circumference = mean(Orange$circumference)))
 
-  expect_identical(new_data(Orange, values = list(age = c(1,2))),
+  expect_identical(new_data(Orange, ref = list(age = c(1,2))),
                    data_frame(Tree = factor(levels(Orange$Tree)[1], levels(Orange$Tree)),
                               age = c(1,2),
                               circumference = mean(Orange$circumference)))
 })
 
-test_that("new_data values errors", {
-  expect_error(new_data(Orange, values = list(c(1,2))), "values must be a named list")
-  expect_error(new_data(Orange, values = list(age = TRUE)), "classes of variables in values must match those in data")
+test_that("new_data ref errors", {
+  expect_error(new_data(Orange, ref = list(c(1,2))), "ref must be a named list")
+  expect_error(new_data(Orange, ref = list(age = TRUE)), "classes of variables in ref must match those in data")
 })
 

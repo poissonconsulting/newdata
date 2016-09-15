@@ -4,7 +4,7 @@
 \alias{new_data}
 \title{New Data}
 \usage{
-new_data(data, seq = character(0), values = list(), obs_only = FALSE,
+new_data(data, seq = character(0), ref = list(), obs_only = FALSE,
   length_out = 30L)
 }
 \arguments{
@@ -12,11 +12,11 @@ new_data(data, seq = character(0), values = list(), obs_only = FALSE,
 
 \item{seq}{A character vector of the variables to represent using a sequence in the new data.}
 
-\item{values}{A named list of values for variables that are not in seq.}
+\item{ref}{A named list of reference values for variables that are not in seq.}
 
 \item{obs_only}{A flag indicating whether to only allow observed combinations of factor levels in the new data.}
 
-\item{length_out}{A count indicating the length of integer and numeric sequences.}
+\item{length_out}{A count indicating the length of numeric and maximum length of integer sequences.}
 }
 \value{
 A tibble of the new data.

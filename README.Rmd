@@ -21,6 +21,7 @@ knitr::opts_chunk$set(
 ## Introduction
 
 `newdata` is an R package to generate newdata frames for predict functions.
+The main idea is that most variable are held constant at a reference level while
 
 ## Utilization
 
