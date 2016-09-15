@@ -1,6 +1,6 @@
 #' New Value
 #'
-#' Generate a new value for a vector.
+#' Generate a new reference value for a vector.
 #'
 #' @param x The vector to generate the new value for.
 #' @seealso \code{\link{new_data}}.

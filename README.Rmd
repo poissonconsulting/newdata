@@ -21,7 +21,9 @@ knitr::opts_chunk$set(
 ## Introduction
 
 `newdata` is an R package to generate newdata frames for predict functions.
-The main idea is that most variable are held constant at a reference level while
+
+The main idea is that most variables are held constant at a reference level while
+the variables of interest vary across their range.
 
 ## Utilization
 
@@ -32,6 +34,8 @@ library(newdata)
 
 model <- lm(circumference ~ age + Tree + age:Tree, data = Orange)
 
+# generate a data frame for all combinations of Tree ranging across the values
+# of age with circumference at the mean level.
 age <- new_data(Orange, c("age", "Tree"))
 
 age$circumference <- predict(model, newdata = age)

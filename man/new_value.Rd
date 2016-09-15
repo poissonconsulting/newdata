@@ -10,7 +10,7 @@ new_value(x)
 \item{x}{The vector to generate the new value for.}
 }
 \description{
-Generate a new value for a vector.
+Generate a new reference value for a vector.
 }
 \seealso{
 \code{\link{new_data}}.

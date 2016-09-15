@@ -1,6 +1,6 @@
 Package: newdata
 Title: Generate New Data Frames for Predictive Purposes
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Date: 2016-09-15
 Authors@R: person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre"))
 Description: Generates newdata frames for predict functions.
