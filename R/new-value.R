@@ -1,3 +1,9 @@
+#' New Value
+#'
+#' Generate a new value for a vector.
+#'
+#' @param x The vector to generate the new value for.
+#' @seealso \code{\link{new_data}}.
 #' @export
 new_value <- function(x)
   UseMethod("new_value")
@@ -49,5 +55,3 @@ new_value.POSIXct <- function(x) {
   x %<>% mean(na.rm = TRUE) %>% round() %>% as.POSIXct(tz = tz)
   x
 }
-
-
