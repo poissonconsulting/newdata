@@ -20,28 +20,49 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-`newdata` is an R package to generate newdata frames for predict functions.
+`newdata` is an R package to generate new data frames for passing to `predict` functions.
+In the new data the column or columns of interest vary across their range while the remaining columns are held constant at their reference value.
 
-The main idea is that most variables are held constant at a reference level while
-the variables of interest vary across their range.
+The reference value for a factor is its first level, while the reference level for columns of other types are the mean or rounded mean in the case of logicals, integers, Dates or POSIXcts.
 
 ## Utilization
 
 ```{r}
-library(datasets)
 library(ggplot2)
 library(newdata)
 
-model <- lm(circumference ~ age + Tree + age:Tree, data = Orange)
+mtcars <- datasets::mtcars
 
-# generate a data frame for all combinations of Tree ranging across the values
-# of age with circumference at the mean level.
-age <- new_data(Orange, c("age", "Tree"))
+model <- lm(mpg ~ wt + hp + poly(disp,2), data = mtcars)
+summary(model)
 
-age$circumference <- predict(model, newdata = age)
+# generate a data frame across range of wt with other predictor
+# variables held constant
+wt <- new_data(mtcars, c("wt"))
+head(wt)
 
-ggplot(data = Orange, aes(x = age, y = circumference, color = Tree)) + 
-  geom_point() + geom_line(data = age)
+wt <- cbind(wt, predict(model, newdata = wt, interval = "confidence"))
+
+ggplot(data = wt, aes(x = wt, y = fit)) + 
+  geom_point(data = mtcars, aes(y = mpg)) + 
+  geom_line() +
+  geom_line(aes(y = lwr), linetype = "dotted") +
+  geom_line(aes(y = upr), linetype = "dotted") +
+  ylab("mpg")
+
+# generate a data frame across range of wt with other predictor
+# variables held constant
+disp <- new_data(mtcars, c("disp"))
+head(disp)
+
+disp <- cbind(disp, predict(model, newdata = disp, interval = "confidence"))
+
+ggplot(data = disp, aes(x = disp, y = fit)) + 
+  geom_point(data = mtcars, aes(y = mpg)) + 
+  geom_line() +
+  geom_line(aes(y = lwr), linetype = "dotted") +
+  geom_line(aes(y = upr), linetype = "dotted") +
+  ylab("mpg")
 ```
 
 ## Installation

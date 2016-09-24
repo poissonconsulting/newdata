@@ -1,9 +1,14 @@
 Package: newdata
 Title: Generate New Data Frames for Predictive Purposes
-Version: 0.0.0.9001
-Date: 2016-09-15
+Version: 0.0.0.9002
+Date: 2016-09-24
 Authors@R: person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre"))
-Description: Generates newdata frames for predict functions.
+Description: Generates new data frames for passing to predict functions.
+    In the new data the column or columns of interest vary across their range
+    while the remaining columns are held constant at their reference value.
+    The reference value for a factor is its first level,
+    while the reference level for columns of other types are the mean
+    or rounded mean in the case of logicals, integers, Dates or POSIXcts.
 License: MIT + file LICENSE
 URL: https://github.com/poissonconsulting/newdata
 BugReports: https://github.com/poissonconsulting/newdata/issues
@@ -17,6 +22,7 @@ Imports:
     tibble
 Suggests:
     datasets,
+    ggplot2,
     stats,
     testthat
 Encoding: UTF-8

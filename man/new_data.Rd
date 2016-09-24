@@ -31,7 +31,7 @@ while the variables of interest vary across their range.
 The returned variables are of the same class as the original variables while
 the rows in the data frame are unique. Consequently continuous variables such as integers
 which have discrete values will not attain the specified \code{length_out} value if
-there are two few possible values between the minimum and maximum.
+there are too few possible values between the minimum and maximum.
 
 If a factor is named in seq then all levels of the factor are represented i.e.
 \code{length_out} is ignored. The only exception to this is if \code{obs_only = TRUE}
@@ -40,5 +40,39 @@ If multiple factors occur as sequences only observed combinations of those facto
 
 It is worth noting that \code{ref} can be used to specify sequences for particular values as well
 as single references. It is useful for extrapolating outside the range of the data.
+}
+\examples{
+library(ggplot2)
+library(newdata)
+
+mtcars <- datasets::mtcars
+
+model <- lm(mpg ~ wt + hp + poly(disp,2), data = mtcars)
+summary(model)
+
+# generate a data frame across range of wt with other predictor
+# variables held constant
+wt <- new_data(mtcars, c("wt"))
+head(wt)
+wt <- cbind(wt, predict(model, newdata = wt, interval = "confidence"))
+ggplot(data = wt, aes(x = wt, y = fit)) +
+  geom_point(data = mtcars, aes(y = mpg)) +
+  geom_line() +
+  geom_line(aes(y = lwr), linetype = "dotted") +
+  geom_line(aes(y = upr), linetype = "dotted") +
+  ylab("mpg")
+
+# generate a data frame across range of wt with other predictor
+# variables held constant
+disp <- new_data(mtcars, c("disp"))
+head(disp)
+
+disp <- cbind(disp, predict(model, newdata = disp, interval = "confidence"))
+ggplot(data = disp, aes(x = disp, y = fit)) +
+  geom_point(data = mtcars, aes(y = mpg)) +
+  geom_line() +
+  geom_line(aes(y = lwr), linetype = "dotted") +
+  geom_line(aes(y = upr), linetype = "dotted") +
+  ylab("mpg")
 }
 
