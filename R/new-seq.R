@@ -15,6 +15,7 @@ new_seq.default <- function(x, length_out = 30) {
   seq(from = min(x, na.rm = TRUE), to = max(x, na.rm = TRUE), length.out = length_out)
 }
 
+#' @export
 new_seq.logical <- function(x, length_out = 2) {
   if (all(is.na(x))) return(x[1])
   x %<>% unique() %>% sort()
