@@ -33,7 +33,7 @@ new_seq.integer <- function(x, length_out = 30) {
 
 #' @export
 new_seq.character <- function(x, length_out = NULL) {
-  stop("new_seq is undefined for character vectors", call. = FALSE)
+  error("new_seq is undefined for character vectors")
 }
 
 #' @export

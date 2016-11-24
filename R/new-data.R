@@ -11,9 +11,8 @@
 #' there are too few possible values between the minimum and maximum.
 #'
 #' If a factor is named in seq then all levels of the factor are represented i.e.
-#' \code{length_out} is ignored. The only exception to this is if \code{obs_only = TRUE}
+#' \code{length_out} is ignored. The only exception to this is if the factor is named in \code{obs_only}
 #' in which case only observed factor levels are permitted in sequences.
-#' If multiple factors occur as sequences only observed combinations of those factors are permitted.
 #'
 #' It is worth noting that \code{ref} can be used to specify sequences for particular values as well
 #' as single references. It is useful for extrapolating outside the range of the data.
@@ -21,8 +20,8 @@
 #' @param data The data frame to generate the new data from.
 #' @param seq A character vector of the variables to represent as a sequence in the new data.
 #' @param ref A named list of reference values for variables that are not in seq.
-#' @param obs_only A flag indicating whether to only allow observed combinations of factor levels in the new data.
-#' @param length_out A count indicating the length sequences.
+#' @param obs_only A list of character vectors indicating the sets of variables to only allow observed combinations for. If TRUE then obs_only is set to be seq.
+#' @param length_out A count indicating the length of numeric and possibly integer sequences.
 #' @return A tibble of the new data.
 #' @examples
 #' library(ggplot2)
@@ -62,24 +61,34 @@
 #'   ylab("mpg")
 #' @export
 new_data <- function(data, seq = character(0), ref = list(),
-                     obs_only = FALSE, length_out = 30L) {
+                     obs_only = list(character(0)), length_out = 30L) {
 
   length_out %<>% as.integer()
 
-  check_data1(data); check_vector(seq, "", min_length = 0);
-  if (!is.list(ref)) stop("ref must be a list")
-  check_flag(obs_only); check_scalar(length_out, 2L, 1000L)
+  check_data1(data)
+  check_vector(seq, "", min_length = 0)
+  if (!is.list(ref)) error("ref must be a list")
+  if (identical(obs_only, TRUE)) obs_only <- list(seq)
+  if (!is.list(obs_only)) error("obs_only must be a list")
+  if (!all(vapply(obs_only, is.character, TRUE))) error("obs_only must be a list of character vectors")
+
+  check_scalar(length_out, 2L, 1000L)
+
+  obs_only %<>% unique()
 
   if (!all(tibble::has_name(data, seq)))
-    stop("data missing names in seq", call. = FALSE)
+    error("data missing names in seq")
 
   if (!all(tibble::has_name(data, names(ref))))
-    stop("data missing names in ref", call. = FALSE)
+    error("data missing names in ref")
+
+  if (!all(tibble::has_name(data, unique(unlist(obs_only)))))
+    error("data missing names in obs_only")
 
   if (length(ref)) {
-    if (!is.named(ref)) stop("ref must be a named list", call. = FALSE)
+    if (!is.named(ref)) error("ref must be a named list")
     if (!identical(classes(ref), classes(data[names(data) %in% names(ref)])))
-      stop("classes of variables in ref must match those in data", call. = FALSE)
+      error("classes of variables in ref must match those in data")
   }
 
   new_seqs <- lapply(data[names(data) %in% seq], new_seq, length_out)
@@ -90,7 +99,7 @@ new_data <- function(data, seq = character(0), ref = list(),
   new_data <- expand.grid(c(new_seqs, new_ref, ref),
                           KEEP.OUT.ATTRS = FALSE, stringsAsFactors = FALSE)
 
-  if (obs_only) new_data %<>% obs_only(data, seq)
+  for (obo in obs_only) new_data %<>% obs_only(data, obo)
 
   new_data <- new_data[names(data)] %>% tibble::as_data_frame()
   new_data

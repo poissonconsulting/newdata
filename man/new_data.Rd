@@ -4,8 +4,8 @@
 \alias{new_data}
 \title{New Data}
 \usage{
-new_data(data, seq = character(0), ref = list(), obs_only = FALSE,
-  length_out = 30L)
+new_data(data, seq = character(0), ref = list(),
+  obs_only = list(character(0)), length_out = 30L)
 }
 \arguments{
 \item{data}{The data frame to generate the new data from.}
@@ -14,9 +14,9 @@ new_data(data, seq = character(0), ref = list(), obs_only = FALSE,
 
 \item{ref}{A named list of reference values for variables that are not in seq.}
 
-\item{obs_only}{A flag indicating whether to only allow observed combinations of factor levels in the new data.}
+\item{obs_only}{A list of character vectors indicating the sets of variables to only allow observed combinations for. If TRUE then obs_only is set to be seq.}
 
-\item{length_out}{A count indicating the length sequences.}
+\item{length_out}{A count indicating the length of numeric and possibly integer sequences.}
 }
 \value{
 A tibble of the new data.
@@ -34,9 +34,8 @@ which have discrete values will not attain the specified \code{length_out} value
 there are too few possible values between the minimum and maximum.
 
 If a factor is named in seq then all levels of the factor are represented i.e.
-\code{length_out} is ignored. The only exception to this is if \code{obs_only = TRUE}
+\code{length_out} is ignored. The only exception to this is if the factor is named in \code{obs_only}
 in which case only observed factor levels are permitted in sequences.
-If multiple factors occur as sequences only observed combinations of those factors are permitted.
 
 It is worth noting that \code{ref} can be used to specify sequences for particular values as well
 as single references. It is useful for extrapolating outside the range of the data.
