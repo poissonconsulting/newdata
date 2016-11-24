@@ -22,4 +22,9 @@ test_that("new_data obs_only", {
   expect_identical(nrow(new_data(data, c("Random"), obs_only = TRUE)), 2L)
   expect_identical(nrow(new_data(data, c("Fac3", "Random"))), 6L)
   expect_identical(nrow(new_data(data, c("Fac3", "Random"), obs_only = TRUE)), 4L)
+  expect_identical(new_data(data, c("Fac1","Fac2","Fac3"), obs_only = TRUE),
+                   new_data(data, c("Fac1","Fac2","Fac3"), obs_only = list(c("Fac1","Fac2","Fac3"))))
+  expect_equal(new_data(data, c("Fac1","Fac2","Fac3","Random"), obs_only = TRUE), data)
+  expect_equal(nrow(new_data(data, c("Fac1","Fac2","Fac3","Random"), obs_only = TRUE)), 20L)
+  expect_identical(nrow(new_data(data, c("Fac1","Fac2","Fac3","Random"), obs_only = list("Fac1", "Fac2", "Fac3", "Random"))), 24L)
 })
