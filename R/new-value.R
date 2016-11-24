@@ -15,8 +15,7 @@ new_value.default <- function(x) {
 
 #' @export
 new_value.logical <- function(x) {
-  x %<>% mean(na.rm = TRUE) %>% round() %>% as.logical()
-  x
+  FALSE
 }
 
 #' @export
