@@ -54,7 +54,29 @@ test_that("new_data ref works", {
 })
 
 test_that("new_data ref errors", {
-  expect_error(new_data(Orange, ref = list(c(1,2))), "ref must be a named list")
+  expect_error(new_data(Orange, ref = list(1,2)), "ref must be a named list")
   expect_error(new_data(Orange, ref = list(age = TRUE)), "classes of variables in ref must match those in data")
+  expect_error(new_data(Orange, seq = "age", ref = list(age = 118)), "variables must not be in seq and ref")
+  expect_error(new_data(Orange, obs_only = list("age"), ref = list(age = 118)), "variables must not be in obs_only and ref")
 })
 
+test_that("new_data ref works", {
+  new_data <- new_data(ToothGrowth, ref = list(dose = 4))
+  expect_identical(new_data$dose, 4)
+
+  new_data <- new_data(ToothGrowth, ref = list(dose = c(3,4)))
+  expect_identical(new_data$dose, c(3,4))
+
+  new_data <- new_data(ToothGrowth, ref = list(dose = c(3,4), len = c(10.1, 12, 13)))
+  expect_identical(colnames(new_data), c("len", "supp", "dose"))
+  expect_identical(new_data$dose, rep(c(3,4), 3))
+  expect_identical(new_data$len, rep(c(10.1,12,13), each = 2))
+
+  new_data <- new_data(ToothGrowth, ref = list(supp = factor("VC")))
+
+  new_data <- new_data(ToothGrowth, ref = list(supp = factor("TP")))
+  expect_identical(new_data(ToothGrowth, ref = list(supp = factor("TP")))$supp, factor("TP"))
+  expect_identical(new_data(ToothGrowth, ref = list(supp = "TP"))$supp, factor(NA, levels = c("OJ", "VC")))
+  expect_identical(new_data(ToothGrowth, ref = list(supp = factor("VC")))$supp, factor("VC"))
+  expect_identical(new_data(ToothGrowth, ref = list(supp = "VC"))$supp, factor("VC", levels = c("OJ", "VC")))
+})

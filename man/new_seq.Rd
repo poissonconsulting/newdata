@@ -17,4 +17,3 @@ Generate a new sequence for a vector
 \seealso{
 \code{\link{new_data}}.
 }
-
