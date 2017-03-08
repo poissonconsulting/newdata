@@ -34,7 +34,7 @@ new_value.numeric <- function(x) {
 
 #' @export
 new_value.character <- function(x) {
-  sort(x)[1]
+  sort(x, na.last = TRUE)[1]
 }
 
 #' @export

@@ -15,4 +15,3 @@ Generate a new reference value for a vector.
 \seealso{
 \code{\link{new_data}}.
 }
-

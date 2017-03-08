@@ -74,4 +74,3 @@ ggplot(data = disp, aes(x = disp, y = fit)) +
   geom_line(aes(y = upr), linetype = "dotted") +
   ylab("mpg")
 }
-
