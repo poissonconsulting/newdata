@@ -38,7 +38,9 @@ If a factor is named in seq then all levels of the factor are represented i.e.
 in which case only observed factor levels are permitted in sequences.
 
 It is worth noting that \code{ref} can be used to specify sequences for particular values as well
-as single references. It is useful for extrapolating outside the range of the data.
+as single references. It is useful for extrapolating outside the range of the data or changes the levels of a factor.
+If an element of ref is a character vector and the corresponding column is a data frame, then the ref element is assigned the same
+factor levels as the column in the data. This is useful for choosing a factor level without having to set the correct levels.
 }
 \examples{
 library(ggplot2)

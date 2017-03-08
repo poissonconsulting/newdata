@@ -15,7 +15,9 @@
 #' in which case only observed factor levels are permitted in sequences.
 #'
 #' It is worth noting that \code{ref} can be used to specify sequences for particular values as well
-#' as single references. It is useful for extrapolating outside the range of the data.
+#' as single references. It is useful for extrapolating outside the range of the data or changes the levels of a factor.
+#' If an element of ref is a character vector and the corresponding column is a data frame, then the ref element is assigned the same
+#' factor levels as the column in the data. This is useful for choosing a factor level without having to set the correct levels.
 #'
 #' @param data The data frame to generate the new data from.
 #' @param seq A character vector of the variables to represent as a sequence in the new data.
@@ -87,14 +89,14 @@ new_data <- function(data, seq = character(0), ref = list(),
 
   if (length(ref)) {
     if (!is.named(ref)) error("ref must be a named list")
-    if (!identical(classes(ref), classes(data[names(data) %in% names(ref)])))
-      error("classes of variables in ref must match those in data")
+    if (any(seq %in% names(ref))) error("variables must not be in seq and ref")
+    if (any(unique(unlist(obs_only)) %in% names(ref))) error("variables must not be in obs_only and ref")
+
+    ref %<>% check_classes(data[names(ref)], x_name = "ref", y_name = "data")
   }
 
   new_seqs <- lapply(data[names(data) %in% seq], new_seq, length_out)
   new_ref <- lapply(data[!names(data) %in% seq & !names(data) %in% names(ref)], new_value)
-
-  ref <- ref[!names(ref) %in% seq]
 
   new_data <- expand.grid(c(new_seqs, new_ref, ref),
                           KEEP.OUT.ATTRS = FALSE, stringsAsFactors = FALSE)

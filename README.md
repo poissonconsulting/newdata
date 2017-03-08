@@ -12,8 +12,8 @@ Introduction
 
 The reference value for a factor is its first level, while the reference level for columns of other types are the mean or rounded mean in the case of logicals, integers, Dates or POSIXcts.
 
-Utilization
------------
+Demonstration
+-------------
 
 ``` r
 library(ggplot2)
@@ -47,7 +47,7 @@ summary(model)
 
 # generate a data frame across range of wt with other predictor
 # variables held constant
-wt <- new_data(mtcars, c("wt"))
+wt <- new_data(mtcars, "wt")
 head(wt)
 #> # A tibble: 6 × 11
 #>        mpg    cyl     disp       hp     drat       wt     qsec     vs
@@ -74,9 +74,9 @@ ggplot(data = wt, aes(x = wt, y = fit)) +
 
 ``` r
 
-# generate a data frame across range of wt with other predictor
+# generate a data frame across range of disp with other predictor
 # variables held constant
-disp <- new_data(mtcars, c("disp"))
+disp <- new_data(mtcars, "disp")
 head(disp)
 #> # A tibble: 6 × 11
 #>        mpg    cyl      disp       hp     drat      wt     qsec     vs

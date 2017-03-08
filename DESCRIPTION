@@ -18,6 +18,7 @@ Imports:
     datacheckr,
     lubridate,
     magrittr,
+    purrr,
     dplyr,
     tibble
 Suggests:

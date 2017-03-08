@@ -1,8 +1,7 @@
 context("utils")
 
 test_that("classes", {
-  expect_identical(classes(Orange), list(Tree = c("ordered", "factor"), age = "numeric",
-                                         circumference = "numeric"))
+  expect_equal(classes(Orange), c("ordered", "numeric","numeric"), check.attributes = FALSE)
 })
 
 test_that("is.named", {
