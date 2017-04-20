@@ -8,12 +8,6 @@ as_factor <- function(x, y) {
   ordered(x, levels = levels(y), ordered = TRUE)
 }
 
-#' Error
-#'
-#' Throws an error without the call as part of the error message.
-#'
-#' @inheritParams base::stop
-#' @seealso base::stop
 error <- function(...) {
   stop(..., call. = FALSE)
 }
