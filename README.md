@@ -70,7 +70,7 @@ ggplot(data = wt, aes(x = wt, y = fit)) +
   ylab("mpg")
 ```
 
-![](README-unnamed-chunk-2-1.png)
+![](tools/README-unnamed-chunk-2-1.png)
 
 ``` r
 
@@ -99,7 +99,7 @@ ggplot(data = disp, aes(x = disp, y = fit)) +
   ylab("mpg")
 ```
 
-![](README-unnamed-chunk-2-2.png)
+![](tools/README-unnamed-chunk-2-2.png)
 
 Installation
 ------------
