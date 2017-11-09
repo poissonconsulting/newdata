@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-![stability-unstable](https://img.shields.io/badge/stability-unstable-yellow.svg) [![Travis-CI Build Status](https://travis-ci.org/poissonconsulting/newdata.svg?branch=master)](https://travis-ci.org/poissonconsulting/newdata) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/poissonconsulting/newdata?branch=master&svg=true)](https://ci.appveyor.com/project/poissonconsulting/newdata) [![codecov](https://codecov.io/gh/poissonconsulting/newdata/branch/master/graph/badge.svg)](https://codecov.io/gh/poissonconsulting/newdata) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![stability-unstable](https://img.shields.io/badge/stability-unstable-yellow.svg)](https://github.com/joethorley/stability-badges#unstable) [![Travis-CI Build Status](https://travis-ci.org/poissonconsulting/newdata.svg?branch=master)](https://travis-ci.org/poissonconsulting/newdata) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/poissonconsulting/newdata?branch=master&svg=true)](https://ci.appveyor.com/project/poissonconsulting/newdata) [![Coverage Status](https://img.shields.io/codecov/c/github/poissonconsulting/newdata/master.svg)](https://codecov.io/github/poissonconsulting/newdata?branch=master) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/newdata)](https://cran.r-project.org/package=newdata)
 
 newdata
 =======
@@ -49,7 +49,7 @@ summary(model)
 # variables held constant
 wt <- new_data(mtcars, "wt")
 head(wt)
-#> # A tibble: 6 × 11
+#> # A tibble: 6 x 11
 #>        mpg    cyl     disp       hp     drat       wt     qsec     vs
 #>      <dbl>  <dbl>    <dbl>    <dbl>    <dbl>    <dbl>    <dbl>  <dbl>
 #> 1 20.09062 6.1875 230.7219 146.6875 3.596563 1.513000 17.84875 0.4375
@@ -78,7 +78,7 @@ ggplot(data = wt, aes(x = wt, y = fit)) +
 # variables held constant
 disp <- new_data(mtcars, "disp")
 head(disp)
-#> # A tibble: 6 × 11
+#> # A tibble: 6 x 11
 #>        mpg    cyl      disp       hp     drat      wt     qsec     vs
 #>      <dbl>  <dbl>     <dbl>    <dbl>    <dbl>   <dbl>    <dbl>  <dbl>
 #> 1 20.09062 6.1875  71.10000 146.6875 3.596563 3.21725 17.84875 0.4375

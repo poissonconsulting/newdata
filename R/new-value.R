@@ -44,13 +44,24 @@ new_value.factor <- function(x) {
 
 #' @export
 new_value.Date <- function(x) {
-  x %<>% mean(na.rm = TRUE) %>% round() %>% as.Date()
+  x %<>%
+    mean(na.rm = TRUE) %>%
+    round() %>%
+    as.Date() %>%
+    # ensure Date exactly as displayed!
+    as.character() %>%
+    as.Date()
   x
 }
 
 #' @export
 new_value.POSIXct <- function(x) {
   tz <- lubridate::tz(x)
-  x %<>% mean(na.rm = TRUE) %>% round() %>% as.POSIXct(tz = tz)
+  x %<>%
+    mean(na.rm = TRUE) %>%
+    round() %>%
+    as.POSIXct(tz = tz) %>%
+    # ensure POSIXct exactly as displayed!
+    floor_date()
   x
 }

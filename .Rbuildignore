@@ -5,3 +5,6 @@
 ^appveyor\.yml$
 ^LICENSE\.md$
 ^CONDUCT\.md$
+^docs$
+^document.R$
+^codecov.yml$

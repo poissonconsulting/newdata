@@ -12,7 +12,9 @@ new_seq <- function(x, length_out = 30)
 #' @export
 new_seq.default <- function(x, length_out = 30) {
   if (all(is.na(x))) return(x[1])
-  seq(from = min(x, na.rm = TRUE), to = max(x, na.rm = TRUE), length.out = length_out)
+  x <- seq(from = min(x, na.rm = TRUE), to = max(x, na.rm = TRUE), length.out = length_out)
+  x %<>% unique()
+  x
 }
 
 #' @export
@@ -41,3 +43,22 @@ new_seq.character <- function(x, length_out = NULL) {
 new_seq.factor <- function(x, length_out = NULL) {
   factor(levels(x), levels = levels(x))
 }
+
+#' @export
+new_seq.Date <- function(x, length_out = 30) {
+  if (all(is.na(x))) return(x[1])
+  x <- seq(from = min(x, na.rm = TRUE), to = max(x, na.rm = TRUE), length.out = length_out)
+  # ensure Date unique
+  x %<>% as.character() %>% as.Date() %>% unique()
+  x
+}
+
+#' @export
+new_seq.POSIXct <- function(x, length_out = 30) {
+  if (all(is.na(x))) return(x[1])
+  x <- seq(from = min(x, na.rm = TRUE), to = max(x, na.rm = TRUE), length.out = length_out)
+  # ensure POSIXct unique
+  x %<>% floor_date() %>% unique()
+  x
+}
+
