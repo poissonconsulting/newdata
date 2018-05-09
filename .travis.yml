@@ -1,5 +1,4 @@
 language: R
-sudo: required
 cache: packages
 
 r_packages:
@@ -9,9 +8,6 @@ after_success:
   - Rscript -e 'covr::codecov()'
 
 notifications:
-  email:
-    recipients:
-      - seb@poissonconsulting.ca
   slack:
     rooms:
       - poissonconsulting:BKjfn7jsVh8zXTu2rq7BEQEb
