@@ -18,13 +18,25 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="New Data — new_data" />
+
+<meta property="og:description" content="Generates a new data frame that can be passed to a predict function.
+The main idea is that most variables are held constant at a reference level
+while the variables of interest vary across their range.
+new_data can be thought of as a sophisticated version of expand.grid." />
+<meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,12 +59,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">newdata</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">newdata</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9011</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -61,7 +77,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -73,6 +89,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -80,23 +97,27 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>New Data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/poissonconsulting/newdata/blob/master/R/new-data.R'><code>R/new-data.R</code></a></small>
+    <div class="hidden name"><code>new_data.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Generates a new data frame that can be passed to a predict function.
 The main idea is that most variables are held constant at a reference level
 while the variables of interest vary across their range.
 <code>new_data</code> can be thought of as a sophisticated version of <code>expand.grid</code>.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>new_data</span>(<span class='no'>data</span>, <span class='kw'>seq</span> <span class='kw'>=</span> <span class='fu'>character</span>(<span class='fl'>0</span>), <span class='kw'>ref</span> <span class='kw'>=</span> <span class='fu'>list</span>(),
   <span class='kw'>obs_only</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='fu'>character</span>(<span class='fl'>0</span>)), <span class='kw'>length_out</span> <span class='kw'>=</span> <span class='fl'>30L</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -173,41 +194,39 @@ factor levels as the column in the data. This is useful for choosing a factor le
 <span class='co'># variables held constant</span>
 <span class='no'>wt</span> <span class='kw'>&lt;-</span> <span class='fu'>new_data</span>(<span class='no'>mtcars</span>, <span class='fu'>c</span>(<span class='st'>"wt"</span>))
 <span class='fu'>head</span>(<span class='no'>wt</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 11
-#&gt;        mpg    cyl     disp       hp     drat       wt     qsec     vs      am
-#&gt;      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-#&gt; 1 20.09062 6.1875 230.7219 146.6875 3.596563 1.513000 17.84875 0.4375 0.40625
-#&gt; 2 20.09062 6.1875 230.7219 146.6875 3.596563 1.647862 17.84875 0.4375 0.40625
-#&gt; 3 20.09062 6.1875 230.7219 146.6875 3.596563 1.782724 17.84875 0.4375 0.40625
-#&gt; 4 20.09062 6.1875 230.7219 146.6875 3.596563 1.917586 17.84875 0.4375 0.40625
-#&gt; 5 20.09062 6.1875 230.7219 146.6875 3.596563 2.052448 17.84875 0.4375 0.40625
-#&gt; 6 20.09062 6.1875 230.7219 146.6875 3.596563 2.187310 17.84875 0.4375 0.40625
-#&gt; # ... with 2 more variables: gear &lt;dbl&gt;, carb &lt;dbl&gt;</div><div class='input'><span class='no'>wt</span> <span class='kw'>&lt;-</span> <span class='fu'>cbind</span>(<span class='no'>wt</span>, <span class='fu'>predict</span>(<span class='no'>model</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='no'>wt</span>, <span class='kw'>interval</span> <span class='kw'>=</span> <span class='st'>"confidence"</span>))
+#&gt;     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1  20.1  6.19  231.  147.  3.60  1.51  17.8 0.438 0.406  3.69  2.81
+#&gt; 2  20.1  6.19  231.  147.  3.60  1.65  17.8 0.438 0.406  3.69  2.81
+#&gt; 3  20.1  6.19  231.  147.  3.60  1.78  17.8 0.438 0.406  3.69  2.81
+#&gt; 4  20.1  6.19  231.  147.  3.60  1.92  17.8 0.438 0.406  3.69  2.81
+#&gt; 5  20.1  6.19  231.  147.  3.60  2.05  17.8 0.438 0.406  3.69  2.81
+#&gt; 6  20.1  6.19  231.  147.  3.60  2.19  17.8 0.438 0.406  3.69  2.81</div><div class='input'><span class='no'>wt</span> <span class='kw'>&lt;-</span> <span class='fu'>cbind</span>(<span class='no'>wt</span>, <span class='fu'>predict</span>(<span class='no'>model</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='no'>wt</span>, <span class='kw'>interval</span> <span class='kw'>=</span> <span class='st'>"confidence"</span>))
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>wt</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>wt</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>fit</span>)) +
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>mpg</span>)) +
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>() +
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>lwr</span>), <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='st'>"dotted"</span>) +
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>upr</span>), <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='st'>"dotted"</span>) +
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/labs'>ylab</a></span>(<span class='st'>"mpg"</span>)</div><div class='img'><img src='new_data-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/labs'>ylab</a></span>(<span class='st'>"mpg"</span>)</div><div class='img'><img src='new_data-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># generate a data frame across range of wt with other predictor</span>
 <span class='co'># variables held constant</span>
 <span class='no'>disp</span> <span class='kw'>&lt;-</span> <span class='fu'>new_data</span>(<span class='no'>mtcars</span>, <span class='fu'>c</span>(<span class='st'>"disp"</span>))
 <span class='fu'>head</span>(<span class='no'>disp</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 11
-#&gt;        mpg    cyl      disp       hp     drat      wt     qsec     vs      am
-#&gt;      &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-#&gt; 1 20.09062 6.1875  71.10000 146.6875 3.596563 3.21725 17.84875 0.4375 0.40625
-#&gt; 2 20.09062 6.1875  84.92414 146.6875 3.596563 3.21725 17.84875 0.4375 0.40625
-#&gt; 3 20.09062 6.1875  98.74828 146.6875 3.596563 3.21725 17.84875 0.4375 0.40625
-#&gt; 4 20.09062 6.1875 112.57241 146.6875 3.596563 3.21725 17.84875 0.4375 0.40625
-#&gt; 5 20.09062 6.1875 126.39655 146.6875 3.596563 3.21725 17.84875 0.4375 0.40625
-#&gt; 6 20.09062 6.1875 140.22069 146.6875 3.596563 3.21725 17.84875 0.4375 0.40625
-#&gt; # ... with 2 more variables: gear &lt;dbl&gt;, carb &lt;dbl&gt;</div><div class='input'>
+#&gt;     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+#&gt; 1  20.1  6.19  71.1  147.  3.60  3.22  17.8 0.438 0.406  3.69  2.81
+#&gt; 2  20.1  6.19  84.9  147.  3.60  3.22  17.8 0.438 0.406  3.69  2.81
+#&gt; 3  20.1  6.19  98.7  147.  3.60  3.22  17.8 0.438 0.406  3.69  2.81
+#&gt; 4  20.1  6.19 113.   147.  3.60  3.22  17.8 0.438 0.406  3.69  2.81
+#&gt; 5  20.1  6.19 126.   147.  3.60  3.22  17.8 0.438 0.406  3.69  2.81
+#&gt; 6  20.1  6.19 140.   147.  3.60  3.22  17.8 0.438 0.406  3.69  2.81</div><div class='input'>
 <span class='no'>disp</span> <span class='kw'>&lt;-</span> <span class='fu'>cbind</span>(<span class='no'>disp</span>, <span class='fu'>predict</span>(<span class='no'>model</span>, <span class='kw'>newdata</span> <span class='kw'>=</span> <span class='no'>disp</span>, <span class='kw'>interval</span> <span class='kw'>=</span> <span class='st'>"confidence"</span>))
 <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>disp</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>disp</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>fit</span>)) +
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>mpg</span>)) +
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>() +
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>lwr</span>), <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='st'>"dotted"</span>) +
   <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>upr</span>), <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='st'>"dotted"</span>) +
-  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/labs'>ylab</a></span>(<span class='st'>"mpg"</span>)</div><div class='img'><img src='new_data-2.png' alt='' width='700' height='432.632880098887' /></div></pre>
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/labs'>ylab</a></span>(<span class='st'>"mpg"</span>)</div><div class='img'><img src='new_data-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -230,11 +249,14 @@ factor levels as the column in the data. This is useful for choosing a factor le
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

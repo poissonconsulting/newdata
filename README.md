@@ -1,21 +1,31 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![stability-unstable](https://img.shields.io/badge/stability-unstable-yellow.svg)](https://github.com/joethorley/stability-badges#unstable) [![Travis-CI Build Status](https://travis-ci.org/poissonconsulting/newdata.svg?branch=master)](https://travis-ci.org/poissonconsulting/newdata) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/poissonconsulting/newdata?branch=master&svg=true)](https://ci.appveyor.com/project/poissonconsulting/newdata) [![Coverage Status](https://img.shields.io/codecov/c/github/poissonconsulting/newdata/master.svg)](https://codecov.io/github/poissonconsulting/newdata?branch=master) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/newdata)](https://cran.r-project.org/package=newdata)
 
-newdata
-=======
 
-Introduction
-------------
 
-`newdata` is an R package to generate new data frames for passing to `predict` functions. In the new data the column or columns of interest vary across their range while the remaining columns are held constant at their reference value.
+[![stability-unstable](https://img.shields.io/badge/stability-unstable-yellow.svg)](https://github.com/joethorley/stability-badges#unstable)
+[![Travis-CI Build Status](https://travis-ci.org/poissonconsulting/newdata.svg?branch=master)](https://travis-ci.org/poissonconsulting/newdata)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/poissonconsulting/newdata?branch=master&svg=true)](https://ci.appveyor.com/project/poissonconsulting/newdata)
+[![Coverage Status](https://img.shields.io/codecov/c/github/poissonconsulting/newdata/master.svg)](https://codecov.io/github/poissonconsulting/newdata?branch=master)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/newdata)](https://cran.r-project.org/package=newdata)
+
+# newdata
+
+## Introduction
+
+`newdata` is an R package to generate new data frames for passing to `predict` functions.
+In the new data the column or columns of interest vary across their range while the remaining columns are held constant at their reference value.
 
 The reference value for a factor is its first level, while the reference level for columns of other types are the mean or rounded mean in the case of logicals, integers, Dates or POSIXcts.
 
-Demonstration
--------------
+## Demonstration
 
-``` r
+
+```r
 library(ggplot2)
 library(newdata)
 
@@ -42,7 +52,7 @@ summary(model)
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #> 
 #> Residual standard error: 2.263 on 27 degrees of freedom
-#> Multiple R-squared:  0.8772, Adjusted R-squared:  0.859 
+#> Multiple R-squared:  0.8772,	Adjusted R-squared:  0.859 
 #> F-statistic:  48.2 on 4 and 27 DF,  p-value: 6.521e-12
 
 # generate a data frame across range of wt with other predictor
@@ -50,15 +60,14 @@ summary(model)
 wt <- new_data(mtcars, "wt")
 head(wt)
 #> # A tibble: 6 x 11
-#>        mpg    cyl     disp       hp     drat       wt     qsec     vs
-#>      <dbl>  <dbl>    <dbl>    <dbl>    <dbl>    <dbl>    <dbl>  <dbl>
-#> 1 20.09062 6.1875 230.7219 146.6875 3.596563 1.513000 17.84875 0.4375
-#> 2 20.09062 6.1875 230.7219 146.6875 3.596563 1.647862 17.84875 0.4375
-#> 3 20.09062 6.1875 230.7219 146.6875 3.596563 1.782724 17.84875 0.4375
-#> 4 20.09062 6.1875 230.7219 146.6875 3.596563 1.917586 17.84875 0.4375
-#> 5 20.09062 6.1875 230.7219 146.6875 3.596563 2.052448 17.84875 0.4375
-#> 6 20.09062 6.1875 230.7219 146.6875 3.596563 2.187310 17.84875 0.4375
-#> # ... with 3 more variables: am <dbl>, gear <dbl>, carb <dbl>
+#>     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+#>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+#> 1  20.1  6.19  231.  147.  3.60  1.51  17.8 0.438 0.406  3.69  2.81
+#> 2  20.1  6.19  231.  147.  3.60  1.65  17.8 0.438 0.406  3.69  2.81
+#> 3  20.1  6.19  231.  147.  3.60  1.78  17.8 0.438 0.406  3.69  2.81
+#> 4  20.1  6.19  231.  147.  3.60  1.92  17.8 0.438 0.406  3.69  2.81
+#> 5  20.1  6.19  231.  147.  3.60  2.05  17.8 0.438 0.406  3.69  2.81
+#> 6  20.1  6.19  231.  147.  3.60  2.19  17.8 0.438 0.406  3.69  2.81
 
 wt <- cbind(wt, predict(model, newdata = wt, interval = "confidence"))
 
@@ -70,24 +79,23 @@ ggplot(data = wt, aes(x = wt, y = fit)) +
   ylab("mpg")
 ```
 
-![](tools/README-unnamed-chunk-2-1.png)
+![plot of chunk unnamed-chunk-2](tools/README-unnamed-chunk-2-1.png)
 
-``` r
+```r
 
 # generate a data frame across range of disp with other predictor
 # variables held constant
 disp <- new_data(mtcars, "disp")
 head(disp)
 #> # A tibble: 6 x 11
-#>        mpg    cyl      disp       hp     drat      wt     qsec     vs
-#>      <dbl>  <dbl>     <dbl>    <dbl>    <dbl>   <dbl>    <dbl>  <dbl>
-#> 1 20.09062 6.1875  71.10000 146.6875 3.596563 3.21725 17.84875 0.4375
-#> 2 20.09062 6.1875  84.92414 146.6875 3.596563 3.21725 17.84875 0.4375
-#> 3 20.09062 6.1875  98.74828 146.6875 3.596563 3.21725 17.84875 0.4375
-#> 4 20.09062 6.1875 112.57241 146.6875 3.596563 3.21725 17.84875 0.4375
-#> 5 20.09062 6.1875 126.39655 146.6875 3.596563 3.21725 17.84875 0.4375
-#> 6 20.09062 6.1875 140.22069 146.6875 3.596563 3.21725 17.84875 0.4375
-#> # ... with 3 more variables: am <dbl>, gear <dbl>, carb <dbl>
+#>     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+#>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+#> 1  20.1  6.19  71.1  147.  3.60  3.22  17.8 0.438 0.406  3.69  2.81
+#> 2  20.1  6.19  84.9  147.  3.60  3.22  17.8 0.438 0.406  3.69  2.81
+#> 3  20.1  6.19  98.7  147.  3.60  3.22  17.8 0.438 0.406  3.69  2.81
+#> 4  20.1  6.19 113.   147.  3.60  3.22  17.8 0.438 0.406  3.69  2.81
+#> 5  20.1  6.19 126.   147.  3.60  3.22  17.8 0.438 0.406  3.69  2.81
+#> 6  20.1  6.19 140.   147.  3.60  3.22  17.8 0.438 0.406  3.69  2.81
 
 disp <- cbind(disp, predict(model, newdata = disp, interval = "confidence"))
 
@@ -99,18 +107,17 @@ ggplot(data = disp, aes(x = disp, y = fit)) +
   ylab("mpg")
 ```
 
-![](tools/README-unnamed-chunk-2-2.png)
+![plot of chunk unnamed-chunk-2](tools/README-unnamed-chunk-2-2.png)
 
-Installation
-------------
+## Installation
 
 To install the latest version from GitHub
+```
+# install.packages("devtools")
+devtools::install_github("poissonconsulting/newdata")
+```
 
-    # install.packages("devtools")
-    devtools::install_github("poissonconsulting/newdata")
-
-Contribution
-------------
+## Contribution
 
 Please report any [issues](https://github.com/poissonconsulting/newdata/issues).
 

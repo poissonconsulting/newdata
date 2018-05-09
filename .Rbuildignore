@@ -8,3 +8,4 @@
 ^docs$
 ^document.R$
 ^codecov.yml$
+^codemeta\.json$

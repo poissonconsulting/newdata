@@ -1,0 +1,134 @@
+{
+  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@type": "SoftwareSourceCode",
+  "identifier": "newdata",
+  "description": "Generates new data frames for passing to predict functions.\n    In the new data the column or columns of interest vary across their range\n    while the remaining columns are held constant at their reference value.\n    The reference value for a factor is its first level,\n    while the reference level for columns of other types are the mean\n    or rounded mean in the case of logicals, integers, Dates or POSIXcts.",
+  "name": "newdata: Generate New Data Frames for Predictive Purposes",
+  "codeRepository": "https://github.com/poissonconsulting/newdata",
+  "issueTracker": "https://github.com/poissonconsulting/newdata/issues",
+  "datePublished": "2018-05-09",
+  "license": "https://spdx.org/licenses/MIT",
+  "version": "0.0.0.9011",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "version": "3.5.0",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 3.5.0 (2018-04-23)",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Joe",
+      "familyName": "Thorley",
+      "email": "joe@poissonconsulting.ca"
+    }
+  ],
+  "maintainer": {
+    "@type": "Person",
+    "givenName": "Joe",
+    "familyName": "Thorley",
+    "email": "joe@poissonconsulting.ca"
+  },
+  "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "datasets",
+      "name": "datasets"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "ggplot2",
+      "name": "ggplot2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "stats",
+      "name": "stats"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    }
+  ],
+  "softwareRequirements": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "datacheckr",
+      "name": "datacheckr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "lubridate",
+      "name": "lubridate",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "magrittr",
+      "name": "magrittr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "purrr",
+      "name": "purrr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "tibble",
+      "name": "tibble",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": "3.3.1"
+    }
+  ],
+  "contIntegration": "https://travis-ci.org/poissonconsulting/newdata",
+  "releaseNotes": "https://github.com/poissonconsulting/newdata/blob/master/NEWS.md",
+  "readme": "https://github.com/poissonconsulting/newdata/blob/master/README.md",
+  "fileSize": "70.811KB"
+}
