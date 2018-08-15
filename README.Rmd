@@ -12,12 +12,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-[![stability-unstable](https://img.shields.io/badge/stability-unstable-yellow.svg)](https://github.com/joethorley/stability-badges#unstable)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Travis-CI Build Status](https://travis-ci.org/poissonconsulting/newdata.svg?branch=master)](https://travis-ci.org/poissonconsulting/newdata)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/poissonconsulting/newdata?branch=master&svg=true)](https://ci.appveyor.com/project/poissonconsulting/newdata)
 [![Coverage Status](https://img.shields.io/codecov/c/github/poissonconsulting/newdata/master.svg)](https://codecov.io/github/poissonconsulting/newdata?branch=master)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/newdata)](https://cran.r-project.org/package=newdata)
 
 # newdata
 
@@ -70,10 +68,17 @@ ggplot(data = disp, aes(x = disp, y = fit)) +
 
 ## Installation
 
-To install the latest version from GitHub
+To install the latest development version from [GitHub](https://github.com/poissonconsulting/rpdo)
 ```
 # install.packages("devtools")
-devtools::install_github("poissonconsulting/newdata")
+devtools::install_github("poissonconsulting/rpdo")
+```
+
+To install the latest development version from the Poisson drat [repository](https://github.com/poissonconsulting/drat)
+```
+# install.packages("drat")
+drat::addRepo("poissonconsulting")
+install.packages("rpdo")
 ```
 
 ## Contribution

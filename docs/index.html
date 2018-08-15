@@ -8,8 +8,8 @@
 <title>Generate New Data Frames for Predictive Purposes • newdata</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="jquery.sticky-kit.min.js"></script><script src="pkgdown.js"></script><meta property="og:title" content="Generate New Data Frames for Predictive Purposes">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script><meta property="og:title" content="Generate New Data Frames for Predictive Purposes">
 <meta property="og:description" content="Generates new data frames for passing to predict functions.
     In the new data the column or columns of interest vary across their range
     while the remaining columns are held constant at their reference value.
@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">newdata</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9011</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9012</span>
       </span>
     </div>
 
@@ -169,9 +169,13 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>To install the latest version from GitHub</p>
+<p>To install the latest development version from <a href="https://github.com/poissonconsulting/rpdo">GitHub</a></p>
 <pre><code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github"># install.packages("devtools")
-devtools::install_github("poissonconsulting/newdata")</a></code></pre>
+devtools::install_github("poissonconsulting/rpdo")</a></code></pre>
+<p>To install the latest development version from the Poisson drat <a href="https://github.com/poissonconsulting/drat">repository</a></p>
+<pre><code><a href="http://www.rdocumentation.org/packages/drat/topics/addRepo"># install.packages("drat")
+drat::addRepo("poissonconsulting")
+install.packages("rpdo")</a></code></pre>
 </div>
 <div id="contribution" class="section level2">
 <h2 class="hasAnchor">
@@ -210,12 +214,10 @@ devtools::install_github("poissonconsulting/newdata")</a></code></pre>
       <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/joethorley/stability-badges#unstable"><img src="https://img.shields.io/badge/stability-unstable-yellow.svg" alt="stability-unstable"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a></li>
 <li><a href="https://travis-ci.org/poissonconsulting/newdata"><img src="https://travis-ci.org/poissonconsulting/newdata.svg?branch=master" alt="Travis-CI Build Status"></a></li>
-<li><a href="https://ci.appveyor.com/project/poissonconsulting/newdata"><img src="https://ci.appveyor.com/api/projects/status/github/poissonconsulting/newdata?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
 <li><a href="https://codecov.io/github/poissonconsulting/newdata?branch=master"><img src="https://img.shields.io/codecov/c/github/poissonconsulting/newdata/master.svg" alt="Coverage Status"></a></li>
 <li><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT"></a></li>
-<li><a href="https://cran.r-project.org/package=newdata"><img src="http://www.r-pkg.org/badges/version/newdata" alt="CRAN_Status_Badge"></a></li>
 </ul>
 </div>
 </div>

@@ -1,31 +1,30 @@
----
-output: github_document
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-
-
-[![stability-unstable](https://img.shields.io/badge/stability-unstable-yellow.svg)](https://github.com/joethorley/stability-badges#unstable)
-[![Travis-CI Build Status](https://travis-ci.org/poissonconsulting/newdata.svg?branch=master)](https://travis-ci.org/poissonconsulting/newdata)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/poissonconsulting/newdata?branch=master&svg=true)](https://ci.appveyor.com/project/poissonconsulting/newdata)
-[![Coverage Status](https://img.shields.io/codecov/c/github/poissonconsulting/newdata/master.svg)](https://codecov.io/github/poissonconsulting/newdata?branch=master)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/newdata)](https://cran.r-project.org/package=newdata)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Travis-CI Build
+Status](https://travis-ci.org/poissonconsulting/newdata.svg?branch=master)](https://travis-ci.org/poissonconsulting/newdata)
+[![Coverage
+Status](https://img.shields.io/codecov/c/github/poissonconsulting/newdata/master.svg)](https://codecov.io/github/poissonconsulting/newdata?branch=master)
+[![License:
+MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 # newdata
 
 ## Introduction
 
-`newdata` is an R package to generate new data frames for passing to `predict` functions.
-In the new data the column or columns of interest vary across their range while the remaining columns are held constant at their reference value.
+`newdata` is an R package to generate new data frames for passing to
+`predict` functions. In the new data the column or columns of interest
+vary across their range while the remaining columns are held constant at
+their reference value.
 
-The reference value for a factor is its first level, while the reference level for columns of other types are the mean or rounded mean in the case of logicals, integers, Dates or POSIXcts.
+The reference value for a factor is its first level, while the reference
+level for columns of other types are the mean or rounded mean in the
+case of logicals, integers, Dates or POSIXcts.
 
 ## Demonstration
 
-
-```r
+``` r
 library(ggplot2)
 library(newdata)
 
@@ -52,7 +51,7 @@ summary(model)
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #> 
 #> Residual standard error: 2.263 on 27 degrees of freedom
-#> Multiple R-squared:  0.8772,	Adjusted R-squared:  0.859 
+#> Multiple R-squared:  0.8772, Adjusted R-squared:  0.859 
 #> F-statistic:  48.2 on 4 and 27 DF,  p-value: 6.521e-12
 
 # generate a data frame across range of wt with other predictor
@@ -79,9 +78,9 @@ ggplot(data = wt, aes(x = wt, y = fit)) +
   ylab("mpg")
 ```
 
-![plot of chunk unnamed-chunk-2](tools/README-unnamed-chunk-2-1.png)
+![](tools/README-unnamed-chunk-2-1.png)<!-- -->
 
-```r
+``` r
 
 # generate a data frame across range of disp with other predictor
 # variables held constant
@@ -107,20 +106,31 @@ ggplot(data = disp, aes(x = disp, y = fit)) +
   ylab("mpg")
 ```
 
-![plot of chunk unnamed-chunk-2](tools/README-unnamed-chunk-2-2.png)
+![](tools/README-unnamed-chunk-2-2.png)<!-- -->
 
 ## Installation
 
-To install the latest version from GitHub
-```
-# install.packages("devtools")
-devtools::install_github("poissonconsulting/newdata")
-```
+To install the latest development version from
+[GitHub](https://github.com/poissonconsulting/rpdo)
+
+    # install.packages("devtools")
+    devtools::install_github("poissonconsulting/rpdo")
+
+To install the latest development version from the Poisson drat
+[repository](https://github.com/poissonconsulting/drat)
+
+    # install.packages("drat")
+    drat::addRepo("poissonconsulting")
+    install.packages("rpdo")
 
 ## Contribution
 
-Please report any [issues](https://github.com/poissonconsulting/newdata/issues).
+Please report any
+[issues](https://github.com/poissonconsulting/newdata/issues).
 
-[Pull requests](https://github.com/poissonconsulting/newdata/pulls) are always welcome.
+[Pull requests](https://github.com/poissonconsulting/newdata/pulls) are
+always welcome.
 
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of
+Conduct](CONDUCT.md). By participating in this project you agree to
+abide by its terms.
