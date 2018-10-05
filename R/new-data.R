@@ -67,14 +67,14 @@ new_data <- function(data, seq = character(0), ref = list(),
 
   length_out %<>% as.integer()
 
-  check_data1(data)
-  check_vector(seq, "", min_length = 0)
+  check_data(data)
+  check_vector(seq, "")
   if (!is.list(ref)) error("ref must be a list")
   if (identical(obs_only, TRUE)) obs_only <- list(seq)
   if (!is.list(obs_only)) error("obs_only must be a list")
   if (!all(vapply(obs_only, is.character, TRUE))) error("obs_only must be a list of character vectors")
 
-  check_scalar(length_out, 2L, 1000L)
+  check_scalar(length_out, c(2L, 1000L))
 
   obs_only %<>% unique()
 

@@ -4,6 +4,8 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Travis-CI Build
 Status](https://travis-ci.org/poissonconsulting/newdata.svg?branch=master)](https://travis-ci.org/poissonconsulting/newdata)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/poissonconsulting/newdata?branch=master&svg=true)](https://ci.appveyor.com/project/poissonconsulting/newdata)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/poissonconsulting/newdata/master.svg)](https://codecov.io/github/poissonconsulting/newdata?branch=master)
 [![License:
