@@ -4,8 +4,13 @@
 \alias{new_data}
 \title{New Data}
 \usage{
-new_data(data, seq = character(0), ref = list(),
-  obs_only = list(character(0)), length_out = 30L)
+new_data(
+  data,
+  seq = character(0),
+  ref = list(),
+  obs_only = list(character(0)),
+  length_out = 30L
+)
 }
 \arguments{
 \item{data}{The data frame to generate the new data from.}

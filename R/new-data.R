@@ -107,6 +107,6 @@ new_data <- function(data, seq = character(0), ref = list(),
 
   for (obo in obs_only) new_data %<>% obs_only(data, obo)
 
-  new_data <- new_data[names(data)] %>% tibble::as_data_frame()
+  new_data <- new_data[names(data)] %>% tibble::as_tibble()
   new_data
 }
