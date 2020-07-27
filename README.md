@@ -1,15 +1,16 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+<!-- badges: start -->
+
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![Travis-CI Build
-Status](https://travis-ci.org/poissonconsulting/newdata.svg?branch=master)](https://travis-ci.org/poissonconsulting/newdata)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/poissonconsulting/newdata?branch=master&svg=true)](https://ci.appveyor.com/project/poissonconsulting/newdata)
-[![Coverage
-Status](https://img.shields.io/codecov/c/github/poissonconsulting/newdata/master.svg)](https://codecov.io/github/poissonconsulting/newdata?branch=master)
+[![R build
+status](https://github.com/poissonconsulting/newdata/workflows/R-CMD-check/badge.svg)](https://github.com/poissonconsulting/newdata/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/poissonconsulting/newdata/branch/master/graph/badge.svg)](https://codecov.io/gh/poissonconsulting/newdata?branch=master)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+<!-- badges: end -->
 
 # newdata
 
@@ -28,6 +29,7 @@ case of logicals, integers, Dates or POSIXcts.
 
 ``` r
 library(ggplot2)
+#> Warning: package 'ggplot2' was built under R version 3.6.3
 library(newdata)
 
 mtcars <- datasets::mtcars
@@ -133,6 +135,9 @@ Please report any
 [Pull requests](https://github.com/poissonconsulting/newdata/pulls) are
 always welcome.
 
-Please note that this project is released with a [Contributor Code of
-Conduct](CONDUCT.md). By participating in this project you agree to
-abide by its terms.
+## Code of Conduct
+
+Please note that the newdata project is released with a [Contributor
+Code of
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.

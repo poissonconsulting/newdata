@@ -12,3 +12,4 @@
 ^codemeta\.json$
 ^build.R$
 ^\.github$
+^codecov\.yml$
