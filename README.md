@@ -1,9 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
 <!-- badges: start -->
 
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R build
 status](https://github.com/poissonconsulting/newdata/workflows/R-CMD-check/badge.svg)](https://github.com/poissonconsulting/newdata/actions)
 [![Codecov test
@@ -29,7 +29,6 @@ case of logicals, integers, Dates or POSIXcts.
 
 ``` r
 library(ggplot2)
-#> Warning: package 'ggplot2' was built under R version 3.6.3
 library(newdata)
 
 mtcars <- datasets::mtcars
@@ -85,7 +84,6 @@ ggplot(data = wt, aes(x = wt, y = fit)) +
 ![](tools/README-unnamed-chunk-2-1.png)<!-- -->
 
 ``` r
-
 # generate a data frame across range of disp with other predictor
 # variables held constant
 disp <- new_data(mtcars, "disp")
