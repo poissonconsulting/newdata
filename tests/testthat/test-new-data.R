@@ -1,5 +1,3 @@
-context("new-data")
-
 test_that("newdata", {
   library(tibble)
 

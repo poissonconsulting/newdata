@@ -1,5 +1,3 @@
-context("obs-only")
-
 test_that("obs_only", {
   newdata <- expand.grid(Tree = unique(Orange$Tree), age = c(1,2,3,4,5), circumference = c(6,7,8,9,10))
   data <- Orange[c(1,35),]

@@ -1,5 +1,3 @@
-context("new-seq")
-
 test_that("new_seq", {
 
   dlogical <-  as.logical(0:9)

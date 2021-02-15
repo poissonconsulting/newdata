@@ -1,5 +1,3 @@
-context("new-value")
-
 test_that("new_value", {
 
   dlogical <-  as.logical(0:9)
