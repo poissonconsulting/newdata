@@ -14,10 +14,9 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-[![R build status](https://github.com/poissonconsulting/newdata/workflows/R-CMD-check/badge.svg)](https://github.com/poissonconsulting/newdata/actions)
+[![R-CMD-check](https://github.com/poissonconsulting/newdata/workflows/R-CMD-check/badge.svg)](https://github.com/poissonconsulting/newdata/actions)
 [![Codecov test coverage](https://codecov.io/gh/poissonconsulting/newdata/branch/master/graph/badge.svg)](https://codecov.io/gh/poissonconsulting/newdata?branch=master)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![R-CMD-check](https://github.com/poissonconsulting/newdata/workflows/R-CMD-check/badge.svg)](https://github.com/poissonconsulting/newdata/actions)
 <!-- badges: end -->
 
 # newdata
@@ -73,15 +72,8 @@ ggplot(data = disp, aes(x = disp, y = fit)) +
 
 To install the latest development version from [GitHub](https://github.com/poissonconsulting/rpdo)
 ```
-# install.packages("devtools")
-devtools::install_github("poissonconsulting/rpdo")
-```
-
-To install the latest development version from the Poisson drat [repository](https://github.com/poissonconsulting/drat)
-```
-# install.packages("drat")
-drat::addRepo("poissonconsulting")
-install.packages("rpdo")
+# install.packages("remotes")
+remotes::install_github("poissonconsulting/newdata")
 ```
 
 ## Contribution
