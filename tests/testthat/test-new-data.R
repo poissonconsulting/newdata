@@ -1,6 +1,4 @@
 test_that("newdata", {
-  library(tibble)
-
   chickwts <- datasets::chickwts
 
   feed <- sort(unique(chickwts$feed))
