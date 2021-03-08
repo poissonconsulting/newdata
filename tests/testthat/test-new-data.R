@@ -7,13 +7,13 @@ test_that("newdata", {
   weight <- chickwts$weight
 
   expect_equal(new_data(chickwts),
-               data_frame(weight = mean(chickwts$weight), feed = feed[1]))
+               tibble::tibble(weight = mean(chickwts$weight), feed = feed[1]))
 
   expect_equal(new_data(datasets::chickwts, "feed"),
-               data_frame(weight = mean(weight), feed = feed))
+               tibble::tibble(weight = mean(weight), feed = feed))
 
   expect_equal(new_data(datasets::chickwts, "weight"),
-               data_frame(weight = seq(min(weight), max(weight), length.out = 30), feed = feed[1]))
+               tibble::tibble(weight = seq(min(weight), max(weight), length.out = 30), feed = feed[1]))
 
   expect_equal(nrow(new_data(datasets::chickwts, c("weight", "feed"))), 30 * nlevels(feed))
 })
@@ -36,17 +36,17 @@ test_that("new_data generates data frame with correct number of rows", {
 
 test_that("new_data ref works", {
   expect_identical(new_data(Orange),
-                   data_frame(Tree = factor(levels(Orange$Tree)[1], levels(Orange$Tree)),
+                   tibble::tibble(Tree = factor(levels(Orange$Tree)[1], levels(Orange$Tree)),
                               age = mean(Orange$age),
                               circumference = mean(Orange$circumference)))
 
   expect_identical(new_data(Orange, ref = list(age = 1)),
-                   data_frame(Tree = factor(levels(Orange$Tree)[1], levels(Orange$Tree)),
+                   tibble::tibble(Tree = factor(levels(Orange$Tree)[1], levels(Orange$Tree)),
                               age = 1,
                               circumference = mean(Orange$circumference)))
 
   expect_identical(new_data(Orange, ref = list(age = c(1,2))),
-                   data_frame(Tree = factor(levels(Orange$Tree)[1], levels(Orange$Tree)),
+                   tibble::tibble(Tree = factor(levels(Orange$Tree)[1], levels(Orange$Tree)),
                               age = c(1,2),
                               circumference = mean(Orange$circumference)))
 })
@@ -80,7 +80,7 @@ test_that("new_data ref works", {
 
 test_that("new_data ref overridden by seq", {
   expect_identical(new_data(Orange, seq = "age", ref = list(age = 118)),
-                   data_frame(Tree = factor(levels(Orange$Tree)[1], levels(Orange$Tree)),
+                   tibble::tibble(Tree = factor(levels(Orange$Tree)[1], levels(Orange$Tree)),
                               age = seq(min(Orange$age), max(Orange$age), length.out = 30),
                               circumference = mean(Orange$circumference)))
 })

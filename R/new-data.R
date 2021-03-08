@@ -67,14 +67,14 @@ new_data <- function(data, seq = character(0), ref = list(),
 
   length_out %<>% as.integer()
 
-  check_data(data)
-  check_vector(seq, "")
-  if (!is.list(ref)) error("ref must be a list")
-  if (identical(obs_only, TRUE)) obs_only <- list(seq)
-  if (!is.list(obs_only)) error("obs_only must be a list")
+  chk_data(data)
+  chk_character(seq)
+  chk_list(ref)
+  chk_whole_number(length_out)
+  chk_range(length_out, c(2L, 1000L))
+  if (isTRUE(obs_only)) obs_only <- list(seq)
+  chk_list(obs_only)
   if (!all(vapply(obs_only, is.character, TRUE))) error("obs_only must be a list of character vectors")
-
-  check_scalar(length_out, c(2L, 1000L))
 
   obs_only %<>% unique()
 
