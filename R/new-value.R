@@ -56,12 +56,11 @@ new_value.Date <- function(x) {
 
 #' @export
 new_value.POSIXct <- function(x) {
-  tz <- lubridate::tz(x)
+  tz <- dttr2::dtt_tz(x)
   x %<>%
     mean(na.rm = TRUE) %>%
     round() %>%
     as.POSIXct(tz = tz) %>%
-    # ensure POSIXct exactly as displayed!
-    floor_date()
+    dttr2::dtt_floor()
   x
 }

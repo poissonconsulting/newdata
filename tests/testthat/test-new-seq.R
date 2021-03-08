@@ -15,7 +15,7 @@ test_that("new_seq", {
   expect_identical(new_seq(dfactor, 1), dfactor)
   expect_identical(new_seq(rev(dfactor), 100), dfactor)
   expect_equal(new_seq(ddate, 10), ddate)
-  expect_identical(new_seq(dposix, 10), lubridate::floor_date(dposix))
+  expect_identical(new_seq(dposix, 10), dttr2::dtt_floor(dposix))
 })
 
 test_that("new_seq with missing", {

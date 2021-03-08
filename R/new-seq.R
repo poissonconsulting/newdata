@@ -58,7 +58,7 @@ new_seq.POSIXct <- function(x, length_out = 30) {
   if (all(is.na(x))) return(x[1])
   x <- seq(from = min(x, na.rm = TRUE), to = max(x, na.rm = TRUE), length.out = length_out)
   # ensure POSIXct unique
-  x %<>% floor_date() %>% unique()
+  x %<>% dttr2::dtt_floor() %>% unique()
   x
 }
 
