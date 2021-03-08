@@ -21,6 +21,7 @@ Suggests:
     datasets,
     ggplot2,
     stats,
+    hms,
     testthat,
     covr
 Encoding: UTF-8

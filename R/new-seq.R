@@ -62,3 +62,19 @@ new_seq.POSIXct <- function(x, length_out = 30) {
   x
 }
 
+#' @export
+new_seq.hms <- function(x, length_out = 30) {
+  if (!requireNamespace("hms", quietly = TRUE)) {
+    stop("Package \"hms\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
+
+  if (all(is.na(x))) return(x[1])
+  x <- seq(from = min(x, na.rm = TRUE), to = max(x, na.rm = TRUE), length.out = length_out)
+  # ensure hms unique
+  x <- hms::as_hms(x)
+  x <- dttr2::dtt_floor(x)
+  x <- unique(x)
+  hms::as_hms(x)
+}
+
