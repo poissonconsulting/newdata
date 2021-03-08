@@ -15,7 +15,6 @@ Imports:
     chk,
     dttr2,
     magrittr,
-    purrr,
     tibble
 Suggests:
     datasets,

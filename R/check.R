@@ -11,6 +11,6 @@ check_classes <- function(x, y, x_name, y_name) {
 
   if (!all(vapply(y[character], is_factor, TRUE))) error("classes of variables in ", x_name, " must match those in ", y_name)
 
-  x[character] %<>% purrr::map2(y[character], as_factor)
+  x[character] %<>% mapply(FUN = as_factor, y[character], SIMPLIFY = FALSE)
   x
 }
