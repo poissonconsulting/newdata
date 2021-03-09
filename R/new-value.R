@@ -64,3 +64,18 @@ new_value.POSIXct <- function(x) {
     dttr2::dtt_floor()
   x
 }
+
+#' @export
+new_value.hms <- function(x) {
+  if (!requireNamespace("hms", quietly = TRUE)) {
+    stop("Package \"hms\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
+
+  x %<>%
+    mean(na.rm = TRUE) %>%
+    round() %>%
+    hms::as_hms() %>%
+    dttr2::dtt_floor()
+  x
+}
