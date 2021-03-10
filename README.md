@@ -112,7 +112,7 @@ ggplot(data = disp, aes(x = disp, y = fit)) +
 ## Installation
 
 To install the latest development version from
-[GitHub](https://github.com/poissonconsulting/rpdo)
+[GitHub](https://github.com/poissonconsulting/newdata)
 
     # install.packages("remotes")
     remotes::install_github("poissonconsulting/newdata")
