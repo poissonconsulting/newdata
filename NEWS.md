@@ -1,3 +1,8 @@
+# newdata 0.0.0.9016 (2021-04-26)
+
+- Same as previous version.
+
+
 # newdata 0.0.0.9015 (2021-03-08)
 
 - Added `new_value().hms`
