@@ -1,3 +1,8 @@
+# newdata 0.0.0.9017 (2021-04-26)
+
+- Edited news file.
+
+
 # NEWS newdata
 
 # newdata 0.0.0.9016 (2021-04-26)
