@@ -46,11 +46,7 @@ new_value.factor <- function(x) {
 new_value.Date <- function(x) {
   x %<>%
     mean(na.rm = TRUE) %>%
-    round() %>%
-    as.Date() %>%
-    # ensure Date exactly as displayed!
-    as.character() %>%
-    as.Date()
+    dttr2::dtt_date()
   x
 }
 
