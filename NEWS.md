@@ -1,20 +1,20 @@
-# newdata 0.0.0.9017 (2021-04-26)
+# NEWS
+
+# newdata 0.0.0.9017
 
 - Edited news file.
 
 
-# NEWS newdata
-
-# newdata 0.0.0.9016 (2021-04-26)
+# newdata 0.0.0.9016
 
 - Same as previous version.
 
 
-# newdata 0.0.0.9015 (2021-03-08)
+# newdata 0.0.0.9015
 
 - Added `new_value().hms`
 
 
-# newdata 0.0.0.9014 (2021-03-08)
+# newdata 0.0.0.9014
 
 - Replace deprecated tibble::as_data_frame() with tibble::as_tibble().
