@@ -1,3 +1,3 @@
 #' @import chk
-#' @importFrom magrittr %<>% %>%
+#' @importFrom tibble %>%
 NULL

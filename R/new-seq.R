@@ -13,14 +13,13 @@ new_seq <- function(x, length_out = 30)
 new_seq.default <- function(x, length_out = 30) {
   if (all(is.na(x))) return(x[1])
   x <- seq(from = min(x, na.rm = TRUE), to = max(x, na.rm = TRUE), length.out = length_out)
-  x %<>% unique()
-  x
+  x %>% unique()
 }
 
 #' @export
 new_seq.logical <- function(x, length_out = 2) {
   if (all(is.na(x))) return(x[1])
-  x %<>% unique() %>% sort()
+  x <- x %>% unique() %>% sort()
   if (length_out == 1) return(x[1])
   x
 }
@@ -29,7 +28,7 @@ new_seq.logical <- function(x, length_out = 2) {
 new_seq.integer <- function(x, length_out = 30) {
   if (all(is.na(x))) return(x[1])
   x <- seq(from = min(x, na.rm = TRUE), to = max(x, na.rm = TRUE), length.out = length_out)
-  x %<>% round() %>% as.integer() %>% unique()
+  x <- x %>% round() %>% as.integer() %>% unique()
   x
 }
 
@@ -49,7 +48,7 @@ new_seq.Date <- function(x, length_out = 30) {
   if (all(is.na(x))) return(x[1])
   x <- seq(from = min(x, na.rm = TRUE), to = max(x, na.rm = TRUE), length.out = length_out)
   # ensure Date unique
-  x %<>% as.character() %>% as.Date() %>% unique()
+  x <- x %>% as.character() %>% as.Date() %>% unique()
   x
 }
 
@@ -58,8 +57,7 @@ new_seq.POSIXct <- function(x, length_out = 30) {
   if (all(is.na(x))) return(x[1])
   x <- seq(from = min(x, na.rm = TRUE), to = max(x, na.rm = TRUE), length.out = length_out)
   # ensure POSIXct unique
-  x %<>% dttr2::dtt_floor() %>% unique()
-  x
+  x %>% dttr2::dtt_floor() %>% unique()
 }
 
 #' @export

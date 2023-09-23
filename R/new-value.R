@@ -10,7 +10,7 @@ new_value <- function(x)
 
 #' @export
 new_value.default <- function(x) {
-  mean(x, na.rm = TRUE)
+  x %>% mean(na.rm = TRUE)
 }
 
 #' @export
@@ -20,58 +20,55 @@ new_value.logical <- function(x) {
 
 #' @export
 new_value.integer <- function(x) {
-  x %<>% mean(na.rm = TRUE) %>% round() %>% as.integer()
-  x
+  x %>% mean(na.rm = TRUE) %>% round() %>% as.integer()
 }
 
 #' @export
 new_value.numeric <- function(x) {
-  x %<>% mean(na.rm = TRUE)
-  if (all(is.nan(x)))
+  out <- x %>% mean(na.rm = TRUE)
+  if (is.nan(out))
     return(NA_real_)
-  x
+  out
 }
 
 #' @export
 new_value.character <- function(x) {
-  sort(x, na.last = TRUE)[1]
+  if(all(is.na(x))) {
+    return(NA_character_)
+  }
+  x %>% min(na.rm = TRUE)
 }
 
 #' @export
 new_value.factor <- function(x) {
-  factor(levels(x)[1], levels = levels(x))
+  levels <- levels(x)
+  factor(levels[1], levels = levels)
 }
 
 #' @export
 new_value.Date <- function(x) {
-  x %<>%
+  x %>%
     mean(na.rm = TRUE) %>%
     dttr2::dtt_date()
-  x
 }
 
 #' @export
 new_value.POSIXct <- function(x) {
   tz <- dttr2::dtt_tz(x)
-  x %<>%
+  x %>%
     mean(na.rm = TRUE) %>%
     round() %>%
     as.POSIXct(tz = tz) %>%
     dttr2::dtt_floor()
-  x
 }
 
 #' @export
 new_value.hms <- function(x) {
-  if (!requireNamespace("hms", quietly = TRUE)) {
-    stop("Package \"hms\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
+  rlang::check_installed("hms")
 
-  x %<>%
+  x %>%
     mean(na.rm = TRUE) %>%
     round() %>%
     hms::as_hms() %>%
     dttr2::dtt_floor()
-  x
 }

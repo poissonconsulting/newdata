@@ -14,7 +14,7 @@ BugReports: https://github.com/poissonconsulting/newdata/issues
 Imports:
     chk,
     dttr2,
-    magrittr,
+    rlang,
     tibble
 Suggests:
     datasets,

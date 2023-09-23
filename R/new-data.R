@@ -65,7 +65,7 @@
 new_data <- function(data, seq = character(0), ref = list(),
                      obs_only = list(character(0)), length_out = 30L) {
 
-  length_out %<>% as.integer()
+  length_out <- length_out %>% as.integer()
 
   chk_data(data)
   chk_character(seq)
@@ -76,7 +76,7 @@ new_data <- function(data, seq = character(0), ref = list(),
   chk_list(obs_only)
   if (!all(vapply(obs_only, is.character, TRUE))) error("obs_only must be a list of character vectors")
 
-  obs_only %<>% unique()
+  obs_only <- obs_only %>% unique()
 
   if (!all(tibble::has_name(data, seq)))
     error("data missing names in seq")
@@ -95,7 +95,7 @@ new_data <- function(data, seq = character(0), ref = list(),
     if (length(ref)) {
       if (any(unique(unlist(obs_only)) %in% names(ref))) error("variables must not be in obs_only and ref")
 
-      ref %<>% check_classes(data[names(ref)], x_name = "ref", y_name = "data")
+      ref <- ref %>% check_classes(data[names(ref)], x_name = "ref", y_name = "data")
     }
   }
 
@@ -105,8 +105,9 @@ new_data <- function(data, seq = character(0), ref = list(),
   new_data <- expand.grid(c(new_seqs, new_ref, ref),
                           KEEP.OUT.ATTRS = FALSE, stringsAsFactors = FALSE)
 
-  for (obo in obs_only) new_data %<>% obs_only(data, obo)
-
+  for (obo in obs_only) {
+    new_data <- new_data %>% obs_only(data, obo)
+  }
   new_data <- new_data[names(data)] %>% tibble::as_tibble()
   new_data
 }
