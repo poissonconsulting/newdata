@@ -18,8 +18,8 @@ status](https://www.r-pkg.org/badges/version/newdata)](https://CRAN.R-project.or
 ## Introduction
 
 `newdata` is an R package to generate new data frames for passing to
-`predict` functions. In the new data the column or columns of interest
-vary across their range while the remaining columns are held constant at
+`predict` functions. In the new data the column(s) of interest vary
+across their range while the remaining columns are held constant at
 their reference value.
 
 For more information see `new_data()`.
@@ -80,5 +80,5 @@ always welcome.
 
 Please note that the newdata project is released with a [Contributor
 Code of
-Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
+Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
