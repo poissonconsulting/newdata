@@ -54,6 +54,7 @@ new_value.factor <- function(x) {
 new_value.Date <- function(x) {
   x %>%
     mean(na.rm = TRUE) %>%
+    round() %>%
     dttr2::dtt_date()
 }
 
@@ -64,7 +65,7 @@ new_value.POSIXct <- function(x) {
     mean(na.rm = TRUE) %>%
     round() %>%
     as.POSIXct(tz = tz) %>%
-    dttr2::dtt_floor()
+    dttr2::dtt_date_time(tz = tz)
 }
 
 #' @export

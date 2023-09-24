@@ -22,6 +22,18 @@ test_that("new_value", {
   expect_identical(new_value(dhms), hms::as_hms("10:00:06"))
 })
 
+test_that("new_value date and time rounding", {
+  ddate <- as.Date("2000-01-01") + 0.9
+  dposix <- ISOdate(2000, 1, 1, 12, 0, 0, tz = "PST8PDT") + 0.9
+  dhms <- hms::as_hms(hms::as_hms("10:00:00") + 0.9)
+  dhms2 <- hms::as_hms(hms::as_hms("23:59:59") + 0.9)
+
+  expect_identical(new_value(ddate), as.Date("2000-01-02"))
+  expect_identical(new_value(dposix), ISOdate(2000, 1, 1, 12, 0, 1, tz = "PST8PDT"))
+  expect_identical(new_value(dhms), hms::as_hms("10:00:01"))
+  expect_identical(new_value(dhms2), hms::as_hms("00:00:00"))
+})
+
 test_that("new_value with missing", {
   dlogical <- c(as.logical(0:9), NA)
   dinteger <- c(1:10, NA)
