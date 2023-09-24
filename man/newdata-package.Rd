@@ -6,7 +6,7 @@
 \alias{newdata-package}
 \title{newdata: Generate New Data Frames for Predictive Purposes}
 \description{
-Generates new data frames for passing to predict functions. In the new data the column or columns of interest vary across their range while the remaining columns are held constant at their reference value. The reference value for a factor or character is its minimum level, while the reference level are the mean in the case of real and default vectors and rounded mean in the case of logical, integer, Date, POSIXct and hms vectors.
+Generates new data frames for passing to predict functions. In the new data the column(s) of interest vary across their range while the remaining columns are held constant at their reference value.
 }
 \seealso{
 Useful links:

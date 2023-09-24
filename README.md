@@ -22,10 +22,7 @@ status](https://www.r-pkg.org/badges/version/newdata)](https://CRAN.R-project.or
 vary across their range while the remaining columns are held constant at
 their reference value.
 
-The reference value for a factor or character is its minimum level,
-while the reference level are the mean in the case of real and default
-vectors and rounded mean in the case of logical, integer, Date, POSIXct
-and hms vectors.
+For more information see `new_data()`.
 
 ## Demonstration
 
@@ -36,34 +33,6 @@ library(newdata)
 mtcars <- datasets::mtcars
 
 model <- lm(mpg ~ wt + hp + poly(disp, 2), data = mtcars)
-
-# generate a data frame across range of wt with other predictor
-# variables held constant
-wt <- new_data(mtcars, "wt")
-head(wt)
-#> # A tibble: 6 × 11
-#>     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-#>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1  20.1  6.19  231.  147.  3.60  1.51  17.8 0.438 0.406  3.69  2.81
-#> 2  20.1  6.19  231.  147.  3.60  1.65  17.8 0.438 0.406  3.69  2.81
-#> 3  20.1  6.19  231.  147.  3.60  1.78  17.8 0.438 0.406  3.69  2.81
-#> 4  20.1  6.19  231.  147.  3.60  1.92  17.8 0.438 0.406  3.69  2.81
-#> 5  20.1  6.19  231.  147.  3.60  2.05  17.8 0.438 0.406  3.69  2.81
-#> 6  20.1  6.19  231.  147.  3.60  2.19  17.8 0.438 0.406  3.69  2.81
-
-wt <- cbind(wt, predict(model, newdata = wt, interval = "confidence"))
-
-ggplot(data = wt, aes(x = wt, y = fit)) +
-  geom_point(data = mtcars, aes(y = mpg)) +
-  geom_line() +
-  geom_line(aes(y = lwr), linetype = "dotted") +
-  geom_line(aes(y = upr), linetype = "dotted") +
-  ylab("mpg")
-```
-
-![](man/figures/README-unnamed-chunk-2-1.png)<!-- -->
-
-``` r
 
 # generate a data frame across range of disp with other predictor
 # variables held constant
@@ -89,7 +58,7 @@ ggplot(data = disp, aes(x = disp, y = fit)) +
   ylab("mpg")
 ```
 
-![](man/figures/README-unnamed-chunk-2-2.png)<!-- -->
+![](man/figures/README-unnamed-chunk-2-1.png)<!-- -->
 
 ## Installation
 
