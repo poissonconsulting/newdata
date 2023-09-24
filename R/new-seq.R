@@ -15,7 +15,9 @@ new_seq.default <- function(x, length_out = 30) {
   if (all(is.na(x))) {
     return(x[1])
   }
-  x <- seq(from = min(x, na.rm = TRUE), to = max(x, na.rm = TRUE), length.out = length_out)
+  x <- seq(from = min(x, na.rm = TRUE),
+           to = max(x, na.rm = TRUE),
+           length.out = length_out)
   x %>% unique()
 }
 
@@ -38,7 +40,9 @@ new_seq.integer <- function(x, length_out = 30) {
   if (all(is.na(x))) {
     return(x[1])
   }
-  x <- seq(from = min(x, na.rm = TRUE), to = max(x, na.rm = TRUE), length.out = length_out)
+  x <- seq(from = min(x, na.rm = TRUE),
+           to = max(x, na.rm = TRUE),
+           length.out = length_out)
   x <- x %>%
     round() %>%
     as.integer() %>%
@@ -64,7 +68,9 @@ new_seq.Date <- function(x, length_out = 30) {
   if (all(is.na(x))) {
     return(x[1])
   }
-  x <- seq(from = min(x, na.rm = TRUE), to = max(x, na.rm = TRUE), length.out = length_out)
+  x <- seq(from = min(x, na.rm = TRUE),
+           to = max(x, na.rm = TRUE),
+           length.out = length_out)
   # ensure Date unique
   x <- x %>%
     as.character() %>%
@@ -78,7 +84,9 @@ new_seq.POSIXct <- function(x, length_out = 30) {
   if (all(is.na(x))) {
     return(x[1])
   }
-  x <- seq(from = min(x, na.rm = TRUE), to = max(x, na.rm = TRUE), length.out = length_out)
+  x <- seq(from = min(x, na.rm = TRUE),
+           to = max(x, na.rm = TRUE),
+           length.out = length_out)
   # ensure POSIXct unique
   x %>%
     dttr2::dtt_floor() %>%
@@ -96,7 +104,9 @@ new_seq.hms <- function(x, length_out = 30) {
   if (all(is.na(x))) {
     return(x[1])
   }
-  x <- seq(from = min(x, na.rm = TRUE), to = max(x, na.rm = TRUE), length.out = length_out)
+  x <- seq(from = min(x, na.rm = TRUE),
+           to = max(x, na.rm = TRUE),
+           length.out = length_out)
   # ensure hms unique
   x <- hms::as_hms(x)
   x <- dttr2::dtt_floor(x)

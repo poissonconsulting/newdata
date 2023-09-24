@@ -15,13 +15,18 @@ new_data(
 \arguments{
 \item{data}{The data frame to generate the new data from.}
 
-\item{seq}{A character vector of the variables to represent as a sequence in the new data.}
+\item{seq}{A character vector of the variables to represent as a sequence
+in the new data.}
 
-\item{ref}{A named list of reference values for variables that are not in seq.}
+\item{ref}{A named list of reference values for variables
+that are not in seq.}
 
-\item{obs_only}{A list of character vectors indicating the sets of variables to only allow observed combinations for. If TRUE then obs_only is set to be seq.}
+\item{obs_only}{A list of character vectors indicating
+the sets of variables to only allow observed combinations for.
+If TRUE then obs_only is set to be seq.}
 
-\item{length_out}{A count indicating the length of numeric and possibly integer sequences.}
+\item{length_out}{A count indicating the length of numeric
+and possibly integer sequences.}
 }
 \value{
 A tibble of the new data.
@@ -34,18 +39,25 @@ while the variables of interest vary across their range.
 }
 \details{
 The returned variables are of the same class as the original variables while
-the rows in the data frame are unique. Consequently continuous variables such as integers
-which have discrete values will not attain the specified \code{length_out} value if
+the rows in the data frame are unique.
+Consequently continuous variables such as integers
+which have discrete values will not attain the specified \code{length_out} value
+if
 there are too few possible values between the minimum and maximum.
 
-If a factor is named in seq then all levels of the factor are represented i.e.
-\code{length_out} is ignored. The only exception to this is if the factor is named in \code{obs_only}
+If a factor is named in seq then all levels of the factor are represented
+i.e. \code{length_out} is ignored. The only exception to this is
+if the factor is named in \code{obs_only}
 in which case only observed factor levels are permitted in sequences.
 
-It is worth noting that \code{ref} can be used to specify sequences for particular values as well
-as single references. It is useful for extrapolating outside the range of the data or changes the levels of a factor.
-If an element of ref is a character vector and the corresponding column is a data frame, then the ref element is assigned the same
-factor levels as the column in the data. This is useful for choosing a factor level without having to set the correct levels.
+It is worth noting that \code{ref} can be used to specify sequences
+for particular values as well
+as single references. It is useful for extrapolating outside
+the range of the data or changes the levels of a factor.
+If an element of ref is a character vector and the corresponding
+column is a data frame, then the ref element is assigned the same
+factor levels as the column in the data. This is useful for choosing
+a factor level without having to set the correct levels.
 }
 \examples{
 library(ggplot2)
