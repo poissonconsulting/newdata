@@ -30,7 +30,7 @@ A tibble of the new data.
 Generates a new data frame that can be passed to a predict function.
 The main idea is that most variables are held constant at a reference level
 while the variables of interest vary across their range.
-\code{new_data} can be thought of as a sophisticated version of \code{\link{expand.grid}}.
+\code{new_data} can be thought of as a sophisticated version of \code{\link[=expand.grid]{expand.grid()}}.
 }
 \details{
 The returned variables are of the same class as the original variables while

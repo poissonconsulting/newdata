@@ -3,18 +3,18 @@
 #' Generates a new data frame that can be passed to a predict function.
 #' The main idea is that most variables are held constant at a reference level
 #' while the variables of interest vary across their range.
-#' \code{new_data} can be thought of as a sophisticated version of \code{\link{expand.grid}}.
+#' `new_data` can be thought of as a sophisticated version of [expand.grid()].
 #'
 #' The returned variables are of the same class as the original variables while
 #' the rows in the data frame are unique. Consequently continuous variables such as integers
-#' which have discrete values will not attain the specified \code{length_out} value if
+#' which have discrete values will not attain the specified `length_out` value if
 #' there are too few possible values between the minimum and maximum.
 #'
 #' If a factor is named in seq then all levels of the factor are represented i.e.
-#' \code{length_out} is ignored. The only exception to this is if the factor is named in \code{obs_only}
+#' `length_out` is ignored. The only exception to this is if the factor is named in `obs_only`
 #' in which case only observed factor levels are permitted in sequences.
 #'
-#' It is worth noting that \code{ref} can be used to specify sequences for particular values as well
+#' It is worth noting that `ref` can be used to specify sequences for particular values as well
 #' as single references. It is useful for extrapolating outside the range of the data or changes the levels of a factor.
 #' If an element of ref is a character vector and the corresponding column is a data frame, then the ref element is assigned the same
 #' factor levels as the column in the data. This is useful for choosing a factor level without having to set the correct levels.

@@ -4,7 +4,7 @@
 #'
 #' @param x The vector to generate the sequence for.
 #' @param length_out The length of the sequence.
-#' @seealso \code{\link{new_data}}.
+#' @seealso [new_data()].
 #' @export
 new_seq <- function(x, length_out = 30)
   UseMethod("new_seq")
