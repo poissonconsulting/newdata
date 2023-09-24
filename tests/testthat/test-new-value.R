@@ -1,4 +1,5 @@
 test_that("new_value", {
+  default <- complex(real = 1:10 + 0.1)
   dlogical <- as.logical(0:9)
   dinteger <- 1:10
   dnumeric <- 1:10 + 0.1
@@ -8,6 +9,8 @@ test_that("new_value", {
   dposix <- ISOdate(2000, 1, 1, 12, tz = "PST8PDT") + 1:10
   dhms <- as_hms(as_hms("10:00:00") + 1:10)
 
+
+  expect_equal(new_value(default), complex(real = 5.6))
   expect_identical(new_value(dlogical), FALSE)
   expect_identical(new_value(c(TRUE, FALSE)), FALSE)
   expect_identical(new_value(dinteger), 6L)
@@ -40,6 +43,7 @@ test_that("new_value date and time rounding", {
 })
 
 test_that("new_value with missing", {
+  default <- complex(real = c(1:10 + 0.1, NA))
   dlogical <- c(as.logical(0:9), NA)
   dinteger <- c(1:10, NA)
   dnumeric <- c(1:10 + 0.1, NA)
@@ -49,6 +53,7 @@ test_that("new_value with missing", {
   dposix <- ISOdate(2000, 1, 1, 12, tz = "PST8PDT") + c(1:10, NA)
   dhms <- as_hms(as_hms("10:00:00") + c(1:10, NA))
 
+  expect_equal(new_value(default), complex(real = 5.6))
   expect_identical(new_value(dlogical), FALSE)
   expect_identical(new_value(c(TRUE, FALSE)), FALSE)
   expect_identical(new_value(dinteger), 6L)
@@ -66,6 +71,7 @@ test_that("new_value with missing", {
 })
 
 test_that("new_value all missing", {
+  default <- complex(real = NA)
   dlogical <- as.logical(NA)
   dinteger <- as.integer(NA)
   dnumeric <- as.numeric(NA)
@@ -75,6 +81,7 @@ test_that("new_value all missing", {
   dposix <- as.POSIXct(NA, tz = "PST8PDT")
   dhms <- as_hms(NA)
 
+  expect_equal(new_value(default), default)
   expect_identical(new_value(dlogical), FALSE)
   expect_identical(new_value(dinteger), dinteger)
   expect_equal(new_value(dnumeric), dnumeric)
