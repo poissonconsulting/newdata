@@ -36,28 +36,6 @@ library(newdata)
 mtcars <- datasets::mtcars
 
 model <- lm(mpg ~ wt + hp + poly(disp, 2), data = mtcars)
-summary(model)
-#> 
-#> Call:
-#> lm(formula = mpg ~ wt + hp + poly(disp, 2), data = mtcars)
-#> 
-#> Residuals:
-#>     Min      1Q  Median      3Q     Max 
-#> -3.3887 -1.6079 -0.3997  1.7992  4.2331 
-#> 
-#> Coefficients:
-#>                Estimate Std. Error t value Pr(>|t|)    
-#> (Intercept)    35.13941    3.53184   9.949 1.58e-10 ***
-#> wt             -3.71314    0.91483  -4.059 0.000379 ***
-#> hp             -0.02115    0.01026  -2.062 0.048978 *  
-#> poly(disp, 2)1 -4.09195    6.21246  -0.659 0.515687    
-#> poly(disp, 2)2  7.87570    2.36778   3.326 0.002546 ** 
-#> ---
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-#> 
-#> Residual standard error: 2.263 on 27 degrees of freedom
-#> Multiple R-squared:  0.8772, Adjusted R-squared:  0.859 
-#> F-statistic:  48.2 on 4 and 27 DF,  p-value: 6.521e-12
 
 # generate a data frame across range of wt with other predictor
 # variables held constant
