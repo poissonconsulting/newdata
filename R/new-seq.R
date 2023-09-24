@@ -66,6 +66,11 @@ new_seq.factor <- function(x, length_out = NULL) {
 }
 
 #' @export
+new_seq.ordered <- function(x, length_out = NULL) {
+  ordered(levels(x), levels = levels(x))
+}
+
+#' @export
 new_seq.Date <- function(x, length_out = 30) {
   if (all(is.na(x))) {
     return(x[1])
