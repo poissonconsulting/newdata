@@ -9,8 +9,7 @@
 #' the rows in the data frame are unique.
 #' Consequently continuous variables such as integers
 #' which have discrete values will not attain the specified `length_out` value
-#' if
-#' there are too few possible values between the minimum and maximum.
+#' if there are too few possible values between the minimum and maximum.
 #'
 #' If a factor is named in seq then all levels of the factor are represented
 #' i.e. `length_out` is ignored. The only exception to this is
@@ -44,7 +43,6 @@
 #' mtcars <- datasets::mtcars
 #'
 #' model <- lm(mpg ~ wt + hp + poly(disp, 2), data = mtcars)
-#' summary(model)
 #'
 #' # generate a data frame across range of wt with other predictor
 #' # variables held constant
