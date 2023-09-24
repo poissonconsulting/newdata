@@ -92,28 +92,6 @@
 <span><span class="va">mtcars</span> <span class="op">&lt;-</span> <span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/mtcars.html" class="external-link">mtcars</a></span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">hp</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">disp</span>, <span class="fl">2</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Call:</span></span>
-<span><span class="co">#&gt; lm(formula = mpg ~ wt + hp + poly(disp, 2), data = mtcars)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Residuals:</span></span>
-<span><span class="co">#&gt;     Min      1Q  Median      3Q     Max </span></span>
-<span><span class="co">#&gt; -3.3887 -1.6079 -0.3997  1.7992  4.2331 </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Coefficients:</span></span>
-<span><span class="co">#&gt;                Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span><span class="co">#&gt; (Intercept)    35.13941    3.53184   9.949 1.58e-10 ***</span></span>
-<span><span class="co">#&gt; wt             -3.71314    0.91483  -4.059 0.000379 ***</span></span>
-<span><span class="co">#&gt; hp             -0.02115    0.01026  -2.062 0.048978 *  </span></span>
-<span><span class="co">#&gt; poly(disp, 2)1 -4.09195    6.21246  -0.659 0.515687    </span></span>
-<span><span class="co">#&gt; poly(disp, 2)2  7.87570    2.36778   3.326 0.002546 ** </span></span>
-<span><span class="co">#&gt; ---</span></span>
-<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Residual standard error: 2.263 on 27 degrees of freedom</span></span>
-<span><span class="co">#&gt; Multiple R-squared:  0.8772, Adjusted R-squared:  0.859 </span></span>
-<span><span class="co">#&gt; F-statistic:  48.2 on 4 and 27 DF,  p-value: 6.521e-12</span></span>
 <span></span>
 <span><span class="co"># generate a data frame across range of wt with other predictor</span></span>
 <span><span class="co"># variables held constant</span></span>
