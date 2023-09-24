@@ -36,6 +36,7 @@
 #' @param length_out A count indicating the length of numeric
 #' and possibly integer sequences.
 #' @return A tibble of the new data.
+#' @seealso [new_seq()] and [new_value()].
 #' @examples
 #' library(ggplot2)
 #' library(newdata)

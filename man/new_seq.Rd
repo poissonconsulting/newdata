@@ -15,5 +15,5 @@ new_seq(x, length_out = 30)
 Generate a new sequence for a vector
 }
 \seealso{
-\code{\link[=new_data]{new_data()}}.
+\code{\link[=new_value]{new_value()}} and \code{\link[=new_data]{new_data()}}.
 }

@@ -94,3 +94,6 @@ ggplot(data = disp, aes(x = disp, y = fit)) +
   geom_line(aes(y = upr), linetype = "dotted") +
   ylab("mpg")
 }
+\seealso{
+\code{\link[=new_seq]{new_seq()}} and \code{\link[=new_value]{new_value()}}.
+}

@@ -13,5 +13,5 @@ new_value(x)
 Generate a new reference value for a vector.
 }
 \seealso{
-\code{\link[=new_data]{new_data()}}.
+\code{\link[=new_seq]{new_seq()}} and \code{\link[=new_data]{new_data()}}.
 }

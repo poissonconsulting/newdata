@@ -3,7 +3,7 @@
 #' Generate a new reference value for a vector.
 #'
 #' @param x The vector to generate the new value for.
-#' @seealso [new_data()].
+#' @seealso [new_seq()] and [new_data()].
 #' @export
 new_value <- function(x) {
   UseMethod("new_value")
