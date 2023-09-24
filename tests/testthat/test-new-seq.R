@@ -5,7 +5,7 @@ test_that("new_seq", {
   dcharacter <- as.character(1:10)
   dfactor <- factor(1:10)
   ddate <- as.Date("2000-01-01") + 1:10
-  dposix <- Sys.time() + 1:10
+  dposix <- ISOdate(2000, 1, 1, 12, tz = "PST8PDT") + 1:10
   dhms <- as_hms(as_hms("10:00:00") + 1:10)
 
   expect_identical(new_seq(dlogical, 30), c(FALSE, TRUE))
@@ -15,7 +15,7 @@ test_that("new_seq", {
   expect_identical(new_seq(dfactor, 1), dfactor)
   expect_identical(new_seq(rev(dfactor), 100), dfactor)
   expect_equal(new_seq(ddate, 10), ddate)
-  expect_identical(new_seq(dposix, 10), dttr2::dtt_floor(dposix))
+  expect_identical(new_seq(dposix, 10), dposix)
   expect_identical(new_seq(dhms, 10), dhms)
 })
 
@@ -38,6 +38,27 @@ test_that("new_seq with missing", {
   expect_equal(new_seq(ddate, 11), ddate[!is.na(ddate)])
   expect_equal(new_seq(dposix, 11), dposix[!is.na(dposix)])
   expect_identical(new_seq(dhms, 10), dhms[!is.na(dhms)])
+})
+
+test_that("new_seq one value", {
+  dlogical <- TRUE
+  dinteger <- 1L
+  dnumeric <- 1
+  dcharacter <- as.character(1)
+  dfactor <- factor(1)
+  ddate <- as.Date("2000-01-01")
+  dposix <- ISOdate(2000, 1, 1, 12, tz = "PST8PDT")
+  dhms <- as_hms("10:00:00")
+
+  expect_identical(new_seq(dlogical, 30), dlogical)
+  expect_identical(new_seq(dinteger, 10), dinteger)
+  expect_identical(new_seq(dnumeric, 5), dnumeric)
+  expect_identical(new_seq(dcharacter, 1), dcharacter)
+  expect_identical(new_seq(dfactor, 1), dfactor)
+  expect_identical(new_seq(rev(dfactor), 100), dfactor)
+  expect_equal(new_seq(ddate, 10), ddate)
+  expect_identical(new_seq(dposix, 10), dposix)
+  expect_identical(new_seq(dhms, 10), dhms)
 })
 
 test_that("new_seq all missing", {
