@@ -107,8 +107,7 @@ and possibly integer sequences.</p></dd>
 the rows in the data frame are unique.
 Consequently continuous variables such as integers
 which have discrete values will not attain the specified <code>length_out</code> value
-if
-there are too few possible values between the minimum and maximum.</p>
+if there are too few possible values between the minimum and maximum.</p>
 <p>If a factor is named in seq then all levels of the factor are represented
 i.e. <code>length_out</code> is ignored. The only exception to this is
 if the factor is named in <code>obs_only</code>
@@ -131,29 +130,6 @@ a factor level without having to set the correct levels.</p>
 <span class="r-in"><span><span class="va">mtcars</span> <span class="op">&lt;-</span> <span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/mtcars.html" class="external-link">mtcars</a></span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">hp</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/poly.html" class="external-link">poly</a></span><span class="op">(</span><span class="va">disp</span>, <span class="fl">2</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lm(formula = mpg ~ wt + hp + poly(disp, 2), data = mtcars)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residuals:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     Min      1Q  Median      3Q     Max </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -3.3887 -1.6079 -0.3997  1.7992  4.2331 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)    35.13941    3.53184   9.949 1.58e-10 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> wt             -3.71314    0.91483  -4.059 0.000379 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> hp             -0.02115    0.01026  -2.062 0.048978 *  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> poly(disp, 2)1 -4.09195    6.21246  -0.659 0.515687    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> poly(disp, 2)2  7.87570    2.36778   3.326 0.002546 ** </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residual standard error: 2.263 on 27 degrees of freedom</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Multiple R-squared:  0.8772,	Adjusted R-squared:  0.859 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> F-statistic:  48.2 on 4 and 27 DF,  p-value: 6.521e-12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># generate a data frame across range of wt with other predictor</span></span></span>
 <span class="r-in"><span><span class="co"># variables held constant</span></span></span>
