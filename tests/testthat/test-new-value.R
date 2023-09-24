@@ -10,7 +10,6 @@ test_that("new_value", {
   default <- complex(real = 1:10 + 0.1)
 
 
-  expect_equal(new_value(default), complex(real = 5.6))
   expect_identical(new_value(dlogical), FALSE)
   expect_identical(new_value(c(TRUE, FALSE)), FALSE)
   expect_identical(new_value(dinteger), 6L)
@@ -25,6 +24,7 @@ test_that("new_value", {
     ISOdate(2000, 1, 1, 12, 0, 6, tz = "PST8PDT")
   )
   expect_identical(new_value(dhms), as_hms("10:00:06"))
+  expect_equal(new_value(default), complex(real = 5.6))
 })
 
 test_that("new_value date and time rounding", {
@@ -53,7 +53,6 @@ test_that("new_value with missing", {
   dhms <- as_hms(as_hms("10:00:00") + c(1:10, NA))
   default <- complex(real = c(1:10 + 0.1, NA))
 
-  expect_equal(new_value(default), complex(real = 5.6))
   expect_identical(new_value(dlogical), FALSE)
   expect_identical(new_value(c(TRUE, FALSE)), FALSE)
   expect_identical(new_value(dinteger), 6L)
@@ -68,6 +67,7 @@ test_that("new_value with missing", {
     ISOdate(2000, 1, 1, 12, 0, 6, tz = "PST8PDT")
   )
   expect_identical(new_value(dhms), as_hms("10:00:06"))
+  expect_equal(new_value(default), complex(real = 5.6))
 })
 
 test_that("new_value all missing", {
@@ -81,7 +81,6 @@ test_that("new_value all missing", {
   dhms <- as_hms(NA)
   default <- complex(real = NA)
 
-  expect_equal(new_value(default), default)
   expect_identical(new_value(dlogical), FALSE)
   expect_identical(new_value(dinteger), dinteger)
   expect_equal(new_value(dnumeric), dnumeric)
@@ -90,4 +89,5 @@ test_that("new_value all missing", {
   expect_equal(new_value(ddate), ddate)
   expect_equal(new_value(dposix), dposix)
   expect_equal(new_value(dhms), dhms)
+  expect_equal(new_value(default), default)
 })
