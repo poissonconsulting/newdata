@@ -83,7 +83,7 @@ ggplot(data = wt, aes(x = wt, y = fit)) +
   ylab("mpg")
 ```
 
-![](man/figures/unnamed-chunk-2-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-2-1.png)<!-- -->
 
 ``` r
 
@@ -111,7 +111,7 @@ ggplot(data = disp, aes(x = disp, y = fit)) +
   ylab("mpg")
 ```
 
-![](man/figures/unnamed-chunk-2-2.png)<!-- -->
+![](man/figures/README-unnamed-chunk-2-2.png)<!-- -->
 
 ## Installation
 
