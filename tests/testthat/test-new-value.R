@@ -31,7 +31,10 @@ test_that("new_value date and time rounding", {
   dhms2 <- hms::as_hms(hms::as_hms("23:59:59") + 0.9)
 
   expect_identical(new_value(ddate), as.Date("2000-01-02"))
-  expect_identical(new_value(dposix), ISOdate(2000, 1, 1, 12, 0, 1, tz = "PST8PDT"))
+  expect_identical(
+    new_value(dposix),
+    ISOdate(2000, 1, 1, 12, 0, 1, tz = "PST8PDT")
+  )
   expect_identical(new_value(dhms), hms::as_hms("10:00:01"))
   expect_identical(new_value(dhms2), hms::as_hms("00:00:00"))
 })
