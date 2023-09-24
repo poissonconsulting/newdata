@@ -96,11 +96,6 @@ new_seq.POSIXct <- function(x, length_out = 30) {
 
 #' @export
 new_seq.hms <- function(x, length_out = 30) {
-  if (!requireNamespace("hms", quietly = TRUE)) {
-    stop("Package \"hms\" needed for this function to work. Please install it.",
-      call. = FALSE
-    )
-  }
 
   if (all(is.na(x))) {
     return(x[1])
