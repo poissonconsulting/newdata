@@ -6,7 +6,7 @@ test_that("new_value", {
   dfactor <- factor(1:10)
   ddate <- as.Date("2000-01-01") + 1:10
   dposix <- ISOdate(2000, 1, 1, 12, tz = "PST8PDT") + 1:10
-  dhms <- hms::as_hms(hms::as_hms("10:00:00") + 1:10)
+  dhms <- as_hms(as_hms("10:00:00") + 1:10)
 
   expect_identical(new_value(dlogical), FALSE)
   expect_identical(new_value(c(TRUE, FALSE)), FALSE)
@@ -21,22 +21,22 @@ test_that("new_value", {
     new_value(dposix),
     ISOdate(2000, 1, 1, 12, 0, 6, tz = "PST8PDT")
   )
-  expect_identical(new_value(dhms), hms::as_hms("10:00:06"))
+  expect_identical(new_value(dhms), as_hms("10:00:06"))
 })
 
 test_that("new_value date and time rounding", {
   ddate <- as.Date("2000-01-01") + 0.9
   dposix <- ISOdate(2000, 1, 1, 12, 0, 0, tz = "PST8PDT") + 0.9
-  dhms <- hms::as_hms(hms::as_hms("10:00:00") + 0.9)
-  dhms2 <- hms::as_hms(hms::as_hms("23:59:59") + 0.9)
+  dhms <- as_hms(as_hms("10:00:00") + 0.9)
+  dhms2 <- as_hms(as_hms("23:59:59") + 0.9)
 
   expect_identical(new_value(ddate), as.Date("2000-01-02"))
   expect_identical(
     new_value(dposix),
     ISOdate(2000, 1, 1, 12, 0, 1, tz = "PST8PDT")
   )
-  expect_identical(new_value(dhms), hms::as_hms("10:00:01"))
-  expect_identical(new_value(dhms2), hms::as_hms("00:00:00"))
+  expect_identical(new_value(dhms), as_hms("10:00:01"))
+  expect_identical(new_value(dhms2), as_hms("00:00:00"))
 })
 
 test_that("new_value with missing", {
@@ -47,7 +47,7 @@ test_that("new_value with missing", {
   dfactor <- factor(c(1:10, NA))
   ddate <- c(as.Date("2000-01-01") + 1:10, NA)
   dposix <- ISOdate(2000, 1, 1, 12, tz = "PST8PDT") + c(1:10, NA)
-  dhms <- hms::as_hms(hms::as_hms("10:00:00") + c(1:10, NA))
+  dhms <- as_hms(as_hms("10:00:00") + c(1:10, NA))
 
   expect_identical(new_value(dlogical), FALSE)
   expect_identical(new_value(c(TRUE, FALSE)), FALSE)
@@ -62,7 +62,7 @@ test_that("new_value with missing", {
     new_value(dposix),
     ISOdate(2000, 1, 1, 12, 0, 6, tz = "PST8PDT")
   )
-  expect_identical(new_value(dhms), hms::as_hms("10:00:06"))
+  expect_identical(new_value(dhms), as_hms("10:00:06"))
 })
 
 test_that("new_value all missing", {
@@ -73,7 +73,7 @@ test_that("new_value all missing", {
   dfactor <- factor(NA)
   ddate <- as.Date(NA)
   dposix <- as.POSIXct(NA, tz = "PST8PDT")
-  dhms <- hms::as_hms(NA)
+  dhms <- as_hms(NA)
 
   expect_identical(new_value(dlogical), FALSE)
   expect_identical(new_value(dinteger), dinteger)

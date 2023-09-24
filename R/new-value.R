@@ -70,11 +70,9 @@ new_value.POSIXct <- function(x) {
 
 #' @export
 new_value.hms <- function(x) {
-  rlang::check_installed("hms")
-
   x %>%
     mean(na.rm = TRUE) %>%
     round() %>%
-    hms::as_hms() %>%
+    as_hms() %>%
     dttr2::dtt_floor()
 }

@@ -35,7 +35,7 @@ test_that("new_data generates data frame with correct number of rows", {
     dnumeric = 1:10 + 0.1,
     dfactor = factor(1:10),
     ddate = as.Date("2000-01-01") + 1:10,
-    dhms = hms::as_hms(hms::as_hms("10:00:00") + 1:10)
+    dhms = as_hms(as_hms("10:00:00") + 1:10)
   )
   expect_is(new_data(data), "data.frame")
   expect_that(nrow(new_data(data)), equals(1))
@@ -56,7 +56,7 @@ test_that("new_data generates data frame with correct number of rows", {
     dnumeric = 1:10 + 0.1,
     dfactor = factor(1:10),
     ddate = as.Date("2000-01-01") + 1:10,
-    dhms = hms::as_hms(hms::as_hms("10:00:00") + 1:10)
+    dhms = as_hms(as_hms("10:00:00") + 1:10)
   )
   new_data <- new_data(data, "dnumeric")
 

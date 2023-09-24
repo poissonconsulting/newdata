@@ -110,8 +110,8 @@ new_seq.hms <- function(x, length_out = 30) {
     to = max(x, na.rm = TRUE),
     length.out = length_out
   ) %>%
-    hms::as_hms() %>%
+    as_hms() %>%
     dttr2::dtt_floor() %>%
     unique() %>%
-    hms::as_hms()
+    as_hms()
 }

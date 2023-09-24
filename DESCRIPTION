@@ -16,13 +16,13 @@ Depends: R (>= 3.6)
 Imports:
     chk,
     dttr2,
+    hms,
     rlang,
     tibble
 Suggests:
     covr,
     datasets,
     ggplot2,
-    hms,
     stats,
     testthat
 Encoding: UTF-8
