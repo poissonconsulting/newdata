@@ -7,11 +7,13 @@ Description: Generates new data frames for passing to predict functions.
     In the new data the column or columns of interest vary across their
     range while the remaining columns are held constant at their reference
     value.  The reference value for a factor is its first level, while the
-    reference level for columns of other types are the mean or rounded
-    mean in the case of logicals, integers, Dates or POSIXcts.
+    reference level for columns of other types are the mean in the case
+    of real vectors, rounded mean in the case of logical and integer vectors and
+    floored mean in the case of Dates and POSIXct vectors.
 License: MIT + file LICENSE
 URL: https://github.com/poissonconsulting/newdata
 BugReports: https://github.com/poissonconsulting/newdata/issues
+Depends: R (>= 3.6)
 Imports:
     chk,
     dttr2,

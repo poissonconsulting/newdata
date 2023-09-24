@@ -4,11 +4,13 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![R-CMD-check](https://github.com/poissonconsulting/newdata/workflows/R-CMD-check/badge.svg)](https://github.com/poissonconsulting/newdata/actions)
+[![R-CMD-check](https://github.com/poissonconsulting/newdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/poissonconsulting/newdata/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/poissonconsulting/newdata/branch/master/graph/badge.svg)](https://codecov.io/gh/poissonconsulting/newdata?branch=master)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/newdata)](https://CRAN.R-project.org/package=newdata)
 <!-- badges: end -->
 
 # newdata
@@ -21,8 +23,9 @@ vary across their range while the remaining columns are held constant at
 their reference value.
 
 The reference value for a factor is its first level, while the reference
-level for columns of other types are the mean or rounded mean in the
-case of logicals, integers, Dates or POSIXcts.
+level for columns of other types are the mean in the case of real
+vectors, rounded mean in the case of logical and integer vectors and
+floored mean in the case of Date and POSIXct vectors.
 
 ## Demonstration
 
@@ -60,7 +63,7 @@ summary(model)
 # variables held constant
 wt <- new_data(mtcars, "wt")
 head(wt)
-#> # A tibble: 6 x 11
+#> # A tibble: 6 × 11
 #>     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 #>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
 #> 1  20.1  6.19  231.  147.  3.60  1.51  17.8 0.438 0.406  3.69  2.81
@@ -83,11 +86,12 @@ ggplot(data = wt, aes(x = wt, y = fit)) +
 ![](tools/README-unnamed-chunk-2-1.png)<!-- -->
 
 ``` r
+
 # generate a data frame across range of disp with other predictor
 # variables held constant
 disp <- new_data(mtcars, "disp")
 head(disp)
-#> # A tibble: 6 x 11
+#> # A tibble: 6 × 11
 #>     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 #>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
 #> 1  20.1  6.19  71.1  147.  3.60  3.22  17.8 0.438 0.406  3.69  2.81
