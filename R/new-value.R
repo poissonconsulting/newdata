@@ -51,6 +51,12 @@ new_value.factor <- function(x) {
 }
 
 #' @export
+new_value.ordered <- function(x) {
+  levels <- levels(x)
+  ordered(levels[1], levels = levels)
+}
+
+#' @export
 new_value.Date <- function(x) {
   x %>%
     mean(na.rm = TRUE) %>%
@@ -74,5 +80,5 @@ new_value.hms <- function(x) {
     mean(na.rm = TRUE) %>%
     round() %>%
     as_hms() %>%
-    dttr2::dtt_floor()
+    dttr2::dtt_time()
 }

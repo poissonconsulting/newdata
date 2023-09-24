@@ -1,5 +1,35 @@
-test_that("new_value", {
-  dlogical <- as.logical(0:9)
+test_that("new_value always FALSE logical", {
+  expect_identical(new_value(FALSE), FALSE)
+  expect_identical(new_value(TRUE), FALSE)
+  expect_identical(new_value(NA), FALSE)
+  expect_identical(new_value(c(TRUE, FALSE)), FALSE)
+  expect_identical(new_value(c(TRUE, FALSE, NA)), FALSE)
+  expect_identical(new_value(c(TRUE, TRUE, NA)), FALSE)
+})
+
+test_that("new_value one value", {
+  dinteger <- 2L
+  dnumeric <- 1.1
+  dcharacter <- "1"
+  dfactor <- factor(1)
+  dordered <- ordered(1)
+  ddate <- as.Date("2000-01-01")
+  dposix <- ISOdate(2000, 1, 1, 12, tz = "PST8PDT")
+  dhms <- as_hms("10:00:00")
+  default <- complex(real = 1.1)
+
+  expect_identical(new_value(dinteger), dinteger)
+  expect_equal(new_value(dnumeric), dnumeric)
+  expect_identical(new_value(dcharacter), dcharacter)
+  expect_identical(new_value(dfactor), dfactor)
+  expect_identical(new_value(dordered), dordered)
+  expect_identical(new_value(ddate), ddate)
+  expect_identical(new_value(dposix), dposix)
+  expect_identical(new_value(dhms), dhms)
+  expect_equal(new_value(default), default)
+})
+
+test_that("new_value vector", {
   dinteger <- 1:10
   dnumeric <- 1:10 + 0.1
   dcharacter <- as.character(1:10)
@@ -9,7 +39,6 @@ test_that("new_value", {
   dhms <- as_hms(as_hms("10:00:00") + 1:10)
   default <- complex(real = 1:10 + 0.1)
 
-  expect_identical(new_value(dlogical), FALSE)
   expect_identical(new_value(c(TRUE, FALSE)), FALSE)
   expect_identical(new_value(dinteger), 6L)
   expect_equal(new_value(dnumeric), 5.6)
@@ -42,7 +71,6 @@ test_that("new_value date and time rounding", {
 })
 
 test_that("new_value with missing", {
-  dlogical <- c(as.logical(0:9), NA)
   dinteger <- c(1:10, NA)
   dnumeric <- c(1:10 + 0.1, NA)
   dcharacter <- c(as.character(1:10), NA)
@@ -52,7 +80,6 @@ test_that("new_value with missing", {
   dhms <- as_hms(as_hms("10:00:00") + c(1:10, NA))
   default <- complex(real = c(1:10 + 0.1, NA))
 
-  expect_identical(new_value(dlogical), FALSE)
   expect_identical(new_value(c(TRUE, FALSE)), FALSE)
   expect_identical(new_value(dinteger), 6L)
   expect_equal(new_value(dnumeric), 5.6)
@@ -70,7 +97,6 @@ test_that("new_value with missing", {
 })
 
 test_that("new_value all missing", {
-  dlogical <- as.logical(NA)
   dinteger <- as.integer(NA)
   dnumeric <- as.numeric(NA)
   dcharacter <- as.character(NA)
@@ -80,7 +106,6 @@ test_that("new_value all missing", {
   dhms <- as_hms(NA)
   default <- complex(real = NA)
 
-  expect_identical(new_value(dlogical), FALSE)
   expect_identical(new_value(dinteger), dinteger)
   expect_equal(new_value(dnumeric), dnumeric)
   expect_identical(new_value(dcharacter), dcharacter)
