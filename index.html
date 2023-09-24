@@ -80,7 +80,7 @@
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p><code>newdata</code> is an R package to generate new data frames for passing to <code>predict</code> functions. In the new data the column or columns of interest vary across their range while the remaining columns are held constant at their reference value.</p>
-<p>The reference value for a factor is its first level, while the reference level for columns of other types are the mean in the case of real vectors, rounded mean in the case of logical and integer vectors and floored mean in the case of Date and POSIXct vectors.</p>
+<p>The reference value for a factor or character is its minimum level, while the reference level are the mean in the case of real and default vectors and rounded mean in the case of logical, integer, Date, POSIXct and hms vectors.</p>
 </div>
 <div class="section level2">
 <h2 id="demonstration">Demonstration<a class="anchor" aria-label="anchor" href="#demonstration"></a>
