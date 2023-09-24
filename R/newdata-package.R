@@ -4,6 +4,6 @@
 ## usethis namespace: start
 #' @import chk
 #' @importFrom tibble %>%
-#' @importFrom rlang is_named
+#' @importFrom rlang is_named has_name
 ## usethis namespace: end
 NULL

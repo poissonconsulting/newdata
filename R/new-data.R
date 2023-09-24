@@ -89,15 +89,15 @@ new_data <- function(data, seq = character(0), ref = list(),
   }
   obs_only <- obs_only %>% unique()
 
-  if (!all(tibble::has_name(data, seq))) {
+  if (!all(has_name(data, seq))) {
     err("`data` missing names in `seq`")
   }
 
-  if (!all(tibble::has_name(data, names(ref)))) {
+  if (!all(has_name(data, names(ref)))) {
     err("`data` missing names in `ref`")
   }
 
-  if (!all(tibble::has_name(data, unique(unlist(obs_only))))) {
+  if (!all(has_name(data, unique(unlist(obs_only))))) {
     err("`data` missing names in `obs_only`")
   }
 
