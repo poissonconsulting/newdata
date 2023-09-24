@@ -17,8 +17,10 @@ test_that("new_value", {
   expect_identical(new_value(dfactor), dfactor[1])
   expect_identical(new_value(rev(dfactor)), dfactor[1])
   expect_identical(new_value(ddate), as.Date("2000-01-06"))
-  expect_identical(new_value(dposix),
-                   ISOdate(2000, 1, 1, 12, 0, 6, tz = "PST8PDT"))
+  expect_identical(
+    new_value(dposix),
+    ISOdate(2000, 1, 1, 12, 0, 6, tz = "PST8PDT")
+  )
   expect_identical(new_value(dhms), hms::as_hms("10:00:06"))
 })
 
@@ -53,8 +55,10 @@ test_that("new_value with missing", {
   expect_identical(new_value(dfactor), dfactor[1])
   expect_identical(new_value(rev(dfactor)), dfactor[1])
   expect_identical(new_value(ddate), as.Date("2000-01-06"))
-  expect_identical(new_value(dposix),
-                   ISOdate(2000, 1, 1, 12, 0, 6, tz = "PST8PDT"))
+  expect_identical(
+    new_value(dposix),
+    ISOdate(2000, 1, 1, 12, 0, 6, tz = "PST8PDT")
+  )
   expect_identical(new_value(dhms), hms::as_hms("10:00:06"))
 })
 

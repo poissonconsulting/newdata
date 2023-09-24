@@ -116,8 +116,10 @@ new_data <- function(data, seq = character(0), ref = list(),
   }
 
   new_seqs <- lapply(data[names(data) %in% seq], new_seq, length_out)
-  new_ref <- lapply(data[!names(data) %in% seq & !names(data) %in% names(ref)],
-                    new_value)
+  new_ref <- lapply(
+    data[!names(data) %in% seq & !names(data) %in% names(ref)],
+    new_value
+  )
 
   new_data <- expand.grid(c(new_seqs, new_ref, ref),
     KEEP.OUT.ATTRS = FALSE, stringsAsFactors = FALSE

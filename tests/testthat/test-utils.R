@@ -1,6 +1,7 @@
 test_that("classes", {
   expect_equal(classes(Orange), c("ordered", "numeric", "numeric"),
-               check.attributes = FALSE)
+    check.attributes = FALSE
+  )
 })
 
 test_that("is_named", {
