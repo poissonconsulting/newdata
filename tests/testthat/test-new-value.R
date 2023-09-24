@@ -9,7 +9,6 @@ test_that("new_value", {
   dhms <- as_hms(as_hms("10:00:00") + 1:10)
   default <- complex(real = 1:10 + 0.1)
 
-
   expect_identical(new_value(dlogical), FALSE)
   expect_identical(new_value(c(TRUE, FALSE)), FALSE)
   expect_identical(new_value(dinteger), 6L)
