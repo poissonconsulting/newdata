@@ -1,8 +1,10 @@
 Package: newdata
 Title: Generate New Data Frames for Predictive Purposes
 Version: 0.0.0.9017
-Authors@R: 
-    person("Joe", "Thorley", , "joe@poissonconsulting.ca", role = c("aut", "cre"))
+Authors@R: c(
+    person("Joe", "Thorley", , "joe@poissonconsulting.ca", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-7683-4592"))
+  )
 Description: Generates new data frames for passing to predict functions.
     In the new data the column(s) of interest vary across their
     range while the remaining columns are held constant at their reference
