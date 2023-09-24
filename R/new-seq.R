@@ -15,10 +15,10 @@ new_seq.default <- function(x, length_out = 30) {
   if (all(is.na(x))) {
     return(x[1])
   }
-  x <- seq(from = min(x, na.rm = TRUE),
-           to = max(x, na.rm = TRUE),
-           length.out = length_out)
-  x %>% unique()
+  seq(from = min(x, na.rm = TRUE),
+      to = max(x, na.rm = TRUE),
+      length.out = length_out) %>%
+    unique()
 }
 
 #' @export
@@ -26,13 +26,13 @@ new_seq.logical <- function(x, length_out = 2) {
   if (all(is.na(x))) {
     return(x[1])
   }
-  x <- x %>%
+  out <- x %>%
     unique() %>%
     sort()
   if (length_out == 1) {
-    return(x[1])
+    return(out[1])
   }
-  x
+  out
 }
 
 #' @export
@@ -40,14 +40,12 @@ new_seq.integer <- function(x, length_out = 30) {
   if (all(is.na(x))) {
     return(x[1])
   }
-  x <- seq(from = min(x, na.rm = TRUE),
-           to = max(x, na.rm = TRUE),
-           length.out = length_out)
-  x <- x %>%
+  seq(from = min(x, na.rm = TRUE),
+      to = max(x, na.rm = TRUE),
+      length.out = length_out) %>%
     round() %>%
     as.integer() %>%
     unique()
-  x
 }
 
 #' @export
@@ -68,15 +66,12 @@ new_seq.Date <- function(x, length_out = 30) {
   if (all(is.na(x))) {
     return(x[1])
   }
-  x <- seq(from = min(x, na.rm = TRUE),
-           to = max(x, na.rm = TRUE),
-           length.out = length_out)
-  # ensure Date unique
-  x <- x %>%
+  seq(from = min(x, na.rm = TRUE),
+      to = max(x, na.rm = TRUE),
+      length.out = length_out) %>%
     as.character() %>%
     as.Date() %>%
     unique()
-  x
 }
 
 #' @export
@@ -84,11 +79,9 @@ new_seq.POSIXct <- function(x, length_out = 30) {
   if (all(is.na(x))) {
     return(x[1])
   }
-  x <- seq(from = min(x, na.rm = TRUE),
-           to = max(x, na.rm = TRUE),
-           length.out = length_out)
-  # ensure POSIXct unique
-  x %>%
+  seq(from = min(x, na.rm = TRUE),
+      to = max(x, na.rm = TRUE),
+      length.out = length_out) %>%
     dttr2::dtt_floor() %>%
     unique()
 }
@@ -97,19 +90,18 @@ new_seq.POSIXct <- function(x, length_out = 30) {
 new_seq.hms <- function(x, length_out = 30) {
   if (!requireNamespace("hms", quietly = TRUE)) {
     stop("Package \"hms\" needed for this function to work. Please install it.",
-      call. = FALSE
+         call. = FALSE
     )
   }
 
   if (all(is.na(x))) {
     return(x[1])
   }
-  x <- seq(from = min(x, na.rm = TRUE),
-           to = max(x, na.rm = TRUE),
-           length.out = length_out)
-  # ensure hms unique
-  x <- hms::as_hms(x)
-  x <- dttr2::dtt_floor(x)
-  x <- unique(x)
-  hms::as_hms(x)
+  seq(from = min(x, na.rm = TRUE),
+      to = max(x, na.rm = TRUE),
+      length.out = length_out) %>%
+    hms::as_hms() %>%
+    dttr2::dtt_floor() %>%
+    unique() %>%
+    hms::as_hms()
 }
