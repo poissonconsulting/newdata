@@ -31,16 +31,16 @@
 #'
 #' mtcars <- datasets::mtcars
 #'
-#' model <- lm(mpg ~ wt + hp + poly(disp,2), data = mtcars)
+#' model <- lm(mpg ~ wt + hp + poly(disp, 2), data = mtcars)
 #' summary(model)
 #'
 #' # generate a data frame across range of wt with other predictor
 #' # variables held constant
 #' wt <- new_data(mtcars, c("wt"))
 #' head(wt)
-#
+#' #
 #' wt <- cbind(wt, predict(model, newdata = wt, interval = "confidence"))
-#
+#' #
 #' ggplot(data = wt, aes(x = wt, y = fit)) +
 #'   geom_point(data = mtcars, aes(y = mpg)) +
 #'   geom_line() +
@@ -54,7 +54,7 @@
 #' head(disp)
 #'
 #' disp <- cbind(disp, predict(model, newdata = disp, interval = "confidence"))
-#
+#' #
 #' ggplot(data = disp, aes(x = disp, y = fit)) +
 #'   geom_point(data = mtcars, aes(y = mpg)) +
 #'   geom_line() +
@@ -64,7 +64,6 @@
 #' @export
 new_data <- function(data, seq = character(0), ref = list(),
                      obs_only = list(character(0)), length_out = 30L) {
-
   length_out <- length_out %>% as.integer()
 
   chk_data(data)
@@ -78,14 +77,17 @@ new_data <- function(data, seq = character(0), ref = list(),
 
   obs_only <- obs_only %>% unique()
 
-  if (!all(tibble::has_name(data, seq)))
+  if (!all(tibble::has_name(data, seq))) {
     error("data missing names in seq")
+  }
 
-  if (!all(tibble::has_name(data, names(ref))))
+  if (!all(tibble::has_name(data, names(ref)))) {
     error("data missing names in ref")
+  }
 
-  if (!all(tibble::has_name(data, unique(unlist(obs_only)))))
+  if (!all(tibble::has_name(data, unique(unlist(obs_only))))) {
     error("data missing names in obs_only")
+  }
 
   if (length(ref)) {
     if (!is.named(ref)) error("ref must be a named list")
@@ -103,7 +105,8 @@ new_data <- function(data, seq = character(0), ref = list(),
   new_ref <- lapply(data[!names(data) %in% seq & !names(data) %in% names(ref)], new_value)
 
   new_data <- expand.grid(c(new_seqs, new_ref, ref),
-                          KEEP.OUT.ATTRS = FALSE, stringsAsFactors = FALSE)
+    KEEP.OUT.ATTRS = FALSE, stringsAsFactors = FALSE
+  )
 
   for (obo in obs_only) {
     new_data <- new_data %>% obs_only(data, obo)

@@ -53,14 +53,16 @@ library(newdata)
 
 mtcars <- datasets::mtcars
 
-model <- lm(mpg ~ wt + hp + poly(disp,2), data = mtcars)
+model <- lm(mpg ~ wt + hp + poly(disp, 2), data = mtcars)
 summary(model)
 
 # generate a data frame across range of wt with other predictor
 # variables held constant
 wt <- new_data(mtcars, c("wt"))
 head(wt)
+#
 wt <- cbind(wt, predict(model, newdata = wt, interval = "confidence"))
+#
 ggplot(data = wt, aes(x = wt, y = fit)) +
   geom_point(data = mtcars, aes(y = mpg)) +
   geom_line() +
@@ -74,6 +76,7 @@ disp <- new_data(mtcars, c("disp"))
 head(disp)
 
 disp <- cbind(disp, predict(model, newdata = disp, interval = "confidence"))
+#
 ggplot(data = disp, aes(x = disp, y = fit)) +
   geom_point(data = mtcars, aes(y = mpg)) +
   geom_line() +

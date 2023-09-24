@@ -1,9 +1,8 @@
 test_that("new_seq", {
-
-  dlogical <-  as.logical(0:9)
-  dinteger <-  1:10
-  dnumeric <-  1:10 + 0.1
-  dcharacter <-  as.character(1:10)
+  dlogical <- as.logical(0:9)
+  dinteger <- 1:10
+  dnumeric <- 1:10 + 0.1
+  dcharacter <- as.character(1:10)
   dfactor <- factor(1:10)
   ddate <- as.Date("2000-01-01") + 1:10
   dposix <- Sys.time() + 1:10
@@ -11,7 +10,7 @@ test_that("new_seq", {
 
   expect_identical(new_seq(dlogical, 30), c(FALSE, TRUE))
   expect_identical(new_seq(dinteger, 10), 1:10)
-  expect_identical(new_seq(dnumeric, 5), c(1.10,  3.35,  5.60,  7.85, 10.10))
+  expect_identical(new_seq(dnumeric, 5), c(1.10, 3.35, 5.60, 7.85, 10.10))
   expect_identical(new_seq(dcharacter, 1), sort(dcharacter))
   expect_identical(new_seq(dfactor, 1), dfactor)
   expect_identical(new_seq(rev(dfactor), 100), dfactor)
@@ -21,11 +20,10 @@ test_that("new_seq", {
 })
 
 test_that("new_seq with missing", {
-
-  dlogical <-  c(as.logical(0:9), NA)
-  dinteger <-  c(1:10, NA)
-  dnumeric <-  c(1:10 + 0.1, NA)
-  dcharacter <-  c(as.character(1:10), NA)
+  dlogical <- c(as.logical(0:9), NA)
+  dinteger <- c(1:10, NA)
+  dnumeric <- c(1:10 + 0.1, NA)
+  dcharacter <- c(as.character(1:10), NA)
   dfactor <- factor(c(1:10, NA))
   ddate <- c(as.Date("2000-01-01") + 1:10, NA)
   dposix <- ISOdate(2000, 1, 1, 12, tz = "PST8PDT") + c(1:10, NA)
@@ -33,7 +31,7 @@ test_that("new_seq with missing", {
 
   expect_identical(new_seq(dlogical, 30), c(FALSE, TRUE))
   expect_identical(new_seq(dinteger, 10), 1:10)
-  expect_identical(new_seq(dnumeric, 5), c(1.10,  3.35,  5.60,  7.85, 10.10))
+  expect_identical(new_seq(dnumeric, 5), c(1.10, 3.35, 5.60, 7.85, 10.10))
   expect_identical(new_seq(dcharacter, 1), sort(unique(dcharacter)))
   expect_identical(new_seq(dfactor, 1), dfactor[!is.na(dfactor)])
   expect_identical(new_seq(rev(dfactor), 100), dfactor[!is.na(dfactor)])
@@ -43,10 +41,10 @@ test_that("new_seq with missing", {
 })
 
 test_that("new_seq all missing", {
-  dlogical <-  as.logical(NA)
-  dinteger <-  as.integer(NA)
-  dnumeric <-  as.numeric(NA)
-  dcharacter <-  as.character(NA)
+  dlogical <- as.logical(NA)
+  dinteger <- as.integer(NA)
+  dnumeric <- as.numeric(NA)
+  dcharacter <- as.character(NA)
   dfactor <- factor(NA, levels = "1")
   ddate <- as.Date(NA)
   dposix <- as.POSIXct(NA, tz = "PST8PDT")

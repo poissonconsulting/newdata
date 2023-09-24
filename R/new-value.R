@@ -5,8 +5,9 @@
 #' @param x The vector to generate the new value for.
 #' @seealso [new_data()].
 #' @export
-new_value <- function(x)
+new_value <- function(x) {
   UseMethod("new_value")
+}
 
 #' @export
 new_value.default <- function(x) {
@@ -20,20 +21,24 @@ new_value.logical <- function(x) {
 
 #' @export
 new_value.integer <- function(x) {
-  x %>% mean(na.rm = TRUE) %>% round() %>% as.integer()
+  x %>%
+    mean(na.rm = TRUE) %>%
+    round() %>%
+    as.integer()
 }
 
 #' @export
 new_value.numeric <- function(x) {
   out <- x %>% mean(na.rm = TRUE)
-  if (is.nan(out))
+  if (is.nan(out)) {
     return(NA_real_)
+  }
   out
 }
 
 #' @export
 new_value.character <- function(x) {
-  if(all(is.na(x))) {
+  if (all(is.na(x))) {
     return(NA_character_)
   }
   x %>% min(na.rm = TRUE)

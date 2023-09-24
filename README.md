@@ -35,7 +35,7 @@ library(newdata)
 
 mtcars <- datasets::mtcars
 
-model <- lm(mpg ~ wt + hp + poly(disp,2), data = mtcars)
+model <- lm(mpg ~ wt + hp + poly(disp, 2), data = mtcars)
 summary(model)
 #> 
 #> Call:
@@ -75,8 +75,8 @@ head(wt)
 
 wt <- cbind(wt, predict(model, newdata = wt, interval = "confidence"))
 
-ggplot(data = wt, aes(x = wt, y = fit)) + 
-  geom_point(data = mtcars, aes(y = mpg)) + 
+ggplot(data = wt, aes(x = wt, y = fit)) +
+  geom_point(data = mtcars, aes(y = mpg)) +
   geom_line() +
   geom_line(aes(y = lwr), linetype = "dotted") +
   geom_line(aes(y = upr), linetype = "dotted") +
@@ -103,8 +103,8 @@ head(disp)
 
 disp <- cbind(disp, predict(model, newdata = disp, interval = "confidence"))
 
-ggplot(data = disp, aes(x = disp, y = fit)) + 
-  geom_point(data = mtcars, aes(y = mpg)) + 
+ggplot(data = disp, aes(x = disp, y = fit)) +
+  geom_point(data = mtcars, aes(y = mpg)) +
   geom_line() +
   geom_line(aes(y = lwr), linetype = "dotted") +
   geom_line(aes(y = upr), linetype = "dotted") +

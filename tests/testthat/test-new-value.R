@@ -1,9 +1,8 @@
 test_that("new_value", {
-
-  dlogical <-  as.logical(0:9)
-  dinteger <-  1:10
-  dnumeric <-  1:10 + 0.1
-  dcharacter <-  as.character(1:10)
+  dlogical <- as.logical(0:9)
+  dinteger <- 1:10
+  dnumeric <- 1:10 + 0.1
+  dcharacter <- as.character(1:10)
   dfactor <- factor(1:10)
   ddate <- as.Date("2000-01-01") + 1:10
   dposix <- ISOdate(2000, 1, 1, 12, tz = "PST8PDT") + 1:10
@@ -23,11 +22,10 @@ test_that("new_value", {
 })
 
 test_that("new_value with missing", {
-
-  dlogical <-  c(as.logical(0:9), NA)
-  dinteger <-  c(1:10, NA)
-  dnumeric <-  c(1:10 + 0.1, NA)
-  dcharacter <-  c(as.character(1:10), NA)
+  dlogical <- c(as.logical(0:9), NA)
+  dinteger <- c(1:10, NA)
+  dnumeric <- c(1:10 + 0.1, NA)
+  dcharacter <- c(as.character(1:10), NA)
   dfactor <- factor(c(1:10, NA))
   ddate <- c(as.Date("2000-01-01") + 1:10, NA)
   dposix <- ISOdate(2000, 1, 1, 12, tz = "PST8PDT") + c(1:10, NA)
@@ -47,11 +45,10 @@ test_that("new_value with missing", {
 })
 
 test_that("new_value all missing", {
-
-  dlogical <-  as.logical(NA)
-  dinteger <-  as.integer(NA)
-  dnumeric <-  as.numeric(NA)
-  dcharacter <-  as.character(NA)
+  dlogical <- as.logical(NA)
+  dinteger <- as.integer(NA)
+  dnumeric <- as.numeric(NA)
+  dcharacter <- as.character(NA)
   dfactor <- factor(NA)
   ddate <- as.Date(NA)
   dposix <- as.POSIXct(NA, tz = "PST8PDT")
@@ -66,4 +63,3 @@ test_that("new_value all missing", {
   expect_equal(new_value(dposix), dposix)
   expect_equal(new_value(dhms), dhms)
 })
-
