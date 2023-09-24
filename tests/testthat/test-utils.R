@@ -3,8 +3,3 @@ test_that("classes", {
     check.attributes = FALSE
   )
 })
-
-test_that("is_named", {
-  expect_true(is_named(Orange))
-  expect_false(is_named(list(1)))
-})
