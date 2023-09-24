@@ -86,30 +86,30 @@ new_data <- function(data, seq = character(0), ref = list(),
   if (isTRUE(obs_only)) obs_only <- list(seq)
   chk_list(obs_only)
   if (!all(vapply(obs_only, is.character, TRUE))) {
-    error("obs_only must be a list of character vectors")
+    err("`obs_only` must be a list of character vectors")
   }
   obs_only <- obs_only %>% unique()
 
   if (!all(tibble::has_name(data, seq))) {
-    error("data missing names in seq")
+    err("`data` missing names in `seq`")
   }
 
   if (!all(tibble::has_name(data, names(ref)))) {
-    error("data missing names in ref")
+    err("`data` missing names in `ref`")
   }
 
   if (!all(tibble::has_name(data, unique(unlist(obs_only))))) {
-    error("data missing names in obs_only")
+    err("`data` missing names in `obs_only`")
   }
 
   if (length(ref)) {
-    if (!is_named(ref)) error("ref must be a named list")
+    if (!is_named(ref)) err("`ref` must be a named list")
 
     ref <- ref[!names(ref) %in% seq]
 
     if (length(ref)) {
       if (any(unique(unlist(obs_only)) %in% names(ref))) {
-        error("variables must not be in obs_only and ref")
+        err("variables must not be in `obs_only` and `ref`")
       }
       ref <- ref %>%
         check_classes(data[names(ref)], x_name = "ref", y_name = "data")

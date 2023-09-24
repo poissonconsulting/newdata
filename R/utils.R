@@ -9,7 +9,3 @@ as_factor <- function(x, y) {
   }
   ordered(x, levels = levels(y), ordered = TRUE)
 }
-
-error <- function(...) {
-  stop(..., call. = FALSE)
-}

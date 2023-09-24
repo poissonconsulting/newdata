@@ -99,11 +99,11 @@ test_that("new_data ref works", {
 })
 
 test_that("new_data ref errors", {
-  expect_error(new_data(Orange, ref = list(1, 2)), "ref must be a named list")
+  expect_error(new_data(Orange, ref = list(1, 2)), "`ref` must be a named list.")
   expect_error(new_data(Orange, ref = list(age = TRUE)),
-               "classes of variables in ref must match those in data")
+               "Classes of variables in `ref` must match those in `data`.")
   expect_error(new_data(Orange, obs_only = list("age"), ref = list(age = 118)),
-               "variables must not be in obs_only and ref")
+               "Variables must not be in `obs_only` and `ref`.")
 })
 
 test_that("new_data ref works", {
