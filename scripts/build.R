@@ -5,6 +5,7 @@ lintr::lint_package()
 devtools::test()
 devtools::document()
 
+pkgdown::init_site()
 pkgdown::build_home()
 
 devtools::check()

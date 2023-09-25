@@ -1,3 +1,5 @@
+template:
+  bootstrap: 5
 authors:
   Joe Thorley:
     href: "https://github.com/joethorley"
