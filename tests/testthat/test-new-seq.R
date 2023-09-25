@@ -1,3 +1,20 @@
+test_that("new_seq logical", {
+  expect_identical(new_seq(logical(0)), NA)
+  expect_identical(new_seq(NA), NA)
+  expect_identical(new_seq(TRUE), TRUE)
+  expect_identical(new_seq(FALSE), FALSE)
+  expect_identical(new_seq(c(FALSE, TRUE)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(TRUE, FALSE)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(FALSE, FALSE, TRUE)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(FALSE, TRUE, NA)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(FALSE, TRUE), length_out = 1), FALSE)
+  expect_identical(new_seq(TRUE, length_out = 1), TRUE)
+  expect_identical(new_seq(FALSE, length_out = 1), FALSE)
+  expect_identical(new_seq(c(FALSE, TRUE), length_out = 3), c(FALSE, TRUE))
+  expect_identical(new_seq(c(FALSE, TRUE, TRUE), length_out = 3), c(FALSE, TRUE))
+  expect_identical(new_seq(c(TRUE, TRUE), length_out = 3), TRUE)
+})
+
 test_that("new_seq length 1", {
   dlogical <- as.logical(0:9)
   dinteger <- 1:10

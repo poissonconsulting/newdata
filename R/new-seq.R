@@ -6,6 +6,22 @@
 #' @param length_out The length of the sequence.
 #' @returns A vector of the same class as the vector.
 #' @seealso [new_value()] and [new_data()].
+#' @examples
+#' new_seq(c(1,4,NA)) # returns vector of 30 equidistant real values in range
+#' new_seq(c(1,4,NA),  length_out = 10) # returns 10 equidistant real values
+#' new_seq(c(1L,4L,NA)) # returns up to 30 unique integer values
+#' new_seq(c(1L,4L,NA), length_out = 3) # up to three unique integer values
+#' new_seq(c(1L,4L,NA), length_out = 2) # minimum and maximum integer values
+#' new_seq(c(1L,4L,NA), length_out = 1) # minimum integer value
+#' new_seq(c("g", "a", "b", "b", NA)) # all character values
+#' # all factor levels preserving factor levels
+#' new_seq(factor(c("g", "a", "b", "b", NA), levels = c("b", "a", "g")))
+#' # rounded mean for dates and times
+#' new_seq(as.Date(c("2000-01-01", "2000-01-04", NA)))
+#' new_seq(hms::as_hms(c("00:00:01", "00:00:04", NA)))
+#' new_seq(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04", NA)))
+#' # FALSE and TRUE for logical vectors
+#' new_seq(c(TRUE,FALSE, NA))
 #' @export
 new_seq <- function(x, length_out = 30) {
   UseMethod("new_seq")
