@@ -1,13 +1,38 @@
-test_that("new_value always FALSE logical", {
+test_that("new_value logical", {
+  expect_identical(new_value(logical(0)), FALSE)
+  expect_identical(new_value(NA), FALSE)
   expect_identical(new_value(FALSE), FALSE)
   expect_identical(new_value(TRUE), FALSE)
-  expect_identical(new_value(NA), FALSE)
   expect_identical(new_value(c(TRUE, FALSE)), FALSE)
   expect_identical(new_value(c(TRUE, FALSE, NA)), FALSE)
   expect_identical(new_value(c(TRUE, TRUE, NA)), FALSE)
 })
 
-test_that("new_value one value", {
+# should make independent of locale!!
+test_that("new_value character", {
+  expect_identical(new_value(character()), NA_character_)
+  expect_identical(new_value(NA_character_), NA_character_)
+  expect_identical(new_value("b"), "b")
+  expect_identical(new_value(c("a", "b")), "a")
+  expect_identical(new_value(c("b", "a")), "a")
+  expect_identical(new_value(c("b", "b", "a")), "a")
+  expect_identical(new_value(c(NA, "b", "b", "a")), "a")
+})
+
+test_that("new_value factor", {
+#  expect_identical(new_value(factor()), NA_) factor no length
+  expect_identical(new_value(factor(NA)), factor(NA))
+  expect_identical(new_value(factor("b")), factor("b"))
+  expect_identical(new_value(factor(c("b", NA))), factor("b"))
+  expect_identical(new_value(factor(c("a", "b"))), factor("a", levels = c("a", "b")))
+  expect_identical(new_value(factor(c("a", "b"), levels = c("b", "a"))), factor("b", levels = c("b", "a")))
+  expect_identical(new_value(factor(c("b", "a"), levels = c("b", "a"))), factor("b", levels = c("b", "a")))
+  expect_identical(new_value(factor(c("c", "b", "a"), levels = c("b", "c", "a"))), factor("b", levels = c("b", "c", "a")))
+  expect_identical(new_value(factor(c("a", "b", "a"), levels = c("b", "a"))), factor("b", levels = c("b", "a")))
+  expect_identical(new_value(factor(c("a", "b", "a"), levels = c("b", "a"))), factor("b", levels = c("b", "a")))
+})
+
+test_that("new_value scalar", {
   dinteger <- 2L
   dnumeric <- 1.1
   dcharacter <- "1"
@@ -55,6 +80,27 @@ test_that("new_value vector", {
   expect_equal(new_value(default), complex(real = 5.6))
 })
 
+test_that("new_value scalar NA", {
+  dinteger <- as.integer(NA)
+  dnumeric <- as.numeric(NA)
+  dcharacter <- as.character(NA)
+  dfactor <- factor(NA)
+  ddate <- as.Date(NA)
+  dposix <- as.POSIXct(NA, tz = "PST8PDT")
+  dhms <- as_hms(NA)
+  default <- complex(real = NA)
+
+  expect_identical(new_value(dinteger), dinteger)
+  expect_equal(new_value(dnumeric), dnumeric)
+  expect_identical(new_value(dcharacter), dcharacter)
+  expect_identical(new_value(dfactor), dfactor)
+  expect_equal(new_value(ddate), ddate)
+  expect_equal(new_value(dposix), dposix)
+  expect_equal(new_value(dhms), dhms)
+  expect_equal(new_value(default), default)
+})
+
+
 test_that("new_value date and time rounding", {
   ddate <- as.Date("2000-01-01") + 0.9
   dposix <- ISOdate(2000, 1, 1, 12, 0, 0, tz = "PST8PDT") + 0.9
@@ -94,24 +140,4 @@ test_that("new_value with missing", {
   )
   expect_identical(new_value(dhms), as_hms("10:00:06"))
   expect_equal(new_value(default), complex(real = 5.6))
-})
-
-test_that("new_value all missing", {
-  dinteger <- as.integer(NA)
-  dnumeric <- as.numeric(NA)
-  dcharacter <- as.character(NA)
-  dfactor <- factor(NA)
-  ddate <- as.Date(NA)
-  dposix <- as.POSIXct(NA, tz = "PST8PDT")
-  dhms <- as_hms(NA)
-  default <- complex(real = NA)
-
-  expect_identical(new_value(dinteger), dinteger)
-  expect_equal(new_value(dnumeric), dnumeric)
-  expect_identical(new_value(dcharacter), dcharacter)
-  expect_identical(new_value(dfactor), dfactor)
-  expect_equal(new_value(ddate), ddate)
-  expect_equal(new_value(dposix), dposix)
-  expect_equal(new_value(dhms), dhms)
-  expect_equal(new_value(default), default)
 })
