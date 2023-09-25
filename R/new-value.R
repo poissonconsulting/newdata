@@ -3,6 +3,7 @@
 #' Generate a new reference value for a vector.
 #'
 #' @param x The vector to generate the new value for.
+#' @returns A scalar of the same class as the vector.
 #' @seealso [new_seq()] and [new_data()].
 #' @examples
 #' new_value(c(1,4,NA)) # returns mean for reference value for real vector

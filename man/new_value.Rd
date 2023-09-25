@@ -9,6 +9,9 @@ new_value(x)
 \arguments{
 \item{x}{The vector to generate the new value for.}
 }
+\value{
+A scalar of the same class as the vector.
+}
 \description{
 Generate a new reference value for a vector.
 }
