@@ -95,7 +95,7 @@ test_that("new_value scalar NA", {
   expect_identical(new_value(dcharacter), dcharacter)
   expect_identical(new_value(dfactor), dfactor)
   expect_equal(new_value(ddate), ddate)
-  expect_equivalent(new_value(dposix), dposix)
+  expect_equal(new_value(dposix), dposix, ignore_attr = TRUE)
   expect_equal(new_value(dhms), dhms)
 #  expect_equal(new_value(default), default) #FIXME as an example
 })
