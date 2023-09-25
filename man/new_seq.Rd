@@ -11,6 +11,9 @@ new_seq(x, length_out = 30)
 
 \item{length_out}{The length of the sequence.}
 }
+\value{
+A vector of the same class as the vector.
+}
 \description{
 Generate a new sequence for a vector
 }

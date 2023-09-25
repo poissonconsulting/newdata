@@ -4,6 +4,7 @@
 #'
 #' @param x The vector to generate the sequence for.
 #' @param length_out The length of the sequence.
+#' @returns A vector of the same class as the vector.
 #' @seealso [new_value()] and [new_data()].
 #' @export
 new_seq <- function(x, length_out = 30) {
