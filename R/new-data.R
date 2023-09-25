@@ -38,40 +38,18 @@
 #' @return A tibble of the new data.
 #' @seealso [new_seq()] and [new_value()].
 #' @examples
-#' library(ggplot2)
-#' library(newdata)
+#' # an example data set
+#' data <- tibble::tibble(
+#'   vecint = c(1L, 3L),
+#'   vecreal = c(1, 3),
+#'   vecchar = c("b", "a"),
+#'   vecdate = as.Date("2001-01-01", "2001-01-01"))
 #'
-#' mtcars <- datasets::mtcars
-#'
-#' model <- lm(mpg ~ wt + hp + poly(disp, 2), data = mtcars)
-#'
-#' # generate a data frame across range of wt with other predictor
-#' # variables held constant
-#' wt <- new_data(mtcars, c("wt"))
-#' head(wt)
-#' #
-#' wt <- cbind(wt, predict(model, newdata = wt, interval = "confidence"))
-#' #
-#' ggplot(data = wt, aes(x = wt, y = fit)) +
-#'   geom_point(data = mtcars, aes(y = mpg)) +
-#'   geom_line() +
-#'   geom_line(aes(y = lwr), linetype = "dotted") +
-#'   geom_line(aes(y = upr), linetype = "dotted") +
-#'   ylab("mpg")
-#'
-#' # generate a data frame across range of wt with other predictor
-#' # variables held constant
-#' disp <- new_data(mtcars, c("disp"))
-#' head(disp)
-#'
-#' disp <- cbind(disp, predict(model, newdata = disp, interval = "confidence"))
-#' #
-#' ggplot(data = disp, aes(x = disp, y = fit)) +
-#'   geom_point(data = mtcars, aes(y = mpg)) +
-#'   geom_line() +
-#'   geom_line(aes(y = lwr), linetype = "dotted") +
-#'   geom_line(aes(y = upr), linetype = "dotted") +
-#'   ylab("mpg")
+#' # vary count while holding other values constant
+#' new_data(data, "vecint")
+#' # vary continual
+#' new_data(data, "vecreal")
+#' new_data(data, c("vecchar", "vecint"))
 #' @export
 new_data <- function(data, seq = character(0), ref = list(),
                      obs_only = list(character(0)), length_out = 30L) {

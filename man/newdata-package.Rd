@@ -11,6 +11,7 @@ Generates new data frames for passing to predict functions. In the new data the 
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://poissonconsulting.github.io/newdata}
   \item \url{https://github.com/poissonconsulting/newdata}
   \item Report bugs at \url{https://github.com/poissonconsulting/newdata/issues}
 }
