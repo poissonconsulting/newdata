@@ -55,10 +55,20 @@ ggplot(data = disp, aes(x = disp, y = fit)) +
 
 ## Installation
 
-To install the latest development version from [GitHub](https://github.com/poissonconsulting/newdata)
+To install the latest release version from CRAN.
+```r
+install.packages("newdata")
 ```
+
+To install the latest development version from [r-universe](https://poissonconsulting.r-universe.dev/newdata).
+```r
+install.packages("newdata", repos = c("https://poissonconsulting.r-universe.dev", "https://cloud.r-project.org"))
+```
+
+To install the latest development version from [GitHub](https://github.com/poissonconsulting/newdata)
+```r
 # install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
-pak::pak("poissonconsulting/newdata")
+pak::pak("newdata")
 ```
 
 ## Contribution
