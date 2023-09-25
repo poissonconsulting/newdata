@@ -57,8 +57,8 @@ ggplot(data = disp, aes(x = disp, y = fit)) +
 
 To install the latest development version from [GitHub](https://github.com/poissonconsulting/newdata)
 ```
-# install.packages("remotes")
-remotes::install_github("poissonconsulting/newdata")
+# install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
+pak::pak("poissonconsulting/newdata")
 ```
 
 ## Contribution
