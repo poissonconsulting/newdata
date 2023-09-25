@@ -13,7 +13,7 @@ Description: Generates new data frames for passing to predict functions.
 License: MIT + file LICENSE
 URL: https://poissonconsulting.github.io/newdata, https://github.com/poissonconsulting/newdata
 BugReports: https://github.com/poissonconsulting/newdata/issues
-Depends: R (>= 4.1)
+Depends: R (>= 3.6)
 Imports:
     chk,
     dttr2,
