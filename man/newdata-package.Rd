@@ -21,7 +21,7 @@ Useful links:
 
 Other contributors:
 \itemize{
-  \item Poisson Consulting [copyright holder]
+  \item Poisson Consulting [funder, copyright holder]
 }
 
 }
