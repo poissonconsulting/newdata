@@ -4,6 +4,20 @@
 #'
 #' @param x The vector to generate the new value for.
 #' @seealso [new_seq()] and [new_data()].
+#' @examples
+#' new_value(c(1,4,NA)) # returns mean for reference value for real vector
+#' new_value(c(1L,4L,NA)) # rounded mean for integer vector
+#' new_value(c("d", "a", "b", "b", NA)) # minimum for character vector
+#' # first level for factor (preserves factor levels)
+#' new_value(factor(c("d", "a", "b", "b", NA), levels = c("b", "a", "d")))
+#' # rounded mean for dates and times
+#' new_value(as.Date(c("2000-01-01", "2000-01-02", NA)))
+#' new_value(hms::as_hms(c("00:00:01", "00:00:02", NA)))
+#' new_value(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:02", NA)))
+#' # false for logical vector as this is the natural reference value
+#' new_value(c(TRUE,NA))
+#' # mean value by default
+#' new_value(complex(real = c(1, 4, NA)))
 #' @export
 new_value <- function(x) {
   UseMethod("new_value")
