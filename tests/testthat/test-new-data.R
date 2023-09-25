@@ -37,16 +37,16 @@ test_that("new_data generates data frame with correct number of rows", {
     ddate = as.Date("2000-01-01") + 1:10,
     dhms = as_hms(as_hms("10:00:00") + 1:10)
   )
-  expect_is(new_data(data), "data.frame")
-  expect_that(nrow(new_data(data)), equals(1))
-  expect_equal(nrow(new_data(data, "dlogical")), 2)
-  expect_equal(nrow(new_data(data, "dnumeric")), 30)
-  expect_that(nrow(new_data(data, c("dnumeric", "dinteger"))), equals(300))
-  expect_that(
+  expect_s3_class(new_data(data), "data.frame")
+  expect_equal(nrow(new_data(data)), 1L)
+  expect_equal(nrow(new_data(data, "dlogical")), 2L)
+  expect_equal(nrow(new_data(data, "dnumeric")), 30L)
+  expect_equal(nrow(new_data(data, c("dnumeric", "dinteger"))), 300L)
+  expect_equal(
     nrow(new_data(data, c("dfactor", "dinteger"), length_out = 5)),
-    equals(50)
+    50
   )
-  expect_that(nrow(new_data(data, c("dhms"), length_out = 5)), equals(5))
+  expect_equal(nrow(new_data(data, c("dhms"), length_out = 5)), 5L)
 })
 
 test_that("new_data generates data frame with correct number of rows", {
@@ -65,16 +65,16 @@ test_that("new_data generates data frame with correct number of rows", {
     vapply(new_data, FUN = function(x) class(x)[1], FUN.VALUE = "")
   )
 
-  expect_is(new_data(data), "data.frame")
-  expect_that(nrow(new_data(data)), equals(1))
+  expect_s3_class(new_data(data), "data.frame")
+  expect_equal(nrow(new_data(data)), 1L)
   expect_equal(nrow(new_data(data, "dlogical")), 2)
   expect_equal(nrow(new_data(data, "dnumeric")), 30)
-  expect_that(nrow(new_data(data, c("dnumeric", "dinteger"))), equals(300))
-  expect_that(
+  expect_equal(nrow(new_data(data, c("dnumeric", "dinteger"))), 300)
+  expect_equal(
     nrow(new_data(data, c("dfactor", "dinteger"), length_out = 5)),
-    equals(50)
+    50
   )
-  expect_that(nrow(new_data(data, c("dhms"), length_out = 5)), equals(5))
+  expect_equal(nrow(new_data(data, c("dhms"), length_out = 5)), 5)
 })
 
 test_that("new_data ref works", {

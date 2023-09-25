@@ -31,6 +31,7 @@ new_seq(factor(c("g", "a", "b", "b", NA), levels = c("b", "a", "g")))
 new_seq(as.Date(c("2000-01-01", "2000-01-04", NA)))
 new_seq(hms::as_hms(c("00:00:01", "00:00:04", NA)))
 new_seq(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04", NA)))
+# FALSE and TRUE for logical vectors
 new_seq(c(TRUE,FALSE, NA))
 }
 \seealso{
