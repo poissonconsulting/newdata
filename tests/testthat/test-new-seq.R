@@ -122,6 +122,73 @@ test_that("new_seq integer", {
   expect_identical(new_seq(c(100L, 1L), length_out = 3), c(1L, 50L, 100L))
 })
 
+test_that("new_seq numeric", {
+  # zero length
+  expect_identical(new_seq(numeric(0)), NA_real_)
+  # missing value
+  expect_identical(new_seq(NA_real_), NA_real_)
+  # single value
+  expect_identical(new_seq(1), 1)
+  expect_identical(new_seq(0), 0)
+  expect_identical(new_seq(1.1), 1.1)
+  expect_identical(new_seq(-1), -1)
+  # multiple value
+  x0to1 <- seq(0,1,length.out = 30)
+  expect_identical(new_seq(c(0, 1)), x0to1)
+  expect_identical(new_seq(c(1, 0)), x0to1)
+  expect_identical(new_seq(c(1, 1)), 1)
+  expect_identical(new_seq(c(0, 0)), 0)
+  expect_identical(new_seq(c(0, 0, 1)), x0to1)
+  expect_identical(new_seq(c(1, 1, 0)), x0to1)
+  expect_equal(new_seq(c(10, 0)), x0to1 * 10)
+  expect_equal(new_seq(c(100, 0)), x0to1 * 100)
+  # multiple value with missing
+  x0to1 <- seq(0,1,length.out = 30)
+  expect_identical(new_seq(c(0, 1, NA)), x0to1)
+  expect_identical(new_seq(c(1, 0, NA)), x0to1)
+  expect_identical(new_seq(c(1, 1, NA)), 1)
+  expect_identical(new_seq(c(0, 0, NA)), 0)
+  expect_identical(new_seq(c(0, 0, 1, NA)), x0to1)
+  expect_identical(new_seq(c(1, 1, 0, NA)), x0to1)
+  expect_equal(new_seq(c(10, 0, NA)), x0to1 * 10)
+  expect_equal(new_seq(c(100, 0, NA)), x0to1 * 100)
+  # length_out not count
+  expect_error(new_seq(1, length_out = -1), "`length_out` must be a count")
+  expect_error(new_seq(1, length_out = 0.5), "`length_out` must be a count")
+  # length_out is 0
+  expect_identical(new_seq(double(), length_out = 0), double())
+  expect_identical(new_seq(numeric(), length_out = 0), double())
+  expect_identical(new_seq(NA_real_, length_out = 0), double())
+  expect_identical(new_seq(1, length_out = 0), double())
+  # length_out = 1
+  expect_identical(new_seq(c(0, 1), length_out = 1), 0)
+  expect_identical(new_seq(c(1, 0), length_out = 1), 0)
+  expect_identical(new_seq(c(1, 1), length_out = 1), 1)
+  expect_identical(new_seq(c(0, 0), length_out = 1), 0)
+  expect_identical(new_seq(c(0, 0, 1), length_out = 1), 0)
+  expect_identical(new_seq(c(1, 1, 0), length_out = 1), 0)
+  expect_identical(new_seq(c(10, 1), length_out = 1), 1)
+  expect_identical(new_seq(c(100, 1), length_out = 1), 1)
+  # length_out = 2
+  expect_identical(new_seq(c(0, 1), length_out = 2), c(0, 1))
+  expect_identical(new_seq(c(1, 0), length_out = 2), c(0, 1))
+  expect_identical(new_seq(c(1, 1), length_out = 2), 1)
+  expect_identical(new_seq(c(0, 0), length_out = 2), 0)
+  expect_identical(new_seq(c(0, 0, 1), length_out = 2), c(0, 1))
+  expect_identical(new_seq(c(1, 1, 0), length_out = 2), c(0, 1))
+  expect_identical(new_seq(c(10, 1), length_out = 2), c(1, 10))
+  expect_identical(new_seq(c(100, 1), length_out = 2), c(1, 100))
+  # length_out = 3
+  expect_identical(new_seq(c(0, 1), length_out = 3), c(0, 0.5, 1))
+  expect_identical(new_seq(c(1, 0), length_out = 3), c(0, 0.5, 1))
+  expect_identical(new_seq(c(1, 1), length_out = 3), 1)
+  expect_identical(new_seq(c(0, 0), length_out = 3), 0)
+  expect_identical(new_seq(c(0, 0, 1), length_out = 3), c(0, 0.5, 1))
+  expect_identical(new_seq(c(1, 1, 0), length_out = 3), c(0, 0.5, 1))
+  expect_identical(new_seq(c(10, 1), length_out = 3), c(1, 5.5, 10))
+  expect_identical(new_seq(c(100, 1), length_out = 3), c(1, 50.5, 100))
+})
+
 test_that("new_seq length 1", {
   dlogical <- as.logical(0:9)
   dinteger <- 1:10
