@@ -67,6 +67,11 @@
 <p>A scalar of the same class as the vector.</p>
     </div>
     <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>The reference value is the value to use for a variable when it is being
+held constant.</p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="new_seq.html">new_seq()</a></code> and <code><a href="new_data.html">new_data()</a></code>.</p></div>
     </div>
@@ -75,7 +80,7 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span>,<span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="co"># returns mean for reference value for real vector</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.5</span>
-<span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1L</span>,<span class="fl">4L</span>,<span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="co"># rounded mean for integer vector</span></span></span>
+<span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1L</span>,<span class="fl">4L</span>,<span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="co"># rounded mean as integer for integer vector</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
 <span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"g"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"b"</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="co"># minimum for character vector</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "a"</span>
@@ -83,12 +88,13 @@
 <span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"g"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"b"</span>, <span class="cn">NA</span><span class="op">)</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"b"</span>, <span class="st">"a"</span>, <span class="st">"g"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] b</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Levels: b a g</span>
-<span class="r-in"><span><span class="co"># rounded mean for dates and times</span></span></span>
+<span class="r-in"><span><span class="co"># rounded mean as integer for dates and times (Date, hms, POSIXct)</span></span></span>
 <span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2000-01-01"</span>, <span class="st">"2000-01-02"</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2000-01-02"</span>
 <span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu">hms</span><span class="fu">::</span><span class="fu"><a href="https://hms.tidyverse.org/reference/hms.html" class="external-link">as_hms</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"00:00:01"</span>, <span class="st">"00:00:02"</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 00:00:02</span>
-<span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2000-01-01 00:00:01"</span>, <span class="st">"2000-01-01 00:00:02"</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2000-01-01 00:00:01"</span>, <span class="st">"2000-01-01 00:00:02"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>tz <span class="op">=</span> <span class="st">"UTC"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2000-01-01 00:00:02 UTC"</span>
 <span class="r-in"><span><span class="co"># false for logical vector as this is the natural reference value</span></span></span>
 <span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>,<span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span></span>
