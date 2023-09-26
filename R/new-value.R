@@ -73,7 +73,7 @@ new_value.ordered <- function(x) {
 new_value.Date <- function(x) {
   out <- x %>% mean(na.rm = TRUE)
   if (is.nan(out)) {
-    return(as.Date(NA))
+    return(as.Date(NA_integer_))
   }
   out %>%
     round() %>%
@@ -83,12 +83,16 @@ new_value.Date <- function(x) {
 
 #' @export
 new_value.POSIXct <- function(x) {
-  tz <- dttr2::dtt_tz(x)
-  x %>%
-    mean(na.rm = TRUE) %>%
+  tz <- attr(x, "tzone", exact = TRUE)
+  out <- x %>% mean(na.rm = TRUE)
+  if (is.nan(out)) {
+    return(as.POSIXct(NA_integer_, tz = tz))
+  }
+  out %>%
     round() %>%
     as.POSIXct(tz = tz) %>%
-    dttr2::dtt_date_time(tz = tz)
+    as.integer() %>%
+    as.POSIXct(tz = tz)
 }
 
 #' @export
@@ -96,6 +100,6 @@ new_value.hms <- function(x) {
   x %>%
     mean(na.rm = TRUE) %>%
     round() %>%
-    as_hms() %>%
-    dttr2::dtt_time()
+    as.integer() %>%
+    as_hms()
 }

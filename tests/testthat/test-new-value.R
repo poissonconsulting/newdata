@@ -163,13 +163,13 @@ test_that("new_value ordered", {
 
 test_that("new_value Date", {
   # zero length
-  expect_identical(new_value(as.Date(character())), as.Date(NA_character_))
-  expect_identical(new_value(as.Date(integer())), as.Date(NA_character_))
-  expect_identical(new_value(as.Date(double())), as.Date(NA_character_))
+  expect_identical(new_value(as.Date(character())), as.Date(NA_integer_))
+  expect_identical(new_value(as.Date(integer())), as.Date(NA_integer_))
+  expect_identical(new_value(as.Date(double())), as.Date(NA_integer_))
   # missing value
-  expect_identical(new_value(as.Date(NA_character_)), as.Date(NA_character_))
-  expect_identical(new_value(as.Date(NA_real_)), as.Date(NA_character_))
-  expect_identical(new_value(as.Date(NA_integer_)), as.Date(NA_character_))
+  expect_identical(new_value(as.Date(NA_character_)), as.Date(NA_integer_))
+  expect_identical(new_value(as.Date(NA_real_)), as.Date(NA_integer_))
+  expect_identical(new_value(as.Date(NA_integer_)), as.Date(NA_integer_))
   # single value
   expect_identical(new_value(as.Date(1L)), as.Date(1L))
   expect_identical(new_value(as.Date(1)), as.Date(1L))
@@ -188,23 +188,32 @@ test_that("new_value Date", {
 
 test_that("new_value POSIXct", {
   # zero length
- # expect_identical(new_value(as.POSIXct(character())), as.POSIXct(NA_character_)) # FIXME
+  expect_identical(new_value(as.POSIXct(character())), as.POSIXct(NA_integer_))
+  expect_identical(new_value(as.POSIXct(character(), tz = "UTC")), as.POSIXct(NA_integer_, tz = "UTC"))
+  expect_identical(new_value(as.POSIXct(character(), tz = "PST8PDT")), as.POSIXct(NA_integer_, tz = "PST8PDT"))
   # missing value
-  #  expect_identical(new_value(as.POSIXct(NA_character_)), as.POSIXct(NA_character_)) # FIXME
+  expect_identical(new_value(as.POSIXct(NA_character_)), as.POSIXct(NA_integer_))
+  expect_identical(new_value(as.POSIXct(NA_character_, tz = "UTC")), as.POSIXct(NA_integer_, tz = "UTC"))
+  expect_identical(new_value(as.POSIXct(NA_character_, tz = "PST8PDT")), as.POSIXct(NA_integer_, tz = "PST8PDT"))
   # single value
-  #  expect_identical(new_value(as.POSIXct(1L)), as.POSIXct(1L)) # FIXME
-  # expect_identical(new_value(as.POSIXct(1)), as.POSIXct(1))
-  # expect_identical(new_value(as.POSIXct(1.1)), as.POSIXct(1))
-  # expect_identical(new_value(as.POSIXct(1.6)), as.POSIXct(2))
-  # expect_identical(new_value(as.POSIXct(10)), as.POSIXct(10))
-  # # multiple values
-  # expect_identical(new_value(as.POSIXct(c(0, 1))), as.POSIXct(0))
-  # expect_identical(new_value(as.POSIXct(c(1, 2))), as.POSIXct(2))
-  # expect_identical(new_value(as.POSIXct(c(1, 3))), as.POSIXct(2))
-  # # multiple values with missing
-  # expect_identical(new_value(as.POSIXct(c(0, 1, NA))), as.POSIXct(0))
-  # expect_identical(new_value(as.POSIXct(c(1, 2, NA))), as.POSIXct(2))
-  # expect_identical(new_value(as.POSIXct(c(1, 3, NA))), as.POSIXct(2))
+  expect_identical(new_value(as.POSIXct(1L)), as.POSIXct(1L))
+  expect_identical(new_value(as.POSIXct(1L, tz = "UTC")), as.POSIXct(1L, tz = "UTC"))
+  expect_identical(new_value(as.POSIXct(1L, tz = "PST8PDT")), as.POSIXct(1L, tz = "PST8PDT"))
+  expect_identical(new_value(as.POSIXct(1)), as.POSIXct(1L))
+  expect_identical(new_value(as.POSIXct(1.1)), as.POSIXct(1L))
+  expect_identical(new_value(as.POSIXct(1.6)), as.POSIXct(2L))
+  expect_identical(new_value(as.POSIXct(10)), as.POSIXct(10L))
+  # multiple values
+  expect_identical(new_value(as.POSIXct(c(0, 1))), as.POSIXct(1L))
+  expect_identical(new_value(as.POSIXct(c(1, 2))), as.POSIXct(2L))
+  expect_identical(new_value(as.POSIXct(c(1, 3))), as.POSIXct(2L))
+  expect_identical(new_value(as.POSIXct(c(1, 4))), as.POSIXct(3L))
+  expect_identical(new_value(as.POSIXct(c(1, 4), tz = "PST8PDT")), as.POSIXct(3L, tz = "PST8PDT"))
+  # multiple values with missing
+  expect_identical(new_value(as.POSIXct(c(0, 1, NA))), as.POSIXct(1L))
+  expect_identical(new_value(as.POSIXct(c(1, 2, NA))), as.POSIXct(2L))
+  expect_identical(new_value(as.POSIXct(c(1, 3, NA))), as.POSIXct(2L))
+  expect_identical(new_value(as.POSIXct(c(1, 4, NA), tz = "PST8PDT")), as.POSIXct(3L, tz = "PST8PDT"))
 })
 
 test_that("new_value hms", {
@@ -230,9 +239,11 @@ test_that("new_value hms", {
 })
 
 test_that("new_value default", {
-  # zero length
-  # missing value
   # single value
+  expect_identical(new_value(complex(real = 1)), complex(real = 1))
+  expect_identical(new_value(complex(real = 1.1)), complex(real = 1.1))
   # multiple values
+  expect_identical(new_value(complex(real = c(1, 2))), complex(real = 1.5))
   # multiple values with missing
+  expect_identical(new_value(complex(real = c(1, 2, NA))), complex(real = 1.5))
 })
