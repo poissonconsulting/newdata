@@ -24,6 +24,8 @@ test_that("new_seq logical", {
   expect_error(new_seq(TRUE, length_out = -1), "`length_out` must be a count")
   expect_error(new_seq(TRUE, length_out = 0.5), "`length_out` must be a count")
   # length_out is 0
+  expect_identical(new_seq(logical(), length_out = 0), logical())
+  expect_identical(new_seq(NA, length_out = 0), logical())
   expect_identical(new_seq(TRUE, length_out = 0), logical())
   # length_out = 1
   expect_identical(new_seq(c(FALSE, TRUE), length_out = 1), FALSE)
@@ -46,6 +48,78 @@ test_that("new_seq logical", {
   expect_identical(new_seq(c(FALSE, FALSE), length_out = 3), FALSE)
   expect_identical(new_seq(c(FALSE, FALSE, TRUE), length_out = 3), c(FALSE, TRUE))
   expect_identical(new_seq(c(TRUE, TRUE, FALSE), length_out = 3), c(FALSE, TRUE))
+})
+
+test_that("new_seq integer", {
+  # zero length
+  expect_identical(new_seq(integer(0)), NA_integer_)
+  # missing value
+  expect_identical(new_seq(NA_integer_), NA_integer_)
+  # single value
+  expect_identical(new_seq(1L), 1L)
+  expect_identical(new_seq(0L), 0L)
+  # multiple value
+  expect_identical(new_seq(c(0L, 1L)), c(0L, 1L))
+  expect_identical(new_seq(c(1L, 0L)), c(0L, 1L))
+  expect_identical(new_seq(c(1L, 1L)), 1L)
+  expect_identical(new_seq(c(0L, 0L)), 0L)
+  expect_identical(new_seq(c(0L, 0L, 1L)), c(0L, 1L))
+  expect_identical(new_seq(c(1L, 1L, 0L)), c(0L, 1L))
+  expect_identical(new_seq(c(10L, 1L)), 1:10)
+  expect_identical(new_seq(c(100L, 1L)),
+                   c(1L, 4L, 8L, 11L, 15L, 18L, 21L, 25L, 28L, 32L,
+                     35L, 39L, 42L,
+                     45L, 49L, 52L, 56L, 59L, 62L, 66L, 69L, 73L,
+                     76L, 80L, 83L, 86L,
+                     90L, 93L, 97L, 100L))
+  # multiple value with missing
+  expect_identical(new_seq(c(0L, 1L, NA)), c(0L, 1L))
+  expect_identical(new_seq(c(1L, 0L, NA)), c(0L, 1L))
+  expect_identical(new_seq(c(1L, 1L, NA)), 1L)
+  expect_identical(new_seq(c(0L, 0L, NA)), 0L)
+  expect_identical(new_seq(c(0L, 0L, 1L, NA)), c(0L, 1L))
+  expect_identical(new_seq(c(1L, 1L, 0L, NA)), c(0L, 1L))
+  expect_identical(new_seq(c(10L, 1L, NA)), 1:10)
+  expect_identical(new_seq(c(100L, 1L, NA)),
+                   c(1L, 4L, 8L, 11L, 15L, 18L, 21L, 25L, 28L, 32L,
+                     35L, 39L, 42L,
+                     45L, 49L, 52L, 56L, 59L, 62L, 66L, 69L, 73L,
+                     76L, 80L, 83L, 86L,
+                     90L, 93L, 97L, 100L))
+  # length_out not count
+  expect_error(new_seq(1L, length_out = -1), "`length_out` must be a count")
+  expect_error(new_seq(1L, length_out = 0.5), "`length_out` must be a count")
+  # length_out is 0
+  expect_identical(new_seq(integer(), length_out = 0), integer())
+  expect_identical(new_seq(NA_integer_, length_out = 0), integer())
+  expect_identical(new_seq(1L, length_out = 0), integer())
+  # length_out = 1
+  expect_identical(new_seq(c(0L, 1L), length_out = 1), 0L)
+  expect_identical(new_seq(c(1L, 0L), length_out = 1), 0L)
+  expect_identical(new_seq(c(1L, 1L), length_out = 1), 1L)
+  expect_identical(new_seq(c(0L, 0L), length_out = 1), 0L)
+  expect_identical(new_seq(c(0L, 0L, 1L), length_out = 1), 0L)
+  expect_identical(new_seq(c(1L, 1L, 0L), length_out = 1), 0L)
+  expect_identical(new_seq(c(10L, 1L), length_out = 1), 1L)
+  expect_identical(new_seq(c(100L, 1L), length_out = 1), 1L)
+  # length_out = 2
+  expect_identical(new_seq(c(0L, 1L), length_out = 2), c(0L, 1L))
+  expect_identical(new_seq(c(1L, 0L), length_out = 2), c(0L, 1L))
+  expect_identical(new_seq(c(1L, 1L), length_out = 2), 1L)
+  expect_identical(new_seq(c(0L, 0L), length_out = 2), 0L)
+  expect_identical(new_seq(c(0L, 0L, 1L), length_out = 2), c(0L, 1L))
+  expect_identical(new_seq(c(1L, 1L, 0L), length_out = 2), c(0L, 1L))
+  expect_identical(new_seq(c(10L, 1L), length_out = 2), c(1L, 10L))
+  expect_identical(new_seq(c(100L, 1L), length_out = 2), c(1L, 100L))
+  # length_out = 3
+  expect_identical(new_seq(c(0L, 1L), length_out = 3), c(0L, 1L))
+  expect_identical(new_seq(c(1L, 0L), length_out = 3), c(0L, 1L))
+  expect_identical(new_seq(c(1L, 1L), length_out = 3), 1L)
+  expect_identical(new_seq(c(0L, 0L), length_out = 3), 0L)
+  expect_identical(new_seq(c(0L, 0L, 1L), length_out = 3), c(0L, 1L))
+  expect_identical(new_seq(c(1L, 1L, 0L), length_out = 3), c(0L, 1L))
+  expect_identical(new_seq(c(10L, 1L), length_out = 3), c(1L, 6L, 10L))
+  expect_identical(new_seq(c(100L, 1L), length_out = 3), c(1L, 50L, 100L))
 })
 
 test_that("new_seq length 1", {

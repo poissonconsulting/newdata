@@ -44,7 +44,7 @@ new_seq.default <- function(x, length_out = 30) {
 new_seq.logical <- function(x, length_out = 2) {
   chk_count(length_out)
   if(length_out == 0L) {
-    return(logical(0))
+    return(logical())
   }
   if (all(is.na(x))) {
     return(x[1])
@@ -60,6 +60,10 @@ new_seq.logical <- function(x, length_out = 2) {
 
 #' @export
 new_seq.integer <- function(x, length_out = 30) {
+  chk_count(length_out)
+  if(length_out == 0L) {
+    return(integer())
+  }
   if (all(is.na(x))) {
     return(x[1])
   }
@@ -93,6 +97,7 @@ new_seq.ordered <- function(x, length_out = NULL) {
 
 #' @export
 new_seq.Date <- function(x, length_out = 30) {
+  chk_count(length_out)
   if (all(is.na(x))) {
     return(x[1])
   }
@@ -108,6 +113,7 @@ new_seq.Date <- function(x, length_out = 30) {
 
 #' @export
 new_seq.POSIXct <- function(x, length_out = 30) {
+  chk_count(length_out)
   if (all(is.na(x))) {
     return(x[1])
   }
@@ -122,7 +128,7 @@ new_seq.POSIXct <- function(x, length_out = 30) {
 
 #' @export
 new_seq.hms <- function(x, length_out = 30) {
-
+  chk_count(length_out)
   if (all(is.na(x))) {
     return(x[1])
   }
