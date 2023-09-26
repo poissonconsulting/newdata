@@ -163,13 +163,15 @@ test_that("new_value ordered", {
 
 test_that("new_value Date", {
   # zero length
-  expect_identical(new_value(as.Date(character())), as.Date(NA_character_)) # FIXME
-  expect_identical(new_value(as.Date(double())), as.Date(NA_character_)) # FIXME
-  expect_identical(new_value(as.Date(integer())), as.Date(NA_character_)) # FIXME
+  expect_identical(new_value(as.Date(character())), as.Date(NA_character_))
+  expect_identical(new_value(as.Date(integer())), as.Date(NA_character_))
+  expect_identical(new_value(as.Date(double())), as.Date(NA_character_))
   # missing value
-#  expect_identical(new_value(as.Date(NA_character_)), as.Date(NA_character_)) # FIXME
+  expect_identical(new_value(as.Date(NA_character_)), as.Date(NA_character_))
+  expect_identical(new_value(as.Date(NA_real_)), as.Date(NA_character_))
+  expect_identical(new_value(as.Date(NA_integer_)), as.Date(NA_character_))
   # single value
-  expect_identical(new_value(as.Date(1L)), as.Date(1L)) # FIXME
+  expect_identical(new_value(as.Date(1L)), as.Date(1L))
   expect_identical(new_value(as.Date(1)), as.Date(1L))
   expect_identical(new_value(as.Date(1.1)), as.Date(1L))
   expect_identical(new_value(as.Date(1.6)), as.Date(2L))
