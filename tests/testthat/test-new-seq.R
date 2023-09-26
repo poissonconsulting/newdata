@@ -189,6 +189,73 @@ test_that("new_seq numeric", {
   expect_identical(new_seq(c(100, 1), length_out = 3), c(1, 50.5, 100))
 })
 
+test_that("new_seq character", {
+  # zero length
+  expect_identical(new_seq(character(0)), NA_character_)
+  # missing value
+  expect_identical(new_seq(NA_character_), NA_character_)
+  # single value
+  expect_identical(new_seq("1"), "1")
+  expect_identical(new_seq("0"), "0")
+  # multiple value
+  expect_identical(new_seq(c("0", "1")), c("0", "1"))
+  expect_identical(new_seq(c("1", "0")), c("0", "1"))
+  expect_identical(new_seq(c("1", "1")), "1")
+  expect_identical(new_seq(c("0", "0")), "0")
+  expect_identical(new_seq(c("0", "0", "1")), c("0", "1"))
+  expect_identical(new_seq(c("1", "1", "0")), c("0", "1"))
+  expect_identical(new_seq(c("10", "1")), c("1","10"))
+  expect_identical(new_seq(c("100", "1")), c("1", "100"))
+  expect_identical(new_seq(as.character(1:100)), sort(as.character(1:100)))
+  # multiple value with missing
+  expect_identical(new_seq(c("0", "1", NA)), c("0", "1"))
+  expect_identical(new_seq(c("1", "0", NA)), c("0", "1"))
+  expect_identical(new_seq(c("1", "1", NA)), "1")
+  expect_identical(new_seq(c("0", "0", NA)), "0")
+  expect_identical(new_seq(c("0", "0", "1", NA)), c("0", "1"))
+  expect_identical(new_seq(c("1", "1", "0", NA)), c("0", "1"))
+  expect_identical(new_seq(c("10", "1", NA)), c("1","10"))
+  expect_identical(new_seq(c("100", "1", NA)), c("1", "100"))
+  # length_out not count
+  expect_error(new_seq("1", length_out = -1), "`length_out` must be a count")
+  expect_error(new_seq("1", length_out = 0.5), "`length_out` must be a count")
+  # length_out is 0
+  expect_identical(new_seq(character(), length_out = 0), character())
+  expect_identical(new_seq(NA_character_, length_out = 0), character())
+  expect_identical(new_seq("1", length_out = 0), character())
+  # length_out = 1
+  expect_identical(new_seq(c("0", "1"), length_out = 1), "0")
+  expect_identical(new_seq(c("1", "0"), length_out = 1), "0")
+  expect_identical(new_seq(c("1", "1"), length_out = 1), "1")
+  expect_identical(new_seq(c("0", "0"), length_out = 1), "0")
+  expect_identical(new_seq(c("0", "0", "1"), length_out = 1), "0")
+  expect_identical(new_seq(c("1", "1", "0"), length_out = 1), "0")
+  expect_identical(new_seq(c("1", "0", "1"), length_out = 1), "0")
+  expect_identical(new_seq(c("10", "1"), length_out = 1), "1")
+  expect_identical(new_seq(c("100", "1"), length_out = 1), "1")
+  # length_out = 2
+  expect_identical(new_seq(c("0", "1"), length_out = 2), c("0", "1"))
+  expect_identical(new_seq(c("1", "0"), length_out = 2), c("0", "1"))
+  expect_identical(new_seq(c("1", "1"), length_out = 2), "1")
+  expect_identical(new_seq(c("0", "0"), length_out = 2), "0")
+  expect_identical(new_seq(c("0", "0", "1"), length_out = 2), c("0", "1"))
+  expect_identical(new_seq(c("1", "1", "0"), length_out = 2), c("0", "1"))
+  expect_identical(new_seq(c("10", "1"), length_out = 2), c("1", "10"))
+  expect_identical(new_seq(c("100", "1"), length_out = 2), c("1", "100"))
+  # length_out = 3
+  expect_identical(new_seq(c("0", "1"), length_out = 3), c("0", "1"))
+  expect_identical(new_seq(c("1", "0"), length_out = 3), c("0", "1"))
+  expect_identical(new_seq(c("1", "1"), length_out = 3), "1")
+  expect_identical(new_seq(c("0", "0"), length_out = 3), "0")
+  expect_identical(new_seq(c("0", "0", "1"), length_out = 3), c("0", "1"))
+  expect_identical(new_seq(c("1", "1", "0"), length_out = 3), c("0", "1"))
+  expect_identical(new_seq(c("10", "1"), length_out = 3), c("1", "10"))
+  expect_identical(new_seq(c("100", "1"), length_out = 3), c("1", "100"))
+  expect_identical(new_seq(c("100", "1", "2"), length_out = 3), c("1", "100", "2"))
+  expect_identical(new_seq(c("100", "1", "2", "3"), length_out = 3), c("1", "100", "3"))
+  expect_identical(new_seq(c("100", "1", "99", "3"), length_out = 3), c("1", "100", "99"))
+})
+
 test_that("new_seq length 1", {
   dlogical <- as.logical(0:9)
   dinteger <- 1:10
@@ -203,7 +270,6 @@ test_that("new_seq length 1", {
   expect_identical(new_seq(dlogical, 1), FALSE)
   expect_identical(new_seq(dinteger, 1), 1L) # should be intermediat value
   expect_identical(new_seq(dnumeric, 1), 1.1)
-  expect_identical(new_seq(dcharacter, 1), sort(dcharacter)) # should this be one?
   expect_identical(new_seq(dfactor, 1), dfactor)
   expect_identical(new_seq(rev(dfactor), 1), dfactor)
   expect_identical(new_seq(dordered, 1), dordered)
@@ -227,7 +293,6 @@ test_that("new_seq", {
   expect_identical(new_seq(dlogical, 30), c(FALSE, TRUE))
   expect_identical(new_seq(dinteger, 10), 1:10)
   expect_identical(new_seq(dnumeric, 5), c(1.10, 3.35, 5.60, 7.85, 10.10))
-  expect_identical(new_seq(dcharacter, 1), sort(dcharacter))
   expect_identical(new_seq(dfactor, 1), dfactor)
   expect_identical(new_seq(rev(dfactor), 100), dfactor)
   expect_identical(new_seq(dordered, 1), dordered)
@@ -251,7 +316,6 @@ test_that("new_seq with missing", {
   expect_identical(new_seq(dlogical, 30), c(FALSE, TRUE))
   expect_identical(new_seq(dinteger, 10), 1:10)
   expect_identical(new_seq(dnumeric, 5), c(1.10, 3.35, 5.60, 7.85, 10.10))
-  expect_identical(new_seq(dcharacter, 1), sort(unique(dcharacter)))
   expect_identical(new_seq(dfactor, 1), dfactor[!is.na(dfactor)])
   expect_identical(new_seq(rev(dfactor), 100), dfactor[!is.na(dfactor)])
   expect_identical(new_seq(dordered, 1), dordered[!is.na(dordered)])

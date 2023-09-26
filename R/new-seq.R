@@ -98,13 +98,24 @@ new_seq.numeric <- function(x, length_out = 30) {
     unique()
 }
 
-
 #' @export
-new_seq.character <- function(x, length_out = NULL) {
-  if (all(is.na(x))) {
-    return(x[1])
+new_seq.character <- function(x, length_out = Inf) {
+  chk_count(length_out)
+  if(length_out == 0L) {
+    return(character())
   }
-  sort(unique(x))
+  if (all(is.na(x))) {
+    return(NA_character_)
+  }
+  out <- x %>%
+    sort() %>%
+    unique()
+
+  n <- length(out)
+  if(n > length_out) {
+    out <- out[unique(round(seq(1L,n,length.out = length_out)))]
+  }
+  out
 }
 
 #' @export
