@@ -1,18 +1,51 @@
 test_that("new_seq logical", {
+  # zero length
   expect_identical(new_seq(logical(0)), NA)
+  # missing value
   expect_identical(new_seq(NA), NA)
+  # single value
   expect_identical(new_seq(TRUE), TRUE)
   expect_identical(new_seq(FALSE), FALSE)
+  # multiple value
   expect_identical(new_seq(c(FALSE, TRUE)), c(FALSE, TRUE))
   expect_identical(new_seq(c(TRUE, FALSE)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(TRUE, TRUE)), TRUE)
+  expect_identical(new_seq(c(FALSE, FALSE)), FALSE)
   expect_identical(new_seq(c(FALSE, FALSE, TRUE)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(TRUE, TRUE, FALSE)), c(FALSE, TRUE))
+  # multiple value with missing
   expect_identical(new_seq(c(FALSE, TRUE, NA)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(TRUE, FALSE, NA)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(TRUE, TRUE, NA)), TRUE)
+  expect_identical(new_seq(c(FALSE, FALSE, NA)), FALSE)
+  expect_identical(new_seq(c(FALSE, FALSE, TRUE, NA)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(TRUE, TRUE, FALSE, NA)), c(FALSE, TRUE))
+  # length_out not count
+  expect_error(new_seq(TRUE, length_out = -1), "`length_out` must be a count")
+  expect_error(new_seq(TRUE, length_out = 0.5), "`length_out` must be a count")
+  # length_out is 0
+  expect_identical(new_seq(TRUE, length_out = 0), logical())
+  # length_out = 1
   expect_identical(new_seq(c(FALSE, TRUE), length_out = 1), FALSE)
-  expect_identical(new_seq(TRUE, length_out = 1), TRUE)
-  expect_identical(new_seq(FALSE, length_out = 1), FALSE)
+  expect_identical(new_seq(c(TRUE, FALSE), length_out = 1), FALSE)
+  expect_identical(new_seq(c(TRUE, TRUE), length_out = 1), TRUE)
+  expect_identical(new_seq(c(FALSE, FALSE), length_out = 1), FALSE)
+  expect_identical(new_seq(c(FALSE, FALSE, TRUE), length_out = 1), FALSE)
+  expect_identical(new_seq(c(TRUE, TRUE, FALSE), length_out = 1), FALSE)
+  # length_out = 2
+  expect_identical(new_seq(c(FALSE, TRUE), length_out = 2), c(FALSE, TRUE))
+  expect_identical(new_seq(c(TRUE, FALSE), length_out = 2), c(FALSE, TRUE))
+  expect_identical(new_seq(c(TRUE, TRUE), length_out = 2), TRUE)
+  expect_identical(new_seq(c(FALSE, FALSE), length_out = 2), FALSE)
+  expect_identical(new_seq(c(FALSE, FALSE, TRUE), length_out = 2), c(FALSE, TRUE))
+  expect_identical(new_seq(c(TRUE, TRUE, FALSE), length_out = 2), c(FALSE, TRUE))
+  # length_out = 3
   expect_identical(new_seq(c(FALSE, TRUE), length_out = 3), c(FALSE, TRUE))
-  expect_identical(new_seq(c(FALSE, TRUE, TRUE), length_out = 3), c(FALSE, TRUE))
+  expect_identical(new_seq(c(TRUE, FALSE), length_out = 3), c(FALSE, TRUE))
   expect_identical(new_seq(c(TRUE, TRUE), length_out = 3), TRUE)
+  expect_identical(new_seq(c(FALSE, FALSE), length_out = 3), FALSE)
+  expect_identical(new_seq(c(FALSE, FALSE, TRUE), length_out = 3), c(FALSE, TRUE))
+  expect_identical(new_seq(c(TRUE, TRUE, FALSE), length_out = 3), c(FALSE, TRUE))
 })
 
 test_that("new_seq length 1", {

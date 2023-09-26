@@ -42,6 +42,10 @@ new_seq.default <- function(x, length_out = 30) {
 
 #' @export
 new_seq.logical <- function(x, length_out = 2) {
+  chk_count(length_out)
+  if(length_out == 0L) {
+    return(logical(0))
+  }
   if (all(is.na(x))) {
     return(x[1])
   }
