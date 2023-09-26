@@ -2,19 +2,23 @@
 #'
 #' Generate a new reference value for a vector.
 #'
+#' The reference value is the value to use for a variable when it is being
+#' held constant.
+#'
 #' @param x The vector to generate the new value for.
 #' @returns A scalar of the same class as the vector.
 #' @seealso [new_seq()] and [new_data()].
 #' @examples
 #' new_value(c(1,4,NA)) # returns mean for reference value for real vector
-#' new_value(c(1L,4L,NA)) # rounded mean for integer vector
+#' new_value(c(1L,4L,NA)) # rounded mean as integer for integer vector
 #' new_value(c("g", "a", "b", "b", NA)) # minimum for character vector
 #' # first level for factor preserving factor levels
 #' new_value(factor(c("g", "a", "b", "b", NA), levels = c("b", "a", "g")))
-#' # rounded mean for dates and times
+#' # rounded mean as integer for dates and times (Date, hms, POSIXct)
 #' new_value(as.Date(c("2000-01-01", "2000-01-02", NA)))
 #' new_value(hms::as_hms(c("00:00:01", "00:00:02", NA)))
-#' new_value(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:02", NA)))
+#' new_value(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:02"),
+#' tz = "UTC"))
 #' # false for logical vector as this is the natural reference value
 #' new_value(c(TRUE,NA))
 #' @export
