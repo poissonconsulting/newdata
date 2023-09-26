@@ -163,23 +163,25 @@ test_that("new_value ordered", {
 
 test_that("new_value Date", {
   # zero length
-#  expect_identical(new_value(as.Date(character())), as.Date(NA_character_)) # FIXME
+  expect_identical(new_value(as.Date(character())), as.Date(NA_character_)) # FIXME
+  expect_identical(new_value(as.Date(double())), as.Date(NA_character_)) # FIXME
+  expect_identical(new_value(as.Date(integer())), as.Date(NA_character_)) # FIXME
   # missing value
 #  expect_identical(new_value(as.Date(NA_character_)), as.Date(NA_character_)) # FIXME
   # single value
-#  expect_identical(new_value(as.Date(1L)), as.Date(1L)) # FIXME
-  expect_identical(new_value(as.Date(1)), as.Date(1))
-  expect_identical(new_value(as.Date(1.1)), as.Date(1))
-  expect_identical(new_value(as.Date(1.6)), as.Date(2))
-  expect_identical(new_value(as.Date(10)), as.Date(10))
+  expect_identical(new_value(as.Date(1L)), as.Date(1L)) # FIXME
+  expect_identical(new_value(as.Date(1)), as.Date(1L))
+  expect_identical(new_value(as.Date(1.1)), as.Date(1L))
+  expect_identical(new_value(as.Date(1.6)), as.Date(2L))
+  expect_identical(new_value(as.Date(10)), as.Date(10L                                                                                               ))
   # multiple values
-  expect_identical(new_value(as.Date(c(0, 1))), as.Date(0))
-  expect_identical(new_value(as.Date(c(1, 2))), as.Date(2))
-  expect_identical(new_value(as.Date(c(1, 3))), as.Date(2))
+  expect_identical(new_value(as.Date(c(0, 1))), as.Date(0L))
+  expect_identical(new_value(as.Date(c(1, 2))), as.Date(2L))
+  expect_identical(new_value(as.Date(c(1, 3))), as.Date(2L))
   # multiple values with missing
-  expect_identical(new_value(as.Date(c(0, 1, NA))), as.Date(0))
-  expect_identical(new_value(as.Date(c(1, 2, NA))), as.Date(2))
-  expect_identical(new_value(as.Date(c(1, 3, NA))), as.Date(2))
+  expect_identical(new_value(as.Date(c(0, 1, NA))), as.Date(0L))
+  expect_identical(new_value(as.Date(c(1, 2, NA))), as.Date(2L))
+  expect_identical(new_value(as.Date(c(1, 3, NA))), as.Date(2L))
 })
 
 test_that("new_value POSIXct", {

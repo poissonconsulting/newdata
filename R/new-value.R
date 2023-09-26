@@ -71,10 +71,14 @@ new_value.ordered <- function(x) {
 
 #' @export
 new_value.Date <- function(x) {
-  x %>%
-    mean(na.rm = TRUE) %>%
+  out <- x %>% mean(na.rm = TRUE)
+  if (is.nan(out)) {
+    return(as.Date(NA))
+  }
+  out %>%
     round() %>%
-    dttr2::dtt_date()
+    as.integer() %>%
+    as.Date()
 }
 
 #' @export
