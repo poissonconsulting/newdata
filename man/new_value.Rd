@@ -2,9 +2,39 @@
 % Please edit documentation in R/new-value.R
 \name{new_value}
 \alias{new_value}
+\alias{new_value.default}
+\alias{new_value.numeric}
+\alias{new_value.logical}
+\alias{new_value.integer}
+\alias{new_value.character}
+\alias{new_value.factor}
+\alias{new_value.ordered}
+\alias{new_value.Date}
+\alias{new_value.POSIXct}
+\alias{new_value.hms}
 \title{New Value}
 \usage{
 new_value(x)
+
+\method{new_value}{default}(x)
+
+\method{new_value}{numeric}(x)
+
+\method{new_value}{logical}(x)
+
+\method{new_value}{integer}(x)
+
+\method{new_value}{character}(x)
+
+\method{new_value}{factor}(x)
+
+\method{new_value}{ordered}(x)
+
+\method{new_value}{Date}(x)
+
+\method{new_value}{POSIXct}(x)
+
+\method{new_value}{hms}(x)
 }
 \arguments{
 \item{x}{The vector to generate the new value for.}
@@ -19,6 +49,29 @@ Generate a new reference value for a vector.
 The reference value is the value to use for a variable when it is being
 held constant.
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{new_value(default)}: default
+
+\item \code{new_value(numeric)}: numeric
+
+\item \code{new_value(logical)}: logical
+
+\item \code{new_value(integer)}: integer
+
+\item \code{new_value(character)}: character
+
+\item \code{new_value(factor)}: factor
+
+\item \code{new_value(ordered)}: ordered
+
+\item \code{new_value(Date)}: Date
+
+\item \code{new_value(POSIXct)}: POSIXct
+
+\item \code{new_value(hms)}: hms
+
+}}
 \examples{
 # the reference value for real vectors is the mean
 new_value(c(1,4))
@@ -46,7 +99,6 @@ new_value(hms::as_hms(c("00:00:01", "00:00:04")))
 new_value(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04"),
   tz = "PST8PDT"))
 # for logical vector it's always FALSE as this is the natural reference value
-new_value(TRUE)
 new_value(logical())
 # by default its simply the mean
 new_value(complex(real = c(1, 4)))

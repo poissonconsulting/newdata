@@ -35,7 +35,6 @@
 #' new_value(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04"),
 #'   tz = "PST8PDT"))
 #' # for logical vector it's always FALSE as this is the natural reference value
-#' new_value(TRUE)
 #' new_value(logical())
 #' # by default its simply the mean
 #' new_value(complex(real = c(1, 4)))
@@ -44,6 +43,7 @@ new_value <- function(x) {
   UseMethod("new_value")
 }
 
+#' @describeIn new_value default
 #' @export
 new_value.default <- function(x) {
   out <- x %>% mean(na.rm = TRUE)
@@ -54,19 +54,7 @@ new_value.default <- function(x) {
   out
 }
 
-#' @export
-new_value.logical <- function(x) {
-  FALSE
-}
-
-#' @export
-new_value.integer <- function(x) {
-  x %>%
-    mean(na.rm = TRUE) %>%
-    round() %>%
-    as.integer()
-}
-
+#' @describeIn new_value numeric
 #' @export
 new_value.numeric <- function(x) {
   out <- x %>% mean(na.rm = TRUE)
@@ -76,6 +64,22 @@ new_value.numeric <- function(x) {
   out
 }
 
+#' @describeIn new_value logical
+#' @export
+new_value.logical <- function(x) {
+  FALSE
+}
+
+#' @describeIn new_value integer
+#' @export
+new_value.integer <- function(x) {
+  x %>%
+    mean(na.rm = TRUE) %>%
+    round() %>%
+    as.integer()
+}
+
+#' @describeIn new_value character
 #' @export
 new_value.character <- function(x) {
   if (all(is.na(x))) {
@@ -84,18 +88,21 @@ new_value.character <- function(x) {
   x %>% min(na.rm = TRUE)
 }
 
+#' @describeIn new_value factor
 #' @export
 new_value.factor <- function(x) {
   levels <- levels(x)
   factor(levels[1], levels = levels)
 }
 
+#' @describeIn new_value ordered
 #' @export
 new_value.ordered <- function(x) {
   levels <- levels(x)
   ordered(levels[1], levels = levels)
 }
 
+#' @describeIn new_value Date
 #' @export
 new_value.Date <- function(x) {
   out <- x %>% mean(na.rm = TRUE)
@@ -108,6 +115,7 @@ new_value.Date <- function(x) {
     as.Date()
 }
 
+#' @describeIn new_value POSIXct
 #' @export
 new_value.POSIXct <- function(x) {
   tz <- attr(x, "tzone", exact = TRUE)
@@ -122,6 +130,7 @@ new_value.POSIXct <- function(x) {
     as.POSIXct(tz = tz)
 }
 
+#' @describeIn new_value hms
 #' @export
 new_value.hms <- function(x) {
   x %>%
