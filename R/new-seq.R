@@ -186,7 +186,7 @@ new_seq.Date <- function(x, length_out = 30) {
   from <- range[1]
   to <- range[2]
   length_out <- min(length_out, to - from + 1L)
-  out <- seq(
+  seq(
     from = from,
     to = to,
     length.out = length_out
@@ -195,13 +195,6 @@ new_seq.Date <- function(x, length_out = 30) {
     as.integer() %>%
     unique() %>%
     as.Date()
-
-  n <- length(out)
-  if(n > length_out) {
-    out <- out[seq(1, n, length.out = length_out)]
-  }
-  out
-
 }
 
 #' @export
