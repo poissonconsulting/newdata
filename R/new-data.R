@@ -1,15 +1,17 @@
-#' New Data
+#' Generate New Data
 #'
-#' Generates a new data frame that can be passed to a predict function.
-#' The main idea is that most variables are held constant at a reference level
-#' while the variables of interest vary across their range.
-#' `new_data` can be thought of as a sophisticated version of [expand.grid()].
+#' Generates a new data frame (in the form of a tibble) with each variable
+#' held constant or varying as a unique ordered sequence.
+#' All possible combinations are included.
 #'
-#' The returned variables are of the same class as the original variables while
+#' The new variables are of the same class as the original variables while
 #' the rows in the data frame are unique.
 #' Consequently continuous variables such as integers
 #' which have discrete values will not attain the specified `length_out` value
 #' if there are too few possible values between the minimum and maximum.
+#'
+#' `ref` can include variables that are not in data. Each vector is
+#' unique and sorted.
 #'
 #' If a factor is named in seq then all levels of the factor are represented
 #' i.e. `length_out` is ignored. The only exception to this is
@@ -26,17 +28,26 @@
 #' a factor level without having to set the correct levels.
 #'
 #' @param data The data frame to generate the new data from.
-#' @param seq A character vector of the variables to represent as a sequence
-#' in the new data.
-#' @param ref A named list of reference values for variables
-#' that are not in seq.
-#' @param obs_only A list of character vectors indicating
-#' the sets of variables to only allow observed combinations for.
-#' If TRUE then obs_only is set to be seq.
-#' @param length_out A count indicating the length of numeric
-#' and possibly integer sequences.
+#' @param seq A character vector of the variables in `data` to generate
+#' sequences for or a named integer vector of the maximum length for each
+#' sequence where each name is the respective variable.
+#' @param ref A named list of vectors to add to the new data frame.
+#' The variables must not be in
+#' `seq` but they do not need to be in `data`.
+#' @param obs_only A character vector specifying the
+#' character, factor, and ordered (factor) variables in `seq` that
+#' should only be represented by their unique combinations or a list
+#' of character vectors specifying the groupings of character, factor
+#' and ordered (factor) variables in `seq` that should each only
+#' be represented by their unique combinations.
+#' If `TRUE` it is set to be all character, factor,
+#' and ordered (factor) variables specified in `seq`.
+#' @param length_out A count indicating the maximum length of sequences for all
+#' types of variables except character, factor and ordered factors.
+#' If the maximum length for each variable is specified in `seq`
+#' then `length_out` is ignored.
 #' @return A tibble of the new data.
-#' @seealso [new_seq()] and [new_value()].
+#' @seealso [new_value()] and [new_seq()].
 #' @examples
 #' # an example data set
 #' data <- tibble::tibble(
@@ -52,7 +63,7 @@
 #' new_data(data, c("vecchar", "vecint"))
 #' @export
 new_data <- function(data, seq = character(0), ref = list(),
-                     obs_only = list(character(0)), length_out = 30L) {
+                     obs_only = list(character(0)), length_out = 30) {
   length_out <- length_out %>% as.integer()
 
   chk_data(data)

@@ -2,47 +2,58 @@
 % Please edit documentation in R/new-data.R
 \name{new_data}
 \alias{new_data}
-\title{New Data}
+\title{Generate New Data}
 \usage{
 new_data(
   data,
   seq = character(0),
   ref = list(),
   obs_only = list(character(0)),
-  length_out = 30L
+  length_out = 30
 )
 }
 \arguments{
 \item{data}{The data frame to generate the new data from.}
 
-\item{seq}{A character vector of the variables to represent as a sequence
-in the new data.}
+\item{seq}{A character vector of the variables in \code{data} to generate
+sequences for or a named integer vector of the maximum length for each
+sequence where each name is the respective variable.}
 
-\item{ref}{A named list of reference values for variables
-that are not in seq.}
+\item{ref}{A named list of vectors to add to the new data frame.
+The variables must not be in
+\code{seq} but they do not need to be in \code{data}.}
 
-\item{obs_only}{A list of character vectors indicating
-the sets of variables to only allow observed combinations for.
-If TRUE then obs_only is set to be seq.}
+\item{obs_only}{A character vector specifying the
+character, factor, and ordered (factor) variables in \code{seq} that
+should only be represented by their unique combinations or a list
+of character vectors specifying the groupings of character, factor
+and ordered (factor) variables in \code{seq} that should each only
+be represented by their unique combinations.
+If \code{TRUE} it is set to be all character, factor,
+and ordered (factor) variables specified in \code{seq}.}
 
-\item{length_out}{A count indicating the length of numeric
-and possibly integer sequences.}
+\item{length_out}{A count indicating the maximum length of sequences for all
+types of variables except character, factor and ordered factors.
+If the maximum length for each variable is specified in \code{seq}
+then \code{length_out} is ignored.}
 }
 \value{
 A tibble of the new data.
 }
 \description{
-Generates a new data frame that can be passed to a predict function.
-The main idea is that most variables are held constant at a reference level
-while the variables of interest vary across their range.
-\code{new_data} can be thought of as a sophisticated version of \code{\link[=expand.grid]{expand.grid()}}.
+Generates a new data frame (in the form of a tibble) with each variable
+held constant or varying as a unique ordered sequence.
+All possible combinations are included.
 }
 \details{
-The returned variables are of the same class as the original variables while
+The new variables are of the same class as the original variables while
 the rows in the data frame are unique.
 Consequently continuous variables such as integers
 which have discrete values will not attain the specified \code{length_out} value
 if there are too few possible values between the minimum and maximum.
+
+\code{ref} can include variables that are not in data. Each vector is
+unique and sorted.
 
 If a factor is named in seq then all levels of the factor are represented
 i.e. \code{length_out} is ignored. The only exception to this is
@@ -73,5 +84,5 @@ new_data(data, "vecreal")
 new_data(data, c("vecchar", "vecint"))
 }
 \seealso{
-\code{\link[=new_seq]{new_seq()}} and \code{\link[=new_value]{new_value()}}.
+\code{\link[=new_value]{new_value()}} and \code{\link[=new_seq]{new_seq()}}.
 }

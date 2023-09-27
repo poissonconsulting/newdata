@@ -21,7 +21,7 @@ new_seq(x, length_out = 30)
 
 \method{new_seq}{double}(x, length_out = 30)
 
-\method{new_seq}{character}(x, length_out = 30)
+\method{new_seq}{character}(x, length_out = Inf)
 
 \method{new_seq}{factor}(x, length_out = Inf)
 

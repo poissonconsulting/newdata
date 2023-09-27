@@ -136,7 +136,7 @@ new_seq.double <- function(x, length_out = 30) {
 
 #' @describeIn new_seq Generate new sequence of values for character objects
 #' @export
-new_seq.character <- function(x, length_out = 30) {
+new_seq.character <- function(x, length_out = Inf) {
   chk_count(length_out)
   if(length_out == 0L) {
     return(character())
