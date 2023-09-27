@@ -44,7 +44,7 @@ A tibble of the new data.
 Generates a new data frame (in the form of a tibble) with each variable
 held constant or varying as a unique ordered sequence.
 All possible unique combinations are included and the columns
-are in the same order as those in data with new columns added from
+are in the same order as those in \code{data} with new columns added from
 \code{ref}.
 }
 \details{

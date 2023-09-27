@@ -43,19 +43,19 @@ A vector of the same class as the object.
 }
 \description{
 Generate a new sequence of values for a vector, matrix or array.
-A sequence of value is used to predict the effect of a variable.
+A sequence of values is used to predict the effect of a variable.
 }
 \details{
 By default the sequence of values for objects of class numeric
 is 30 evenly space values across the range of the data.
 Missing values are always removed unless it's the only value
 or the object is zero length.
-The length of the sequence can be varied using the length_out argument
+The length of the sequence can be varied using the \code{length_out} argument
 which can even be 0.
-For integer objects the sequence is the unique integers
+For integer objects the sequence is the unique integers.
 For character objects it's the actual values sorted by
 how common they are followed by their actual value.
-For factors its the factor levels in order
+For factors it's the factor levels in order
 with the trailing levels dropped first.
 For ordered factors the intermediate levels are dropped first.
 For Date vectors it's the unique dates;

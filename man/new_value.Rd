@@ -55,14 +55,12 @@ unless it's the only value
 or the object is zero length.
 For integer objects it's the rounded mean.
 For character vectors it's the most common value
-and the minimum of the most common values if a tie.
-For factors its the first level and the factor levels are preserved.
-For ordered factors its also the first level.
-For dates it's the rounded mean.
-It's also the rounded mean for times.
+and the (locale-dependent) minimum of the most common values if a tie.
+For factors and ordered factors it's the first level and the factor levels are preserved.
+For dates and hms vectors it's the rounded mean.
 For POSIXct vectors it's the rounded mean and the time zone is preserved.
-For logical objects it's always FALSE as this is the natural reference value.
-And finally by default its simply the mean.
+For logical objects it's always \code{FALSE} as this is the natural reference value.
+And finally by default it's simply the mean.
 }
 \section{Methods (by class)}{
 \itemize{
