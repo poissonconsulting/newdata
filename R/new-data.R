@@ -84,13 +84,11 @@ new_data <- function(data, seq = character(0), ref = list(),
 
     ref <- ref[!names(ref) %in% seq]
 
-    if (length(ref)) {
-      if (any(unique(unlist(obs_only)) %in% names(ref))) {
-        err("variables must not be in `obs_only` and `ref`")
-      }
-      ref <- ref %>%
-        check_classes(data[names(ref)], x_name = "ref", y_name = "data")
+    if (any(unique(unlist(obs_only)) %in% names(ref))) {
+      err("variables must not be in `obs_only` and `ref`")
     }
+    ref <- ref %>%
+      check_classes(data[names(ref)], x_name = "ref", y_name = "data")
   }
 
   new_seqs <- lapply(data[names(data) %in% seq], new_seq, length_out)
