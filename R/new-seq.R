@@ -165,17 +165,26 @@ new_seq.ordered <- function(x, length_out = Inf) {
 #' @export
 new_seq.Date <- function(x, length_out = 30) {
   chk_count(length_out)
-  if (all(is.na(x))) {
-    return(x[1])
+  if(length_out == 0L) {
+    return(as.Date(integer()))
   }
-  seq(
+  if (all(is.na(x))) {
+    return(as.Date(NA_integer_))
+  }
+  out <- seq(
     from = min(x, na.rm = TRUE),
     to = max(x, na.rm = TRUE),
     length.out = length_out
   ) %>%
-    as.character() %>%
-    as.Date() %>%
-    unique()
+    as.integer() %>%
+    unique() %>%
+    as.Date()
+  n <- length(out)
+  if(n > length_out) {
+    out <- out[seq(1, n, length.out = length_out)]
+  }
+  out
+
 }
 
 #' @export
