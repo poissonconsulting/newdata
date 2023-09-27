@@ -15,24 +15,45 @@ new_seq(x, length_out = 30)
 A vector of the same class as the object.
 }
 \description{
-Generate a new sequence for a vector, matrix or array.
+Generate a new sequence of values for a vector, matrix or array.
+A sequence of value is used to predict the effect of a variable.
 }
 \examples{
-new_seq(c(1,4,NA)) # returns vector of 30 equidistant real values in range
-new_seq(c(1,4,NA),  length_out = 10) # returns 10 equidistant real values
-new_seq(c(1L,4L,NA)) # returns up to 30 unique integer values
-new_seq(c(1L,4L,NA), length_out = 3) # up to three unique integer values
-new_seq(c(1L,4L,NA), length_out = 2) # minimum and maximum integer values
-new_seq(c(1L,4L,NA), length_out = 1) # minimum integer value
-new_seq(c("g", "a", "b", "b", NA)) # all character values
-# all factor levels preserving factor levels
-new_seq(factor(c("g", "a", "b", "b", NA), levels = c("b", "a", "g")))
-# rounded mean for dates and times
-new_seq(as.Date(c("2000-01-01", "2000-01-04", NA)))
-new_seq(hms::as_hms(c("00:00:01", "00:00:04", NA)))
-new_seq(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04", NA)))
-# FALSE and TRUE for logical vectors
-new_seq(c(TRUE,FALSE, NA))
+# by default the sequence of values for objects of class numeric
+# is 30 evenly space values across its range
+new_seq(c(1,4))
+# missing values are always removed
+new_seq(c(1,4, NA))
+# unless it's the only value
+new_seq(NA_real_)
+# or the object is zero length
+new_seq(numeric())
+# the length of the sequence can be varied using the length_out argument
+new_seq(c(1,4), length_out = 1)
+# which can even be 0
+new_seq(c(1,4), length_out = 0)
+# for integer objects the sequence is by default up to 30 unique
+# integers across the range
+new_seq(c(1L,4L))
+# for character objects by default its the
+new_value(c("a", "b", "c", "c"))
+# and the minimum of the most common values if a tie
+new_value(c("a", "b", "c", "c", "b"))
+# for factors its the first level and factor levels are always preserved
+new_value(factor(c("a", "b", "c", "c"), levels = c("b", "a", "g")))
+# for ordered factors its also the first level
+new_value(ordered(c("a", "b", "c", "c"), levels = c("b", "a", "g")))
+# for dates it's the rounded mean
+new_value(as.Date(c("2000-01-01", "2000-01-04")))
+# it's also the rounded mean for times
+new_value(hms::as_hms(c("00:00:01", "00:00:04")))
+# for POSIXct vectors it's the rounded mean and the time zone is preserved
+new_value(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04"),
+  tz = "PST8PDT"))
+# for logical objects it's always FALSE
+new_value(logical())
+# and finally by default its simply the mean
+new_value(complex(real = c(1, 4)))
 }
 \seealso{
 \code{\link[=new_value]{new_value()}} and \code{\link[=new_data]{new_data()}}.

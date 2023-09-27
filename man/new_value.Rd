@@ -44,8 +44,8 @@ A scalar of the same class as the object.
 }
 \description{
 Generate a new reference value for a vector, matrix or array.
-The reference value is the value to use for a variable when it is being
-held constant.
+A reference value is used to control for a variable
+during predictions.
 }
 \details{
 The reference value for objects (vectors, matrices or arrays)
@@ -56,7 +56,7 @@ or the object is zero length.
 For integer objects it's the rounded mean.
 For character vectors it's the most common value
 and the minimum of the most common values if a tie.
-For factors its the first level and factor levels are always preserved.
+For factors its the first level and the factor levels are preserved.
 For ordered factors its also the first level.
 For dates it's the rounded mean.
 It's also the rounded mean for times.
@@ -102,7 +102,7 @@ new_value(c(1L,4L))
 new_value(c("a", "b", "c", "c"))
 # and the minimum of the most common values if a tie
 new_value(c("a", "b", "c", "c", "b"))
-# for factors its the first level and factor levels are always preserved
+# for factors its the first level and the factor levels are preserved
 new_value(factor(c("a", "b", "c", "c"), levels = c("b", "a", "g")))
 # for ordered factors its also the first level
 new_value(ordered(c("a", "b", "c", "c"), levels = c("b", "a", "g")))
