@@ -1,3 +1,13 @@
+test_that("new_value default", {
+  # single value
+  expect_identical(new_value(complex(real = 1)), complex(real = 1))
+  expect_identical(new_value(complex(real = 1.1)), complex(real = 1.1))
+  # multiple values
+  expect_identical(new_value(complex(real = c(1, 2))), complex(real = 1.5))
+  # multiple values with missing
+  expect_identical(new_value(complex(real = c(1, 2, NA))), complex(real = 1.5))
+})
+
 test_that("new_value logical", {
   # zero length
   expect_identical(new_value(logical(0)), FALSE)
@@ -236,14 +246,4 @@ test_that("new_value hms", {
   expect_identical(new_value(as_hms(c(0, 1, NA))), as_hms(0))
   expect_identical(new_value(as_hms(c(1, 2, NA))), as_hms(2))
   expect_identical(new_value(as_hms(c(1, 3, NA))), as_hms(2))
-})
-
-test_that("new_value default", {
-  # single value
-  expect_identical(new_value(complex(real = 1)), complex(real = 1))
-  expect_identical(new_value(complex(real = 1.1)), complex(real = 1.1))
-  # multiple values
-  expect_identical(new_value(complex(real = c(1, 2))), complex(real = 1.5))
-  # multiple values with missing
-  expect_identical(new_value(complex(real = c(1, 2, NA))), complex(real = 1.5))
 })
