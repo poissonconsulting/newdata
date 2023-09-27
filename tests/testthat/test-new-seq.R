@@ -620,6 +620,9 @@ test_that("new_seq POSIXct", {
   expect_identical(new_seq(as.POSIXct(NA_character_)), as.POSIXct(NA_integer_))
   expect_identical(new_seq(as.POSIXct(NA_integer_)), as.POSIXct(NA_integer_))
   expect_identical(new_seq(as.POSIXct(NA_real_)), as.POSIXct(NA_integer_))
+  expect_identical(new_seq(as.POSIXct(NA_character_, tz = "PST8PDT")), as.POSIXct(NA_integer_, tz = "PST8PDT"))
+  expect_identical(new_seq(as.POSIXct(NA_integer_, tz = "PST8PDT")), as.POSIXct(NA_integer_, tz = "PST8PDT"))
+  expect_identical(new_seq(as.POSIXct(NA_real_, tz = "PST8PDT")), as.POSIXct(NA_integer_, tz = "PST8PDT"))
   # # single value
   # expect_identical(new_seq(as.POSIXct(1L)), as.POSIXct(1L))
   # expect_identical(new_seq(as.POSIXct(1)), as.POSIXct(1L))
