@@ -1,10 +1,10 @@
-#' New Sequence
+#' Generate New Sequence
 #'
-#' Generate a new sequence for a vector
+#' Generate a new sequence for a vector, matrix or array.
 #'
 #' @param x The vector to generate the sequence for.
-#' @param length_out The length of the sequence.
-#' @returns A vector of the same class as the vector.
+#' @param length_out The maximum length of the sequence.
+#' @returns A vector of the same class as the object.
 #' @seealso [new_value()] and [new_data()].
 #' @examples
 #' new_seq(c(1,4,NA)) # returns vector of 30 equidistant real values in range
@@ -99,7 +99,7 @@ new_seq.numeric <- function(x, length_out = 30) {
 }
 
 #' @export
-new_seq.character <- function(x, length_out = Inf) {
+new_seq.character <- function(x, length_out = 10) {
   chk_count(length_out)
   if(length_out == 0L) {
     return(character())

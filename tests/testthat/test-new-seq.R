@@ -1,6 +1,21 @@
+test_that("new_seq default", {
+  # zero length
+  expect_identical(new_seq(complex()), NA_complex_)
+  # missing value
+  expect_identical(new_seq(NA_complex_), NA_complex_)
+  # single value
+  # multiple value
+  # multiple value with missing
+  # length_out not count
+  # length_out is 0
+  # length_out = 1
+  # length_out = 2
+  # length_out = 3
+})
+
 test_that("new_seq logical", {
   # zero length
-  expect_identical(new_seq(logical(0)), NA)
+  expect_identical(new_seq(logical()), NA)
   # missing value
   expect_identical(new_seq(NA), NA)
   # single value
@@ -206,7 +221,8 @@ test_that("new_seq character", {
   expect_identical(new_seq(c("1", "1", "0")), c("0", "1"))
   expect_identical(new_seq(c("10", "1")), c("1","10"))
   expect_identical(new_seq(c("100", "1")), c("1", "100"))
-  expect_identical(new_seq(as.character(1:100)), sort(as.character(1:100)))
+  expect_identical(new_seq(as.character(1:100)),
+                   c("1", "10", "100", "11", "12", "13", "14", "15", "16", "17"))
   # multiple value with missing
   expect_identical(new_seq(c("0", "1", NA)), c("0", "1"))
   expect_identical(new_seq(c("1", "0", NA)), c("0", "1"))

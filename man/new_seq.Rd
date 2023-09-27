@@ -2,20 +2,20 @@
 % Please edit documentation in R/new-seq.R
 \name{new_seq}
 \alias{new_seq}
-\title{New Sequence}
+\title{Generate New Sequence}
 \usage{
 new_seq(x, length_out = 30)
 }
 \arguments{
 \item{x}{The vector to generate the sequence for.}
 
-\item{length_out}{The length of the sequence.}
+\item{length_out}{The maximum length of the sequence.}
 }
 \value{
-A vector of the same class as the vector.
+A vector of the same class as the object.
 }
 \description{
-Generate a new sequence for a vector
+Generate a new sequence for a vector, matrix or array.
 }
 \examples{
 new_seq(c(1,4,NA)) # returns vector of 30 equidistant real values in range
