@@ -612,10 +612,13 @@ test_that("new_seq Date", {
 })
 
 test_that("new_seq POSIXct", {
-  # # zero length
-  # expect_identical(new_seq(as.POSIXct(character(0))), as.POSIXct(NA_integer_))
-  # expect_identical(new_seq(as.POSIXct(integer(0))), as.POSIXct(NA_integer_))
-  # expect_identical(new_seq(as.POSIXct(double(0))), as.POSIXct(NA_integer_))
+  # zero length
+  expect_identical(new_seq(as.POSIXct(character(0))), as.POSIXct(NA_integer_))
+  expect_identical(new_seq(as.POSIXct(integer(0))), as.POSIXct(NA_integer_))
+  expect_identical(new_seq(as.POSIXct(double(0))), as.POSIXct(NA_integer_))
+  expect_identical(new_seq(as.POSIXct(character(0), tz = "PST8PDT")), as.POSIXct(NA_integer_, tz = "PST8PDT"))
+  expect_identical(new_seq(as.POSIXct(integer(0), tz = "PST8PDT")), as.POSIXct(NA_integer_, tz = "PST8PDT"))
+  expect_identical(new_seq(as.POSIXct(double(0), tz = "PST8PDT")), as.POSIXct(NA_integer_, tz = "PST8PDT"))
   # missing value
   expect_identical(new_seq(as.POSIXct(NA_character_)), as.POSIXct(NA_integer_))
   expect_identical(new_seq(as.POSIXct(NA_integer_)), as.POSIXct(NA_integer_))
