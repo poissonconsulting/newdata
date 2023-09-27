@@ -45,6 +45,24 @@ A vector of the same class as the object.
 Generate a new sequence of values for a vector, matrix or array.
 A sequence of value is used to predict the effect of a variable.
 }
+\details{
+By default the sequence of values for objects of class numeric
+is 30 evenly space values across the range of the data.
+Missing values are always removed unless it's the only value
+or the object is zero length.
+The length of the sequence can be varied using the length_out argument
+which can even be 0.
+For integer objects the sequence is the unique integers
+For character objects it's the actual values sorted by
+how common they are followed by their actual value.
+For factors its the factor levels in order
+with the trailing levels dropped first.
+For ordered factors the intermediate levels are dropped first.
+For Date vectors it's the unique dates;
+same for hms vectors.
+For POSIXct vectors the time zone is preserved.
+For logical objects the longest possible sequence is \code{c(TRUE, FALSE)}.
+}
 \section{Methods (by class)}{
 \itemize{
 \item \code{new_seq(logical)}: Generate new sequence of values for logical objects
@@ -82,10 +100,10 @@ new_seq(c(1,4), length_out = 2)
 new_seq(c(1,4), length_out = 3)
 # which can even be 0
 new_seq(c(1,4), length_out = 0)
-# for integer objects the sequence it's the unique integers
+# for integer objects the sequence is the unique integers
 new_seq(c(1L,4L))
 new_seq(c(1L,100L))
-# for character objects it's the actual values are sorted by
+# for character objects it's the actual values sorted by
 # how common they are followed by their actual value
 new_seq(c("a", "c", "c", "b", "b"))
 new_seq(c("a", "c", "c", "b", "b"), length_out = 2)
