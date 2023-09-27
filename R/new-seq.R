@@ -200,10 +200,13 @@ new_seq.Date <- function(x, length_out = 30) {
 #' @export
 new_seq.POSIXct <- function(x, length_out = 30) {
   chk_count(length_out)
+  tz <- attr(x, "tzone", exact = TRUE)
+  if(length_out == 0L) {
+    return(as.POSIXct(integer(), tz = tz))
+  }
   if (all(is.na(x))) {
     return(x[1])
   }
-  tz <- attr(x, "tzone", exact = TRUE)
   range <- range(x, na.rm = TRUE) %>%
     as.integer()
   from <- range[1]

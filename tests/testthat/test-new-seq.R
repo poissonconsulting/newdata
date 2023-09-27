@@ -611,6 +611,92 @@ test_that("new_seq Date", {
                    as.Date(c(1:100)))
 })
 
+test_that("new_seq POSIXct", {
+  # zero length
+  # expect_identical(new_seq(as.POSIXct(character(0))), as.POSIXct(NA_integer_))
+  # expect_identical(new_seq(as.POSIXct(integer(0))), as.POSIXct(NA_integer_))
+  # expect_identical(new_seq(as.POSIXct(double(0))), as.POSIXct(NA_integer_))
+  # # missing value
+  # expect_identical(new_seq(as.POSIXct(NA_character_)), as.POSIXct(NA_integer_))
+  # expect_identical(new_seq(as.POSIXct(NA_integer_)), as.POSIXct(NA_integer_))
+  # expect_identical(new_seq(as.POSIXct(NA_real_)), as.POSIXct(NA_integer_))
+  # # single value
+  # expect_identical(new_seq(as.POSIXct(1L)), as.POSIXct(1L))
+  # expect_identical(new_seq(as.POSIXct(1)), as.POSIXct(1L))
+  # expect_identical(new_seq(as.POSIXct(0L)), as.POSIXct(0L))
+  # # multiple value
+  # expect_identical(new_seq(as.POSIXct(c(0L, 1L))), as.POSIXct(c(0L, 1L)))
+  # expect_identical(new_seq(as.POSIXct(c(1L, 0L))), as.POSIXct(c(0L, 1L)))
+  # expect_identical(new_seq(as.POSIXct(c(1L, 1L))), as.POSIXct(1L))
+  # expect_identical(new_seq(as.POSIXct(c(0L, 0L))), as.POSIXct(0L))
+  # expect_identical(new_seq(as.POSIXct(c(0L, 0L, 1L))), as.POSIXct(c(0L, 1L)))
+  # expect_identical(new_seq(as.POSIXct(c(1L, 1L, 0L))), as.POSIXct(c(0L, 1L)))
+  # expect_identical(new_seq(as.POSIXct(c(10L, 1L))), as.POSIXct(1:10))
+  # expect_identical(new_seq(as.POSIXct(c(100L, 1L))),
+  #                  as.POSIXct(c(1L, 4L, 7L, 11L, 14L, 18L, 21L, 24L, 28L, 31L, 35L, 38L, 41L,
+  #                            45L, 48L, 52L, 55L, 59L, 62L, 65L, 69L, 72L, 76L, 79L, 82L, 86L,
+  #                            89L, 93L, 96L, 100L)))
+  # # multiple value with missing
+  # expect_identical(new_seq(as.POSIXct(c(0L, 1L, NA))), as.POSIXct(c(0L, 1L)))
+  # expect_identical(new_seq(as.POSIXct(c(1L, 0L, NA))), as.POSIXct(c(0L, 1L)))
+  # expect_identical(new_seq(as.POSIXct(c(1L, 1L, NA))), as.POSIXct(1L))
+  # expect_identical(new_seq(as.POSIXct(c(0L, 0L, NA))), as.POSIXct(0L))
+  # expect_identical(new_seq(as.POSIXct(c(0L, 0L, 1L, NA))), as.POSIXct(c(0L, 1L)))
+  # expect_identical(new_seq(as.POSIXct(c(1L, 1L, 0L, NA))), as.POSIXct(c(0L, 1L)))
+  # expect_identical(new_seq(as.POSIXct(c(10L, 1L, NA))), as.POSIXct(1:10))
+  # expect_identical(new_seq(as.POSIXct(c(100L, 1L, NA))),
+  #                  as.POSIXct(c(1L, 4L, 7L, 11L, 14L, 18L, 21L, 24L, 28L, 31L, 35L, 38L, 41L,
+  #                            45L, 48L, 52L, 55L, 59L, 62L, 65L, 69L, 72L, 76L, 79L, 82L, 86L,
+  #                            89L, 93L, 96L, 100L)))
+  # # length_out not count
+  # expect_error(new_seq(as.POSIXct(1L), length_out = -1), "`length_out` must be a count")
+  # expect_error(new_seq(as.POSIXct(1L), length_out = 0.5), "`length_out` must be a count")
+  # length_out is 0
+  expect_identical(new_seq(as.POSIXct(integer()), length_out = 0),
+                   as.POSIXct(integer()))
+  expect_identical(new_seq(as.POSIXct(NA_integer_), length_out = 0),
+                   as.POSIXct(integer()))
+  expect_identical(new_seq(as.POSIXct(1L), length_out = 0),
+                   as.POSIXct(integer()))
+  expect_identical(new_seq(as.POSIXct(integer(), tz = "PST8PDT"), length_out = 0),
+                   as.POSIXct(integer(), tz = "PST8PDT"))
+  expect_identical(new_seq(as.POSIXct(NA_integer_, tz = "PST8PDT"), length_out = 0),
+                   as.POSIXct(integer(), tz = "PST8PDT"))
+  expect_identical(new_seq(as.POSIXct(1L, tz = "PST8PDT"), length_out = 0),
+                   as.POSIXct(integer(), tz = "PST8PDT"))
+  # # length_out = 1
+  # expect_identical(new_seq(as.POSIXct(c(0L, 1L)), length_out = 1), as.POSIXct(0L))
+  # expect_identical(new_seq(as.POSIXct(c(1L, 0L)), length_out = 1), as.POSIXct(0L))
+  # expect_identical(new_seq(as.POSIXct(c(1L, 1L)), length_out = 1), as.POSIXct(1L))
+  # expect_identical(new_seq(as.POSIXct(c(0L, 0L)), length_out = 1), as.POSIXct(0L))
+  # expect_identical(new_seq(as.POSIXct(c(0L, 0L, 1L)), length_out = 1), as.POSIXct(0L))
+  # expect_identical(new_seq(as.POSIXct(c(1L, 1L, 0L)), length_out = 1), as.POSIXct(0L))
+  # expect_identical(new_seq(as.POSIXct(c(10L, 1L)), length_out = 1), as.POSIXct(1L))
+  # expect_identical(new_seq(as.POSIXct(c(100L, 1L)), length_out = 1), as.POSIXct(1L))
+  # # length_out = 2
+  # expect_identical(new_seq(as.POSIXct(c(0L, 1L)), length_out = 2), as.POSIXct(c(0L, 1L)))
+  # expect_identical(new_seq(as.POSIXct(c(1L, 0L)), length_out = 2), as.POSIXct(c(0L, 1L)))
+  # expect_identical(new_seq(as.POSIXct(c(1L, 1L)), length_out = 2), as.POSIXct(1L))
+  # expect_identical(new_seq(as.POSIXct(c(0L, 0L)), length_out = 2), as.POSIXct(0L))
+  # expect_identical(new_seq(as.POSIXct(c(0L, 0L, 1L)), length_out = 2), as.POSIXct(c(0L, 1L)))
+  # expect_identical(new_seq(as.POSIXct(c(1L, 1L, 0L)), length_out = 2), as.POSIXct(c(0L, 1L)))
+  # expect_identical(new_seq(as.POSIXct(c(10L, 1L)), length_out = 2), as.POSIXct(c(1L, 10L)))
+  # expect_identical(new_seq(as.POSIXct(c(100L, 1L)), length_out = 2), as.POSIXct(c(1L, 100L)))
+  # # length_out = 3
+  # expect_identical(new_seq(as.POSIXct(c(0L, 1L)), length_out = 3), as.POSIXct(c(0L, 1L)))
+  # expect_identical(new_seq(as.POSIXct(c(1L, 0L)), length_out = 3), as.POSIXct(c(0L, 1L)))
+  # expect_identical(new_seq(as.POSIXct(c(1L, 1L)), length_out = 3), as.POSIXct(1L))
+  # expect_identical(new_seq(as.POSIXct(c(0L, 0L)), length_out = 3), as.POSIXct(0L))
+  # expect_identical(new_seq(as.POSIXct(c(0L, 0L, 1L)), length_out = 3), as.POSIXct(c(0L, 1L)))
+  # expect_identical(new_seq(as.POSIXct(c(1L, 1L, 0L)), length_out = 3), as.POSIXct(c(0L, 1L)))
+  # expect_identical(new_seq(as.POSIXct(c(10L, 1L)), length_out = 3), as.POSIXct(c(1L, 5L, 10L)))
+  # expect_identical(new_seq(as.POSIXct(c(100L, 1L)), length_out = 3), as.POSIXct(c(1L, 50L, 100L)))
+  # # length_out = Inf
+  # expect_identical(new_seq(as.POSIXct(c(10L, 1L)), length_out = Inf), as.POSIXct(1:10))
+  # expect_identical(new_seq(as.POSIXct(c(100L, 1L)), length_out = Inf),
+  #                  as.POSIXct(c(1:100)))
+})
+
 test_that("new_seq hms", {
   # zero length
   expect_identical(new_seq(as_hms(character(0))), as_hms(NA_integer_))
