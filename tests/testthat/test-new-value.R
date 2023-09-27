@@ -1,4 +1,8 @@
 test_that("new_value default", {
+  # zero length
+  expect_identical(new_value(complex()), NA_complex_)
+  # missing value
+  expect_identical(new_value(NA_complex_), NA_complex_)
   # single value
   expect_identical(new_value(complex(real = 1)), complex(real = 1))
   expect_identical(new_value(complex(real = 1.1)), complex(real = 1.1))
@@ -10,7 +14,7 @@ test_that("new_value default", {
 
 test_that("new_value logical", {
   # zero length
-  expect_identical(new_value(logical(0)), FALSE)
+  expect_identical(new_value(logical()), FALSE)
   # missing value
   expect_identical(new_value(NA), FALSE)
   # single value

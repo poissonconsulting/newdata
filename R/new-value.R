@@ -46,7 +46,12 @@ new_value <- function(x) {
 
 #' @export
 new_value.default <- function(x) {
-  x %>% mean(na.rm = TRUE)
+  out <- x %>% mean(na.rm = TRUE)
+  if (is.nan(out)) {
+    is.na(out) <- TRUE
+    return(out)
+  }
+  out
 }
 
 #' @export
