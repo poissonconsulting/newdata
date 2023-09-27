@@ -84,11 +84,11 @@ test_that("new_value character", {
   # multiple values
   expect_identical(new_value(c("a", "b")), "a")
   expect_identical(new_value(c("b", "a")), "a")
-  expect_identical(new_value(c("b", "b", "a")), "a")
+  expect_identical(new_value(c("b", "b", "a")), "b")
   # multiple values with missing
   expect_identical(new_value(c("a", "b", NA)), "a")
   expect_identical(new_value(c("b", "a", NA)), "a")
-  expect_identical(new_value(c("b", "b", "a", NA)), "a")
+  expect_identical(new_value(c("b", "b", "a", NA)), "b")
 })
 
 test_that("new_value factor", {
@@ -96,7 +96,7 @@ test_that("new_value factor", {
   expect_identical(new_value(factor()), factor(NA))
   # missing value
   expect_identical(new_value(factor(NA)), factor(NA))
-  "single value"
+  # single value
   expect_identical(new_value(factor("b", levels = "b")),
                    factor("b", levels = "b"))
   expect_identical(new_value(factor("b", levels = c("a", "b"))),

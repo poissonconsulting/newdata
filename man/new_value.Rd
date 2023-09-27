@@ -3,8 +3,8 @@
 \name{new_value}
 \alias{new_value}
 \alias{new_value.default}
-\alias{new_value.numeric}
 \alias{new_value.logical}
+\alias{new_value.double}
 \alias{new_value.integer}
 \alias{new_value.character}
 \alias{new_value.factor}
@@ -18,9 +18,9 @@ new_value(x)
 
 \method{new_value}{default}(x)
 
-\method{new_value}{numeric}(x)
-
 \method{new_value}{logical}(x)
+
+\method{new_value}{double}(x)
 
 \method{new_value}{integer}(x)
 
@@ -53,9 +53,9 @@ held constant.
 \itemize{
 \item \code{new_value(default)}: default
 
-\item \code{new_value(numeric)}: numeric
-
 \item \code{new_value(logical)}: logical
+
+\item \code{new_value(double)}: double
 
 \item \code{new_value(integer)}: integer
 
@@ -100,7 +100,7 @@ new_value(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04"),
   tz = "PST8PDT"))
 # for logical vector it's always FALSE as this is the natural reference value
 new_value(logical())
-# by default its simply the mean
+# and by default its simply the mean
 new_value(complex(real = c(1, 4)))
 }
 \seealso{

@@ -36,7 +36,7 @@
 #'   tz = "PST8PDT"))
 #' # for logical vector it's always FALSE as this is the natural reference value
 #' new_value(logical())
-#' # by default its simply the mean
+#' # and by default its simply the mean
 #' new_value(complex(real = c(1, 4)))
 #' @export
 new_value <- function(x) {
@@ -54,20 +54,20 @@ new_value.default <- function(x) {
   out
 }
 
-#' @describeIn new_value numeric
+#' @describeIn new_value logical
 #' @export
-new_value.numeric <- function(x) {
+new_value.logical <- function(x) {
+  FALSE
+}
+
+#' @describeIn new_value double
+#' @export
+new_value.double <- function(x) {
   out <- x %>% mean(na.rm = TRUE)
   if (is.nan(out)) {
     return(NA_real_)
   }
   out
-}
-
-#' @describeIn new_value logical
-#' @export
-new_value.logical <- function(x) {
-  FALSE
 }
 
 #' @describeIn new_value integer
@@ -82,10 +82,12 @@ new_value.integer <- function(x) {
 #' @describeIn new_value character
 #' @export
 new_value.character <- function(x) {
-  if (all(is.na(x))) {
+  if (all(is.na(x)) || !length(x)) {
     return(NA_character_)
   }
-  x %>% min(na.rm = TRUE)
+  table <- table(x)
+  out <- table[which(table == max(table))]
+  min(names(out))
 }
 
 #' @describeIn new_value factor
