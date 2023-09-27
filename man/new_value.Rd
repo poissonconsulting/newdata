@@ -12,7 +12,7 @@
 \alias{new_value.Date}
 \alias{new_value.POSIXct}
 \alias{new_value.hms}
-\title{New Value}
+\title{Generate New Reference Value}
 \usage{
 new_value(x)
 
@@ -43,47 +43,62 @@ new_value(x)
 A scalar of the same class as the vector.
 }
 \description{
-Generate a new reference value for a vector.
-}
-\details{
+Generate a new reference value for a vector, matrix or array.
 The reference value is the value to use for a variable when it is being
 held constant.
 }
+\details{
+The reference value for objects (vectors, matrices or arrays)
+of class numeric is the mean.
+Missing values are always removed
+unless it's the only value
+or the object is zero length.
+For integer objects it's the rounded mean.
+For character vectors it's the most common value
+and the minimum of the most common values if a tie.
+For factors its the first level and factor levels are always preserved.
+For ordered factors its also the first level.
+For dates it's the rounded mean.
+It's also the rounded mean for times.
+For POSIXct vectors it's the rounded mean and the time zone is preserved.
+For logical objects it's always FALSE as this is the natural reference value.
+And finally by default its simply the mean.
+}
 \section{Methods (by class)}{
 \itemize{
-\item \code{new_value(default)}: default
+\item \code{new_value(default)}: Generate new reference value for default objects
 
-\item \code{new_value(logical)}: logical
+\item \code{new_value(logical)}: Generate new reference value for logical objects
 
-\item \code{new_value(double)}: double
+\item \code{new_value(double)}: Generate new reference value for double objects
 
-\item \code{new_value(integer)}: integer
+\item \code{new_value(integer)}: Generate new reference value for integer objects
 
-\item \code{new_value(character)}: character
+\item \code{new_value(character)}: Generate new reference value for character objects
 
-\item \code{new_value(factor)}: factor
+\item \code{new_value(factor)}: Generate new reference value for factors
 
-\item \code{new_value(ordered)}: ordered
+\item \code{new_value(ordered)}: Generate new reference value for ordered factors
 
-\item \code{new_value(Date)}: Date
+\item \code{new_value(Date)}: Generate new reference value for Date vectors
 
-\item \code{new_value(POSIXct)}: POSIXct
+\item \code{new_value(POSIXct)}: Generate new reference value for POSIXct vectors
 
-\item \code{new_value(hms)}: hms
+\item \code{new_value(hms)}: Generate new reference value for hms vectors
 
 }}
 \examples{
-# the reference value for real vectors is the mean
+# the reference value for objects of class numeric is the mean
 new_value(c(1,4))
 # missing values are always removed
 new_value(c(1,4, NA))
-# unless its the only value
+# unless it's the only value
 new_value(NA_real_)
-# or the vector is zero length
+# or the object is zero length
 new_value(numeric())
-# for integer vectors it's the rounded mean
+# for integer objects it's the rounded mean
 new_value(c(1L,4L))
-# for character vectors it's the most common value
+# for character objects it's the most common value
 new_value(c("a", "b", "c", "c"))
 # and the minimum of the most common values if a tie
 new_value(c("a", "b", "c", "c", "b"))
@@ -98,9 +113,9 @@ new_value(hms::as_hms(c("00:00:01", "00:00:04")))
 # for POSIXct vectors it's the rounded mean and the time zone is preserved
 new_value(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04"),
   tz = "PST8PDT"))
-# for logical vector it's always FALSE as this is the natural reference value
+# for logical objects it's always FALSE
 new_value(logical())
-# and by default its simply the mean
+# and finally by default its simply the mean
 new_value(complex(real = c(1, 4)))
 }
 \seealso{

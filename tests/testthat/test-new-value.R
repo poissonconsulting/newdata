@@ -10,6 +10,9 @@ test_that("new_value default", {
   expect_identical(new_value(complex(real = c(1, 2))), complex(real = 1.5))
   # multiple values with missing
   expect_identical(new_value(complex(real = c(1, 2, NA))), complex(real = 1.5))
+  # matrices and arrays
+  expect_identical(new_value(matrix(complex(real = 1))), complex(real = 1))
+  expect_identical(new_value(array(complex(real = 1))), complex(real = 1))
 })
 
 test_that("new_value logical", {
@@ -30,6 +33,9 @@ test_that("new_value logical", {
   expect_identical(new_value(c(FALSE, TRUE, NA)), FALSE)
   expect_identical(new_value(c(TRUE, TRUE, NA)), FALSE)
   expect_identical(new_value(c(TRUE, TRUE, FALSE, NA)), FALSE)
+  # matrices and arrays
+  expect_identical(new_value(matrix(TRUE)), FALSE)
+  expect_identical(new_value(array(TRUE)), FALSE)
 })
 
 test_that("new_value integer", {
@@ -50,6 +56,9 @@ test_that("new_value integer", {
   expect_identical(new_value(c(0:1, NA)), 0L)
   expect_identical(new_value(c(1:2, NA)), 2L)
   expect_identical(new_value(c(1L, 3L, NA)), 2L)
+  # matrices and arrays
+  expect_identical(new_value(matrix(1L)), 1L)
+  expect_identical(new_value(array(1L)), 1L)
 })
 
 test_that("new_value real", {
@@ -71,6 +80,9 @@ test_that("new_value real", {
   expect_identical(new_value(c(0, 1, NA)), 0.5)
   expect_identical(new_value(c(1, 2, NA)), 1.5)
   expect_identical(new_value(c(1, 3, NA)), 2)
+  # matrices and arrays
+  expect_identical(new_value(matrix(1)), 1)
+  expect_identical(new_value(array(1)), 1)
 })
 
 # FIXME should make independent of locale!!
@@ -89,6 +101,9 @@ test_that("new_value character", {
   expect_identical(new_value(c("a", "b", NA)), "a")
   expect_identical(new_value(c("b", "a", NA)), "a")
   expect_identical(new_value(c("b", "b", "a", NA)), "b")
+  # matrices and arrays
+  expect_identical(new_value(matrix("a")), "a")
+  expect_identical(new_value(array("a")), "a")
 })
 
 test_that("new_value factor", {
