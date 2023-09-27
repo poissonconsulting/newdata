@@ -222,7 +222,6 @@ new_seq.Date <- function(x, length_out = 30) {
     to = to,
     length.out = length_out
   ) %>%
-    floor() %>%
     as.integer() %>%
     unique() %>%
     as.Date()
@@ -249,7 +248,6 @@ new_seq.POSIXct <- function(x, length_out = 30) {
     to = to,
     length.out = length_out
   ) %>%
-    floor() %>%
     as.integer() %>%
     unique() %>%
     as.POSIXct(tz = tz)
@@ -275,7 +273,6 @@ new_seq.hms <- function(x, length_out = 30) {
     to = to,
     length.out = length_out
   ) %>%
-    floor() %>%
     as.integer() %>%
     unique() %>%
     as_hms()
