@@ -370,6 +370,118 @@ test_that("new_seq factor", {
                    factor(c("1", "2", "100"), levels = c("1", "2", "100")))
 })
 
+test_that("new_seq ordered", {
+  # zero length
+  expect_identical(new_seq(ordered()), ordered(NA))
+  # missing value
+  expect_identical(new_seq(ordered(NA)), ordered(NA))
+  # single value
+  expect_identical(new_seq(ordered("1")), ordered("1"))
+  expect_identical(new_seq(ordered("0")), ordered("0"))
+  expect_identical(new_seq(ordered("1", levels = c("1", "0"))),
+                   ordered(c("1", "0"), levels = c("1", "0")))
+  # multiple value
+  expect_identical(new_seq(ordered(c("0", "1"), levels = c("0", "1"))),
+                   ordered(c("0", "1"), levels = c("0", "1")))
+  expect_identical(new_seq(ordered(c("1", "0"), levels = c("1", "0"))),
+                   ordered(c("1", "0"), levels = c("1", "0")))
+  expect_identical(new_seq(ordered(c("0", "1"), levels = c("1", "0"))),
+                   ordered(c("1", "0"), levels = c("1", "0")))
+  expect_identical(new_seq(ordered(c("1", "0"), levels = c("1", "0"))),
+                   ordered(c("1", "0"), levels = c("1", "0")))
+  expect_identical(new_seq(ordered(c("1", "1"), levels = "1")),
+                   ordered("1", levels = "1"))
+  expect_identical(new_seq(ordered(c("0", "0", "1"), levels = c("0", "1"))),
+                   ordered(c("0", "1"), levels = c("0", "1")))
+  expect_identical(new_seq(ordered(c("0", "0", "1"), levels = c("1", "0"))),
+                   ordered(c("1", "0"), levels = c("1", "0")))
+  expect_identical(new_seq(ordered(as.character(1:100))), sort(ordered(as.character(1:100))))
+  # multiple value with missing
+  expect_identical(new_seq(ordered(c("0", "1", NA), levels = c("0", "1"))),
+                   ordered(c("0", "1"), levels = c("0", "1")))
+  expect_identical(new_seq(ordered(c("1", "0", NA), levels = c("1", "0"))),
+                   ordered(c("1", "0"), levels = c("1", "0")))
+  expect_identical(new_seq(ordered(c("0", "1", NA), levels = c("1", "0"))),
+                   ordered(c("1", "0"), levels = c("1", "0")))
+  expect_identical(new_seq(ordered(c("1", "0", NA), levels = c("1", "0"))),
+                   ordered(c("1", "0"), levels = c("1", "0")))
+  expect_identical(new_seq(ordered(c("1", "1", NA), levels = "1")),
+                   ordered("1", levels = "1"))
+  expect_identical(new_seq(ordered(c("0", "0", "1", NA), levels = c("0", "1"))),
+                   ordered(c("0", "1"), levels = c("0", "1")))
+  expect_identical(new_seq(ordered(c("0", "0", "1", NA), levels = c("1", "0"))),
+                   ordered(c("1", "0"), levels = c("1", "0")))
+  expect_identical(new_seq(ordered(as.character(1:100, NA))), sort(ordered(as.character(1:100, NA))))
+  # length_out not count
+  expect_error(new_seq(ordered("1"), length_out = -1), "`length_out` must be a count")
+  expect_error(new_seq(ordered("1"), length_out = 0.5), "`length_out` must be a count")
+  # length_out is 0
+  expect_identical(new_seq(ordered(), length_out = 0), ordered())
+  expect_identical(new_seq(ordered(levels = "1"), length_out = 0), ordered(levels = "1"))
+  expect_identical(new_seq(ordered(NA_character_), length_out = 0), ordered())
+  expect_identical(new_seq(ordered(NA_character_, levels = "1"), length_out = 0), ordered(levels = "1"))
+  expect_identical(new_seq(ordered("1"), length_out = 0), ordered(levels = "1"))
+  # length_out = 1
+  expect_identical(new_seq(ordered(c("0", "1"), levels = c("0", "1")), length_out = 1),
+                   ordered("0", levels = c("0", "1")))
+  expect_identical(new_seq(ordered(c("1", "0"), levels = c("0", "1")), length_out = 1),
+                   ordered("0", levels = c("0", "1")))
+  expect_identical(new_seq(ordered(c("0", "1"), levels = c("1", "0")), length_out = 1),
+                   ordered("1", levels = c("1", "0")))
+  expect_identical(new_seq(ordered(c("1", "0"), levels = c("1", "0")), length_out = 1),
+                   ordered("1", levels = c("1", "0")))
+  expect_identical(new_seq(ordered(c("0", "0", "1"), levels = c("0", "1")), length_out = 1),
+                   ordered("0", levels = c("0", "1")))
+  expect_identical(new_seq(ordered(c("1", "1", "0"), levels = c("0", "1")), length_out = 1),
+                   ordered("0", levels = c("0", "1")))
+  expect_identical(new_seq(ordered("0", levels = c("0", "1", "2")), length_out = 1),
+                   ordered("0", levels = c("0", "1", "2")))
+  expect_identical(new_seq(ordered(c("2", "1", "0"), levels = c("0", "1", "2")), length_out = 1),
+                   ordered("0", levels = c("0", "1", "2")))
+  # length_out = 2
+  expect_identical(new_seq(ordered(c("0", "1"), levels = c("0", "1")), length_out = 2),
+                   ordered(c("0", "1"), levels = c("0", "1")))
+  expect_identical(new_seq(ordered(c("1", "0"), levels = c("0", "1")), length_out = 2),
+                   ordered(c("0", "1"), levels = c("0", "1")))
+  expect_identical(new_seq(ordered(c("0", "1"), levels = c("1", "0")), length_out = 2),
+                   ordered(c("1", "0"), levels = c("1", "0")))
+  expect_identical(new_seq(ordered(c("1", "0"), levels = c("1", "0")), length_out = 2),
+                   ordered(c("1", "0"), levels = c("1", "0")))
+  expect_identical(new_seq(ordered(c("0", "0", "1"), levels = c("0", "1")), length_out = 2),
+                   ordered(c("0", "1"), levels = c("0", "1")))
+  expect_identical(new_seq(ordered(c("1", "1", "0"), levels = c("0", "1")), length_out = 2),
+                   ordered(c("0", "1"), levels = c("0", "1")))
+  expect_identical(new_seq(ordered("0", levels = c("0", "1", "2")), length_out = 2),
+                   ordered(c("0", "2"), levels = c("0", "1", "2")))
+  expect_identical(new_seq(ordered(c("2", "1", "0"), levels = c("0", "1", "2")), length_out = 2),
+                   ordered(c("0", "2"), levels = c("0", "1", "2")))
+  expect_identical(new_seq(ordered(c("10", "1", "2"), levels = c("1", "10", "2")), length_out = 2),
+                   ordered(c("1", "2"), levels = c("1", "10", "2")))
+  expect_identical(new_seq(ordered(c("100", "1", "2"), levels = c("1", "10", "2")), length_out = 2),
+                   ordered(c("1", "2"), levels = c("1", "10", "2")))
+  # length_out = 3
+  expect_identical(new_seq(ordered(c("0", "1"), levels = c("0", "1")), length_out = 3),
+                   ordered(c("0", "1"), levels = c("0", "1")))
+  expect_identical(new_seq(ordered(c("1", "0"), levels = c("0", "1")), length_out = 3),
+                   ordered(c("0", "1"), levels = c("0", "1")))
+  expect_identical(new_seq(ordered(c("0", "1"), levels = c("1", "0")), length_out = 3),
+                   ordered(c("1", "0"), levels = c("1", "0")))
+  expect_identical(new_seq(ordered(c("1", "0"), levels = c("1", "0")), length_out = 3),
+                   ordered(c("1", "0"), levels = c("1", "0")))
+  expect_identical(new_seq(ordered(c("0", "0", "1"), levels = c("0", "1")), length_out = 3),
+                   ordered(c("0", "1"), levels = c("0", "1")))
+  expect_identical(new_seq(ordered(c("1", "1", "0"), levels = c("0", "1")), length_out = 3),
+                   ordered(c("0", "1"), levels = c("0", "1")))
+  expect_identical(new_seq(ordered("0", levels = c("0", "1", "2")), length_out = 3),
+                   ordered(c("0", "1", "2"), levels = c("0", "1", "2")))
+  expect_identical(new_seq(ordered(c("2", "1", "0"), levels = c("0", "1", "2")), length_out = 3),
+                   ordered(c("0", "1", "2"), levels = c("0", "1", "2")))
+  expect_identical(new_seq(ordered(c("10", "1", "2"), levels = c("1", "10", "2")), length_out = 3),
+                   ordered(c("1", "10", "2"), levels = c("1", "10", "2")))
+  expect_identical(new_seq(ordered(c("100", "1", "2"), levels = c("1", "2", "100")), length_out = 3),
+                   ordered(c("1", "2", "100"), levels = c("1", "2", "100")))
+})
+
 test_that("new_seq length 1", {
   dlogical <- as.logical(0:9)
   dinteger <- 1:10
@@ -384,8 +496,6 @@ test_that("new_seq length 1", {
   expect_identical(new_seq(dlogical, 1), FALSE)
   expect_identical(new_seq(dinteger, 1), 1L) # should be intermediat value
   expect_identical(new_seq(dnumeric, 1), 1.1)
-  expect_identical(new_seq(dordered, 1), dordered)
-  expect_identical(new_seq(rev(dordered), 1), dordered)
   expect_equal(new_seq(ddate, 1), ddate[1])
   expect_identical(new_seq(dposix, 1), dposix[1])
   expect_identical(new_seq(dhms, 1), dhms[1])
@@ -405,8 +515,6 @@ test_that("new_seq", {
   expect_identical(new_seq(dlogical, 30), c(FALSE, TRUE))
   expect_identical(new_seq(dinteger, 10), 1:10)
   expect_identical(new_seq(dnumeric, 5), c(1.10, 3.35, 5.60, 7.85, 10.10))
-  expect_identical(new_seq(dordered, 1), dordered)
-  expect_identical(new_seq(rev(dordered), 100), dordered)
   expect_equal(new_seq(ddate, 10), ddate)
   expect_identical(new_seq(dposix, 10), dposix)
   expect_identical(new_seq(dhms, 10), dhms)
@@ -427,8 +535,6 @@ test_that("new_seq with missing", {
   expect_identical(new_seq(dinteger, 10), 1:10)
   expect_identical(new_seq(dnumeric, 5), c(1.10, 3.35, 5.60, 7.85, 10.10))
   expect_identical(new_seq(rev(dfactor), 100), dfactor[!is.na(dfactor)])
-  expect_identical(new_seq(dordered, 1), dordered[!is.na(dordered)])
-  expect_identical(new_seq(rev(dordered), 100), dordered[!is.na(dordered)])
   expect_equal(new_seq(ddate, 11), ddate[!is.na(ddate)])
   expect_equal(new_seq(dposix, 11), dposix[!is.na(dposix)])
   expect_identical(new_seq(dhms, 10), dhms[!is.na(dhms)])
@@ -451,8 +557,6 @@ test_that("new_seq one value", {
   expect_identical(new_seq(dcharacter, 1), dcharacter)
   expect_identical(new_seq(dfactor, 1), dfactor)
   expect_identical(new_seq(rev(dfactor), 100), dfactor)
-  expect_identical(new_seq(dordered, 1), dordered)
-  expect_identical(new_seq(rev(dordered), 1), dordered)
   expect_equal(new_seq(ddate, 10), ddate)
   expect_identical(new_seq(dposix, 10), dposix)
   expect_identical(new_seq(dhms, 10), dhms)
@@ -473,8 +577,6 @@ test_that("new_seq all missing", {
   expect_identical(new_seq(dinteger), dinteger)
   expect_equal(new_seq(dnumeric), dnumeric)
   expect_identical(new_seq(dcharacter), dcharacter)
-  expect_identical(new_seq(dordered), ordered("1", levels = "1"))
-  expect_identical(new_seq(rev(dordered)), ordered("1", levels = "1"))
   expect_equal(new_seq(ddate), ddate)
   expect_equal(new_seq(dposix), dposix)
   expect_equal(new_seq(dhms), dhms)
