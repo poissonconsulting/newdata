@@ -7,7 +7,7 @@
 new_seq(x, length_out = 30)
 }
 \arguments{
-\item{x}{The vector to generate the sequence for.}
+\item{x}{The object to generate the sequence from.}
 
 \item{length_out}{The maximum length of the sequence.}
 }

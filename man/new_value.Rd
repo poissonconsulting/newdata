@@ -37,10 +37,10 @@ new_value(x)
 \method{new_value}{hms}(x)
 }
 \arguments{
-\item{x}{The vector to generate the new value for.}
+\item{x}{The object to generate the reference value from.}
 }
 \value{
-A scalar of the same class as the vector.
+A scalar of the same class as the object.
 }
 \description{
 Generate a new reference value for a vector, matrix or array.

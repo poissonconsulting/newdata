@@ -20,8 +20,8 @@
 #' For logical objects it's always FALSE as this is the natural reference value.
 #' And finally by default its simply the mean.
 #'
-#' @param x The vector to generate the new value for.
-#' @returns A scalar of the same class as the vector.
+#' @param x The object to generate the reference value from.
+#' @returns A scalar of the same class as the object.
 #' @seealso [new_seq()] and [new_data()].
 #' @examples
 #' # the reference value for objects of class numeric is the mean

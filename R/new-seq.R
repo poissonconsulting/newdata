@@ -2,7 +2,7 @@
 #'
 #' Generate a new sequence for a vector, matrix or array.
 #'
-#' @param x The vector to generate the sequence for.
+#' @param x The object to generate the sequence from.
 #' @param length_out The maximum length of the sequence.
 #' @returns A vector of the same class as the object.
 #' @seealso [new_value()] and [new_data()].
