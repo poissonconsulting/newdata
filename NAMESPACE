@@ -3,7 +3,6 @@
 S3method(new_seq,Date)
 S3method(new_seq,POSIXct)
 S3method(new_seq,character)
-S3method(new_seq,default)
 S3method(new_seq,factor)
 S3method(new_seq,hms)
 S3method(new_seq,integer)

@@ -28,24 +28,6 @@ new_seq <- function(x, length_out = 30) {
 }
 
 #' @export
-new_seq.default <- function(x, length_out = 30) {
-  chk_count(length_out)
-  # chk_finite(length_out) # FIXME implement in chk
-  if(length_out == 0L) {
-    return(x[-1])
-  }
-  if (all(is.na(x))) {
-    return(x[1])
-  }
-  seq(
-    from = min(x, na.rm = TRUE),
-    to = max(x, na.rm = TRUE),
-    length.out = length_out
-  ) %>%
-    unique()
-}
-
-#' @export
 new_seq.logical <- function(x, length_out = 2) {
   chk_count(length_out)
   if(length_out == 0L) {
