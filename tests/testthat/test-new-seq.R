@@ -8,6 +8,7 @@ test_that("new_seq default", {
   # multiple value with missing
   # length_out not count
   # length_out is 0
+  expect_identical(new_seq(complex(real = 1), length_out = 0), complex())
   # length_out = 1
   # length_out = 2
   # length_out = 3
@@ -63,6 +64,9 @@ test_that("new_seq logical", {
   expect_identical(new_seq(c(FALSE, FALSE), length_out = 3), FALSE)
   expect_identical(new_seq(c(FALSE, FALSE, TRUE), length_out = 3), c(FALSE, TRUE))
   expect_identical(new_seq(c(TRUE, TRUE, FALSE), length_out = 3), c(FALSE, TRUE))
+  # matrices and arrays
+  expect_identical(new_seq(matrix(TRUE)), TRUE)
+  expect_identical(new_seq(array(TRUE)), TRUE)
 })
 
 test_that("new_seq integer", {
@@ -135,6 +139,9 @@ test_that("new_seq integer", {
   expect_identical(new_seq(c(1L, 1L, 0L), length_out = 3), c(0L, 1L))
   expect_identical(new_seq(c(10L, 1L), length_out = 3), c(1L, 6L, 10L))
   expect_identical(new_seq(c(100L, 1L), length_out = 3), c(1L, 50L, 100L))
+  # matrices and arrays
+  expect_identical(new_seq(matrix(1L)), 1L)
+  expect_identical(new_seq(array(1L)), 1L)
 })
 
 test_that("new_seq numeric", {
@@ -202,6 +209,9 @@ test_that("new_seq numeric", {
   expect_identical(new_seq(c(1, 1, 0), length_out = 3), c(0, 0.5, 1))
   expect_identical(new_seq(c(10, 1), length_out = 3), c(1, 5.5, 10))
   expect_identical(new_seq(c(100, 1), length_out = 3), c(1, 50.5, 100))
+  # matrices and arrays
+  expect_identical(new_seq(matrix(1)), 1)
+  expect_identical(new_seq(array(1)), 1)
 })
 
 test_that("new_seq character", {
@@ -274,6 +284,12 @@ test_that("new_seq character", {
   expect_identical(new_seq(c("100", "1", "2"), length_out = 3), c("1", "100", "2"))
   expect_identical(new_seq(c("100", "1", "2", "3"), length_out = 3), c("1", "100", "2"))
   expect_identical(new_seq(c("100", "1", "99", "3"), length_out = 3), c("1", "100", "3"))
+  # length_out = Inf
+  expect_identical(new_seq(as.character(1:100), length_out = Inf),
+                   sort(as.character(1:100)))
+  # matrices and arrays
+  expect_identical(new_seq(matrix("a")), "a")
+  expect_identical(new_seq(array("a")), "a")
 })
 
 test_that("new_seq factor", {
