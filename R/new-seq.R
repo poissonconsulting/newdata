@@ -205,7 +205,7 @@ new_seq.POSIXct <- function(x, length_out = 30) {
     return(as.POSIXct(integer(), tz = tz))
   }
   if (all(is.na(x))) {
-    return(x[1])
+    return(as.POSIXct(NA_integer_, tz = tz))
   }
   range <- range(x, na.rm = TRUE) %>%
     as.integer()
