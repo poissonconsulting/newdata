@@ -107,9 +107,10 @@ new_seq.character <- function(x, length_out = 10) {
   if (all(is.na(x))) {
     return(NA_character_)
   }
-  out <- x %>%
-    sort() %>%
-    unique()
+  table <- x %>% table()
+  table <- table * -1
+  table <- table[order(table, names(table))]
+  out <- names(table)
   if(is.infinite(length_out)) {
     return(out)
   }
