@@ -9,7 +9,7 @@
 #' @seealso [new_value()] and [new_data()].
 #' @examples
 #' # by default the sequence of values for objects of class numeric
-#' # is 30 evenly space values across its range
+#' # is 30 evenly space values across the range of the data
 #' new_seq(c(1,4))
 #' # missing values are always removed
 #' new_seq(c(1,4, NA))
@@ -19,35 +19,40 @@
 #' new_seq(numeric())
 #' # the length of the sequence can be varied using the length_out argument
 #' new_seq(c(1,4), length_out = 1)
+#' new_seq(c(1,4), length_out = 2)
+#' new_seq(c(1,4), length_out = 3)
 #' # which can even be 0
 #' new_seq(c(1,4), length_out = 0)
-#' # for integer objects the sequence is by default up to 30 unique
-#' # integers across the range
+#' # for integer objects the sequence it's the unique integers
 #' new_seq(c(1L,4L))
-#' # for character objects by default its the
-#' new_value(c("a", "b", "c", "c"))
-#' # and the minimum of the most common values if a tie
-#' new_value(c("a", "b", "c", "c", "b"))
-#' # for factors its the first level and factor levels are always preserved
-#' new_value(factor(c("a", "b", "c", "c"), levels = c("b", "a", "g")))
-#' # for ordered factors its also the first level
-#' new_value(ordered(c("a", "b", "c", "c"), levels = c("b", "a", "g")))
-#' # for dates it's the rounded mean
-#' new_value(as.Date(c("2000-01-01", "2000-01-04")))
-#' # it's also the rounded mean for times
-#' new_value(hms::as_hms(c("00:00:01", "00:00:04")))
-#' # for POSIXct vectors it's the rounded mean and the time zone is preserved
-#' new_value(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04"),
+#' new_seq(c(1L,100L))
+#' # for character objects it's the actual values are sorted by
+#' # how common they are followed by their actual value
+#' new_seq(c("a", "c", "c", "b", "b"))
+#' new_seq(c("a", "c", "c", "b", "b"), length_out = 2)
+#' # for factors its the factor levels in order
+#' new_seq(factor(c("a", "b", "c", "c"), levels = c("b", "a", "g")))
+#' # with the trailing levels dropped first
+#' new_seq(factor(c("a", "b", "c", "c"), levels = c("b", "a", "g")),
+#'  length_out = 2)
+#' # for ordered factors the intermediate levels are dropped first
+#' new_seq(ordered(c("a", "b", "c", "c"), levels = c("b", "a", "g")),
+#'  length_out = 2)
+#' # for Date vectors it's the unique dates
+#' new_seq(as.Date(c("2000-01-01", "2000-01-04")))
+#' # same for hms vectors
+#' new_seq(hms::as_hms(c("00:00:01", "00:00:04")))
+#' # for POSIXct vectors the time zone is preserved
+#' new_seq(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04"),
 #'   tz = "PST8PDT"))
-#' # for logical objects it's always FALSE
-#' new_value(logical())
-#' # and finally by default its simply the mean
-#' new_value(complex(real = c(1, 4)))
+#' # for logical objects the longest possible sequence is `c(TRUE, FALSE)`
+#' new_seq(c(TRUE, TRUE, FALSE), length_out = 3)
 #' @export
 new_seq <- function(x, length_out = 30) {
   UseMethod("new_seq")
 }
 
+#' @describeIn new_seq Generate new sequence of values for logical objects
 #' @export
 new_seq.logical <- function(x, length_out = 2) {
   chk_count(length_out)
@@ -66,6 +71,7 @@ new_seq.logical <- function(x, length_out = 2) {
   out
 }
 
+#' @describeIn new_seq Generate new sequence of values for integer objects
 #' @export
 new_seq.integer <- function(x, length_out = 30) {
   chk_count(length_out)
@@ -89,8 +95,9 @@ new_seq.integer <- function(x, length_out = 30) {
     unique()
 }
 
+#' @describeIn new_seq Generate new sequence of values for double objects
 #' @export
-new_seq.numeric <- function(x, length_out = 30) {
+new_seq.double <- function(x, length_out = 30) {
   chk_count(length_out)
   # chk_finite(length_out) # FIXME implement in chk
   if(length_out == 0L) {
@@ -110,8 +117,9 @@ new_seq.numeric <- function(x, length_out = 30) {
     unique()
 }
 
+#' @describeIn new_seq Generate new sequence of values for character objects
 #' @export
-new_seq.character <- function(x, length_out = 10) {
+new_seq.character <- function(x, length_out = 30) {
   chk_count(length_out)
   if(length_out == 0L) {
     return(character())
@@ -133,6 +141,7 @@ new_seq.character <- function(x, length_out = 10) {
   out
 }
 
+#' @describeIn new_seq Generate new sequence of values for factors
 #' @export
 new_seq.factor <- function(x, length_out = Inf) {
   chk_count(length_out)
@@ -154,6 +163,7 @@ new_seq.factor <- function(x, length_out = Inf) {
   out
 }
 
+#' @describeIn new_seq Generate new sequence of values for ordered factors
 #' @export
 new_seq.ordered <- function(x, length_out = Inf) {
   chk_count(length_out)
@@ -175,6 +185,7 @@ new_seq.ordered <- function(x, length_out = Inf) {
   out
 }
 
+#' @describeIn new_seq Generate new sequence of values for Date vectors
 #' @export
 new_seq.Date <- function(x, length_out = 30) {
   chk_count(length_out)
@@ -200,6 +211,7 @@ new_seq.Date <- function(x, length_out = 30) {
     as.Date()
 }
 
+#' @describeIn new_seq Generate new sequence of values for POSIXct vectors
 #' @export
 new_seq.POSIXct <- function(x, length_out = 30) {
   chk_count(length_out)
@@ -226,6 +238,7 @@ new_seq.POSIXct <- function(x, length_out = 30) {
     as.POSIXct(tz = tz)
 }
 
+#' @describeIn new_seq Generate new sequence of values for hms vectors
 #' @export
 new_seq.hms <- function(x, length_out = 30) {
   chk_count(length_out)

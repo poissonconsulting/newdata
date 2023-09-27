@@ -2,9 +2,36 @@
 % Please edit documentation in R/new-seq.R
 \name{new_seq}
 \alias{new_seq}
+\alias{new_seq.logical}
+\alias{new_seq.integer}
+\alias{new_seq.double}
+\alias{new_seq.character}
+\alias{new_seq.factor}
+\alias{new_seq.ordered}
+\alias{new_seq.Date}
+\alias{new_seq.POSIXct}
+\alias{new_seq.hms}
 \title{Generate New Sequence}
 \usage{
 new_seq(x, length_out = 30)
+
+\method{new_seq}{logical}(x, length_out = 2)
+
+\method{new_seq}{integer}(x, length_out = 30)
+
+\method{new_seq}{double}(x, length_out = 30)
+
+\method{new_seq}{character}(x, length_out = 30)
+
+\method{new_seq}{factor}(x, length_out = Inf)
+
+\method{new_seq}{ordered}(x, length_out = Inf)
+
+\method{new_seq}{Date}(x, length_out = 30)
+
+\method{new_seq}{POSIXct}(x, length_out = 30)
+
+\method{new_seq}{hms}(x, length_out = 30)
 }
 \arguments{
 \item{x}{The object to generate the sequence from.}
@@ -18,9 +45,30 @@ A vector of the same class as the object.
 Generate a new sequence of values for a vector, matrix or array.
 A sequence of value is used to predict the effect of a variable.
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{new_seq(logical)}: Generate new sequence of values for logical objects
+
+\item \code{new_seq(integer)}: Generate new sequence of values for integer objects
+
+\item \code{new_seq(double)}: Generate new sequence of values for double objects
+
+\item \code{new_seq(character)}: Generate new sequence of values for character objects
+
+\item \code{new_seq(factor)}: Generate new sequence of values for factors
+
+\item \code{new_seq(ordered)}: Generate new sequence of values for ordered factors
+
+\item \code{new_seq(Date)}: Generate new sequence of values for Date vectors
+
+\item \code{new_seq(POSIXct)}: Generate new sequence of values for POSIXct vectors
+
+\item \code{new_seq(hms)}: Generate new sequence of values for hms vectors
+
+}}
 \examples{
 # by default the sequence of values for objects of class numeric
-# is 30 evenly space values across its range
+# is 30 evenly space values across the range of the data
 new_seq(c(1,4))
 # missing values are always removed
 new_seq(c(1,4, NA))
@@ -30,30 +78,34 @@ new_seq(NA_real_)
 new_seq(numeric())
 # the length of the sequence can be varied using the length_out argument
 new_seq(c(1,4), length_out = 1)
+new_seq(c(1,4), length_out = 2)
+new_seq(c(1,4), length_out = 3)
 # which can even be 0
 new_seq(c(1,4), length_out = 0)
-# for integer objects the sequence is by default up to 30 unique
-# integers across the range
+# for integer objects the sequence it's the unique integers
 new_seq(c(1L,4L))
-# for character objects by default its the
-new_value(c("a", "b", "c", "c"))
-# and the minimum of the most common values if a tie
-new_value(c("a", "b", "c", "c", "b"))
-# for factors its the first level and factor levels are always preserved
-new_value(factor(c("a", "b", "c", "c"), levels = c("b", "a", "g")))
-# for ordered factors its also the first level
-new_value(ordered(c("a", "b", "c", "c"), levels = c("b", "a", "g")))
-# for dates it's the rounded mean
-new_value(as.Date(c("2000-01-01", "2000-01-04")))
-# it's also the rounded mean for times
-new_value(hms::as_hms(c("00:00:01", "00:00:04")))
-# for POSIXct vectors it's the rounded mean and the time zone is preserved
-new_value(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04"),
+new_seq(c(1L,100L))
+# for character objects it's the actual values are sorted by
+# how common they are followed by their actual value
+new_seq(c("a", "c", "c", "b", "b"))
+new_seq(c("a", "c", "c", "b", "b"), length_out = 2)
+# for factors its the factor levels in order
+new_seq(factor(c("a", "b", "c", "c"), levels = c("b", "a", "g")))
+# with the trailing levels dropped first
+new_seq(factor(c("a", "b", "c", "c"), levels = c("b", "a", "g")),
+ length_out = 2)
+# for ordered factors the intermediate levels are dropped first
+new_seq(ordered(c("a", "b", "c", "c"), levels = c("b", "a", "g")),
+ length_out = 2)
+# for Date vectors it's the unique dates
+new_seq(as.Date(c("2000-01-01", "2000-01-04")))
+# same for hms vectors
+new_seq(hms::as_hms(c("00:00:01", "00:00:04")))
+# for POSIXct vectors the time zone is preserved
+new_seq(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04"),
   tz = "PST8PDT"))
-# for logical objects it's always FALSE
-new_value(logical())
-# and finally by default its simply the mean
-new_value(complex(real = c(1, 4)))
+# for logical objects the longest possible sequence is `c(TRUE, FALSE)`
+new_seq(c(TRUE, TRUE, FALSE), length_out = 3)
 }
 \seealso{
 \code{\link[=new_value]{new_value()}} and \code{\link[=new_data]{new_data()}}.
