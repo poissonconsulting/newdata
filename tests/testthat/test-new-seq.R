@@ -223,6 +223,8 @@ test_that("new_seq character", {
   expect_identical(new_seq(c("100", "1")), c("1", "100"))
   expect_identical(new_seq(as.character(1:100)),
                    c("1", "10", "100", "11", "12", "13", "14", "15", "16", "17"))
+  expect_identical(new_seq(as.character(c("c", "c", "a", "b", "b"))),
+                   c("b", "c", "a"))
   # multiple value with missing
   expect_identical(new_seq(c("0", "1", NA)), c("0", "1"))
   expect_identical(new_seq(c("1", "0", NA)), c("0", "1"))
