@@ -56,10 +56,10 @@
 <span><span class="co"># S3 method for default</span></span>
 <span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># S3 method for numeric</span></span>
+<span><span class="co"># S3 method for logical</span></span>
 <span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># S3 method for logical</span></span>
+<span><span class="co"># S3 method for double</span></span>
 <span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for integer</span></span>
@@ -105,8 +105,8 @@ held constant.</p>
     <h2 id="methods-by-class-">Methods (by class)<a class="anchor" aria-label="anchor" href="#methods-by-class-"></a></h2>
     
 <ul><li><p><code>new_value(default)</code>: default</p></li>
-<li><p><code>new_value(numeric)</code>: numeric</p></li>
 <li><p><code>new_value(logical)</code>: logical</p></li>
+<li><p><code>new_value(double)</code>: double</p></li>
 <li><p><code>new_value(integer)</code>: integer</p></li>
 <li><p><code>new_value(character)</code>: character</p></li>
 <li><p><code>new_value(factor)</code>: factor</p></li>
@@ -139,10 +139,10 @@ held constant.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
 <span class="r-in"><span><span class="co"># for character vectors it's the most common value</span></span></span>
 <span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "a"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "c"</span>
 <span class="r-in"><span><span class="co"># and the minimum of the most common values if a tie</span></span></span>
 <span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "a"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "b"</span>
 <span class="r-in"><span><span class="co"># for factors its the first level and factor levels are always preserved</span></span></span>
 <span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"c"</span><span class="op">)</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"b"</span>, <span class="st">"a"</span>, <span class="st">"g"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] b</span>
@@ -164,7 +164,7 @@ held constant.</p>
 <span class="r-in"><span><span class="co"># for logical vector it's always FALSE as this is the natural reference value</span></span></span>
 <span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
-<span class="r-in"><span><span class="co"># by default its simply the mean</span></span></span>
+<span class="r-in"><span><span class="co"># and by default its simply the mean</span></span></span>
 <span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/complex.html" class="external-link">complex</a></span><span class="op">(</span>real <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.5+0i</span>
 </code></pre></div>
