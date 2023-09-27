@@ -230,6 +230,9 @@ new_seq.POSIXct <- function(x, length_out = 30) {
 #' @export
 new_seq.hms <- function(x, length_out = 30) {
   chk_count(length_out)
+  if(length_out == 0L) {
+    return(as_hms(integer()))
+  }
   if (all(is.na(x))) {
     return(x[1])
   }

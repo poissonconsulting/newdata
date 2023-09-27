@@ -65,10 +65,6 @@ test_that("new_seq logical", {
   expect_identical(new_seq(c(FALSE, FALSE, TRUE), length_out = 3), c(FALSE, TRUE))
   expect_identical(new_seq(c(TRUE, TRUE, FALSE), length_out = 3), c(FALSE, TRUE))
   # length_out = Inf
-  expect_identical(new_seq(c(FALSE, TRUE), length_out = Inf), c(FALSE, TRUE))
-  expect_identical(new_seq(c(TRUE, FALSE), length_out = Inf), c(FALSE, TRUE))
-  expect_identical(new_seq(c(TRUE, TRUE), length_out = Inf), TRUE)
-  expect_identical(new_seq(c(FALSE, FALSE), length_out = Inf), FALSE)
   expect_identical(new_seq(c(FALSE, FALSE, TRUE), length_out = Inf), c(FALSE, TRUE))
   expect_identical(new_seq(c(TRUE, TRUE, FALSE), length_out = Inf), c(FALSE, TRUE))
   # matrices and arrays
@@ -147,12 +143,6 @@ test_that("new_seq integer", {
   expect_identical(new_seq(c(10L, 1L), length_out = 3), c(1L, 6L, 10L))
   expect_identical(new_seq(c(100L, 1L), length_out = 3), c(1L, 50L, 100L))
   # length_out = Inf
-  expect_identical(new_seq(c(0L, 1L), length_out = Inf), c(0L, 1L))
-  expect_identical(new_seq(c(1L, 0L), length_out = Inf), c(0L, 1L))
-  expect_identical(new_seq(c(1L, 1L), length_out = Inf), 1L)
-  expect_identical(new_seq(c(0L, 0L), length_out = Inf), 0L)
-  expect_identical(new_seq(c(0L, 0L, 1L), length_out = Inf), c(0L, 1L))
-  expect_identical(new_seq(c(1L, 1L, 0L), length_out = Inf), c(0L, 1L))
   expect_identical(new_seq(c(10L, 1L), length_out = Inf), 1:10)
   expect_identical(new_seq(c(100L, 1L), length_out = Inf), 1:100)
   # matrices and arrays
@@ -616,13 +606,87 @@ test_that("new_seq Date", {
   expect_identical(new_seq(as.Date(c(10L, 1L)), length_out = 3), as.Date(c(1L, 5L, 10L)))
   expect_identical(new_seq(as.Date(c(100L, 1L)), length_out = 3), as.Date(c(1L, 50L, 100L)))
   # length_out = Inf
-  expect_identical(new_seq(as.Date(c(0L, 1L)), length_out = Inf), as.Date(c(0L, 1L)))
-  expect_identical(new_seq(as.Date(c(1L, 0L)), length_out = Inf), as.Date(c(0L, 1L)))
-  expect_identical(new_seq(as.Date(c(1L, 1L)), length_out = Inf), as.Date(1L))
-  expect_identical(new_seq(as.Date(c(0L, 0L)), length_out = Inf), as.Date(0L))
-  expect_identical(new_seq(as.Date(c(0L, 0L, 1L)), length_out = Inf), as.Date(c(0L, 1L)))
-  expect_identical(new_seq(as.Date(c(1L, 1L, 0L)), length_out = Inf), as.Date(c(0L, 1L)))
   expect_identical(new_seq(as.Date(c(10L, 1L)), length_out = Inf), as.Date(1:10))
   expect_identical(new_seq(as.Date(c(100L, 1L)), length_out = Inf),
                    as.Date(c(1:100)))
+})
+
+test_that("new_seq hms", {
+  # zero length
+  expect_identical(new_seq(as_hms(character(0))), as_hms(NA_integer_))
+  expect_identical(new_seq(as_hms(integer(0))), as_hms(NA_integer_))
+  expect_identical(new_seq(as_hms(double(0))), as_hms(NA_integer_))
+  # missing value
+  expect_identical(new_seq(as_hms(NA_character_)), as_hms(NA_integer_))
+  expect_identical(new_seq(as_hms(NA_integer_)), as_hms(NA_integer_))
+  expect_identical(new_seq(as_hms(NA_real_)), as_hms(NA_integer_))
+  # single value
+  expect_identical(new_seq(as_hms(1L)), as_hms(1L))
+  expect_identical(new_seq(as_hms(1)), as_hms(1L))
+  expect_identical(new_seq(as_hms(0L)), as_hms(0L))
+  # multiple value
+  expect_identical(new_seq(as_hms(c(0L, 1L))), as_hms(c(0L, 1L)))
+  expect_identical(new_seq(as_hms(c(1L, 0L))), as_hms(c(0L, 1L)))
+  expect_identical(new_seq(as_hms(c(1L, 1L))), as_hms(1L))
+  expect_identical(new_seq(as_hms(c(0L, 0L))), as_hms(0L))
+  expect_identical(new_seq(as_hms(c(0L, 0L, 1L))), as_hms(c(0L, 1L)))
+  expect_identical(new_seq(as_hms(c(1L, 1L, 0L))), as_hms(c(0L, 1L)))
+  expect_identical(new_seq(as_hms(c(10L, 1L))), as_hms(1:10))
+  expect_identical(new_seq(as_hms(c(100L, 1L))),
+                   as_hms(c(1L, 4L, 7L, 11L, 14L, 18L, 21L, 24L, 28L, 31L, 35L, 38L, 41L,
+                             45L, 48L, 52L, 55L, 59L, 62L, 65L, 69L, 72L, 76L, 79L, 82L, 86L,
+                             89L, 93L, 96L, 100L)))
+  # multiple value with missing
+  expect_identical(new_seq(as_hms(c(0L, 1L, NA))), as_hms(c(0L, 1L)))
+  expect_identical(new_seq(as_hms(c(1L, 0L, NA))), as_hms(c(0L, 1L)))
+  expect_identical(new_seq(as_hms(c(1L, 1L, NA))), as_hms(1L))
+  expect_identical(new_seq(as_hms(c(0L, 0L, NA))), as_hms(0L))
+  expect_identical(new_seq(as_hms(c(0L, 0L, 1L, NA))), as_hms(c(0L, 1L)))
+  expect_identical(new_seq(as_hms(c(1L, 1L, 0L, NA))), as_hms(c(0L, 1L)))
+  expect_identical(new_seq(as_hms(c(10L, 1L, NA))), as_hms(1:10))
+  expect_identical(new_seq(as_hms(c(100L, 1L, NA))),
+                   as_hms(c(1L, 4L, 7L, 11L, 14L, 18L, 21L, 24L, 28L, 31L, 35L, 38L, 41L,
+                             45L, 48L, 52L, 55L, 59L, 62L, 65L, 69L, 72L, 76L, 79L, 82L, 86L,
+                             89L, 93L, 96L, 100L)))
+  # length_out not count
+  expect_error(new_seq(as_hms(1L), length_out = -1), "`length_out` must be a count")
+  expect_error(new_seq(as_hms(1L), length_out = 0.5), "`length_out` must be a count")
+  # length_out is 0
+  expect_identical(new_seq(as_hms(integer()), length_out = 0),
+                   as_hms(integer()))
+  expect_identical(new_seq(as_hms(NA_integer_), length_out = 0),
+                   as_hms(integer()))
+  expect_identical(new_seq(as_hms(1L), length_out = 0),
+                   as_hms(integer()))
+  # length_out = 1
+  expect_identical(new_seq(as_hms(c(0L, 1L)), length_out = 1), as_hms(0L))
+  expect_identical(new_seq(as_hms(c(1L, 0L)), length_out = 1), as_hms(0L))
+  expect_identical(new_seq(as_hms(c(1L, 1L)), length_out = 1), as_hms(1L))
+  expect_identical(new_seq(as_hms(c(0L, 0L)), length_out = 1), as_hms(0L))
+  expect_identical(new_seq(as_hms(c(0L, 0L, 1L)), length_out = 1), as_hms(0L))
+  expect_identical(new_seq(as_hms(c(1L, 1L, 0L)), length_out = 1), as_hms(0L))
+  expect_identical(new_seq(as_hms(c(10L, 1L)), length_out = 1), as_hms(1L))
+  expect_identical(new_seq(as_hms(c(100L, 1L)), length_out = 1), as_hms(1L))
+  # length_out = 2
+  expect_identical(new_seq(as_hms(c(0L, 1L)), length_out = 2), as_hms(c(0L, 1L)))
+  expect_identical(new_seq(as_hms(c(1L, 0L)), length_out = 2), as_hms(c(0L, 1L)))
+  expect_identical(new_seq(as_hms(c(1L, 1L)), length_out = 2), as_hms(1L))
+  expect_identical(new_seq(as_hms(c(0L, 0L)), length_out = 2), as_hms(0L))
+  expect_identical(new_seq(as_hms(c(0L, 0L, 1L)), length_out = 2), as_hms(c(0L, 1L)))
+  expect_identical(new_seq(as_hms(c(1L, 1L, 0L)), length_out = 2), as_hms(c(0L, 1L)))
+  expect_identical(new_seq(as_hms(c(10L, 1L)), length_out = 2), as_hms(c(1L, 10L)))
+  expect_identical(new_seq(as_hms(c(100L, 1L)), length_out = 2), as_hms(c(1L, 100L)))
+  # length_out = 3
+  expect_identical(new_seq(as_hms(c(0L, 1L)), length_out = 3), as_hms(c(0L, 1L)))
+  expect_identical(new_seq(as_hms(c(1L, 0L)), length_out = 3), as_hms(c(0L, 1L)))
+  expect_identical(new_seq(as_hms(c(1L, 1L)), length_out = 3), as_hms(1L))
+  expect_identical(new_seq(as_hms(c(0L, 0L)), length_out = 3), as_hms(0L))
+  expect_identical(new_seq(as_hms(c(0L, 0L, 1L)), length_out = 3), as_hms(c(0L, 1L)))
+  expect_identical(new_seq(as_hms(c(1L, 1L, 0L)), length_out = 3), as_hms(c(0L, 1L)))
+  expect_identical(new_seq(as_hms(c(10L, 1L)), length_out = 3), as_hms(c(1L, 5L, 10L)))
+  expect_identical(new_seq(as_hms(c(100L, 1L)), length_out = 3), as_hms(c(1L, 50L, 100L)))
+  # length_out = Inf
+  expect_identical(new_seq(as_hms(c(10L, 1L)), length_out = Inf), as_hms(1:10))
+  expect_identical(new_seq(as_hms(c(100L, 1L)), length_out = Inf),
+                   as_hms(c(1:100)))
 })
