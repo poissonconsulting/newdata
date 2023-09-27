@@ -110,17 +110,35 @@ new_seq.character <- function(x, length_out = Inf) {
   out <- x %>%
     sort() %>%
     unique()
-
+  if(is.infinite(length_out)) {
+    return(out)
+  }
   n <- length(out)
   if(n > length_out) {
-    out <- out[unique(round(seq(1L,n,length.out = length_out)))]
+    out <- out[1:length_out]
   }
   out
 }
 
 #' @export
-new_seq.factor <- function(x, length_out = NULL) {
-  factor(levels(x), levels = levels(x))
+new_seq.factor <- function(x, length_out = Inf) {
+  chk_count(length_out)
+  levels <- levels(x)
+  if(length_out == 0L) {
+    return(factor(levels = levels))
+  }
+  if (all(is.na(x))) {
+    return(factor(NA_character_, levels = levels))
+  }
+  out <- factor(levels(x), levels = levels(x))
+  if(is.infinite(length_out)) {
+    return(out)
+  }
+  n <- length(out)
+  if(n > length_out) {
+    out <- out[1:length_out]
+  }
+  out
 }
 
 #' @export

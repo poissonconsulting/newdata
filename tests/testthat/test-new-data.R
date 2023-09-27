@@ -44,7 +44,7 @@ test_that("new_data generates data frame with correct number of rows", {
   expect_equal(nrow(new_data(data, c("dnumeric", "dinteger"))), 300L)
   expect_equal(
     nrow(new_data(data, c("dfactor", "dinteger"), length_out = 5)),
-    50
+    25
   )
   expect_equal(nrow(new_data(data, c("dhms"), length_out = 5)), 5L)
 })
@@ -72,7 +72,7 @@ test_that("new_data generates data frame with correct number of rows", {
   expect_equal(nrow(new_data(data, c("dnumeric", "dinteger"))), 300)
   expect_equal(
     nrow(new_data(data, c("dfactor", "dinteger"), length_out = 5)),
-    50
+    25
   )
   expect_equal(nrow(new_data(data, c("dhms"), length_out = 5)), 5)
 })
