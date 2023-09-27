@@ -51,7 +51,37 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for default</span></span>
+<span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for numeric</span></span>
+<span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for logical</span></span>
+<span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for integer</span></span>
+<span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for character</span></span>
+<span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for factor</span></span>
+<span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for ordered</span></span>
+<span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for Date</span></span>
+<span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for POSIXct</span></span>
+<span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for hms</span></span>
+<span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -71,6 +101,20 @@
     <p>The reference value is the value to use for a variable when it is being
 held constant.</p>
     </div>
+    <div class="section level2">
+    <h2 id="methods-by-class-">Methods (by class)<a class="anchor" aria-label="anchor" href="#methods-by-class-"></a></h2>
+    
+<ul><li><p><code>new_value(default)</code>: default</p></li>
+<li><p><code>new_value(numeric)</code>: numeric</p></li>
+<li><p><code>new_value(logical)</code>: logical</p></li>
+<li><p><code>new_value(integer)</code>: integer</p></li>
+<li><p><code>new_value(character)</code>: character</p></li>
+<li><p><code>new_value(factor)</code>: factor</p></li>
+<li><p><code>new_value(ordered)</code>: ordered</p></li>
+<li><p><code>new_value(Date)</code>: Date</p></li>
+<li><p><code>new_value(POSIXct)</code>: POSIXct</p></li>
+<li><p><code>new_value(hms)</code>: hms</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="new_seq.html">new_seq()</a></code> and <code><a href="new_data.html">new_data()</a></code>.</p></div>
@@ -118,8 +162,6 @@ held constant.</p>
 <span class="r-in"><span>  tz <span class="op">=</span> <span class="st">"PST8PDT"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2000-01-01 00:00:03 PST"</span>
 <span class="r-in"><span><span class="co"># for logical vector it's always FALSE as this is the natural reference value</span></span></span>
-<span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span><span class="co"># by default its simply the mean</span></span></span>
