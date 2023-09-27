@@ -52,8 +52,12 @@
 #' new_data(data, "vecreal")
 #' new_data(data, c("vecchar", "vecint"))
 #' @export
-new_data <- function(data, seq = character(0), ref = list(),
-                     obs_only = list(character(0)), length_out = 30) {
+new_data <- function(
+    data,
+    seq = character(0),
+    ref = list(),
+    obs_only = list(character(0)),
+    length_out = 30) {
   chk_data(data)
   chk_count(length_out)
   chk_character(seq)
