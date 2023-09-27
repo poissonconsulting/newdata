@@ -2,27 +2,17 @@
 #'
 #' Generates a new data frame (in the form of a tibble) with each variable
 #' held constant or varying as a unique ordered sequence.
-#' All possible combinations are included.
+#' All possible unique combinations are included and the columns
+#' are in the same order as those in data with new columns added from
+#' `ref`.
 #'
-#' The new variables are of the same class as the original variables while
-#' the rows in the data frame are unique.
-#' Consequently continuous variables such as integers
-#' which have discrete values will not attain the specified `length_out` value
-#' if there are too few possible values between the minimum and maximum.
-#'
-#' `ref` can include variables that are not in data. Each vector is
-#' unique and sorted.
-#'
-#' If a factor is named in seq then all levels of the factor are represented
-#' i.e. `length_out` is ignored. The only exception to this is
-#' if the factor is named in `obs_only`
-#' in which case only observed factor levels are permitted in sequences.
-#'
-#' It is worth noting that `ref` can be used to specify sequences
-#' for particular values as well
-#' as single references. It is useful for extrapolating outside
-#' the range of the data or changes the levels of a factor.
-#' If an element of ref is a character vector and the corresponding
+#' It is worth noting that `ref` can be used to specify reference values
+#' as well as sequences.
+#' The `ref` argument is useful for introducing new variables,
+#' overriding the default reference values, extrapolating outside
+#' the range of the data and/or changing the levels of a factor
+#' or time zone of a POSIXct vector.
+#' If an element of `ref` is a character vector and the corresponding
 #' column is a data frame, then the ref element is assigned the same
 #' factor levels as the column in the data. This is useful for choosing
 #' a factor level without having to set the correct levels.
@@ -64,18 +54,17 @@
 #' @export
 new_data <- function(data, seq = character(0), ref = list(),
                      obs_only = list(character(0)), length_out = 30) {
-  length_out <- length_out %>% as.integer()
-
   chk_data(data)
+  chk_count(length_out)
   chk_character(seq)
   chk_list(ref)
-  chk_whole_number(length_out)
   chk_range(length_out, c(2L, 1000L))
   if (isTRUE(obs_only)) obs_only <- list(seq)
   chk_list(obs_only)
   if (!all(vapply(obs_only, is.character, TRUE))) {
     err("`obs_only` must be a list of character vectors")
   }
+  length_out <- length_out %>% as.integer()
   obs_only <- obs_only %>% unique()
 
   if (!all(has_name(data, seq))) {

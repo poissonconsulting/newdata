@@ -43,28 +43,18 @@ A tibble of the new data.
 \description{
 Generates a new data frame (in the form of a tibble) with each variable
 held constant or varying as a unique ordered sequence.
-All possible combinations are included.
+All possible unique combinations are included and the columns
+are in the same order as those in data with new columns added from
+\code{ref}.
 }
 \details{
-The new variables are of the same class as the original variables while
-the rows in the data frame are unique.
-Consequently continuous variables such as integers
-which have discrete values will not attain the specified \code{length_out} value
-if there are too few possible values between the minimum and maximum.
-
-\code{ref} can include variables that are not in data. Each vector is
-unique and sorted.
-
-If a factor is named in seq then all levels of the factor are represented
-i.e. \code{length_out} is ignored. The only exception to this is
-if the factor is named in \code{obs_only}
-in which case only observed factor levels are permitted in sequences.
-
-It is worth noting that \code{ref} can be used to specify sequences
-for particular values as well
-as single references. It is useful for extrapolating outside
-the range of the data or changes the levels of a factor.
-If an element of ref is a character vector and the corresponding
+It is worth noting that \code{ref} can be used to specify reference values
+as well as sequences.
+The \code{ref} argument is useful for introducing new variables,
+overriding the default reference values, extrapolating outside
+the range of the data and/or changing the levels of a factor
+or time zone of a POSIXct vector.
+If an element of \code{ref} is a character vector and the corresponding
 column is a data frame, then the ref element is assigned the same
 factor levels as the column in the data. This is useful for choosing
 a factor level without having to set the correct levels.
