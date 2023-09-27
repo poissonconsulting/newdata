@@ -15,11 +15,10 @@ check_classes <- function(x, y, x_name, y_name) {
     )
   }
 
-  if (!all(vapply(y[character], is_factor, TRUE))) {
+  if (!all(map_lgl(y[character], is_factor))) {
     err("classes of variables in ", x_name, " must match those in ", y_name)
   }
 
-  x[character] <- x[character] %>%
-    mapply(FUN = as_factor, y[character], SIMPLIFY = FALSE)
+  x[character] <- map2(x[character], y[character], as_factor)
   x
 }
