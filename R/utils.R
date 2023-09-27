@@ -1,4 +1,4 @@
-classes <- function(x) vapply(x, function(x) class(x)[1], "1")
+classes <- function(x) vapply(x, function(x) class(x)[[1]], character(1))
 
 is_factor <- function(x) is.factor(x) || is.ordered(x)
 
