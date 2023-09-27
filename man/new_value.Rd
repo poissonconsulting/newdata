@@ -20,18 +20,36 @@ The reference value is the value to use for a variable when it is being
 held constant.
 }
 \examples{
-new_value(c(1,4,NA)) # returns mean for reference value for real vector
-new_value(c(1L,4L,NA)) # rounded mean as integer for integer vector
-new_value(c("g", "a", "b", "b", NA)) # minimum for character vector
-# first level for factor preserving factor levels
-new_value(factor(c("g", "a", "b", "b", NA), levels = c("b", "a", "g")))
-# rounded mean as integer for dates and times (Date, hms, POSIXct)
-new_value(as.Date(c("2000-01-01", "2000-01-02", NA)))
-new_value(hms::as_hms(c("00:00:01", "00:00:02", NA)))
-new_value(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:02"),
-tz = "UTC"))
-# false for logical vector as this is the natural reference value
-new_value(c(TRUE,NA))
+# the reference value for real vectors is the mean
+new_value(c(1,4))
+# missing values are always removed
+new_value(c(1,4, NA))
+# unless its the only value
+new_value(NA_real_)
+# or the vector is zero length
+new_value(numeric())
+# for integer vectors it's the rounded mean
+new_value(c(1L,4L))
+# for character vectors it's the most common value
+new_value(c("a", "b", "c", "c"))
+# and the minimum of the most common values if a tie
+new_value(c("a", "b", "c", "c", "b"))
+# for factors its the first level and factor levels are always preserved
+new_value(factor(c("a", "b", "c", "c"), levels = c("b", "a", "g")))
+# for ordered factors its also the first level
+new_value(ordered(c("a", "b", "c", "c"), levels = c("b", "a", "g")))
+# for dates it's the rounded mean
+new_value(as.Date(c("2000-01-01", "2000-01-04")))
+# it's also the rounded mean for times
+new_value(hms::as_hms(c("00:00:01", "00:00:04")))
+# for POSIXct vectors it's the rounded mean and the time zone is preserved
+new_value(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04"),
+  tz = "PST8PDT"))
+# for logical vector it's always FALSE as this is the natural reference value
+new_value(TRUE)
+new_value(logical())
+# by default its simply the mean
+new_value(complex(real = c(1, 4)))
 }
 \seealso{
 \code{\link[=new_seq]{new_seq()}} and \code{\link[=new_data]{new_data()}}.
