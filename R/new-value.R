@@ -101,7 +101,7 @@ new_value.character <- function(x) {
     return(NA_character_)
   }
   table <- table(x)
-  out <- table[which(table == max(table))]
+  out <- table[table == max(table)]
   min(names(out))
 }
 
