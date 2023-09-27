@@ -1,12 +1,12 @@
 Package: newdata
-Title: Generate New Data Frames for Predictive Purposes
+Title: Generate New Data Values, Sequences and Frames
 Version: 0.0.0.9018
 Authors@R: c(
     person("Joe", "Thorley", , "joe@poissonconsulting.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7683-4592")),
     person("Poisson Consulting", role = c("fnd", "cph"))
   )
-Description: Generates new data frames for passing to predict functions.
+Description: Generates new data values, sequences and frames.
     In the new data the column(s) of interest vary across their
     range while the remaining columns are held constant at their reference
     value.
@@ -16,7 +16,6 @@ BugReports: https://github.com/poissonconsulting/newdata/issues
 Depends: R (>= 3.6)
 Imports:
     chk,
-    dttr2,
     hms,
     rlang,
     tibble

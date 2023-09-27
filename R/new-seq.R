@@ -30,6 +30,7 @@ new_seq <- function(x, length_out = 30) {
 #' @export
 new_seq.default <- function(x, length_out = 30) {
   chk_count(length_out)
+  # chk_finite(length_out) # FIXME implement in chk
   if(length_out == 0L) {
     return(x[-1])
   }
@@ -71,9 +72,13 @@ new_seq.integer <- function(x, length_out = 30) {
   if (all(is.na(x))) {
     return(NA_integer_)
   }
+  range <- range(x, na.rm = TRUE)
+  from <- range[1]
+  to <- range[2]
+  length_out <- min(length_out, to - from + 1L)
   seq(
-    from = min(x, na.rm = TRUE),
-    to = max(x, na.rm = TRUE),
+    from = from,
+    to = to,
     length.out = length_out
   ) %>%
     round() %>%
@@ -84,15 +89,19 @@ new_seq.integer <- function(x, length_out = 30) {
 #' @export
 new_seq.numeric <- function(x, length_out = 30) {
   chk_count(length_out)
+  # chk_finite(length_out) # FIXME implement in chk
   if(length_out == 0L) {
     return(double())
   }
   if (all(is.na(x))) {
     return(NA_real_)
   }
+  range <- range(x, na.rm = TRUE)
+  from <- range[1]
+  to <- range[2]
   seq(
-    from = min(x, na.rm = TRUE),
-    to = max(x, na.rm = TRUE),
+    from = from,
+    to = to,
     length.out = length_out
   ) %>%
     unique()
@@ -172,14 +181,21 @@ new_seq.Date <- function(x, length_out = 30) {
   if (all(is.na(x))) {
     return(as.Date(NA_integer_))
   }
+  range <- range(x, na.rm = TRUE) %>%
+    as.integer()
+  from <- range[1]
+  to <- range[2]
+  length_out <- min(length_out, to - from + 1L)
   out <- seq(
-    from = min(x, na.rm = TRUE),
-    to = max(x, na.rm = TRUE),
+    from = from,
+    to = to,
     length.out = length_out
   ) %>%
+    floor() %>%
     as.integer() %>%
     unique() %>%
     as.Date()
+
   n <- length(out)
   if(n > length_out) {
     out <- out[seq(1, n, length.out = length_out)]
@@ -194,13 +210,21 @@ new_seq.POSIXct <- function(x, length_out = 30) {
   if (all(is.na(x))) {
     return(x[1])
   }
+  tz <- attr(x, "tzone", exact = TRUE)
+  range <- range(x, na.rm = TRUE) %>%
+    as.integer()
+  from <- range[1]
+  to <- range[2]
+  length_out <- min(length_out, to - from + 1L)
   seq(
-    from = min(x, na.rm = TRUE),
-    to = max(x, na.rm = TRUE),
+    from = from,
+    to = to,
     length.out = length_out
   ) %>%
-    dttr2::dtt_floor() %>%
-    unique()
+    floor() %>%
+    as.integer() %>%
+    unique() %>%
+    as.POSIXct(tz = tz)
 }
 
 #' @export
@@ -209,13 +233,18 @@ new_seq.hms <- function(x, length_out = 30) {
   if (all(is.na(x))) {
     return(x[1])
   }
+  range <- range(x, na.rm = TRUE) %>%
+    as.integer()
+  from <- range[1]
+  to <- range[2]
+  length_out <- min(length_out, to - from + 1L)
   seq(
-    from = min(x, na.rm = TRUE),
-    to = max(x, na.rm = TRUE),
+    from = from,
+    to = to,
     length.out = length_out
   ) %>%
-    as_hms() %>%
-    dttr2::dtt_floor() %>%
+    floor() %>%
+    as.integer() %>%
     unique() %>%
     as_hms()
 }
