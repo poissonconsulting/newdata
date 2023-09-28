@@ -110,14 +110,14 @@ new_seq.integer <- function(x, length_out = 30) {
   if (length_out == 0L) {
     return(integer())
   }
+  if (all(is.na(x))) {
+    return(NA_integer_)
+  }
   if (length_out == 1L) {
     return(x %>%
       mean(na.rm = TRUE) %>%
       round() %>%
       as.integer())
-  }
-  if (all(is.na(x))) {
-    return(NA_integer_)
   }
   range <- range(x, na.rm = TRUE)
   from <- range[1]
@@ -140,15 +140,12 @@ new_seq.double <- function(x, length_out = 30) {
   if (length_out == 0L) {
     return(double())
   }
-  if (length_out == 1L) {
-    out <- x %>% mean(na.rm = TRUE)
-    if (is.nan(out)) {
-      return(NA_real_)
-    }
-    return(out)
-  }
   if (all(is.na(x))) {
     return(NA_real_)
+  }
+  if (length_out == 1L) {
+    out <- x %>% mean(na.rm = TRUE)
+    return(out)
   }
   range <- range(x, na.rm = TRUE)
   from <- range[1]
@@ -168,16 +165,13 @@ new_seq.character <- function(x, length_out = Inf) {
   if (length_out == 0L) {
     return(character())
   }
+  if (all(is.na(x)) || !length_out) {
+    return(NA_character_)
+  }
   if (length_out == 1L) {
-    if (all(is.na(x)) || !length(x)) {
-      return(NA_character_)
-    }
     table <- table(x)
     out <- table[table == max(table)]
     return(min(names(out)))
-  }
-  if (all(is.na(x))) {
-    return(NA_character_)
   }
   table <- x %>% table()
   table <- table * -1
@@ -252,19 +246,15 @@ new_seq.Date <- function(x, length_out = 30) {
   if (length_out == 0L) {
     return(as.Date(integer()))
   }
+  if (all(is.na(x))) {
+    return(as.Date(NA_integer_))
+  }
   if (length_out == 1L) {
-    out <- x %>% mean(na.rm = TRUE)
-    if (is.nan(out)) {
-      return(as.Date(NA_integer_))
-    }
-    out <- out %>%
+    out <- x %>% mean(na.rm = TRUE) %>%
       round() %>%
       as.integer() %>%
       as.Date()
     return(out)
-  }
-  if (all(is.na(x))) {
-    return(as.Date(NA_integer_))
   }
   range <- range(x, na.rm = TRUE) %>%
     as.integer()
@@ -289,20 +279,17 @@ new_seq.POSIXct <- function(x, length_out = 30) {
   if (length_out == 0L) {
     return(as.POSIXct(integer(), tz = tz))
   }
+  if (all(is.na(x))) {
+    return(as.POSIXct(NA_integer_, tz = tz))
+  }
   if (length_out == 1L) {
     tz <- attr(x, "tzone", exact = TRUE)
-    out <- x %>% mean(na.rm = TRUE)
-    if (is.nan(out)) {
-      return(as.POSIXct(NA_integer_, tz = tz))
-    }
-    return(out %>%
+    out <- x %>% mean(na.rm = TRUE) %>%
       round() %>%
       as.POSIXct(tz = tz) %>%
       as.integer() %>%
-      as.POSIXct(tz = tz))
-  }
-  if (all(is.na(x))) {
-    return(as.POSIXct(NA_integer_, tz = tz))
+      as.POSIXct(tz = tz)
+    return(out)
   }
   range <- range(x, na.rm = TRUE) %>%
     as.integer()
@@ -326,15 +313,15 @@ new_seq.hms <- function(x, length_out = 30) {
   if (length_out == 0L) {
     return(as_hms(integer()))
   }
+  if (all(is.na(x))) {
+    return(x[1])
+  }
   if (length_out == 1L) {
     return(x %>%
       mean(na.rm = TRUE) %>%
       round() %>%
       as.integer() %>%
       as_hms())
-  }
-  if (all(is.na(x))) {
-    return(x[1])
   }
   range <- range(x, na.rm = TRUE) %>%
     as.integer()
