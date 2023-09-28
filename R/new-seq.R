@@ -114,20 +114,19 @@ new_seq.integer <- function(x, length_out = 30) {
     return(NA_integer_)
   }
   if (length_out == 1L) {
-    return(x %>%
-      mean(na.rm = TRUE) %>%
-      round() %>%
-      as.integer())
+    out <- x %>% mean(na.rm = TRUE)
+  } else {
+    range <- range(x, na.rm = TRUE)
+    from <- range[1]
+    to <- range[2]
+    length_out <- min(length_out, to - from + 1L)
+    out <- seq(
+      from = from,
+      to = to,
+      length.out = length_out
+    )
   }
-  range <- range(x, na.rm = TRUE)
-  from <- range[1]
-  to <- range[2]
-  length_out <- min(length_out, to - from + 1L)
-  seq(
-    from = from,
-    to = to,
-    length.out = length_out
-  ) %>%
+  out %>%
     round() %>%
     as.integer()
 }
@@ -318,10 +317,10 @@ new_seq.hms <- function(x, length_out = 30) {
   }
   if (length_out == 1L) {
     return(x %>%
-      mean(na.rm = TRUE) %>%
-      round() %>%
-      as.integer() %>%
-      as_hms())
+             mean(na.rm = TRUE) %>%
+             round() %>%
+             as.integer() %>%
+             as_hms())
   }
   range <- range(x, na.rm = TRUE) %>%
     as.integer()
