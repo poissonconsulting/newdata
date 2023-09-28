@@ -21,6 +21,7 @@
 #' And finally by default it's simply the mean.
 #'
 #' @param x The object to generate the reference value from.
+#' @inheritParams new_seq
 #' @returns A scalar of the same class as the object.
 #' @seealso [new_seq()] and [new_data()].
 #' @examples
@@ -53,6 +54,6 @@
 #' # for logical objects it's always FALSE
 #' new_value(logical())
 #' @export
-new_value <- function(x) {
-  new_seq(x, length_out = 1L)
+new_value <- function(x, obs_only = FALSE) {
+  new_seq(x, length_out = 1L, obs_only = obs_only)
 }

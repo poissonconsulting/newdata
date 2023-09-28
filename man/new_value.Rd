@@ -4,10 +4,12 @@
 \alias{new_value}
 \title{Generate New Reference Value}
 \usage{
-new_value(x)
+new_value(x, obs_only = FALSE)
 }
 \arguments{
 \item{x}{The object to generate the reference value from.}
+
+\item{obs_only}{A flag specifying whether to only use observed values.}
 }
 \value{
 A scalar of the same class as the object.
