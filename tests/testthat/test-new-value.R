@@ -122,7 +122,6 @@ test_that("new_value real", {
   expect_identical(new_value(array(1)), 1)
 })
 
-# FIXME should make independent of locale!!
 test_that("new_value character", {
   # zero length
   expect_identical(new_value(character()), NA_character_)
@@ -296,24 +295,41 @@ test_that("new_value Date", {
   expect_identical(new_value(as.Date(character())), as.Date(NA_integer_))
   expect_identical(new_value(as.Date(integer())), as.Date(NA_integer_))
   expect_identical(new_value(as.Date(double())), as.Date(NA_integer_))
+  expect_identical(new_value(as.Date(character()), obs_only = TRUE), as.Date(NA_integer_))
+  expect_identical(new_value(as.Date(integer()), obs_only = TRUE), as.Date(NA_integer_))
+  expect_identical(new_value(as.Date(double()), obs_only = TRUE), as.Date(NA_integer_))
   # missing value
   expect_identical(new_value(as.Date(NA_character_)), as.Date(NA_integer_))
   expect_identical(new_value(as.Date(NA_real_)), as.Date(NA_integer_))
   expect_identical(new_value(as.Date(NA_integer_)), as.Date(NA_integer_))
+  expect_identical(new_value(as.Date(NA_character_), obs_only = TRUE), as.Date(NA_integer_))
+  expect_identical(new_value(as.Date(NA_real_), obs_only = TRUE), as.Date(NA_integer_))
+  expect_identical(new_value(as.Date(NA_integer_), obs_only = TRUE), as.Date(NA_integer_))
   # single value
   expect_identical(new_value(as.Date(1L)), as.Date(1L))
   expect_identical(new_value(as.Date(1)), as.Date(1L))
   expect_identical(new_value(as.Date(1.1)), as.Date(1L))
   expect_identical(new_value(as.Date(1.6)), as.Date(1L))
   expect_identical(new_value(as.Date(10)), as.Date(10L))
+  expect_identical(new_value(as.Date(1L), obs_only = TRUE), as.Date(1L))
+  expect_identical(new_value(as.Date(1), obs_only = TRUE), as.Date(1L))
+  expect_identical(new_value(as.Date(1.1), obs_only = TRUE), as.Date(1L))
+  expect_identical(new_value(as.Date(1.6), obs_only = TRUE), as.Date(1L))
+  expect_identical(new_value(as.Date(10), obs_only = TRUE), as.Date(10L))
   # multiple values
   expect_identical(new_value(as.Date(c(0, 1))), as.Date(0L))
   expect_identical(new_value(as.Date(c(1, 2))), as.Date(1L))
   expect_identical(new_value(as.Date(c(1, 3))), as.Date(2L))
+  expect_identical(new_value(as.Date(c(0, 1)), obs_only = TRUE), as.Date(0L))
+  expect_identical(new_value(as.Date(c(1, 2)), obs_only = TRUE), as.Date(1L))
+  expect_identical(new_value(as.Date(c(1, 3)), obs_only = TRUE), as.Date(1L))
   # multiple values with missing
   expect_identical(new_value(as.Date(c(0, 1, NA))), as.Date(0L))
   expect_identical(new_value(as.Date(c(1, 2, NA))), as.Date(1L))
   expect_identical(new_value(as.Date(c(1, 3, NA))), as.Date(2L))
+  expect_identical(new_value(as.Date(c(0, 1, NA)), obs_only = TRUE), as.Date(0L))
+  expect_identical(new_value(as.Date(c(1, 2, NA)), obs_only = TRUE), as.Date(1L))
+  expect_identical(new_value(as.Date(c(1, 3, NA)), obs_only = TRUE), as.Date(1L))
 })
 
 test_that("new_value POSIXct", {

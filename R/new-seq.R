@@ -201,7 +201,7 @@ new_seq.ordered <- function(x, length_out = Inf, obs_only = FALSE) {
 new_seq.Date <- function(x, length_out = 30, obs_only = FALSE) {
   x %>%
     as.integer() %>%
-    new_seq(length_out = length_out) %>%
+    new_seq(length_out = length_out, obs_only = obs_only) %>%
     as.Date()
 }
 
@@ -211,7 +211,7 @@ new_seq.POSIXct <- function(x, length_out = 30, obs_only = FALSE) {
   tz <- attr(x, "tzone", exact = TRUE)
   x %>%
     as.integer() %>%
-    new_seq(length_out = length_out) %>%
+    new_seq(length_out = length_out, obs_only = obs_only) %>%
     as.POSIXct(tz = tz)
 }
 
@@ -220,6 +220,6 @@ new_seq.POSIXct <- function(x, length_out = 30, obs_only = FALSE) {
 new_seq.hms <- function(x, length_out = 30, obs_only = FALSE) {
   x %>%
     as.integer() %>%
-    new_seq(length_out = length_out) %>%
+    new_seq(length_out = length_out, obs_only = obs_only) %>%
     as_hms()
 }
