@@ -110,9 +110,7 @@ new_seq.integer <- function(x, length_out = 30) {
   if (all(is.na(x))) {
     return(NA_integer_)
   }
-  seq1(x, length_out, integer = TRUE) %>%
-    round() %>%
-    as.integer()
+  seq1(x, length_out, integer = TRUE)
 }
 
 #' @describeIn new_seq Generate new sequence of values for double objects
