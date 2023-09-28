@@ -134,18 +134,12 @@ new_seq.character <- function(x, length_out = Inf) {
   if (length_out == 0L) {
     return(character())
   }
-  if (all(is.na(x)) || !length_out) {
+  if (all(is.na(x))) {
     return(NA_character_)
   }
   table <- x %>% table()
-  table <- table * -1
-  table <- table[order(table, names(table))]
-  out <- names(table)
-  if (is.infinite(length_out)) {
-    return(out)
-  }
-  n <- length(out)
-  if (n > length_out) {
+  out <- names(table[order(table * -1, names(table))])
+  if (length(out) > length_out) {
     out <- out[1:length_out]
   }
   out
