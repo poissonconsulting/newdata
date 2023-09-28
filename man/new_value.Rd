@@ -87,15 +87,15 @@ And finally by default it's simply the mean.
 }}
 \examples{
 # the reference value for objects of class numeric is the mean
-new_value(c(1,4))
+new_value(c(1, 4))
 # missing values are always removed
-new_value(c(1,4, NA))
+new_value(c(1, 4, NA))
 # unless it's the only value
 new_value(NA_real_)
 # or the object is zero length
 new_value(numeric())
 # for integer objects it's the rounded mean
-new_value(c(1L,4L))
+new_value(c(1L, 4L))
 # for character objects it's the most common value
 new_value(c("a", "b", "c", "c"))
 # and the minimum of the most common values if a tie
@@ -110,7 +110,8 @@ new_value(as.Date(c("2000-01-01", "2000-01-04")))
 new_value(hms::as_hms(c("00:00:01", "00:00:04")))
 # for POSIXct vectors it's the rounded mean and the time zone is preserved
 new_value(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04"),
-  tz = "PST8PDT"))
+  tz = "PST8PDT"
+))
 # for logical objects it's always FALSE
 new_value(logical())
 # and finally by default its simply the mean

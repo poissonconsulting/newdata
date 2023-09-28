@@ -3,7 +3,7 @@ as.Date <- function(x, ...) {
   base::as.Date(x, ..., origin = structure(0, class = "Date"))
 }
 
-as.POSIXct = function(x, ...) {
+as.POSIXct <- function(x, ...) {
   base::as.POSIXct(x, ..., origin = structure(0, class = c("POSIXct", "POSIXt")))
 }
 

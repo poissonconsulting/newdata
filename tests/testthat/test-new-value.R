@@ -112,40 +112,72 @@ test_that("new_value factor", {
   # missing value
   expect_identical(new_value(factor(NA)), factor(NA))
   # single value
-  expect_identical(new_value(factor("b", levels = "b")),
-                   factor("b", levels = "b"))
-  expect_identical(new_value(factor("b", levels = c("a", "b"))),
-                   factor("a", levels = c("a", "b")))
-  expect_identical(new_value(factor("b", levels = c("b", "a"))),
-                   factor("b", levels = c("b", "a")))
-  expect_identical(new_value(factor("a", levels = c("b", "a"))),
-                   factor("b", levels = c("b", "a")))
+  expect_identical(
+    new_value(factor("b", levels = "b")),
+    factor("b", levels = "b")
+  )
+  expect_identical(
+    new_value(factor("b", levels = c("a", "b"))),
+    factor("a", levels = c("a", "b"))
+  )
+  expect_identical(
+    new_value(factor("b", levels = c("b", "a"))),
+    factor("b", levels = c("b", "a"))
+  )
+  expect_identical(
+    new_value(factor("a", levels = c("b", "a"))),
+    factor("b", levels = c("b", "a"))
+  )
   # multiple values
-  expect_identical(new_value(factor(c("a", "b"))),
-                   factor("a", levels = c("a", "b")))
-  expect_identical(new_value(factor(c("a", "b"), levels = c("b", "a"))),
-                   factor("b", levels = c("b", "a")))
-  expect_identical(new_value(factor(c("b", "a"), levels = c("b", "a"))),
-                   factor("b", levels = c("b", "a")))
-  expect_identical(new_value(factor(c("c", "b", "a"), levels = c("b", "c", "a"))),
-                   factor("b", levels = c("b", "c", "a")))
-  expect_identical(new_value(factor(c("a", "b", "a"), levels = c("b", "a"))),
-                   factor("b", levels = c("b", "a")))
-  expect_identical(new_value(factor(c("a", "b", "a"), levels = c("b", "a"))),
-                   factor("b", levels = c("b", "a")))
+  expect_identical(
+    new_value(factor(c("a", "b"))),
+    factor("a", levels = c("a", "b"))
+  )
+  expect_identical(
+    new_value(factor(c("a", "b"), levels = c("b", "a"))),
+    factor("b", levels = c("b", "a"))
+  )
+  expect_identical(
+    new_value(factor(c("b", "a"), levels = c("b", "a"))),
+    factor("b", levels = c("b", "a"))
+  )
+  expect_identical(
+    new_value(factor(c("c", "b", "a"), levels = c("b", "c", "a"))),
+    factor("b", levels = c("b", "c", "a"))
+  )
+  expect_identical(
+    new_value(factor(c("a", "b", "a"), levels = c("b", "a"))),
+    factor("b", levels = c("b", "a"))
+  )
+  expect_identical(
+    new_value(factor(c("a", "b", "a"), levels = c("b", "a"))),
+    factor("b", levels = c("b", "a"))
+  )
   # multiple values missing
-  expect_identical(new_value(factor(c("a", "b", NA))),
-                   factor("a", levels = c("a", "b")))
-  expect_identical(new_value(factor(c("a", "b", NA), levels = c("b", "a"))),
-                   factor("b", levels = c("b", "a")))
-  expect_identical(new_value(factor(c("b", "a", NA), levels = c("b", "a"))),
-                   factor("b", levels = c("b", "a")))
-  expect_identical(new_value(factor(c("c", "b", "a", NA), levels = c("b", "c", "a"))),
-                   factor("b", levels = c("b", "c", "a")))
-  expect_identical(new_value(factor(c("a", "b", "a", NA), levels = c("b", "a"))),
-                   factor("b", levels = c("b", "a")))
-  expect_identical(new_value(factor(c("a", "b", "a", NA), levels = c("b", "a"))),
-                   factor("b", levels = c("b", "a")))
+  expect_identical(
+    new_value(factor(c("a", "b", NA))),
+    factor("a", levels = c("a", "b"))
+  )
+  expect_identical(
+    new_value(factor(c("a", "b", NA), levels = c("b", "a"))),
+    factor("b", levels = c("b", "a"))
+  )
+  expect_identical(
+    new_value(factor(c("b", "a", NA), levels = c("b", "a"))),
+    factor("b", levels = c("b", "a"))
+  )
+  expect_identical(
+    new_value(factor(c("c", "b", "a", NA), levels = c("b", "c", "a"))),
+    factor("b", levels = c("b", "c", "a"))
+  )
+  expect_identical(
+    new_value(factor(c("a", "b", "a", NA), levels = c("b", "a"))),
+    factor("b", levels = c("b", "a"))
+  )
+  expect_identical(
+    new_value(factor(c("a", "b", "a", NA), levels = c("b", "a"))),
+    factor("b", levels = c("b", "a"))
+  )
 })
 
 test_that("new_value ordered", {
@@ -154,40 +186,72 @@ test_that("new_value ordered", {
   # missing value
   expect_identical(new_value(ordered(NA)), ordered(NA))
   "single value"
-  expect_identical(new_value(ordered("b", levels = "b")),
-                   ordered("b", levels = "b"))
-  expect_identical(new_value(ordered("b", levels = c("a", "b"))),
-                   ordered("a", levels = c("a", "b")))
-  expect_identical(new_value(ordered("b", levels = c("b", "a"))),
-                   ordered("b", levels = c("b", "a")))
-  expect_identical(new_value(ordered("a", levels = c("b", "a"))),
-                   ordered("b", levels = c("b", "a")))
+  expect_identical(
+    new_value(ordered("b", levels = "b")),
+    ordered("b", levels = "b")
+  )
+  expect_identical(
+    new_value(ordered("b", levels = c("a", "b"))),
+    ordered("a", levels = c("a", "b"))
+  )
+  expect_identical(
+    new_value(ordered("b", levels = c("b", "a"))),
+    ordered("b", levels = c("b", "a"))
+  )
+  expect_identical(
+    new_value(ordered("a", levels = c("b", "a"))),
+    ordered("b", levels = c("b", "a"))
+  )
   # multiple values
-  expect_identical(new_value(ordered(c("a", "b"))),
-                   ordered("a", levels = c("a", "b")))
-  expect_identical(new_value(ordered(c("a", "b"), levels = c("b", "a"))),
-                   ordered("b", levels = c("b", "a")))
-  expect_identical(new_value(ordered(c("b", "a"), levels = c("b", "a"))),
-                   ordered("b", levels = c("b", "a")))
-  expect_identical(new_value(ordered(c("c", "b", "a"), levels = c("b", "c", "a"))),
-                   ordered("b", levels = c("b", "c", "a")))
-  expect_identical(new_value(ordered(c("a", "b", "a"), levels = c("b", "a"))),
-                   ordered("b", levels = c("b", "a")))
-  expect_identical(new_value(ordered(c("a", "b", "a"), levels = c("b", "a"))),
-                   ordered("b", levels = c("b", "a")))
+  expect_identical(
+    new_value(ordered(c("a", "b"))),
+    ordered("a", levels = c("a", "b"))
+  )
+  expect_identical(
+    new_value(ordered(c("a", "b"), levels = c("b", "a"))),
+    ordered("b", levels = c("b", "a"))
+  )
+  expect_identical(
+    new_value(ordered(c("b", "a"), levels = c("b", "a"))),
+    ordered("b", levels = c("b", "a"))
+  )
+  expect_identical(
+    new_value(ordered(c("c", "b", "a"), levels = c("b", "c", "a"))),
+    ordered("b", levels = c("b", "c", "a"))
+  )
+  expect_identical(
+    new_value(ordered(c("a", "b", "a"), levels = c("b", "a"))),
+    ordered("b", levels = c("b", "a"))
+  )
+  expect_identical(
+    new_value(ordered(c("a", "b", "a"), levels = c("b", "a"))),
+    ordered("b", levels = c("b", "a"))
+  )
   # multiple values missing
-  expect_identical(new_value(ordered(c("a", "b", NA))),
-                   ordered("a", levels = c("a", "b")))
-  expect_identical(new_value(ordered(c("a", "b", NA), levels = c("b", "a"))),
-                   ordered("b", levels = c("b", "a")))
-  expect_identical(new_value(ordered(c("b", "a", NA), levels = c("b", "a"))),
-                   ordered("b", levels = c("b", "a")))
-  expect_identical(new_value(ordered(c("c", "b", "a", NA), levels = c("b", "c", "a"))),
-                   ordered("b", levels = c("b", "c", "a")))
-  expect_identical(new_value(ordered(c("a", "b", "a", NA), levels = c("b", "a"))),
-                   ordered("b", levels = c("b", "a")))
-  expect_identical(new_value(ordered(c("a", "b", "a", NA), levels = c("b", "a"))),
-                   ordered("b", levels = c("b", "a")))
+  expect_identical(
+    new_value(ordered(c("a", "b", NA))),
+    ordered("a", levels = c("a", "b"))
+  )
+  expect_identical(
+    new_value(ordered(c("a", "b", NA), levels = c("b", "a"))),
+    ordered("b", levels = c("b", "a"))
+  )
+  expect_identical(
+    new_value(ordered(c("b", "a", NA), levels = c("b", "a"))),
+    ordered("b", levels = c("b", "a"))
+  )
+  expect_identical(
+    new_value(ordered(c("c", "b", "a", NA), levels = c("b", "c", "a"))),
+    ordered("b", levels = c("b", "c", "a"))
+  )
+  expect_identical(
+    new_value(ordered(c("a", "b", "a", NA), levels = c("b", "a"))),
+    ordered("b", levels = c("b", "a"))
+  )
+  expect_identical(
+    new_value(ordered(c("a", "b", "a", NA), levels = c("b", "a"))),
+    ordered("b", levels = c("b", "a"))
+  )
 })
 
 test_that("new_value Date", {
@@ -204,7 +268,7 @@ test_that("new_value Date", {
   expect_identical(new_value(as.Date(1)), as.Date(1L))
   expect_identical(new_value(as.Date(1.1)), as.Date(1L))
   expect_identical(new_value(as.Date(1.6)), as.Date(2L))
-  expect_identical(new_value(as.Date(10)), as.Date(10L                                                                                               ))
+  expect_identical(new_value(as.Date(10)), as.Date(10L))
   # multiple values
   expect_identical(new_value(as.Date(c(0, 1))), as.Date(0L))
   expect_identical(new_value(as.Date(c(1, 2))), as.Date(2L))
