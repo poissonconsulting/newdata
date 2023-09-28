@@ -1,8 +1,3 @@
-map <- function(.x, .f, ...) {
-  .f <- as_function(.f, env = global_env())
-  lapply(.x, .f, ...)
-}
-
 new_tseq <- function(x, ...) {
   expr <- ensym(x)
   out <- new_seq(x, ...)
