@@ -8,7 +8,7 @@
 #' Missing values are always removed unless it's the only value
 #' or the object is zero length.
 #' The length of the sequence can be varied using the `length_out` argument
-#' which can even be 0.
+#' which gives the reference value when 1 and can even be 0.
 #' For integer objects the sequence is the unique integers.
 #' For character objects it's the actual values sorted by
 #' how common they are followed by their actual value.
@@ -35,10 +35,11 @@
 #' # or the object is zero length
 #' new_seq(numeric())
 #' # the length of the sequence can be varied using the length_out argument
-#' new_seq(c(1,4), length_out = 1)
-#' new_seq(c(1,4), length_out = 2)
 #' new_seq(c(1,4), length_out = 3)
-#' # which can even be 0
+#' new_seq(c(1,4), length_out = 2)
+#' # which gives the reference value when 1
+#' new_seq(c(1,4), length_out = 1)
+#' # and can even be 0
 #' new_seq(c(1,4), length_out = 0)
 #' # for integer objects the sequence is the unique integers
 #' new_seq(c(1L,4L))
@@ -95,6 +96,9 @@ new_seq.integer <- function(x, length_out = 30) {
   if(length_out == 0L) {
     return(integer())
   }
+  if(length_out == 1L) {
+    return(new_value(x))
+  }
   if (all(is.na(x))) {
     return(NA_integer_)
   }
@@ -120,6 +124,9 @@ new_seq.double <- function(x, length_out = 30) {
   if(length_out == 0L) {
     return(double())
   }
+  if(length_out == 1L) {
+    return(new_value(x))
+  }
   if (all(is.na(x))) {
     return(NA_real_)
   }
@@ -140,6 +147,9 @@ new_seq.character <- function(x, length_out = Inf) {
   chk_count(length_out)
   if(length_out == 0L) {
     return(character())
+  }
+  if(length_out == 1L) {
+    return(new_value(x))
   }
   if (all(is.na(x))) {
     return(NA_character_)
@@ -166,6 +176,9 @@ new_seq.factor <- function(x, length_out = Inf) {
   if(length_out == 0L) {
     return(factor(levels = levels))
   }
+  if(length_out == 1L) {
+    return(new_value(x))
+  }
   if (all(is.na(x))) {
     return(factor(NA_character_, levels = levels))
   }
@@ -188,6 +201,9 @@ new_seq.ordered <- function(x, length_out = Inf) {
   if(length_out == 0L) {
     return(ordered(levels = levels))
   }
+  if(length_out == 1L) {
+    return(new_value(x))
+  }
   if (all(is.na(x))) {
     return(ordered(NA_character_, levels = levels))
   }
@@ -208,6 +224,9 @@ new_seq.Date <- function(x, length_out = 30) {
   chk_count(length_out)
   if(length_out == 0L) {
     return(as.Date(integer()))
+  }
+  if(length_out == 1L) {
+    return(new_value(x))
   }
   if (all(is.na(x))) {
     return(as.Date(NA_integer_))
@@ -235,6 +254,9 @@ new_seq.POSIXct <- function(x, length_out = 30) {
   if(length_out == 0L) {
     return(as.POSIXct(integer(), tz = tz))
   }
+  if(length_out == 1L) {
+    return(new_value(x))
+  }
   if (all(is.na(x))) {
     return(as.POSIXct(NA_integer_, tz = tz))
   }
@@ -259,6 +281,9 @@ new_seq.hms <- function(x, length_out = 30) {
   chk_count(length_out)
   if(length_out == 0L) {
     return(as_hms(integer()))
+  }
+  if(length_out == 1L) {
+    return(new_value(x))
   }
   if (all(is.na(x))) {
     return(x[1])
