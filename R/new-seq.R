@@ -135,6 +135,9 @@ new_seq.double <- function(x, length_out = 30, obs_only = FALSE) {
   if (all(is.na(x))) {
     return(NA_real_)
   }
+  if(obs_only) {
+    return(obs_only1(x, length_out))
+  }
   seq1(x, length_out)
 }
 

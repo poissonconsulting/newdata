@@ -88,22 +88,35 @@ test_that("new_value integer", {
 test_that("new_value real", {
   # zero length
   expect_identical(new_value(double()), NA_real_)
+  expect_identical(new_value(double(), obs_only = TRUE), NA_real_)
   # missing value
   expect_identical(new_value(NA_real_), NA_real_)
+  expect_identical(new_value(NA_real_, obs_only = TRUE), NA_real_)
   # single value
   expect_identical(new_value(1), 1)
   expect_identical(new_value(1.1), 1.1)
   expect_identical(new_value(10), 10)
   expect_identical(new_value(-1), -1)
   expect_identical(new_value(0), 0)
+  expect_identical(new_value(1, obs_only = TRUE), 1)
+  expect_identical(new_value(1.1, obs_only = TRUE), 1.1)
+  expect_identical(new_value(10, obs_only = TRUE), 10)
+  expect_identical(new_value(-1, obs_only = TRUE), -1)
+  expect_identical(new_value(0, obs_only = TRUE), 0)
   # multiple values
   expect_identical(new_value(c(0, 1)), 0.5)
   expect_identical(new_value(c(1, 2)), 1.5)
   expect_identical(new_value(c(1, 3)), 2)
+  expect_identical(new_value(c(0, 1), obs_only = TRUE), 0)
+  expect_identical(new_value(c(1, 2), obs_only = TRUE), 1)
+  expect_identical(new_value(c(1, 3), obs_only = TRUE), 1)
   # multiple values with missing
   expect_identical(new_value(c(0, 1, NA)), 0.5)
   expect_identical(new_value(c(1, 2, NA)), 1.5)
   expect_identical(new_value(c(1, 3, NA)), 2)
+  expect_identical(new_value(c(0, 1, NA), obs_only = TRUE), 0)
+  expect_identical(new_value(c(1, 2, NA), obs_only = TRUE), 1)
+  expect_identical(new_value(c(1, 3, NA), obs_only = TRUE), 1)
   # matrices and arrays
   expect_identical(new_value(matrix(1)), 1)
   expect_identical(new_value(array(1)), 1)
