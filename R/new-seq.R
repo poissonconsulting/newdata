@@ -145,6 +145,7 @@ new_seq.double <- function(x, length_out = 30, obs_only = FALSE) {
 #' @export
 new_seq.character <- function(x, length_out = Inf, obs_only = FALSE) {
   chk_count(length_out)
+  chk_flag(obs_only) # unused as character only works on observed values
   if (length_out == 0L) {
     return(character())
   }
