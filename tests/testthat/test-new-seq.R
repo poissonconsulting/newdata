@@ -1,8 +1,8 @@
 test_that("new_seq logical", {
   # zero length
-  expect_identical(new_seq(logical()), NA)
+  expect_identical(new_seq(logical()), c(FALSE, TRUE))
   # missing value
-  expect_identical(new_seq(NA), NA)
+  expect_identical(new_seq(NA), c(FALSE, TRUE))
   # single value
   expect_identical(new_seq(TRUE), c(FALSE, TRUE))
   expect_identical(new_seq(FALSE), c(FALSE, TRUE))

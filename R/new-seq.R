@@ -97,9 +97,6 @@ new_seq.logical <- function(x, length_out = 2) {
   if (length_out == 1L) {
     return(FALSE)
   }
-  if (all(is.na(x))) {
-    return(NA)
-  }
   return(c(FALSE, TRUE))
 }
 
@@ -113,7 +110,9 @@ new_seq.integer <- function(x, length_out = 30) {
   if (all(is.na(x))) {
     return(NA_integer_)
   }
-  seq1(x, length_out, integer = TRUE)
+  seq1(x, length_out, integer = TRUE) %>%
+    round() %>%
+    as.integer()
 }
 
 #' @describeIn new_seq Generate new sequence of values for double objects
