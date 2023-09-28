@@ -11,7 +11,7 @@ ordered <- function(x = character(), ...) {
   base::ordered(x, ...)
 }
 
-classes <- function(x) vapply(x, function(x) class(x)[[1]], character(1))
+classes <- function(x) map_chr(x, function(x) class(x)[[1]])
 
 is_factor <- function(x) is.factor(x) || is.ordered(x)
 

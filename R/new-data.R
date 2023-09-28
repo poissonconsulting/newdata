@@ -65,7 +65,7 @@ new_data <- function(
   chk_range(length_out, c(2L, 1000L))
   if (isTRUE(obs_only)) obs_only <- list(seq)
   chk_list(obs_only)
-  if (!all(vapply(obs_only, is.character, TRUE))) {
+  if (!all(map_lgl(obs_only, is.character))) {
     err("`obs_only` must be a list of character vectors")
   }
   length_out <- length_out %>% as.integer()

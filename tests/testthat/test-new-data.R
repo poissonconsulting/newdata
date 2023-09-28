@@ -61,8 +61,8 @@ test_that("new_data generates data frame with correct number of rows", {
   new_data <- new_data(data, "dnumeric")
 
   expect_identical(
-    vapply(data, FUN = function(x) class(x)[1], FUN.VALUE = ""),
-    vapply(new_data, FUN = function(x) class(x)[1], FUN.VALUE = "")
+    map_chr(data, function(x) class(x)[[1]]),
+    map_chr(new_data, function(x) class(x)[[1]])
   )
 
   expect_s3_class(new_data(data), "data.frame")
