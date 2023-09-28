@@ -129,8 +129,7 @@ new_seq.integer <- function(x, length_out = 30) {
     length.out = length_out
   ) %>%
     round() %>%
-    as.integer() %>%
-    unique()
+    as.integer()
 }
 
 #' @describeIn new_seq Generate new sequence of values for double objects
