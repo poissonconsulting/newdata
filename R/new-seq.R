@@ -185,14 +185,8 @@ new_seq.ordered <- function(x, length_out = Inf) {
 #' @describeIn new_seq Generate new sequence of values for Date vectors
 #' @export
 new_seq.Date <- function(x, length_out = 30) {
-  chk_count(length_out)
-  if (length_out == 0L) {
-    return(as.Date(integer()))
-  }
-  if (all(is.na(x))) {
-    return(as.Date(NA_integer_))
-  }
-  x %>% as.integer() %>%
+  x %>%
+    as.integer() %>%
     new_seq(length_out = length_out) %>%
     as.Date()
 }
