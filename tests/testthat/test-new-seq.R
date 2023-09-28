@@ -844,11 +844,9 @@ test_that("new_seq POSIXct", {
   expect_identical(new_seq(as.POSIXct(c(10L, 1L))), as.POSIXct(1:10))
   expect_identical(
     new_seq(as.POSIXct(c(100L, 1L))),
-    as.POSIXct(c(
-      1L, 4L, 7L, 11L, 14L, 18L, 21L, 24L, 28L, 31L, 35L, 38L, 41L,
-      45L, 48L, 52L, 55L, 59L, 62L, 65L, 69L, 72L, 76L, 79L, 82L, 86L,
-      89L, 93L, 96L, 100L
-    ))
+    as.POSIXct(c(1L, 4L, 8L, 11L, 15L, 18L, 21L, 25L, 28L, 32L, 35L, 39L, 42L,
+                 45L, 49L, 52L, 56L, 59L, 62L, 66L, 69L, 73L, 76L, 80L, 83L, 86L,
+                 90L, 93L, 97L, 100L))
   )
   # multiple value with missing
   expect_identical(new_seq(as.POSIXct(c(0L, 1L, NA))), as.POSIXct(c(0L, 1L)))
@@ -860,11 +858,9 @@ test_that("new_seq POSIXct", {
   expect_identical(new_seq(as.POSIXct(c(10L, 1L, NA))), as.POSIXct(1:10))
   expect_identical(
     new_seq(as.POSIXct(c(100L, 1L, NA))),
-    as.POSIXct(c(
-      1L, 4L, 7L, 11L, 14L, 18L, 21L, 24L, 28L, 31L, 35L, 38L, 41L,
-      45L, 48L, 52L, 55L, 59L, 62L, 65L, 69L, 72L, 76L, 79L, 82L, 86L,
-      89L, 93L, 96L, 100L
-    ))
+    as.POSIXct(c(1L, 4L, 8L, 11L, 15L, 18L, 21L, 25L, 28L, 32L, 35L, 39L, 42L,
+                 45L, 49L, 52L, 56L, 59L, 62L, 66L, 69L, 73L, 76L, 80L, 83L, 86L,
+                 90L, 93L, 97L, 100L))
   )
   # # length_out not count
   expect_error(new_seq(as.POSIXct(1L), length_out = -1), "`length_out` must be a count")
@@ -895,15 +891,15 @@ test_that("new_seq POSIXct", {
     as.POSIXct(integer(), tz = "PST8PDT")
   )
   # length_out = 1
-  expect_identical(new_seq(as.POSIXct(c(0L, 1L)), length_out = 1), as.POSIXct(1L))
-  expect_identical(new_seq(as.POSIXct(c(1L, 0L)), length_out = 1), as.POSIXct(1L))
+  expect_identical(new_seq(as.POSIXct(c(0L, 1L)), length_out = 1), as.POSIXct(0L))
+  expect_identical(new_seq(as.POSIXct(c(1L, 0L)), length_out = 1), as.POSIXct(0L))
   expect_identical(new_seq(as.POSIXct(c(1L, 1L)), length_out = 1), as.POSIXct(1L))
   expect_identical(new_seq(as.POSIXct(c(0L, 0L)), length_out = 1), as.POSIXct(0L))
   expect_identical(new_seq(as.POSIXct(c(0L, 0L, 1L)), length_out = 1), as.POSIXct(0L))
   expect_identical(new_seq(as.POSIXct(c(1L, 1L, 0L)), length_out = 1), as.POSIXct(1L))
   expect_identical(new_seq(as.POSIXct(c(10L, 1L)), length_out = 1), as.POSIXct(6L))
-  expect_identical(new_seq(as.POSIXct(c(100L, 1L)), length_out = 1), as.POSIXct(51L))
-  expect_identical(new_seq(as.POSIXct(c(100L, 1L), tz = "PST8PDT"), length_out = 1), as.POSIXct(51L, tz = "PST8PDT"))
+  expect_identical(new_seq(as.POSIXct(c(100L, 1L)), length_out = 1), as.POSIXct(50L))
+  expect_identical(new_seq(as.POSIXct(c(100L, 1L), tz = "PST8PDT"), length_out = 1), as.POSIXct(50L, tz = "PST8PDT"))
   # length_out = 2
   expect_identical(new_seq(as.POSIXct(c(0L, 1L)), length_out = 2), as.POSIXct(c(0L, 1L)))
   expect_identical(new_seq(as.POSIXct(c(1L, 0L)), length_out = 2), as.POSIXct(c(0L, 1L)))
@@ -921,7 +917,7 @@ test_that("new_seq POSIXct", {
   expect_identical(new_seq(as.POSIXct(c(0L, 0L)), length_out = 3), as.POSIXct(0L))
   expect_identical(new_seq(as.POSIXct(c(0L, 0L, 1L)), length_out = 3), as.POSIXct(c(0L, 1L)))
   expect_identical(new_seq(as.POSIXct(c(1L, 1L, 0L)), length_out = 3), as.POSIXct(c(0L, 1L)))
-  expect_identical(new_seq(as.POSIXct(c(10L, 1L)), length_out = 3), as.POSIXct(c(1L, 5L, 10L)))
+  expect_identical(new_seq(as.POSIXct(c(10L, 1L)), length_out = 3), as.POSIXct(c(1L, 6L, 10L)))
   expect_identical(new_seq(as.POSIXct(c(100L, 1L)), length_out = 3), as.POSIXct(c(1L, 50L, 100L)))
   expect_identical(new_seq(as.POSIXct(c(100L, 1L), tz = "PST8PDT"), length_out = 3), as.POSIXct(c(1L, 50L, 100L), tz = "PST8PDT"))
   # length_out = Inf

@@ -294,19 +294,19 @@ test_that("new_value POSIXct", {
   expect_identical(new_value(as.POSIXct(1L, tz = "PST8PDT")), as.POSIXct(1L, tz = "PST8PDT"))
   expect_identical(new_value(as.POSIXct(1)), as.POSIXct(1L))
   expect_identical(new_value(as.POSIXct(1.1)), as.POSIXct(1L))
-  expect_identical(new_value(as.POSIXct(1.6)), as.POSIXct(2L))
+  expect_identical(new_value(as.POSIXct(1.6)), as.POSIXct(1L))
   expect_identical(new_value(as.POSIXct(10)), as.POSIXct(10L))
   # multiple values
-  expect_identical(new_value(as.POSIXct(c(0, 1))), as.POSIXct(1L))
+  expect_identical(new_value(as.POSIXct(c(0, 1))), as.POSIXct(0L))
   expect_identical(new_value(as.POSIXct(c(1, 2))), as.POSIXct(2L))
   expect_identical(new_value(as.POSIXct(c(1, 3))), as.POSIXct(2L))
-  expect_identical(new_value(as.POSIXct(c(1, 4))), as.POSIXct(3L))
-  expect_identical(new_value(as.POSIXct(c(1, 4), tz = "PST8PDT")), as.POSIXct(3L, tz = "PST8PDT"))
+  expect_identical(new_value(as.POSIXct(c(1, 4))), as.POSIXct(2L))
+  expect_identical(new_value(as.POSIXct(c(1, 4), tz = "PST8PDT")), as.POSIXct(2L, tz = "PST8PDT"))
   # multiple values with missing
-  expect_identical(new_value(as.POSIXct(c(0, 1, NA))), as.POSIXct(1L))
+  expect_identical(new_value(as.POSIXct(c(0, 1, NA))), as.POSIXct(0L))
   expect_identical(new_value(as.POSIXct(c(1, 2, NA))), as.POSIXct(2L))
   expect_identical(new_value(as.POSIXct(c(1, 3, NA))), as.POSIXct(2L))
-  expect_identical(new_value(as.POSIXct(c(1, 4, NA), tz = "PST8PDT")), as.POSIXct(3L, tz = "PST8PDT"))
+  expect_identical(new_value(as.POSIXct(c(1, 4, NA), tz = "PST8PDT")), as.POSIXct(2L, tz = "PST8PDT"))
 })
 
 test_that("new_value hms", {

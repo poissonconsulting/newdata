@@ -194,35 +194,10 @@ new_seq.Date <- function(x, length_out = 30) {
 #' @describeIn new_seq Generate new sequence of values for POSIXct vectors
 #' @export
 new_seq.POSIXct <- function(x, length_out = 30) {
-  chk_count(length_out)
   tz <- attr(x, "tzone", exact = TRUE)
-  if (length_out == 0L) {
-    return(as.POSIXct(integer(), tz = tz))
-  }
-  if (all(is.na(x))) {
-    return(as.POSIXct(NA_integer_, tz = tz))
-  }
-  if (length_out == 1L) {
-    tz <- attr(x, "tzone", exact = TRUE)
-    out <- x %>% mean(na.rm = TRUE) %>%
-      round() %>%
-      as.POSIXct(tz = tz) %>%
-      as.integer() %>%
-      as.POSIXct(tz = tz)
-    return(out)
-  }
-  range <- range(x, na.rm = TRUE) %>%
-    as.integer()
-  from <- range[1]
-  to <- range[2]
-  length_out <- min(length_out, to - from + 1L)
-  seq(
-    from = from,
-    to = to,
-    length.out = length_out
-  ) %>%
+  x %>%
     as.integer() %>%
-    unique() %>%
+    new_seq(length_out = length_out) %>%
     as.POSIXct(tz = tz)
 }
 
