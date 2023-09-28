@@ -65,7 +65,6 @@ new_value.default <- function(x) {
   out <- x %>% mean(na.rm = TRUE)
   if (is.nan(out)) {
     is.na(out) <- TRUE
-    return(out)
   }
   out
 }
