@@ -2,39 +2,9 @@
 % Please edit documentation in R/new-value.R
 \name{new_value}
 \alias{new_value}
-\alias{new_value.default}
-\alias{new_value.logical}
-\alias{new_value.double}
-\alias{new_value.integer}
-\alias{new_value.character}
-\alias{new_value.factor}
-\alias{new_value.ordered}
-\alias{new_value.Date}
-\alias{new_value.POSIXct}
-\alias{new_value.hms}
 \title{Generate New Reference Value}
 \usage{
 new_value(x)
-
-\method{new_value}{default}(x)
-
-\method{new_value}{logical}(x)
-
-\method{new_value}{double}(x)
-
-\method{new_value}{integer}(x)
-
-\method{new_value}{character}(x)
-
-\method{new_value}{factor}(x)
-
-\method{new_value}{ordered}(x)
-
-\method{new_value}{Date}(x)
-
-\method{new_value}{POSIXct}(x)
-
-\method{new_value}{hms}(x)
 }
 \arguments{
 \item{x}{The object to generate the reference value from.}
@@ -64,29 +34,6 @@ For logical objects it's always \code{FALSE} as this is
 the natural reference value.
 And finally by default it's simply the mean.
 }
-\section{Methods (by class)}{
-\itemize{
-\item \code{new_value(default)}: Generate new reference value for default objects
-
-\item \code{new_value(logical)}: Generate new reference value for logical objects
-
-\item \code{new_value(double)}: Generate new reference value for double objects
-
-\item \code{new_value(integer)}: Generate new reference value for integer objects
-
-\item \code{new_value(character)}: Generate new reference value for character objects
-
-\item \code{new_value(factor)}: Generate new reference value for factors
-
-\item \code{new_value(ordered)}: Generate new reference value for ordered factors
-
-\item \code{new_value(Date)}: Generate new reference value for Date vectors
-
-\item \code{new_value(POSIXct)}: Generate new reference value for POSIXct vectors
-
-\item \code{new_value(hms)}: Generate new reference value for hms vectors
-
-}}
 \examples{
 # the reference value for objects of class numeric is the mean
 new_value(c(1, 4))
@@ -116,8 +63,6 @@ new_value(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04"),
 ))
 # for logical objects it's always FALSE
 new_value(logical())
-# and finally by default its simply the mean
-new_value(complex(real = c(1, 4)))
 }
 \seealso{
 \code{\link[=new_seq]{new_seq()}} and \code{\link[=new_data]{new_data()}}.

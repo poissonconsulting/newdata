@@ -75,13 +75,27 @@ new_seq <- function(x, length_out = 30) {
 
 #' @describeIn new_seq Generate new sequence of values for logical objects
 #' @export
+new_seq.default <- function(x, length_out = 30) {
+  chk_count(length_out)
+  if (length_out == 1L) {
+    out <- x %>% mean(na.rm = TRUE)
+    if (is.nan(out)) {
+      is.na(out) <- TRUE
+    }
+    return(out)
+  }
+  err("not yet implemented")
+}
+
+#' @describeIn new_seq Generate new sequence of values for logical objects
+#' @export
 new_seq.logical <- function(x, length_out = 2) {
   chk_count(length_out)
   if (length_out == 0L) {
     return(logical())
   }
   if (length_out == 1L) {
-    return(new_value(x))
+    return(FALSE)
   }
   if (all(is.na(x))) {
     return(NA)
@@ -97,7 +111,10 @@ new_seq.integer <- function(x, length_out = 30) {
     return(integer())
   }
   if (length_out == 1L) {
-    return(new_value(x))
+    return(x %>%
+      mean(na.rm = TRUE) %>%
+      round() %>%
+      as.integer())
   }
   if (all(is.na(x))) {
     return(NA_integer_)
@@ -125,7 +142,11 @@ new_seq.double <- function(x, length_out = 30) {
     return(double())
   }
   if (length_out == 1L) {
-    return(new_value(x))
+    out <- x %>% mean(na.rm = TRUE)
+    if (is.nan(out)) {
+      return(NA_real_)
+    }
+    return(out)
   }
   if (all(is.na(x))) {
     return(NA_real_)
@@ -149,7 +170,12 @@ new_seq.character <- function(x, length_out = Inf) {
     return(character())
   }
   if (length_out == 1L) {
-    return(new_value(x))
+    if (all(is.na(x)) || !length(x)) {
+      return(NA_character_)
+    }
+    table <- table(x)
+    out <- table[table == max(table)]
+    return(min(names(out)))
   }
   if (all(is.na(x))) {
     return(NA_character_)
@@ -177,7 +203,8 @@ new_seq.factor <- function(x, length_out = Inf) {
     return(factor(levels = levels))
   }
   if (length_out == 1L) {
-    return(new_value(x))
+    levels <- levels(x)
+    return(factor(levels[1], levels = levels))
   }
   if (all(is.na(x))) {
     return(factor(NA_character_, levels = levels))
@@ -202,7 +229,8 @@ new_seq.ordered <- function(x, length_out = Inf) {
     return(ordered(levels = levels))
   }
   if (length_out == 1L) {
-    return(new_value(x))
+    levels <- levels(x)
+    return(ordered(levels[1], levels = levels))
   }
   if (all(is.na(x))) {
     return(ordered(NA_character_, levels = levels))
@@ -226,7 +254,15 @@ new_seq.Date <- function(x, length_out = 30) {
     return(as.Date(integer()))
   }
   if (length_out == 1L) {
-    return(new_value(x))
+    out <- x %>% mean(na.rm = TRUE)
+    if (is.nan(out)) {
+      return(as.Date(NA_integer_))
+    }
+    out <- out %>%
+      round() %>%
+      as.integer() %>%
+      as.Date()
+    return(out)
   }
   if (all(is.na(x))) {
     return(as.Date(NA_integer_))
@@ -255,7 +291,16 @@ new_seq.POSIXct <- function(x, length_out = 30) {
     return(as.POSIXct(integer(), tz = tz))
   }
   if (length_out == 1L) {
-    return(new_value(x))
+    tz <- attr(x, "tzone", exact = TRUE)
+    out <- x %>% mean(na.rm = TRUE)
+    if (is.nan(out)) {
+      return(as.POSIXct(NA_integer_, tz = tz))
+    }
+    return(out %>%
+      round() %>%
+      as.POSIXct(tz = tz) %>%
+      as.integer() %>%
+      as.POSIXct(tz = tz))
   }
   if (all(is.na(x))) {
     return(as.POSIXct(NA_integer_, tz = tz))
@@ -283,7 +328,11 @@ new_seq.hms <- function(x, length_out = 30) {
     return(as_hms(integer()))
   }
   if (length_out == 1L) {
-    return(new_value(x))
+    return(x %>%
+      mean(na.rm = TRUE) %>%
+      round() %>%
+      as.integer() %>%
+      as_hms())
   }
   if (all(is.na(x))) {
     return(x[1])

@@ -2,6 +2,7 @@
 % Please edit documentation in R/new-seq.R
 \name{new_seq}
 \alias{new_seq}
+\alias{new_seq.default}
 \alias{new_seq.logical}
 \alias{new_seq.integer}
 \alias{new_seq.double}
@@ -14,6 +15,8 @@
 \title{Generate New Sequence}
 \usage{
 new_seq(x, length_out = 30)
+
+\method{new_seq}{default}(x, length_out = 30)
 
 \method{new_seq}{logical}(x, length_out = 2)
 
@@ -65,6 +68,8 @@ For logical objects the longest possible sequence is \code{c(TRUE, FALSE)}.
 }
 \section{Methods (by class)}{
 \itemize{
+\item \code{new_seq(default)}: Generate new sequence of values for logical objects
+
 \item \code{new_seq(logical)}: Generate new sequence of values for logical objects
 
 \item \code{new_seq(integer)}: Generate new sequence of values for integer objects
