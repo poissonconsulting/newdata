@@ -57,37 +57,7 @@ during predictions.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for default</span></span>
-<span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for logical</span></span>
-<span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for double</span></span>
-<span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for integer</span></span>
-<span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for character</span></span>
-<span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for factor</span></span>
-<span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for ordered</span></span>
-<span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for Date</span></span>
-<span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for POSIXct</span></span>
-<span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for hms</span></span>
-<span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -120,20 +90,6 @@ For logical objects it's always <code>FALSE</code> as this is
 the natural reference value.
 And finally by default it's simply the mean.</p>
     </div>
-    <div class="section level2">
-    <h2 id="methods-by-class-">Methods (by class)<a class="anchor" aria-label="anchor" href="#methods-by-class-"></a></h2>
-    
-<ul><li><p><code>new_value(default)</code>: Generate new reference value for default objects</p></li>
-<li><p><code>new_value(logical)</code>: Generate new reference value for logical objects</p></li>
-<li><p><code>new_value(double)</code>: Generate new reference value for double objects</p></li>
-<li><p><code>new_value(integer)</code>: Generate new reference value for integer objects</p></li>
-<li><p><code>new_value(character)</code>: Generate new reference value for character objects</p></li>
-<li><p><code>new_value(factor)</code>: Generate new reference value for factors</p></li>
-<li><p><code>new_value(ordered)</code>: Generate new reference value for ordered factors</p></li>
-<li><p><code>new_value(Date)</code>: Generate new reference value for Date vectors</p></li>
-<li><p><code>new_value(POSIXct)</code>: Generate new reference value for POSIXct vectors</p></li>
-<li><p><code>new_value(hms)</code>: Generate new reference value for hms vectors</p></li>
-</ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="new_seq.html">new_seq()</a></code> and <code><a href="new_data.html">new_data()</a></code>.</p></div>
@@ -184,9 +140,6 @@ And finally by default it's simply the mean.</p>
 <span class="r-in"><span><span class="co"># for logical objects it's always FALSE</span></span></span>
 <span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
-<span class="r-in"><span><span class="co"># and finally by default its simply the mean</span></span></span>
-<span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/complex.html" class="external-link">complex</a></span><span class="op">(</span>real <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.5+0i</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
