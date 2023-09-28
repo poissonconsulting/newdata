@@ -22,9 +22,12 @@ BugReports: https://github.com/poissonconsulting/newdata/issues
 Depends: R (>= 3.6)
 Imports:
     chk,
+    dplyr,
     hms,
     rlang,
-    tibble
+    tibble,
+    tidyr,
+    utils
 Suggests:
     covr,
     datasets,
