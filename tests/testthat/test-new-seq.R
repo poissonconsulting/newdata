@@ -761,11 +761,11 @@ test_that("new_seq ordered", {
   )
   expect_identical(
     new_seq(ordered("0", levels = c("0", "1", "2")), length_out = 1),
-    ordered("0", levels = c("0", "1", "2"))
+    ordered("1", levels = c("0", "1", "2"))
   )
   expect_identical(
     new_seq(ordered(c("2", "1", "0"), levels = c("0", "1", "2")), length_out = 1),
-    ordered("0", levels = c("0", "1", "2"))
+    ordered("1", levels = c("0", "1", "2"))
   )
   # length_out = 2
   expect_identical(

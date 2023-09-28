@@ -81,7 +81,7 @@ test_that("new_data ref works", {
   expect_identical(
     new_data(Orange),
     tibble::tibble(
-      Tree = ordered(levels(Orange$Tree)[1], levels(Orange$Tree)),
+      Tree = ordered(levels(Orange$Tree)[3], levels(Orange$Tree)),
       age = mean(Orange$age),
       circumference = mean(Orange$circumference)
     )
@@ -90,7 +90,7 @@ test_that("new_data ref works", {
   expect_identical(
     new_data(Orange, ref = list(age = 1)),
     tibble::tibble(
-      Tree = ordered(levels(Orange$Tree)[1], levels(Orange$Tree)),
+      Tree = ordered(levels(Orange$Tree)[3], levels(Orange$Tree)),
       age = 1,
       circumference = mean(Orange$circumference)
     )
@@ -99,7 +99,7 @@ test_that("new_data ref works", {
   expect_identical(
     new_data(Orange, ref = list(age = c(1, 2))),
     tibble::tibble(
-      Tree = ordered(levels(Orange$Tree)[1], levels(Orange$Tree)),
+      Tree = ordered(levels(Orange$Tree)[3], levels(Orange$Tree)),
       age = c(1, 2),
       circumference = mean(Orange$circumference)
     )
@@ -160,7 +160,7 @@ test_that("new_data ref overridden by seq", {
   expect_identical(
     new_data(Orange, seq = "age", ref = list(age = 118)),
     tibble::tibble(
-      Tree = ordered(levels(Orange$Tree)[1], levels(Orange$Tree)),
+      Tree = ordered(levels(Orange$Tree)[3], levels(Orange$Tree)),
       age = seq(min(Orange$age), max(Orange$age), length.out = 30),
       circumference = mean(Orange$circumference)
     )

@@ -183,18 +183,20 @@ new_seq.factor <- function(x, length_out = Inf, obs_only = FALSE) {
 new_seq.ordered <- function(x, length_out = Inf, obs_only = FALSE) {
   chk_count(length_out)
   levels <- levels(x)
+  nlevels <- length(levels)
   if (length_out == 0L) {
     return(ordered(levels = levels))
   }
-  if (!length(levels)) {
+  if (!nlevels) {
     return(ordered(NA_character_, levels = levels))
   }
-  out <- ordered(levels(x), levels = levels(x))
-  n <- length(out)
-  if (length(out) > length_out) {
-    out <- out[seq(1, n, length.out = length_out)]
+  out <- if(obs_only) {
+    as.integer(x)
+  } else {
+    1:nlevels
   }
-  out
+  indices <- new_seq(out, length_out = length_out, obs_only = TRUE)
+  ordered(levels[indices], levels = levels)
 }
 
 #' @describeIn new_seq Generate new sequence of values for Date vectors

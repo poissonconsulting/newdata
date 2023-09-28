@@ -253,7 +253,7 @@ test_that("new_value ordered", {
   )
   expect_identical(
     new_value(ordered(c("c", "b", "a"), levels = c("b", "c", "a"))),
-    ordered("b", levels = c("b", "c", "a"))
+    ordered("c", levels = c("b", "c", "a"))
   )
   expect_identical(
     new_value(ordered(c("a", "b", "a"), levels = c("b", "a"))),
@@ -278,7 +278,7 @@ test_that("new_value ordered", {
   )
   expect_identical(
     new_value(ordered(c("c", "b", "a", NA), levels = c("b", "c", "a"))),
-    ordered("b", levels = c("b", "c", "a"))
+    ordered("c", levels = c("b", "c", "a"))
   )
   expect_identical(
     new_value(ordered(c("a", "b", "a", NA), levels = c("b", "a"))),
