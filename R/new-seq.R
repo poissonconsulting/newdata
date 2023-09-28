@@ -113,7 +113,7 @@ new_seq.integer <- function(x, length_out = 30) {
   if (all(is.na(x))) {
     return(NA_integer_)
   }
-  seq1(x, length_out) %>%
+  seq1(x, length_out, integer = TRUE) %>%
     round() %>%
     as.integer()
 }
@@ -129,19 +129,7 @@ new_seq.double <- function(x, length_out = 30) {
   if (all(is.na(x))) {
     return(NA_real_)
   }
-  if (length_out == 1L) {
-    out <- x %>% mean(na.rm = TRUE)
-    return(out)
-  }
-  range <- range(x, na.rm = TRUE)
-  from <- range[1]
-  to <- range[2]
-  seq(
-    from = from,
-    to = to,
-    length.out = length_out
-  ) %>%
-    unique()
+  seq1(x, length_out)
 }
 
 #' @describeIn new_seq Generate new sequence of values for character objects

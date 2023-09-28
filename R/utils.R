@@ -22,17 +22,20 @@ as_factor <- function(x, y) {
   ordered(x, levels = levels(y), ordered = TRUE)
 }
 
-seq1 <- function(x, length_out) {
+seq1 <- function(x, length_out, integer = FALSE) {
   if(length_out == 1) {
     return(mean(x, na.rm = TRUE))
   }
   range <- range(x, na.rm = TRUE)
   from <- range[1]
   to <- range[2]
-  length_out <- min(length_out, to - from + 1L)
-  seq(
+  if(integer) {
+    length_out <- min(length_out, to - from + 1L)
+  }
+  out <- seq(
     from = from,
     to = to,
     length.out = length_out
-  )
+  ) %>%
+    unique()
 }
