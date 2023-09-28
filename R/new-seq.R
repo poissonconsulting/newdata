@@ -113,20 +113,7 @@ new_seq.integer <- function(x, length_out = 30) {
   if (all(is.na(x))) {
     return(NA_integer_)
   }
-  if (length_out == 1L) {
-    out <- x %>% mean(na.rm = TRUE)
-  } else {
-    range <- range(x, na.rm = TRUE)
-    from <- range[1]
-    to <- range[2]
-    length_out <- min(length_out, to - from + 1L)
-    out <- seq(
-      from = from,
-      to = to,
-      length.out = length_out
-    )
-  }
-  out %>%
+  seq1(x, length_out) %>%
     round() %>%
     as.integer()
 }
