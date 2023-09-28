@@ -77,16 +77,13 @@ new_seq.logical <- function(x, length_out = 2) {
   if(length_out == 0L) {
     return(logical())
   }
+  if(length_out == 1L) {
+    return(new_value(x))
+  }
   if (all(is.na(x))) {
     return(NA)
   }
-  out <- x %>%
-    unique() %>%
-    sort()
-  if (length_out == 1) {
-    return(out[1])
-  }
-  out
+  return(c(FALSE, TRUE))
 }
 
 #' @describeIn new_seq Generate new sequence of values for integer objects

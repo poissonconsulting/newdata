@@ -4,20 +4,20 @@ test_that("new_seq logical", {
   # missing value
   expect_identical(new_seq(NA), NA)
   # single value
-  expect_identical(new_seq(TRUE), TRUE)
-  expect_identical(new_seq(FALSE), FALSE)
+  expect_identical(new_seq(TRUE), c(FALSE, TRUE))
+  expect_identical(new_seq(FALSE), c(FALSE, TRUE))
   # multiple value
   expect_identical(new_seq(c(FALSE, TRUE)), c(FALSE, TRUE))
   expect_identical(new_seq(c(TRUE, FALSE)), c(FALSE, TRUE))
-  expect_identical(new_seq(c(TRUE, TRUE)), TRUE)
-  expect_identical(new_seq(c(FALSE, FALSE)), FALSE)
+  expect_identical(new_seq(c(TRUE, TRUE)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(FALSE, FALSE)), c(FALSE, TRUE))
   expect_identical(new_seq(c(FALSE, FALSE, TRUE)), c(FALSE, TRUE))
   expect_identical(new_seq(c(TRUE, TRUE, FALSE)), c(FALSE, TRUE))
   # multiple value with missing
   expect_identical(new_seq(c(FALSE, TRUE, NA)), c(FALSE, TRUE))
   expect_identical(new_seq(c(TRUE, FALSE, NA)), c(FALSE, TRUE))
-  expect_identical(new_seq(c(TRUE, TRUE, NA)), TRUE)
-  expect_identical(new_seq(c(FALSE, FALSE, NA)), FALSE)
+  expect_identical(new_seq(c(TRUE, TRUE, NA)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(FALSE, FALSE, NA)), c(FALSE, TRUE))
   expect_identical(new_seq(c(FALSE, FALSE, TRUE, NA)), c(FALSE, TRUE))
   expect_identical(new_seq(c(TRUE, TRUE, FALSE, NA)), c(FALSE, TRUE))
   # length_out not count
@@ -30,30 +30,30 @@ test_that("new_seq logical", {
   # length_out = 1
   expect_identical(new_seq(c(FALSE, TRUE), length_out = 1), FALSE)
   expect_identical(new_seq(c(TRUE, FALSE), length_out = 1), FALSE)
-  expect_identical(new_seq(c(TRUE, TRUE), length_out = 1), TRUE)
+  expect_identical(new_seq(c(TRUE, TRUE), length_out = 1), FALSE)
   expect_identical(new_seq(c(FALSE, FALSE), length_out = 1), FALSE)
   expect_identical(new_seq(c(FALSE, FALSE, TRUE), length_out = 1), FALSE)
   expect_identical(new_seq(c(TRUE, TRUE, FALSE), length_out = 1), FALSE)
   # length_out = 2
   expect_identical(new_seq(c(FALSE, TRUE), length_out = 2), c(FALSE, TRUE))
   expect_identical(new_seq(c(TRUE, FALSE), length_out = 2), c(FALSE, TRUE))
-  expect_identical(new_seq(c(TRUE, TRUE), length_out = 2), TRUE)
-  expect_identical(new_seq(c(FALSE, FALSE), length_out = 2), FALSE)
+  expect_identical(new_seq(c(TRUE, TRUE), length_out = 2), c(FALSE, TRUE))
+  expect_identical(new_seq(c(FALSE, FALSE), length_out = 2), c(FALSE, TRUE))
   expect_identical(new_seq(c(FALSE, FALSE, TRUE), length_out = 2), c(FALSE, TRUE))
   expect_identical(new_seq(c(TRUE, TRUE, FALSE), length_out = 2), c(FALSE, TRUE))
   # length_out = 3
   expect_identical(new_seq(c(FALSE, TRUE), length_out = 3), c(FALSE, TRUE))
   expect_identical(new_seq(c(TRUE, FALSE), length_out = 3), c(FALSE, TRUE))
-  expect_identical(new_seq(c(TRUE, TRUE), length_out = 3), TRUE)
-  expect_identical(new_seq(c(FALSE, FALSE), length_out = 3), FALSE)
+  expect_identical(new_seq(c(TRUE, TRUE), length_out = 3), c(FALSE, TRUE))
+  expect_identical(new_seq(c(FALSE, FALSE), length_out = 3), c(FALSE, TRUE))
   expect_identical(new_seq(c(FALSE, FALSE, TRUE), length_out = 3), c(FALSE, TRUE))
   expect_identical(new_seq(c(TRUE, TRUE, FALSE), length_out = 3), c(FALSE, TRUE))
   # length_out = Inf
   expect_identical(new_seq(c(FALSE, FALSE, TRUE), length_out = Inf), c(FALSE, TRUE))
   expect_identical(new_seq(c(TRUE, TRUE, FALSE), length_out = Inf), c(FALSE, TRUE))
   # matrices and arrays
-  expect_identical(new_seq(matrix(TRUE)), TRUE)
-  expect_identical(new_seq(array(TRUE)), TRUE)
+  expect_identical(new_seq(matrix(TRUE)), c(FALSE, TRUE))
+  expect_identical(new_seq(array(TRUE)), c(FALSE, TRUE))
 })
 
 test_that("new_seq integer", {
