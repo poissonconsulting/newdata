@@ -46,3 +46,20 @@ seq1 <- function(x, length_out, integer = FALSE) {
   }
   unique(out)
 }
+
+obs_only1 <- function(x, length_out, first = FALSE) {
+  x <- x[!is.na(x)]
+  out <- x %>%
+    unique() %>%
+    sort()
+
+  n <- length(out)
+  if(n > length_out) {
+    if(first) {
+      out <- out[1:length_out]
+    } else {
+      out <- out[seq1(c(1,n), length_out = length_out, integer = TRUE)]
+    }
+  }
+  out
+}

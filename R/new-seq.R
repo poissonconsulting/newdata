@@ -22,6 +22,7 @@
 #'
 #' @param x The object to generate the sequence from.
 #' @param length_out The maximum length of the sequence.
+#' @param obs_only A flag specifying whether to only use observed values.
 #' @returns A vector of the same class as the object.
 #' @seealso [new_value()] and [new_data()].
 #' @examples
@@ -69,13 +70,13 @@
 #' # for logical objects the longest possible sequence is `c(TRUE, FALSE)`
 #' new_seq(c(TRUE, TRUE, FALSE), length_out = 3)
 #' @export
-new_seq <- function(x, length_out = 30) {
+new_seq <- function(x, length_out = 30, obs_only = FALSE) {
   UseMethod("new_seq")
 }
 
 #' @describeIn new_seq Generate new sequence of values for logical objects
 #' @export
-new_seq.default <- function(x, length_out = 30) {
+new_seq.default <- function(x, length_out = 30, obs_only = FALSE) {
   chk_count(length_out)
   if (length_out == 1L) {
     out <- x %>% mean(na.rm = TRUE)
@@ -89,10 +90,17 @@ new_seq.default <- function(x, length_out = 30) {
 
 #' @describeIn new_seq Generate new sequence of values for logical objects
 #' @export
-new_seq.logical <- function(x, length_out = 2) {
+new_seq.logical <- function(x, length_out = 2, obs_only = FALSE) {
   chk_count(length_out)
+  chk_flag(obs_only)
   if (length_out == 0L) {
     return(logical())
+  }
+  if(obs_only) {
+    if(all(is.na(x))) {
+      return(NA)
+    }
+    return(obs_only1(x, length_out, first = TRUE))
   }
   if (length_out == 1L) {
     return(FALSE)
@@ -102,7 +110,7 @@ new_seq.logical <- function(x, length_out = 2) {
 
 #' @describeIn new_seq Generate new sequence of values for integer objects
 #' @export
-new_seq.integer <- function(x, length_out = 30) {
+new_seq.integer <- function(x, length_out = 30, obs_only = FALSE) {
   chk_count(length_out)
   if (length_out == 0L) {
     return(integer())
@@ -115,7 +123,7 @@ new_seq.integer <- function(x, length_out = 30) {
 
 #' @describeIn new_seq Generate new sequence of values for double objects
 #' @export
-new_seq.double <- function(x, length_out = 30) {
+new_seq.double <- function(x, length_out = 30, obs_only = FALSE) {
   chk_count(length_out)
   # chk_finite(length_out) # FIXME implement in chk
   if (length_out == 0L) {
@@ -129,7 +137,7 @@ new_seq.double <- function(x, length_out = 30) {
 
 #' @describeIn new_seq Generate new sequence of values for character objects
 #' @export
-new_seq.character <- function(x, length_out = Inf) {
+new_seq.character <- function(x, length_out = Inf, obs_only = FALSE) {
   chk_count(length_out)
   if (length_out == 0L) {
     return(character())
@@ -147,7 +155,7 @@ new_seq.character <- function(x, length_out = Inf) {
 
 #' @describeIn new_seq Generate new sequence of values for factors
 #' @export
-new_seq.factor <- function(x, length_out = Inf) {
+new_seq.factor <- function(x, length_out = Inf, obs_only = FALSE) {
   chk_count(length_out)
   levels <- levels(x)
   if (length_out == 0L) {
@@ -165,7 +173,7 @@ new_seq.factor <- function(x, length_out = Inf) {
 
 #' @describeIn new_seq Generate new sequence of values for ordered factors
 #' @export
-new_seq.ordered <- function(x, length_out = Inf) {
+new_seq.ordered <- function(x, length_out = Inf, obs_only = FALSE) {
   chk_count(length_out)
   levels <- levels(x)
   if (length_out == 0L) {
@@ -184,7 +192,7 @@ new_seq.ordered <- function(x, length_out = Inf) {
 
 #' @describeIn new_seq Generate new sequence of values for Date vectors
 #' @export
-new_seq.Date <- function(x, length_out = 30) {
+new_seq.Date <- function(x, length_out = 30, obs_only = FALSE) {
   x %>%
     as.integer() %>%
     new_seq(length_out = length_out) %>%
@@ -193,7 +201,7 @@ new_seq.Date <- function(x, length_out = 30) {
 
 #' @describeIn new_seq Generate new sequence of values for POSIXct vectors
 #' @export
-new_seq.POSIXct <- function(x, length_out = 30) {
+new_seq.POSIXct <- function(x, length_out = 30, obs_only = FALSE) {
   tz <- attr(x, "tzone", exact = TRUE)
   x %>%
     as.integer() %>%
@@ -203,7 +211,7 @@ new_seq.POSIXct <- function(x, length_out = 30) {
 
 #' @describeIn new_seq Generate new sequence of values for hms vectors
 #' @export
-new_seq.hms <- function(x, length_out = 30) {
+new_seq.hms <- function(x, length_out = 30, obs_only = FALSE) {
   x %>%
     as.integer() %>%
     new_seq(length_out = length_out) %>%

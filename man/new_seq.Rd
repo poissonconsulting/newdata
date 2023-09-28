@@ -14,32 +14,34 @@
 \alias{new_seq.hms}
 \title{Generate New Sequence}
 \usage{
-new_seq(x, length_out = 30)
+new_seq(x, length_out = 30, obs_only = FALSE)
 
-\method{new_seq}{default}(x, length_out = 30)
+\method{new_seq}{default}(x, length_out = 30, obs_only = FALSE)
 
-\method{new_seq}{logical}(x, length_out = 2)
+\method{new_seq}{logical}(x, length_out = 2, obs_only = FALSE)
 
-\method{new_seq}{integer}(x, length_out = 30)
+\method{new_seq}{integer}(x, length_out = 30, obs_only = FALSE)
 
-\method{new_seq}{double}(x, length_out = 30)
+\method{new_seq}{double}(x, length_out = 30, obs_only = FALSE)
 
-\method{new_seq}{character}(x, length_out = Inf)
+\method{new_seq}{character}(x, length_out = Inf, obs_only = FALSE)
 
-\method{new_seq}{factor}(x, length_out = Inf)
+\method{new_seq}{factor}(x, length_out = Inf, obs_only = FALSE)
 
-\method{new_seq}{ordered}(x, length_out = Inf)
+\method{new_seq}{ordered}(x, length_out = Inf, obs_only = FALSE)
 
-\method{new_seq}{Date}(x, length_out = 30)
+\method{new_seq}{Date}(x, length_out = 30, obs_only = FALSE)
 
-\method{new_seq}{POSIXct}(x, length_out = 30)
+\method{new_seq}{POSIXct}(x, length_out = 30, obs_only = FALSE)
 
-\method{new_seq}{hms}(x, length_out = 30)
+\method{new_seq}{hms}(x, length_out = 30, obs_only = FALSE)
 }
 \arguments{
 \item{x}{The object to generate the sequence from.}
 
 \item{length_out}{The maximum length of the sequence.}
+
+\item{obs_only}{A flag specifying whether to only use observed values.}
 }
 \value{
 A vector of the same class as the object.
