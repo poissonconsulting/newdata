@@ -229,31 +229,8 @@ new_seq.POSIXct <- function(x, length_out = 30) {
 #' @describeIn new_seq Generate new sequence of values for hms vectors
 #' @export
 new_seq.hms <- function(x, length_out = 30) {
-  chk_count(length_out)
-  if (length_out == 0L) {
-    return(as_hms(integer()))
-  }
-  if (all(is.na(x))) {
-    return(x[1])
-  }
-  if (length_out == 1L) {
-    return(x %>%
-             mean(na.rm = TRUE) %>%
-             round() %>%
-             as.integer() %>%
-             as_hms())
-  }
-  range <- range(x, na.rm = TRUE) %>%
-    as.integer()
-  from <- range[1]
-  to <- range[2]
-  length_out <- min(length_out, to - from + 1L)
-  seq(
-    from = from,
-    to = to,
-    length.out = length_out
-  ) %>%
+  x %>%
     as.integer() %>%
-    unique() %>%
+    new_seq(length_out = length_out) %>%
     as_hms()
 }

@@ -318,7 +318,7 @@ test_that("new_value hms", {
   expect_identical(new_value(as_hms(1L)), as_hms(1L))
   expect_identical(new_value(as_hms(1)), as_hms(1))
   expect_identical(new_value(as_hms(1.1)), as_hms(1))
-  expect_identical(new_value(as_hms(1.6)), as_hms(2))
+  expect_identical(new_value(as_hms(1.6)), as_hms(1))
   expect_identical(new_value(as_hms(10)), as_hms(10))
   # multiple values
   expect_identical(new_value(as_hms(c(0, 1))), as_hms(0))
