@@ -107,7 +107,7 @@ is 30 evenly space values across the range of the data.
 Missing values are always removed unless it's the only value
 or the object is zero length.
 The length of the sequence can be varied using the <code>length_out</code> argument
-which can even be 0.
+which gives the reference value when 1 and can even be 0.
 For integer objects the sequence is the unique integers.
 For character objects it's the actual values sorted by
 how common they are followed by their actual value.
@@ -159,13 +159,14 @@ For logical objects the longest possible sequence is <code>c(TRUE, FALSE)</code>
 <span class="r-in"><span><span class="fu">new_seq</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
 <span class="r-in"><span><span class="co"># the length of the sequence can be varied using the length_out argument</span></span></span>
-<span class="r-in"><span><span class="fu">new_seq</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>, length_out <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
-<span class="r-in"><span><span class="fu">new_seq</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>, length_out <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 4</span>
 <span class="r-in"><span><span class="fu">new_seq</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>, length_out <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.0 2.5 4.0</span>
-<span class="r-in"><span><span class="co"># which can even be 0</span></span></span>
+<span class="r-in"><span><span class="fu">new_seq</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>, length_out <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 4</span>
+<span class="r-in"><span><span class="co"># which gives the reference value when 1</span></span></span>
+<span class="r-in"><span><span class="fu">new_seq</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>, length_out <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.5</span>
+<span class="r-in"><span><span class="co"># and can even be 0</span></span></span>
 <span class="r-in"><span><span class="fu">new_seq</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>, length_out <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> numeric(0)</span>
 <span class="r-in"><span><span class="co"># for integer objects the sequence is the unique integers</span></span></span>
