@@ -137,11 +137,6 @@ new_seq.character <- function(x, length_out = Inf) {
   if (all(is.na(x)) || !length_out) {
     return(NA_character_)
   }
-  if (length_out == 1L) {
-    table <- table(x)
-    out <- table[table == max(table)]
-    return(min(names(out)))
-  }
   table <- x %>% table()
   table <- table * -1
   table <- table[order(table, names(table))]
