@@ -18,21 +18,33 @@ test_that("new_value default", {
 test_that("new_value logical", {
   # zero length
   expect_identical(new_value(logical()), FALSE)
+  expect_identical(new_value(logical(), obs_only = TRUE), NA)
   # missing value
   expect_identical(new_value(NA), FALSE)
+  expect_identical(new_value(NA, obs_only = TRUE), NA)
   # single value
   expect_identical(new_value(FALSE), FALSE)
   expect_identical(new_value(TRUE), FALSE)
+  expect_identical(new_value(FALSE, obs_only = TRUE), FALSE)
+  expect_identical(new_value(TRUE, obs_only = TRUE), TRUE)
   # multiple values
   expect_identical(new_value(c(TRUE, FALSE)), FALSE)
   expect_identical(new_value(c(FALSE, TRUE)), FALSE)
   expect_identical(new_value(c(TRUE, TRUE)), FALSE)
   expect_identical(new_value(c(TRUE, TRUE, FALSE)), FALSE)
+  expect_identical(new_value(c(TRUE, FALSE), obs_only = TRUE), FALSE)
+  expect_identical(new_value(c(FALSE, TRUE), obs_only = TRUE), FALSE)
+  expect_identical(new_value(c(TRUE, TRUE), obs_only = TRUE), TRUE)
+  expect_identical(new_value(c(TRUE, TRUE, FALSE), obs_only = TRUE), FALSE)
   # multiple values with missing
   expect_identical(new_value(c(TRUE, FALSE, NA)), FALSE)
   expect_identical(new_value(c(FALSE, TRUE, NA)), FALSE)
   expect_identical(new_value(c(TRUE, TRUE, NA)), FALSE)
   expect_identical(new_value(c(TRUE, TRUE, FALSE, NA)), FALSE)
+  expect_identical(new_value(c(TRUE, FALSE, NA), obs_only = TRUE), FALSE)
+  expect_identical(new_value(c(FALSE, TRUE, NA), obs_only = TRUE), FALSE)
+  expect_identical(new_value(c(TRUE, TRUE, NA), obs_only = TRUE), TRUE)
+  expect_identical(new_value(c(TRUE, TRUE, FALSE, NA), obs_only = TRUE), FALSE)
   # matrices and arrays
   expect_identical(new_value(matrix(TRUE)), FALSE)
   expect_identical(new_value(array(TRUE)), FALSE)
