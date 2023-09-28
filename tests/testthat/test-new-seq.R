@@ -317,6 +317,7 @@ test_that("new_seq factor", {
   expect_identical(new_seq(factor()), factor(NA))
   # missing value
   expect_identical(new_seq(factor(NA)), factor(NA))
+  expect_identical(new_seq(factor(NA, levels = "1")), factor("1", levels = "1"))
   # single value
   expect_identical(new_seq(factor("1")), factor("1"))
   expect_identical(new_seq(factor("0")), factor("0"))
@@ -520,6 +521,7 @@ test_that("new_seq ordered", {
   expect_identical(new_seq(ordered()), ordered(NA))
   # missing value
   expect_identical(new_seq(ordered(NA)), ordered(NA))
+  expect_identical(new_seq(ordered(NA, levels = "1")), ordered("1", levels = "1"))
   # single value
   expect_identical(new_seq(ordered("1")), ordered("1"))
   expect_identical(new_seq(ordered("0")), ordered("0"))
