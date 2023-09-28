@@ -156,16 +156,8 @@ new_seq.factor <- function(x, length_out = Inf) {
   if (!length(levels)) {
     return(factor(NA_character_, levels = levels))
   }
-  if (length_out == 1L) {
-    levels <- levels(x)
-    return(factor(levels[1], levels = levels))
-  }
   out <- factor(levels(x), levels = levels(x))
-  if (is.infinite(length_out)) {
-    return(out)
-  }
-  n <- length(out)
-  if (n > length_out) {
+  if (length(out) > length_out) {
     out <- out[1:length_out]
   }
   out
@@ -182,16 +174,9 @@ new_seq.ordered <- function(x, length_out = Inf) {
   if (!length(levels)) {
     return(ordered(NA_character_, levels = levels))
   }
-  if (length_out == 1L) {
-    levels <- levels(x)
-    return(ordered(levels[1], levels = levels))
-  }
   out <- ordered(levels(x), levels = levels(x))
-  if (is.infinite(length_out)) {
-    return(out)
-  }
   n <- length(out)
-  if (n > length_out) {
+  if (length(out) > length_out) {
     out <- out[seq(1, n, length.out = length_out)]
   }
   out
