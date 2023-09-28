@@ -118,6 +118,9 @@ new_seq.integer <- function(x, length_out = 30, obs_only = FALSE) {
   if (all(is.na(x))) {
     return(NA_integer_)
   }
+  if(obs_only) {
+    return(obs_only1(x, length_out))
+  }
   seq1(x, length_out, integer = TRUE)
 }
 

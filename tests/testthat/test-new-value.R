@@ -53,21 +53,33 @@ test_that("new_value logical", {
 test_that("new_value integer", {
   # zero length
   expect_identical(new_value(integer()), NA_integer_)
+  expect_identical(new_value(integer(), obs_only = TRUE), NA_integer_)
   # missing value
   expect_identical(new_value(NA_integer_), NA_integer_)
+  expect_identical(new_value(NA_integer_, obs_only = TRUE), NA_integer_)
   # single value
   expect_identical(new_value(1L), 1L)
   expect_identical(new_value(10L), 10L)
   expect_identical(new_value(-1L), -1L)
   expect_identical(new_value(0L), 0L)
+  expect_identical(new_value(1L, obs_only = TRUE), 1L)
+  expect_identical(new_value(10L, obs_only = TRUE), 10L)
+  expect_identical(new_value(-1L, obs_only = TRUE), -1L)
+  expect_identical(new_value(0L, obs_only = TRUE), 0L)
   # multiple values
   expect_identical(new_value(0:1), 0L)
-  expect_identical(new_value(1:2), 2L)
+  expect_identical(new_value(1:2), 1L)
   expect_identical(new_value(c(1L, 3L)), 2L)
+  expect_identical(new_value(0:1, obs_only = TRUE), 0L)
+  expect_identical(new_value(1:2, obs_only = TRUE), 1L)
+  expect_identical(new_value(c(1L, 3L), obs_only = TRUE), 1L)
   # multiple values with missing
   expect_identical(new_value(c(0:1, NA)), 0L)
-  expect_identical(new_value(c(1:2, NA)), 2L)
+  expect_identical(new_value(c(1:2, NA)), 1L)
   expect_identical(new_value(c(1L, 3L, NA)), 2L)
+  expect_identical(new_value(c(0:1, NA), obs_only = TRUE), 0L)
+  expect_identical(new_value(c(1:2, NA), obs_only = TRUE), 1L)
+  expect_identical(new_value(c(1L, 3L, NA), obs_only = TRUE), 1L)
   # matrices and arrays
   expect_identical(new_value(matrix(1L)), 1L)
   expect_identical(new_value(array(1L)), 1L)
@@ -283,11 +295,11 @@ test_that("new_value Date", {
   expect_identical(new_value(as.Date(10)), as.Date(10L))
   # multiple values
   expect_identical(new_value(as.Date(c(0, 1))), as.Date(0L))
-  expect_identical(new_value(as.Date(c(1, 2))), as.Date(2L))
+  expect_identical(new_value(as.Date(c(1, 2))), as.Date(1L))
   expect_identical(new_value(as.Date(c(1, 3))), as.Date(2L))
   # multiple values with missing
   expect_identical(new_value(as.Date(c(0, 1, NA))), as.Date(0L))
-  expect_identical(new_value(as.Date(c(1, 2, NA))), as.Date(2L))
+  expect_identical(new_value(as.Date(c(1, 2, NA))), as.Date(1L))
   expect_identical(new_value(as.Date(c(1, 3, NA))), as.Date(2L))
 })
 
@@ -310,13 +322,13 @@ test_that("new_value POSIXct", {
   expect_identical(new_value(as.POSIXct(10)), as.POSIXct(10L))
   # multiple values
   expect_identical(new_value(as.POSIXct(c(0, 1))), as.POSIXct(0L))
-  expect_identical(new_value(as.POSIXct(c(1, 2))), as.POSIXct(2L))
+  expect_identical(new_value(as.POSIXct(c(1, 2))), as.POSIXct(1L))
   expect_identical(new_value(as.POSIXct(c(1, 3))), as.POSIXct(2L))
   expect_identical(new_value(as.POSIXct(c(1, 4))), as.POSIXct(2L))
   expect_identical(new_value(as.POSIXct(c(1, 4), tz = "PST8PDT")), as.POSIXct(2L, tz = "PST8PDT"))
   # multiple values with missing
   expect_identical(new_value(as.POSIXct(c(0, 1, NA))), as.POSIXct(0L))
-  expect_identical(new_value(as.POSIXct(c(1, 2, NA))), as.POSIXct(2L))
+  expect_identical(new_value(as.POSIXct(c(1, 2, NA))), as.POSIXct(1L))
   expect_identical(new_value(as.POSIXct(c(1, 3, NA))), as.POSIXct(2L))
   expect_identical(new_value(as.POSIXct(c(1, 4, NA), tz = "PST8PDT")), as.POSIXct(2L, tz = "PST8PDT"))
 })
@@ -334,11 +346,11 @@ test_that("new_value hms", {
   expect_identical(new_value(as_hms(10)), as_hms(10))
   # multiple values
   expect_identical(new_value(as_hms(c(0, 1))), as_hms(0))
-  expect_identical(new_value(as_hms(c(1, 2))), as_hms(2))
+  expect_identical(new_value(as_hms(c(1, 2))), as_hms(1))
   expect_identical(new_value(as_hms(c(1, 3))), as_hms(2))
   expect_identical(new_value(as_hms(c("23:59:59", "00:00:02"))), as_hms("12:00:00"))
   # multiple values with missing
   expect_identical(new_value(as_hms(c(0, 1, NA))), as_hms(0))
-  expect_identical(new_value(as_hms(c(1, 2, NA))), as_hms(2))
+  expect_identical(new_value(as_hms(c(1, 2, NA))), as_hms(1))
   expect_identical(new_value(as_hms(c(1, 3, NA))), as_hms(2))
 })

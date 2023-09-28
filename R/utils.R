@@ -32,15 +32,10 @@ seq1 <- function(x, length_out, integer = FALSE) {
     if(integer) {
       length_out <- min(length_out, to - from + 1L)
     }
-    seq(
-      from = from,
-      to = to,
-      length.out = length_out
-    )
+    seq(from = from, to = to, length.out = length_out)
   }
   if(integer) {
     out <- out %>%
-      round() %>%
       as.integer()
     return(out)
   }
