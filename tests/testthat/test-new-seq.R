@@ -861,14 +861,23 @@ test_that("new_seq Date", {
   expect_identical(new_seq(as.Date(character(0))), as.Date(NA_integer_))
   expect_identical(new_seq(as.Date(integer(0))), as.Date(NA_integer_))
   expect_identical(new_seq(as.Date(double(0))), as.Date(NA_integer_))
+  expect_identical(new_seq(as.Date(character(0)), obs_only = TRUE), as.Date(NA_integer_))
+  expect_identical(new_seq(as.Date(integer(0)), obs_only = TRUE), as.Date(NA_integer_))
+  expect_identical(new_seq(as.Date(double(0)), obs_only = TRUE), as.Date(NA_integer_))
   # missing value
   expect_identical(new_seq(as.Date(NA_character_)), as.Date(NA_integer_))
   expect_identical(new_seq(as.Date(NA_integer_)), as.Date(NA_integer_))
   expect_identical(new_seq(as.Date(NA_real_)), as.Date(NA_integer_))
+  expect_identical(new_seq(as.Date(NA_character_), obs_only = TRUE), as.Date(NA_integer_))
+  expect_identical(new_seq(as.Date(NA_integer_), obs_only = TRUE), as.Date(NA_integer_))
+  expect_identical(new_seq(as.Date(NA_real_), obs_only = TRUE), as.Date(NA_integer_))
   # single value
   expect_identical(new_seq(as.Date(1L)), as.Date(1L))
   expect_identical(new_seq(as.Date(1)), as.Date(1L))
   expect_identical(new_seq(as.Date(0L)), as.Date(0L))
+  expect_identical(new_seq(as.Date(1L), obs_only = TRUE), as.Date(1L))
+  expect_identical(new_seq(as.Date(1), obs_only = TRUE), as.Date(1L))
+  expect_identical(new_seq(as.Date(0L), obs_only = TRUE), as.Date(0L))
   # multiple value
   expect_identical(new_seq(as.Date(c(0L, 1L))), as.Date(c(0L, 1L)))
   expect_identical(new_seq(as.Date(c(1L, 0L))), as.Date(c(0L, 1L)))
