@@ -743,11 +743,9 @@ test_that("new_seq Date", {
   expect_identical(new_seq(as.Date(c(10L, 1L))), as.Date(1:10))
   expect_identical(
     new_seq(as.Date(c(100L, 1L))),
-    as.Date(c(
-      1L, 4L, 7L, 11L, 14L, 18L, 21L, 24L, 28L, 31L, 35L, 38L, 41L,
-      45L, 48L, 52L, 55L, 59L, 62L, 65L, 69L, 72L, 76L, 79L, 82L, 86L,
-      89L, 93L, 96L, 100L
-    ))
+    as.Date(c(1L, 4L, 8L, 11L, 15L, 18L, 21L, 25L, 28L, 32L, 35L, 39L, 42L,
+              45L, 49L, 52L, 56L, 59L, 62L, 66L, 69L, 73L, 76L, 80L, 83L, 86L,
+              90L, 93L, 97L, 100L))
   )
   # multiple value with missing
   expect_identical(new_seq(as.Date(c(0L, 1L, NA))), as.Date(c(0L, 1L)))
@@ -759,11 +757,9 @@ test_that("new_seq Date", {
   expect_identical(new_seq(as.Date(c(10L, 1L, NA))), as.Date(1:10))
   expect_identical(
     new_seq(as.Date(c(100L, 1L, NA))),
-    as.Date(c(
-      1L, 4L, 7L, 11L, 14L, 18L, 21L, 24L, 28L, 31L, 35L, 38L, 41L,
-      45L, 48L, 52L, 55L, 59L, 62L, 65L, 69L, 72L, 76L, 79L, 82L, 86L,
-      89L, 93L, 96L, 100L
-    ))
+    as.Date(c(1L, 4L, 8L, 11L, 15L, 18L, 21L, 25L, 28L, 32L, 35L, 39L, 42L,
+              45L, 49L, 52L, 56L, 59L, 62L, 66L, 69L, 73L, 76L, 80L, 83L, 86L,
+              90L, 93L, 97L, 100L))
   )
   # length_out not count
   expect_error(new_seq(as.Date(1L), length_out = -1), "`length_out` must be a count")
@@ -806,7 +802,7 @@ test_that("new_seq Date", {
   expect_identical(new_seq(as.Date(c(0L, 0L)), length_out = 3), as.Date(0L))
   expect_identical(new_seq(as.Date(c(0L, 0L, 1L)), length_out = 3), as.Date(c(0L, 1L)))
   expect_identical(new_seq(as.Date(c(1L, 1L, 0L)), length_out = 3), as.Date(c(0L, 1L)))
-  expect_identical(new_seq(as.Date(c(10L, 1L)), length_out = 3), as.Date(c(1L, 5L, 10L)))
+  expect_identical(new_seq(as.Date(c(10L, 1L)), length_out = 3), as.Date(c(1L, 6L, 10L)))
   expect_identical(new_seq(as.Date(c(100L, 1L)), length_out = 3), as.Date(c(1L, 50L, 100L)))
   # length_out = Inf
   expect_identical(new_seq(as.Date(c(10L, 1L)), length_out = Inf), as.Date(1:10))

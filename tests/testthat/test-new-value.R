@@ -267,7 +267,7 @@ test_that("new_value Date", {
   expect_identical(new_value(as.Date(1L)), as.Date(1L))
   expect_identical(new_value(as.Date(1)), as.Date(1L))
   expect_identical(new_value(as.Date(1.1)), as.Date(1L))
-  expect_identical(new_value(as.Date(1.6)), as.Date(2L))
+  expect_identical(new_value(as.Date(1.6)), as.Date(1L))
   expect_identical(new_value(as.Date(10)), as.Date(10L))
   # multiple values
   expect_identical(new_value(as.Date(c(0, 1))), as.Date(0L))

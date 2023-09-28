@@ -192,25 +192,8 @@ new_seq.Date <- function(x, length_out = 30) {
   if (all(is.na(x))) {
     return(as.Date(NA_integer_))
   }
-  if (length_out == 1L) {
-    out <- x %>% mean(na.rm = TRUE) %>%
-      round() %>%
-      as.integer() %>%
-      as.Date()
-    return(out)
-  }
-  range <- range(x, na.rm = TRUE) %>%
-    as.integer()
-  from <- range[1]
-  to <- range[2]
-  length_out <- min(length_out, to - from + 1L)
-  seq(
-    from = from,
-    to = to,
-    length.out = length_out
-  ) %>%
-    as.integer() %>%
-    unique() %>%
+  x %>% as.integer() %>%
+    new_seq(length_out = length_out) %>%
     as.Date()
 }
 
