@@ -36,6 +36,11 @@ seq1 <- function(x, length_out, integer = FALSE) {
     from = from,
     to = to,
     length.out = length_out
-  ) %>%
-    unique()
+  )
+  if(!integer) {
+    return(unique(out))
+  }
+  out %>%
+    round() %>%
+    as.integer()
 }
