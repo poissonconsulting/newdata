@@ -25,8 +25,6 @@ expand2 <- function(.data, ..., .default = NULL, .order = FALSE) {
   out
 }
 
-xnew_data_env <- rlang::new_environment()
-
 semi_crossing <- function(..., .data = xnew_data_env$data) {
   if (is.null(.data)) {
     err("`semi_crossing()` can only be called from `xnew_data()`")

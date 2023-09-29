@@ -24,3 +24,6 @@ xnew_data <- function(.data, ...) {
 
   expand2(.data, ..., .default = new_value, .order = TRUE)
 }
+
+# Environment to store the .data argument
+xnew_data_env <- rlang::new_environment()
