@@ -23,57 +23,57 @@ preserved. The user can specify the length of each sequence, require
 that only observed values and combinations are used and add new
 variables.
 
+Consider the following observed data frame.
+
+``` r
+library(newdata)
+
+obs_data
+#> # A tibble: 3 × 9
+#>   lgl     int   dbl chr      fct     ord   dte        dtt                 hms   
+#>   <lgl> <int> <dbl> <chr>    <fct>   <ord> <date>     <dttm>              <time>
+#> 1 TRUE      1   1   most     most    most  1970-01-02 1969-12-31 16:00:01 00'01"
+#> 2 FALSE     4   4.5 most     most    most  1970-01-05 1969-12-31 16:00:04 00'04"
+#> 3 NA        6   8.2 a rarity a rari… a ra… 1970-01-07 1969-12-31 16:00:06 00'06"
+```
+
 ### Length of Sequences
 
 By default all variables are held constant (length of 1).
 
 ``` r
-library(newdata)
-
-data <- tibble::tibble(
-  lgl = c(TRUE, FALSE, NA),
-  int = c(1L, 4L, 6L),
-  dbl = c(1, 4.5, 8.2),
-  chr = c("most", "most", "a rarity"),
-  fct = factor(chr, levels = c("bonus", "a rarity", "most")),
-  ord = ordered(chr, levels = c("a rarity", "most")),
-  dte = as.Date(int),
-  dtt = as.POSIXct(int, tz = "PST8PDT"),
-  hms = hms::as_hms(int)
-)
-
-xnew_data(data)
+xnew_data(obs_data)
 #> # A tibble: 1 × 9
-#>   lgl     int   dbl chr   fct   ord      dte        dtt                 hms   
-#>   <lgl> <int> <dbl> <chr> <fct> <ord>    <date>     <dttm>              <time>
-#> 1 FALSE     3  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
+#>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
+#> 1 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
 
 Specifying a variable causes it to vary sequentially across its range.
 
 ``` r
-xnew_data(data, int)
+xnew_data(obs_data, int)
 #> # A tibble: 6 × 9
-#>   lgl     int   dbl chr   fct   ord      dte        dtt                 hms   
-#>   <lgl> <int> <dbl> <chr> <fct> <ord>    <date>     <dttm>              <time>
-#> 1 FALSE     1  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
-#> 2 FALSE     2  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
-#> 3 FALSE     3  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
-#> 4 FALSE     4  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
-#> 5 FALSE     5  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
-#> 6 FALSE     6  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
+#>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
+#> 1 FALSE     1  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 2 FALSE     2  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 3 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 4 FALSE     4  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 5 FALSE     5  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 6 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
 
 The user can specify the length of each sequence.
 
 ``` r
-xnew_data(data, xnew_seq(int, length_out = 3))
+xnew_data(obs_data, xnew_seq(int, length_out = 3))
 #> # A tibble: 3 × 9
-#>   lgl     int   dbl chr   fct   ord      dte        dtt                 hms   
-#>   <lgl> <int> <dbl> <chr> <fct> <ord>    <date>     <dttm>              <time>
-#> 1 FALSE     1  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
-#> 2 FALSE     3  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
-#> 3 FALSE     6  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
+#>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
+#> 1 FALSE     1  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 2 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 3 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
 
 ### Observed Values and Combinations
@@ -81,38 +81,38 @@ xnew_data(data, xnew_seq(int, length_out = 3))
 The user can also indicate whether only observed values should be used.
 
 ``` r
-xnew_data(data, xnew_seq(int, length_out = 3, obs_only = TRUE))
+xnew_data(obs_data, xnew_seq(int, length_out = 3, obs_only = TRUE))
 #> # A tibble: 3 × 9
-#>   lgl     int   dbl chr   fct   ord      dte        dtt                 hms   
-#>   <lgl> <int> <dbl> <chr> <fct> <ord>    <date>     <dttm>              <time>
-#> 1 FALSE     1  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
-#> 2 FALSE     4  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
-#> 3 FALSE     6  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
+#>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
+#> 1 FALSE     1  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 2 FALSE     4  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 3 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
 
 With two or more variables all combinations are used.
 
 ``` r
-xnew_data(data, int, fct)
+xnew_data(obs_data, int, fct)
 #> # A tibble: 18 × 9
 #>    lgl     int   dbl chr   fct      ord    dte        dtt                 hms   
 #>    <lgl> <int> <dbl> <chr> <fct>    <ord>  <date>     <dttm>              <time>
-#>  1 FALSE     1  4.57 most  bonus    a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+#>  1 FALSE     1  4.57 most  not obs  a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
 #>  2 FALSE     1  4.57 most  a rarity a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
 #>  3 FALSE     1  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
-#>  4 FALSE     2  4.57 most  bonus    a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+#>  4 FALSE     2  4.57 most  not obs  a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
 #>  5 FALSE     2  4.57 most  a rarity a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
 #>  6 FALSE     2  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
-#>  7 FALSE     3  4.57 most  bonus    a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+#>  7 FALSE     3  4.57 most  not obs  a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
 #>  8 FALSE     3  4.57 most  a rarity a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
 #>  9 FALSE     3  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
-#> 10 FALSE     4  4.57 most  bonus    a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 10 FALSE     4  4.57 most  not obs  a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
 #> 11 FALSE     4  4.57 most  a rarity a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
 #> 12 FALSE     4  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
-#> 13 FALSE     5  4.57 most  bonus    a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 13 FALSE     5  4.57 most  not obs  a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
 #> 14 FALSE     5  4.57 most  a rarity a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
 #> 15 FALSE     5  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
-#> 16 FALSE     6  4.57 most  bonus    a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 16 FALSE     6  4.57 most  not obs  a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
 #> 17 FALSE     6  4.57 most  a rarity a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
 #> 18 FALSE     6  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
@@ -120,7 +120,7 @@ xnew_data(data, int, fct)
 To only get observed combinations use `xobs_only()`
 
 ``` r
-xnew_data(data, xobs_only(int, fct))
+xnew_data(obs_data, xobs_only(int, fct))
 #> # A tibble: 3 × 9
 #>   lgl     int   dbl chr   fct      ord     dte        dtt                 hms   
 #>   <lgl> <int> <dbl> <chr> <fct>    <ord>   <date>     <dttm>              <time>
@@ -134,12 +134,12 @@ xnew_data(data, xobs_only(int, fct))
 Adding a new variable is simple.
 
 ``` r
-xnew_data(data, new = c(TRUE, FALSE))
+xnew_data(obs_data, new = c(TRUE, FALSE))
 #> # A tibble: 2 × 10
-#>   lgl     int   dbl chr   fct   ord      dte        dtt                 hms   
-#>   <lgl> <int> <dbl> <chr> <fct> <ord>    <date>     <dttm>              <time>
-#> 1 FALSE     3  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
-#> 2 FALSE     3  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
+#>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
+#> 1 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 2 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 #> # ℹ 1 more variable: new <lgl>
 ```
 
