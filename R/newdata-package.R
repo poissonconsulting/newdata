@@ -25,6 +25,5 @@
 #' @importFrom rlang quo_get_expr
 #' @importFrom rlang quo_is_null
 #' @importFrom tibble %>% as_tibble
-#' @importFrom utils data
 ## usethis namespace: end
 NULL

@@ -27,8 +27,7 @@ Imports:
     lifecycle,
     rlang,
     tibble,
-    tidyr,
-    utils
+    tidyr
 Suggests:
     covr,
     datasets,
