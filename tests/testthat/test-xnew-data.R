@@ -1,5 +1,4 @@
 test_that("simple dataset", {
-
   data <- tibble::tibble(
     a = 1:5 + 0.5,
     b = 3:7,

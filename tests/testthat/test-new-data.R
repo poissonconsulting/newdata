@@ -4,28 +4,13 @@ test_that("newdata", {
   feed <- sort(unique(chickwts$feed))
   weight <- chickwts$weight
 
-  expect_equal(
-    new_data(chickwts),
-    tibble::tibble(weight = mean(chickwts$weight), feed = feed[1])
-  )
-
-  expect_equal(
-    new_data(datasets::chickwts, "feed"),
-    tibble::tibble(weight = mean(weight), feed = feed)
-  )
-
-  expect_equal(
-    new_data(datasets::chickwts, "weight"),
-    tibble::tibble(
-      weight = seq(min(weight), max(weight), length.out = 30),
-      feed = feed[1]
-    )
-  )
-
-  expect_equal(
-    nrow(new_data(datasets::chickwts, c("weight", "feed"))),
-    30 * nlevels(feed)
-  )
+  testthat::expect_snapshot({
+    chickwts
+    new_data(chickwts)
+    new_data(datasets::chickwts, "feed")
+    new_data(datasets::chickwts, "weight")
+    new_data(datasets::chickwts, c("weight", "feed"))
+  })
 })
 
 test_that("new_data generates data frame with correct number of rows", {
@@ -140,7 +125,7 @@ test_that("new_data ref works", {
 
   new_data <- new_data(ToothGrowth, ref = list(supp = factor("TP")))
   expect_identical(new_data(ToothGrowth,
-    ref = list(supp = factor("TP"))
+                            ref = list(supp = factor("TP"))
   )$supp, factor("TP"))
   expect_identical(
     new_data(ToothGrowth, ref = list(supp = "TP"))$supp,

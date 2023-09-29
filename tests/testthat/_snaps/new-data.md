@@ -1,0 +1,131 @@
+# newdata
+
+    Code
+      chickwts
+    Output
+         weight      feed
+      1     179 horsebean
+      2     160 horsebean
+      3     136 horsebean
+      4     227 horsebean
+      5     217 horsebean
+      6     168 horsebean
+      7     108 horsebean
+      8     124 horsebean
+      9     143 horsebean
+      10    140 horsebean
+      11    309   linseed
+      12    229   linseed
+      13    181   linseed
+      14    141   linseed
+      15    260   linseed
+      16    203   linseed
+      17    148   linseed
+      18    169   linseed
+      19    213   linseed
+      20    257   linseed
+      21    244   linseed
+      22    271   linseed
+      23    243   soybean
+      24    230   soybean
+      25    248   soybean
+      26    327   soybean
+      27    329   soybean
+      28    250   soybean
+      29    193   soybean
+      30    271   soybean
+      31    316   soybean
+      32    267   soybean
+      33    199   soybean
+      34    171   soybean
+      35    158   soybean
+      36    248   soybean
+      37    423 sunflower
+      38    340 sunflower
+      39    392 sunflower
+      40    339 sunflower
+      41    341 sunflower
+      42    226 sunflower
+      43    320 sunflower
+      44    295 sunflower
+      45    334 sunflower
+      46    322 sunflower
+      47    297 sunflower
+      48    318 sunflower
+      49    325  meatmeal
+      50    257  meatmeal
+      51    303  meatmeal
+      52    315  meatmeal
+      53    380  meatmeal
+      54    153  meatmeal
+      55    263  meatmeal
+      56    242  meatmeal
+      57    206  meatmeal
+      58    344  meatmeal
+      59    258  meatmeal
+      60    368    casein
+      61    390    casein
+      62    379    casein
+      63    260    casein
+      64    404    casein
+      65    318    casein
+      66    352    casein
+      67    359    casein
+      68    216    casein
+      69    222    casein
+      70    283    casein
+      71    332    casein
+    Code
+      new_data(chickwts)
+    Output
+      # A tibble: 1 x 2
+        weight feed  
+         <dbl> <fct> 
+      1   261. casein
+    Code
+      new_data(datasets::chickwts, "feed")
+    Output
+      # A tibble: 6 x 2
+        weight feed     
+         <dbl> <fct>    
+      1   261. casein   
+      2   261. horsebean
+      3   261. linseed  
+      4   261. meatmeal 
+      5   261. soybean  
+      6   261. sunflower
+    Code
+      new_data(datasets::chickwts, "weight")
+    Output
+      # A tibble: 30 x 2
+         weight feed  
+          <dbl> <fct> 
+       1   108  casein
+       2   119. casein
+       3   130. casein
+       4   141. casein
+       5   151. casein
+       6   162. casein
+       7   173. casein
+       8   184. casein
+       9   195. casein
+      10   206. casein
+      # i 20 more rows
+    Code
+      new_data(datasets::chickwts, c("weight", "feed"))
+    Output
+      # A tibble: 180 x 2
+         weight feed  
+          <dbl> <fct> 
+       1   108  casein
+       2   119. casein
+       3   130. casein
+       4   141. casein
+       5   151. casein
+       6   162. casein
+       7   173. casein
+       8   184. casein
+       9   195. casein
+      10   206. casein
+      # i 170 more rows
+
