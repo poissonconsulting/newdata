@@ -14,9 +14,10 @@ Authors@R: c(
   )
 Description: Generates new data frames for predictive purposes. 
     By default, all specified variables vary across their range 
-    while all other variables are held constant.
+    while all other variables are held constant at the default reference value.
+    Types, classes, factor levels and time zones are always preserved.
     The user can specify the length of each sequence, require that only
-    observed values are used and add new variables.
+    observed values and combinations are used and add new variables.
 License: MIT + file LICENSE
 URL: https://poissonconsulting.github.io/newdata, https://github.com/poissonconsulting/newdata
 BugReports: https://github.com/poissonconsulting/newdata/issues

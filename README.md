@@ -17,13 +17,15 @@ status](https://www.r-pkg.org/badges/version/newdata)](https://CRAN.R-project.or
 
 `newdata` is an R package to generate new data frames for predictive
 purposes. By default, all specified variables vary across their range
-while all other variables are held constant. The user can specify the
-length of each sequence, require that only observed values are used and
-add new variables.
-
-By default all variables are held constant at the default reference
+while all other variables are held constant at the default reference
 value. Types, classes, factor levels and time zones are always
-preserved.
+preserved. The user can specify the length of each sequence, require
+that only observed values and combinations are used and add new
+variables.
+
+### Length of Sequences
+
+By default all variables are held constant (length of 1).
 
 ``` r
 library(newdata)
@@ -47,7 +49,7 @@ xnew_data(data)
 #> 1 FALSE     3  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
 
-Specifying a variable causes it to vary across its range.
+Specifying a variable causes it to vary sequentially across its range.
 
 ``` r
 xnew_data(data, int)
@@ -74,7 +76,9 @@ xnew_data(data, xnew_seq(int, length_out = 3))
 #> 3 FALSE     6  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
 
-and indicate whether only observed values should be used.
+### Observed Values and Combinations
+
+The user can also indicate whether only observed values should be used.
 
 ``` r
 xnew_data(data, xnew_seq(int, length_out = 3, obs_only = TRUE))
@@ -124,6 +128,8 @@ xnew_data(data, xobs_only(int, fct))
 #> 2 FALSE     4  4.57 most  most     a rari… 1970-01-04 1969-12-31 16:00:03 00'03"
 #> 3 FALSE     6  4.57 most  a rarity a rari… 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
+
+### Add New Variables
 
 Adding a new variable is simple.
 
