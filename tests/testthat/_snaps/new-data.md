@@ -223,3 +223,28 @@
       4 FALSE           5      5.6 1       2000-01-06 10:00:07
       5 FALSE           5      5.6 1       2000-01-06 10:00:10
 
+# new_data ref works
+
+    Code
+      new_data(Orange)
+    Output
+      # A tibble: 1 x 3
+        Tree    age circumference
+        <ord> <dbl>         <dbl>
+      1 5      922.          116.
+    Code
+      new_data(Orange, ref = list(age = 1))
+    Output
+      # A tibble: 1 x 3
+        Tree    age circumference
+        <ord> <dbl>         <dbl>
+      1 5         1          116.
+    Code
+      new_data(Orange, ref = list(age = c(1, 2)))
+    Output
+      # A tibble: 2 x 3
+        Tree    age circumference
+        <ord> <dbl>         <dbl>
+      1 5         1          116.
+      2 5         2          116.
+

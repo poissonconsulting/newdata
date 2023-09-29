@@ -34,32 +34,11 @@ test_that("new_data generates data frame with correct number of rows", {
 })
 
 test_that("new_data ref works", {
-  expect_identical(
-    new_data(Orange),
-    tibble::tibble(
-      Tree = ordered(levels(Orange$Tree)[3], levels(Orange$Tree)),
-      age = mean(Orange$age),
-      circumference = mean(Orange$circumference)
-    )
-  )
-
-  expect_identical(
-    new_data(Orange, ref = list(age = 1)),
-    tibble::tibble(
-      Tree = ordered(levels(Orange$Tree)[3], levels(Orange$Tree)),
-      age = 1,
-      circumference = mean(Orange$circumference)
-    )
-  )
-
-  expect_identical(
-    new_data(Orange, ref = list(age = c(1, 2))),
-    tibble::tibble(
-      Tree = ordered(levels(Orange$Tree)[3], levels(Orange$Tree)),
-      age = c(1, 2),
-      circumference = mean(Orange$circumference)
-    )
-  )
+  testthat::expect_snapshot({
+    new_data(Orange)
+    new_data(Orange, ref = list(age = 1))
+    new_data(Orange, ref = list(age = c(1, 2)))
+  })
 })
 
 test_that("new_data ref errors", {
