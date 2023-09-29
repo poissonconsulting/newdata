@@ -22,44 +22,15 @@ test_that("new_data generates data frame with correct number of rows", {
     ddate = as.Date("2000-01-01") + 1:10,
     dhms = as_hms(as_hms("10:00:00") + 1:10)
   )
-  expect_s3_class(new_data(data), "data.frame")
-  expect_equal(nrow(new_data(data)), 1L)
-  expect_equal(nrow(new_data(data, "dlogical")), 2L)
-  expect_equal(nrow(new_data(data, "dnumeric")), 30L)
-  expect_equal(nrow(new_data(data, c("dnumeric", "dinteger"))), 300L)
-  expect_equal(
-    nrow(new_data(data, c("dfactor", "dinteger"), length_out = 5)),
-    25
-  )
-  expect_equal(nrow(new_data(data, c("dhms"), length_out = 5)), 5L)
-})
-
-test_that("new_data generates data frame with correct number of rows", {
-  data <- data.frame(
-    dlogical = as.logical(0:9),
-    dinteger = 1:10,
-    dnumeric = 1:10 + 0.1,
-    dfactor = factor(1:10),
-    ddate = as.Date("2000-01-01") + 1:10,
-    dhms = as_hms(as_hms("10:00:00") + 1:10)
-  )
-  new_data <- new_data(data, "dnumeric")
-
-  expect_identical(
-    map_chr(data, function(x) class(x)[[1]]),
-    map_chr(new_data, function(x) class(x)[[1]])
-  )
-
-  expect_s3_class(new_data(data), "data.frame")
-  expect_equal(nrow(new_data(data)), 1L)
-  expect_equal(nrow(new_data(data, "dlogical")), 2)
-  expect_equal(nrow(new_data(data, "dnumeric")), 30)
-  expect_equal(nrow(new_data(data, c("dnumeric", "dinteger"))), 300)
-  expect_equal(
-    nrow(new_data(data, c("dfactor", "dinteger"), length_out = 5)),
-    25
-  )
-  expect_equal(nrow(new_data(data, c("dhms"), length_out = 5)), 5)
+  testthat::expect_snapshot({
+    data
+    new_data(data)
+    new_data(data, "dlogical")
+    new_data(data, "dnumeric")
+    new_data(data, c("dnumeric", "dinteger"))
+    new_data(data, c("dfactor", "dinteger"), length_out = 5)
+    new_data(data, c("dhms"), length_out = 5)
+  })
 })
 
 test_that("new_data ref works", {
