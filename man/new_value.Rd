@@ -4,7 +4,7 @@
 \alias{new_value}
 \title{Generate New Reference Value}
 \usage{
-new_value(x, obs_only = FALSE)
+new_value(x, obs_only = getOption("new_data.obs_only", FALSE))
 }
 \arguments{
 \item{x}{The object to generate the reference value from.}

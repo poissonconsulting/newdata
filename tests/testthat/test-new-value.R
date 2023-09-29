@@ -85,6 +85,54 @@ test_that("new_value integer", {
   expect_identical(new_value(array(1L)), 1L)
 })
 
+
+test_that("new_value logical", {
+  # zero length
+  expect_identical(new_value(logical()), FALSE)
+  # missing value
+  expect_identical(new_value(NA), FALSE)
+  # single value
+  expect_identical(new_value(FALSE), FALSE)
+  expect_identical(new_value(TRUE), FALSE)
+  # multiple values
+  expect_identical(new_value(c(TRUE, FALSE)), FALSE)
+  expect_identical(new_value(c(FALSE, TRUE)), FALSE)
+  expect_identical(new_value(c(TRUE, TRUE)), FALSE)
+  expect_identical(new_value(c(TRUE, TRUE, FALSE)), FALSE)
+  # multiple values with missing
+  expect_identical(new_value(c(TRUE, FALSE, NA)), FALSE)
+  expect_identical(new_value(c(FALSE, TRUE, NA)), FALSE)
+  expect_identical(new_value(c(TRUE, TRUE, NA)), FALSE)
+  expect_identical(new_value(c(TRUE, TRUE, FALSE, NA)), FALSE)
+  # matrices and arrays
+  expect_identical(new_value(matrix(TRUE)), FALSE)
+  expect_identical(new_value(array(TRUE)), FALSE)
+})
+
+test_that("new_value integer obs_only", {
+  withr::local_options(list(new_data.obs_only = TRUE))
+  # zero length
+  expect_identical(new_value(integer()), NA_integer_)
+  # missing value
+  expect_identical(new_value(NA_integer_), NA_integer_)
+  # single value
+  expect_identical(new_value(1L), 1L)
+  expect_identical(new_value(10L), 10L)
+  expect_identical(new_value(-1L), -1L)
+  expect_identical(new_value(0L), 0L)
+  # multiple values
+  expect_identical(new_value(0:1), 0L)
+  expect_identical(new_value(1:2), 1L)
+  expect_identical(new_value(c(1L, 3L)), 1L)
+  # multiple values with missing
+  expect_identical(new_value(c(0:1, NA)), 0L)
+  expect_identical(new_value(c(1:2, NA)), 1L)
+  expect_identical(new_value(c(1L, 3L, NA)), 1L)
+  # matrices and arrays
+  expect_identical(new_value(matrix(1L)), 1L)
+  expect_identical(new_value(array(1L)), 1L)
+})
+
 test_that("new_value real", {
   # zero length
   expect_identical(new_value(double()), NA_real_)
