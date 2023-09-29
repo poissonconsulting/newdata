@@ -17,7 +17,7 @@ expand_defaults <- function(data, quos, default) {
   default_names <- setdiff(names(data), names(ptype))
   default_values <- map(data[default_names], default)
 
-  quo(tidyr::nesting(tibble::tibble_row(!!!default_values)))
+  quo(tibble::tibble_row(!!!default_values))
 }
 
 expand2 <- function(.data, ..., .default = NULL, .order = FALSE) {
