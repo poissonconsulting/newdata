@@ -12,6 +12,9 @@ test_that("simple dataset", {
     data
     auto_expand(data)
     auto_expand(data, a)
+    auto_expand(data, new_valuex(a))
+    auto_expand(data, a = new_value(a))
+    auto_expand(data, a = dplyr::last(a))
     auto_expand(data, b)
     auto_expand(data, c)
     auto_expand(data, new_seqx(c))
@@ -30,4 +33,9 @@ test_that("simple dataset", {
       .filter = c %in% c("a", "b", "c")
     )
   })
+  expect_error(auto_expand(
+    data,
+    b = 8:10,
+    tidyr::nesting(b, d),
+  ))
 })
