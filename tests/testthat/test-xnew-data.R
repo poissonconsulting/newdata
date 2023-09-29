@@ -31,11 +31,15 @@ test_that("simple dataset", {
       tidyr::nesting(c, d)
     )
   })
+  # FIXME: this should error out like the following code
+  xnew_data(data, b, b)
+  expect_error(xnew_data(data, b, xnew_seq(b)), "Names must be unique.")
   expect_error(xnew_data(
     data,
     b = 8:10,
     tidyr::nesting(b, d),
   ))
+
 })
 
 test_that("factors", {
