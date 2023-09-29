@@ -76,20 +76,6 @@ new_seq <- function(x, length_out = 30, obs_only = getOption("new_data.obs_only"
 
 #' @describeIn new_seq Generate new sequence of values for logical objects
 #' @export
-new_seq.default <- function(x, length_out = 30, obs_only = getOption("new_data.obs_only", FALSE)) {
-  chk_count(length_out)
-  if (length_out == 1L) {
-    out <- x %>% mean(na.rm = TRUE)
-    if (is.nan(out)) {
-      is.na(out) <- TRUE
-    }
-    return(out)
-  }
-  err("not yet implemented")
-}
-
-#' @describeIn new_seq Generate new sequence of values for logical objects
-#' @export
 new_seq.logical <- function(x, length_out = 2, obs_only = getOption("new_data.obs_only", FALSE)) {
   chk_count(length_out)
   chk_flag(obs_only)

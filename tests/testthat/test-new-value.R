@@ -1,20 +1,3 @@
-test_that("new_value default", {
-  # zero length
-  expect_identical(new_value(complex()), NA_complex_)
-  # missing value
-  expect_identical(new_value(NA_complex_), NA_complex_)
-  # single value
-  expect_identical(new_value(complex(real = 1)), complex(real = 1))
-  expect_identical(new_value(complex(real = 1.1)), complex(real = 1.1))
-  # multiple values
-  expect_identical(new_value(complex(real = c(1, 2))), complex(real = 1.5))
-  # multiple values with missing
-  expect_identical(new_value(complex(real = c(1, 2, NA))), complex(real = 1.5))
-  # matrices and arrays
-  expect_identical(new_value(matrix(complex(real = 1))), complex(real = 1))
-  expect_identical(new_value(array(complex(real = 1))), complex(real = 1))
-})
-
 test_that("new_value logical", {
   # zero length
   expect_identical(new_value(logical()), FALSE)
