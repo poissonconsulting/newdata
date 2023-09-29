@@ -37,6 +37,6 @@ expand2 <- function(.data, ..., .default = NULL, .order = FALSE) {
   out
 }
 
-auto_expand <- function(.data, ...) {
+xnew_data <- function(.data, ...) {
   expand2(.data, ..., .default = new_value, .order = TRUE)
 }
