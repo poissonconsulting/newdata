@@ -1,10 +1,10 @@
-new_valuex <- function(x, ...) {
+xnew_value <- function(x, ...) {
   expr <- ensym(x)
   out <- new_value(x, ...)
   tibble::tibble(!!expr := out)
 }
 
-new_seqx <- function(x, ...) {
+xnew_seq <- function(x, ...) {
   expr <- ensym(x)
   out <- new_seq(x, ...)
   tibble::tibble(!!expr := out)

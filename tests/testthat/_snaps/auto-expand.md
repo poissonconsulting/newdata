@@ -37,7 +37,7 @@
         <dbl> <int> <fct> <lgl> <date>    
       1   3.5     5 a     FALSE 2023-09-29
     Code
-      auto_expand(data, new_valuex(a))
+      auto_expand(data, xnew_value(a))
     Output
       # A tibble: 1 x 5
             a     b c     d     e         
@@ -73,7 +73,7 @@
       4   3.5     5 d     FALSE 2023-09-29
       5   3.5     5 e     FALSE 2023-09-29
     Code
-      auto_expand(data, new_seqx(c))
+      auto_expand(data, xnew_seq(c))
     Output
       # A tibble: 5 x 5
             a     b c     d     e         
@@ -84,7 +84,7 @@
       4   3.5     5 d     FALSE 2023-09-29
       5   3.5     5 e     FALSE 2023-09-29
     Code
-      auto_expand(data, new_seqx(a))
+      auto_expand(data, xnew_seq(a))
     Output
       # A tibble: 30 x 5
              a     b c     d     e         
@@ -101,7 +101,7 @@
       10  2.74     5 a     FALSE 2023-09-29
       # i 20 more rows
     Code
-      auto_expand(data, new_seqx(a, length_out = 12))
+      auto_expand(data, xnew_seq(a, length_out = 12))
     Output
       # A tibble: 12 x 5
              a     b c     d     e         
@@ -119,7 +119,7 @@
       11  5.14     5 a     FALSE 2023-09-29
       12  5.5      5 a     FALSE 2023-09-29
     Code
-      auto_expand(data, new_seqx(a, length_out = 12, obs_only = TRUE))
+      auto_expand(data, xnew_seq(a, length_out = 12, obs_only = TRUE))
     Output
       # A tibble: 5 x 5
             a     b c     d     e         
@@ -130,7 +130,7 @@
       4   4.5     5 a     FALSE 2023-09-29
       5   5.5     5 a     FALSE 2023-09-29
     Code
-      auto_expand(data, new_seqx(a, length_out = 12), b)
+      auto_expand(data, xnew_seq(a, length_out = 12), b)
     Output
       # A tibble: 60 x 5
              a     b c     d     e         
@@ -147,7 +147,7 @@
       10  1.86     7 a     FALSE 2023-09-29
       # i 50 more rows
     Code
-      auto_expand(data, b, new_seqx(a, length_out = 12))
+      auto_expand(data, b, xnew_seq(a, length_out = 12))
     Output
       # A tibble: 60 x 5
              a     b c     d     e         
@@ -222,14 +222,14 @@
         <fct>  <int> <fct>  <ord>  
       1 before  2005 2000   2005   
     Code
-      auto_expand(data, new_valuex(annual))
+      auto_expand(data, xnew_value(annual))
     Output
       # A tibble: 1 x 4
         period  year annual ordered
         <fct>  <int> <fct>  <ord>  
       1 before  2005 2000   2005   
     Code
-      auto_expand(data, new_valuex(annual, obs_only = TRUE))
+      auto_expand(data, xnew_value(annual, obs_only = TRUE))
     Output
       # A tibble: 1 x 4
         period  year annual ordered
@@ -268,7 +268,7 @@
        9 after   2009 2009   2005   
       10 after   2010 2010   2005   
     Code
-      auto_expand(data, tidyr::nesting(period, year, new_valuex(annual)))
+      auto_expand(data, tidyr::nesting(period, year, xnew_value(annual)))
     Output
       # A tibble: 10 x 4
          period  year annual ordered
@@ -284,7 +284,7 @@
        9 after   2009 2000   2005   
       10 after   2010 2000   2005   
     Code
-      auto_expand(data, tidyr::nesting(period, year), new_valuex(annual))
+      auto_expand(data, tidyr::nesting(period, year), xnew_value(annual))
     Output
       # A tibble: 10 x 4
          period  year annual ordered
