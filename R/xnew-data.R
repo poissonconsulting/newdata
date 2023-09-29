@@ -1,81 +1,26 @@
-xnew_value <- function(x, ...) {
-  expr <- ensym(x)
-  out <- new_value(x, ...)
-  tibble::tibble(!!expr := out)
-}
-
-xnew_seq <- function(x, ...) {
-  expr <- ensym(x)
-  out <- new_seq(x, ...)
-  tibble::tibble(!!expr := out)
-}
-
-expand_defaults <- function(data, quos, default) {
-  default <- as_function(default)
-  ptype <- tidyr::expand(data[0, ], !!!quos)
-
-  default_names <- setdiff(names(data), names(ptype))
-  default_values <- map(data[default_names], default)
-
-  quo(tibble::tibble_row(!!!default_values))
-}
-
-expand2 <- function(.data, ..., .default = NULL, .order = FALSE) {
-  quos <- enquos(...)
-  stopifnot(rlang::is_bool(.order))
-
-  if (!is.null(.default)) {
-    quos <- c(quos, expand_defaults(.data, quos, .default))
-  }
-
-  out <- tidyr::expand(.data, !!!quos)
-
-  if (.order) {
-    out <- dplyr::select(out, !!!names(.data), !!!setdiff(names(out), names(.data)))
-  }
-
-  out
-}
-
-xnew_data_env <- new_environment()
-
+#' Generate New Data by Expansion
+#'
+#' Generates a new data frame (in the form of a tibble) with each variable
+#' held constant or varying as a unique ordered sequence.
+#'
+#' @param .data The data frame to generate the new data from.
+#' @param ... A list of variables to generate sequences for.
+#' @seealso [xnew_value()], [xnew_seq()], [xobs_only()] and [new_data()]
+#' @export
+#' @examples
+#' data <- tibble::tibble(
+#'   period = factor(c("before", "before", "after", "after"),
+#'     levels = c("before", "after")),
+#'   count = c(0L, 1L, 5L, 4L),
+#'   annual = factor(c(1, 3, 5, 8), levels = c(1, 3, 5, 8)))
+#' xnew_data(data, xobs_only(period, xnew_seq(annual, length_out = 3)))
+#' xnew_data(data, xnew_seq(count, length_out = 3),
+#'   xobs_only(period, xnew_seq(annual, length_out = 3)))
+#' xnew_data(data, xnew_seq(count, length_out = 3, obs_only = TRUE),
+#'   xobs_only(period, xnew_seq(annual, length_out = 3)))
 xnew_data <- function(.data, ...) {
   stopifnot(is.null(xnew_data_env$data))
   local_bindings(data = .data, .env = xnew_data_env)
 
   expand2(.data, ..., .default = new_value, .order = TRUE)
-}
-
-#' @export
-xobs_only <- function(..., .length_out = NULL) {
-  quos <- enquos(...)
-
-  translated <- map(quos, quo_translate_xobs_only, .length_out)
-
-  semi_crossing(!!!translated)
-}
-
-# @export, maybe?
-semi_crossing <- function(..., .data = xnew_data_env$data) {
-  if (is.null(.data)) {
-    err("`semi_crossing()` can only be called from `xnew_data()`")
-  }
-
-  out <- tidyr::crossing(...)
-  dplyr::semi_join(out, .data, by = intersect(names(out), names(.data)))
-}
-
-quo_translate_xobs_only <- function(quo, length_out) {
-  new_quosure(
-    expr_translate_xobs_only(quo_get_expr(quo), length_out),
-    quo_get_env(quo)
-  )
-}
-
-expr_translate_xobs_only <- function(expr, length_out) {
-  if (is_symbol(expr)) {
-    expr(xnew_seq(!!expr, length_out = !!length_out, obs_only = TRUE))
-  } else {
-    expr
-  }
 }

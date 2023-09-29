@@ -56,6 +56,7 @@ test_that("new_data ref errors", {
   )
 })
 
+# FIXME: use one snapshot
 test_that("new_data ref works", {
   testthat::expect_snapshot(new_data(ToothGrowth, ref = list(dose = 4)))
   testthat::expect_snapshot(new_data(ToothGrowth, ref = list(dose = c(3, 4))))
