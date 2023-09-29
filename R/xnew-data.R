@@ -18,11 +18,30 @@
 #'   xobs_only(period, xnew_seq(annual, length_out = 3)))
 #' xnew_data(data, xnew_seq(count, length_out = 3, obs_only = TRUE),
 #'   xobs_only(period, xnew_seq(annual, length_out = 3)))
-xnew_data <- function(.data, ...) {
+xnew_data <- function(.data, ..., .length_out = NULL) {
   stopifnot(is.null(xnew_data_env$data))
   local_bindings(data = .data, .env = xnew_data_env)
 
-  expand2(.data, ..., .default = new_value, .order = TRUE)
+  quo <- enquos(...)
+
+  translated <- map(quos, quo_translate_xnew_data, .length_out)
+
+  expand2(.data, !!!translated, .default = new_value, .order = TRUE)
+}
+
+quo_translate_xnew_data <- function(quo, length_out) {
+  new_quosure(
+    expr_translate_xnew_data(quo_get_expr(quo), length_out),
+    quo_get_env(quo)
+  )
+}
+
+expr_translate_xnew_data <- function(expr, length_out) {
+  if (is_symbol(expr)) {
+    expr(xnew_seq(!!expr, length_out = !!length_out))
+  } else {
+    expr
+  }
 }
 
 # Environment to store the .data argument
