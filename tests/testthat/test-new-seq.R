@@ -346,7 +346,7 @@ test_that("new_seq numeric", {
   # length_out = Inf
   expect_error(
     new_seq(c(0, 1), length_out = Inf),
-    "'length.out' must be a non-negative number"
+    "^`length_out` must be less than Inf, not Inf[.]$"
   ) # improve error message
   # matrices and arrays
   expect_identical(new_seq(matrix(1)), 1)

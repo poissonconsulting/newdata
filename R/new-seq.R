@@ -128,7 +128,7 @@ new_seq.integer <- function(x, length_out = 30, obs_only = FALSE) {
 #' @export
 new_seq.double <- function(x, length_out = 30, obs_only = FALSE) {
   chk_count(length_out)
-  # chk_finite(length_out) # FIXME implement in chk
+  chk_lt(length_out, Inf)
   if (length_out == 0L) {
     return(double())
   }
@@ -145,7 +145,7 @@ new_seq.double <- function(x, length_out = 30, obs_only = FALSE) {
 #' @export
 new_seq.character <- function(x, length_out = Inf, obs_only = FALSE) {
   chk_count(length_out)
-  chk_flag(obs_only) # unused as character only works on observed values
+  chk_flag(obs_only)
   if (length_out == 0L) {
     return(character())
   }
@@ -153,11 +153,10 @@ new_seq.character <- function(x, length_out = Inf, obs_only = FALSE) {
     return(NA_character_)
   }
   table <- x %>% table()
-  out <- names(table[order(table * -1, names(table))])
-  if (length(out) > length_out) {
-    out <- out[1:length_out]
-  }
-  out
+  char <- names(table[order(table * -1, names(table))])
+  factor(char, levels = char) %>%
+  new_seq(length_out = length_out, obs_only = FALSE) %>%
+    as.character()
 }
 
 #' @describeIn new_seq Generate new sequence of values for factors
