@@ -39,3 +39,19 @@ test_that("simple dataset", {
     tidyr::nesting(b, d),
   ))
 })
+
+test_that("factors", {
+  data <- tibble::tibble(
+    period = factor(c(rep("before", 5), rep("after", 5)), levels = c("before", "after")),
+    year = 2001:2010,
+    annual = factor(year, levels = 2000:2010),
+    ordered = ordered(year)
+  )
+  testthat::expect_snapshot({
+    data
+    auto_expand(data)
+    auto_expand(data, tidyr::nesting(period, year))
+    auto_expand(data, tidyr::nesting(period, year, annual))
+    auto_expand(data, tidyr::nesting(period, year, new_valuex(annual)))
+  })
+})

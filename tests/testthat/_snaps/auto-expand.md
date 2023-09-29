@@ -200,3 +200,77 @@
       8   3.5    10 b     FALSE 2023-09-29 zed  
       9   3.5    10 c     FALSE 2023-09-29 zed  
 
+# factors
+
+    Code
+      data
+    Output
+      # A tibble: 10 x 4
+         period  year annual ordered
+         <fct>  <int> <fct>  <ord>  
+       1 before  2001 2001   2001   
+       2 before  2002 2002   2002   
+       3 before  2003 2003   2003   
+       4 before  2004 2004   2004   
+       5 before  2005 2005   2005   
+       6 after   2006 2006   2006   
+       7 after   2007 2007   2007   
+       8 after   2008 2008   2008   
+       9 after   2009 2009   2009   
+      10 after   2010 2010   2010   
+    Code
+      auto_expand(data)
+    Output
+      # A tibble: 1 x 4
+        period  year annual ordered
+        <fct>  <int> <fct>  <ord>  
+      1 before  2005 2000   2005   
+    Code
+      auto_expand(data, tidyr::nesting(period, year))
+    Output
+      # A tibble: 10 x 4
+         period  year annual ordered
+         <fct>  <int> <fct>  <ord>  
+       1 before  2001 2000   2005   
+       2 before  2002 2000   2005   
+       3 before  2003 2000   2005   
+       4 before  2004 2000   2005   
+       5 before  2005 2000   2005   
+       6 after   2006 2000   2005   
+       7 after   2007 2000   2005   
+       8 after   2008 2000   2005   
+       9 after   2009 2000   2005   
+      10 after   2010 2000   2005   
+    Code
+      auto_expand(data, tidyr::nesting(period, year, annual))
+    Output
+      # A tibble: 10 x 4
+         period  year annual ordered
+         <fct>  <int> <fct>  <ord>  
+       1 before  2001 2001   2005   
+       2 before  2002 2002   2005   
+       3 before  2003 2003   2005   
+       4 before  2004 2004   2005   
+       5 before  2005 2005   2005   
+       6 after   2006 2006   2005   
+       7 after   2007 2007   2005   
+       8 after   2008 2008   2005   
+       9 after   2009 2009   2005   
+      10 after   2010 2010   2005   
+    Code
+      auto_expand(data, tidyr::nesting(period, year, new_valuex(annual)))
+    Output
+      # A tibble: 10 x 4
+         period  year annual ordered
+         <fct>  <int> <fct>  <ord>  
+       1 before  2001 2000   2005   
+       2 before  2002 2000   2005   
+       3 before  2003 2000   2005   
+       4 before  2004 2000   2005   
+       5 before  2005 2000   2005   
+       6 after   2006 2000   2005   
+       7 after   2007 2000   2005   
+       8 after   2008 2000   2005   
+       9 after   2009 2000   2005   
+      10 after   2010 2000   2005   
+
