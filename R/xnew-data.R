@@ -22,7 +22,7 @@ xnew_data <- function(.data, ..., .length_out = NULL) {
   stopifnot(is.null(xnew_data_env$data))
   local_bindings(data = .data, .env = xnew_data_env)
 
-  quo <- enquos(...)
+  quos <- enquos(...)
 
   translated <- map(quos, quo_translate_xnew_data, .length_out)
 

@@ -4,7 +4,7 @@
 \alias{xnew_data}
 \title{Generate New Data by Expansion}
 \usage{
-xnew_data(.data, ...)
+xnew_data(.data, ..., .length_out = NULL)
 }
 \arguments{
 \item{.data}{The data frame to generate the new data from.}

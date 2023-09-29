@@ -29,13 +29,23 @@ while all other variables are held constant.
 The user can specify the length of each sequence, require that only
 observed values are used and add new variables.
 
-By default all variables are held constant.
+By default all variables are held constant at the default reference value.
+Types, classes, factor levels and time zones are always preserved.
+
 ```{r}
 library(newdata)
-data <- tibble::tibble(
-  a = c(1L, 3L, 6L, 10L),
-  b = c(1,4.5, 8.2, 10))
 
+data <- tibble::tibble(
+  lgl = c(TRUE, FALSE, NA),
+  int = c(1L, 4L, 6L),
+  dbl = c(1, 4.5, 8.2),
+  chr = c("most", "most", "a rarity"),
+  fct = factor(chr, levels = c("bonus", "a rarity", "most")),
+  ord = ordered(chr, levels = c("a rarity", "most")),
+  dte = as.Date(int),
+  dtt = as.POSIXct(int, tz = "PST8PDT"),
+  hms = hms::as_hms(int)
+)
 
 xnew_data(data)
 ```
@@ -43,14 +53,32 @@ xnew_data(data)
 Specifying a variable causes it to vary across its range.
 
 ```{r}
-# FIXME: this should obs_only = FALSE by default
-xnew_data(data, a)
+xnew_data(data, int)
 ```
 
 The user can specify the length of each sequence.
 ```{r}
-# FIXME: this should obs_only = FALSE by default
-xnew_data(data, xnew_seq(a, length_out = 3))
+xnew_data(data, xnew_seq(int, length_out = 3))
+```
+
+and indicate whether only observed values should be used.
+```{r}
+xnew_data(data, xnew_seq(int, length_out = 3, obs_only = TRUE))
+```
+
+With two or more variables all combinations are used.
+```{r}
+xnew_data(data, int, fct)
+```
+
+To only get observed combinations use `xobs_only()`
+```{r}
+xnew_data(data, xobs_only(int, fct))
+```
+
+Adding a new variable is simple.
+```{r}
+xnew_data(data, new = c(TRUE, FALSE))
 ```
 
 ## Installation
