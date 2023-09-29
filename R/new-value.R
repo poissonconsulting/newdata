@@ -54,6 +54,6 @@
 #' # for logical objects it's always FALSE
 #' new_value(logical())
 #' @export
-new_value <- function(x, obs_only = getOption("new_data.obs_only", FALSE)) {
+new_value <- function(x, ..., obs_only = NULL) {
   new_seq(x, length_out = 1L, obs_only = obs_only)
 }

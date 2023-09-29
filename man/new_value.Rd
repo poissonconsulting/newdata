@@ -4,10 +4,12 @@
 \alias{new_value}
 \title{Generate New Reference Value}
 \usage{
-new_value(x, obs_only = getOption("new_data.obs_only", FALSE))
+new_value(x, ..., obs_only = NULL)
 }
 \arguments{
 \item{x}{The object to generate the reference value from.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{obs_only}{A flag specifying whether to only use observed values.}
 }

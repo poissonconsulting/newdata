@@ -22,6 +22,7 @@
 #'
 #' @param x The object to generate the sequence from.
 #' @param length_out The maximum length of the sequence.
+#' @inheritParams rlang::args_dots_empty
 #' @param obs_only A flag specifying whether to only use observed values.
 #' @returns A vector of the same class as the object.
 #' @seealso [new_value()] and [new_data()].
@@ -70,7 +71,8 @@
 #' # for logical objects the longest possible sequence is `c(TRUE, FALSE)`
 #' new_seq(c(TRUE, TRUE, FALSE), length_out = 3)
 #' @export
-new_seq <- function(x, length_out = 30, obs_only = FALSE) {
+new_seq <- function(x, length_out = NULL, ..., obs_only = NULL) {
+  chk_unused(...)
   UseMethod("new_seq")
 }
 
@@ -78,10 +80,18 @@ new_seq <- function(x, length_out = 30, obs_only = FALSE) {
 #' @export
 new_seq.logical <- function(
     x,
-    length_out = getOption("new_data.length_out_lgl", 2L),
-    obs_only = getOption("new_data.obs_only", FALSE)) {
+    length_out = NULL,
+    ...,
+    obs_only = NULL) {
 
+  if(is.null(length_out)) {
+    length_out <- getOption("new_data.length_out_lgl", 2L)
+  }
   chk_count(length_out)
+
+  if(is.null(obs_only)) {
+    obs_only <- getOption("new_data.obs_only", FALSE)
+  }
   chk_flag(obs_only)
 
   if (length_out == 0L) {
@@ -103,10 +113,18 @@ new_seq.logical <- function(
 #' @export
 new_seq.integer <- function(
     x,
-    length_out = getOption("new_data.length_out_int", 30L),
-    obs_only = getOption("new_data.obs_only", FALSE)) {
+    length_out = NULL,
+    ...,
+    obs_only = NULL) {
 
+  if(is.null(length_out)) {
+    length_out <- getOption("new_data.length_out_int", 30L)
+  }
   chk_count(length_out)
+
+  if(is.null(obs_only)) {
+    obs_only <- getOption("new_data.obs_only", FALSE)
+  }
   chk_flag(obs_only)
 
   if (length_out == 0L) {
@@ -125,11 +143,19 @@ new_seq.integer <- function(
 #' @export
 new_seq.double <- function(
     x,
-    length_out = getOption("new_data.length_out_dbl", 30L),
-    obs_only = getOption("new_data.obs_only", FALSE)) {
+    length_out = NULL,
+    ...,
+    obs_only = NULL) {
 
+  if(is.null(length_out)) {
+    length_out <- getOption("new_data.length_out_dbl", 30L)
+  }
   chk_count(length_out)
   chk_lt(length_out, Inf)
+
+  if(is.null(obs_only)) {
+    obs_only <- getOption("new_data.obs_only", FALSE)
+  }
   chk_flag(obs_only)
 
   if (length_out == 0L) {
@@ -148,9 +174,18 @@ new_seq.double <- function(
 #' @export
 new_seq.character <- function(
     x,
-    length_out = getOption("new_data.length_out_chr", Inf),
-    obs_only = getOption("new_data.obs_only", FALSE)) {
+    length_out = NULL,
+    ...,
+    obs_only = NULL) {
 
+  if(is.null(length_out)) {
+    length_out <- getOption("new_data.length_out_chr", Inf)
+  }
+  chk_count(length_out)
+
+  if(is.null(obs_only)) {
+    obs_only <- getOption("new_data.obs_only", FALSE)
+  }
   chk_flag(obs_only)
 
   if (length_out == 0L) {
@@ -170,10 +205,18 @@ new_seq.character <- function(
 #' @export
 new_seq.factor <- function(
     x,
-    length_out = getOption("new_data.length_out_chr", Inf),
-    obs_only = getOption("new_data.obs_only", FALSE)) {
+    length_out = NULL,
+    ...,
+    obs_only = NULL) {
 
+  if(is.null(length_out)) {
+    length_out <- getOption("new_data.length_out_chr", Inf)
+  }
   chk_count(length_out)
+
+  if(is.null(obs_only)) {
+    obs_only <- getOption("new_data.obs_only", FALSE)
+  }
   chk_flag(obs_only)
 
   levels <- levels(x)
@@ -200,9 +243,18 @@ new_seq.factor <- function(
 #' @export
 new_seq.ordered <- function(
     x,
-    length_out = getOption("new_data.length_out_chr", Inf),
-    obs_only = getOption("new_data.obs_only", FALSE)) {
+    length_out = NULL,
+    ...,
+    obs_only = NULL) {
 
+  if(is.null(length_out)) {
+    length_out <- getOption("new_data.length_out_chr", Inf)
+  }
+  chk_count(length_out)
+
+  if(is.null(obs_only)) {
+    obs_only <- getOption("new_data.obs_only", FALSE)
+  }
   chk_flag(obs_only)
 
   levels <- levels(x)
@@ -227,8 +279,9 @@ new_seq.ordered <- function(
 #' @export
 new_seq.Date <- function(
     x,
-    length_out = getOption("new_data.length_out_int", 30L),
-    obs_only = getOption("new_data.obs_only", FALSE)) {
+    length_out = NULL,
+    ...,
+    obs_only = NULL) {
 
   x %>%
     as.integer() %>%
@@ -240,8 +293,9 @@ new_seq.Date <- function(
 #' @export
 new_seq.POSIXct <- function(
     x,
-    length_out = getOption("new_data.length_out_int", 30L),
-    obs_only = getOption("new_data.obs_only", FALSE)) {
+    length_out = NULL,
+    ...,
+    obs_only = NULL) {
 
   tz <- attr(x, "tzone", exact = TRUE)
 
@@ -255,8 +309,9 @@ new_seq.POSIXct <- function(
 #' @export
 new_seq.hms <- function(
     x,
-    length_out = getOption("new_data.length_out_int", 30L),
-    obs_only = getOption("new_data.obs_only", FALSE)) {
+    length_out = NULL,
+    ...,
+    obs_only = NULL) {
 
   x %>%
     as.integer() %>%
