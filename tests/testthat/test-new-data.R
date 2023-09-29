@@ -57,47 +57,14 @@ test_that("new_data ref errors", {
 })
 
 test_that("new_data ref works", {
-  new_data <- new_data(ToothGrowth, ref = list(dose = 4))
-  expect_identical(new_data$dose, 4)
-
-  new_data <- new_data(ToothGrowth, ref = list(dose = c(3, 4)))
-  expect_identical(new_data$dose, c(3, 4))
-
-  new_data <- new_data(ToothGrowth, ref = list(
-    dose = c(3, 4),
-    len = c(10.1, 12, 13)
-  ))
-  expect_identical(colnames(new_data), c("len", "supp", "dose"))
-  expect_identical(new_data$dose, rep(c(3, 4), 3))
-  expect_identical(new_data$len, rep(c(10.1, 12, 13), each = 2))
-
-  new_data <- new_data(ToothGrowth, ref = list(supp = factor("VC")))
-
-  new_data <- new_data(ToothGrowth, ref = list(supp = factor("TP")))
-  expect_identical(new_data(ToothGrowth,
-                            ref = list(supp = factor("TP"))
-  )$supp, factor("TP"))
-  expect_identical(
-    new_data(ToothGrowth, ref = list(supp = "TP"))$supp,
-    factor(NA, levels = c("OJ", "VC"))
-  )
-  expect_identical(
-    new_data(ToothGrowth, ref = list(supp = factor("VC")))$supp,
-    factor("VC")
-  )
-  expect_identical(
-    new_data(ToothGrowth, ref = list(supp = "VC"))$supp,
-    factor("VC", levels = c("OJ", "VC"))
-  )
+  testthat::expect_snapshot(new_data(ToothGrowth, ref = list(dose = 4)))
+  testthat::expect_snapshot(new_data(ToothGrowth, ref = list(dose = c(3, 4))))
+  testthat::expect_snapshot(new_data(ToothGrowth, ref = list(dose = c(3, 4), len = c(10.1, 12, 13))))
+  testthat::expect_snapshot(new_data(ToothGrowth, ref = list(supp = factor("VC"))))
+  testthat::expect_snapshot(new_data(ToothGrowth, ref = list(supp = factor("TP"))))
+  testthat::expect_snapshot(new_data(ToothGrowth, ref = list(supp = factor(c("VC", "OJ")))))
 })
 
 test_that("new_data ref overridden by seq", {
-  expect_identical(
-    new_data(Orange, seq = "age", ref = list(age = 118)),
-    tibble::tibble(
-      Tree = ordered(levels(Orange$Tree)[3], levels(Orange$Tree)),
-      age = seq(min(Orange$age), max(Orange$age), length.out = 30),
-      circumference = mean(Orange$circumference)
-    )
-  )
+  testthat::expect_snapshot(new_data(Orange, seq = "age", ref = list(age = 118)))
 })

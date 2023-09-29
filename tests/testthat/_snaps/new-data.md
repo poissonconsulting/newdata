@@ -248,3 +248,90 @@
       1 5         1          116.
       2 5         2          116.
 
+---
+
+    Code
+      new_data(ToothGrowth, ref = list(dose = 4))
+    Output
+      # A tibble: 1 x 3
+          len supp   dose
+        <dbl> <fct> <dbl>
+      1  18.8 OJ        4
+
+---
+
+    Code
+      new_data(ToothGrowth, ref = list(dose = c(3, 4)))
+    Output
+      # A tibble: 2 x 3
+          len supp   dose
+        <dbl> <fct> <dbl>
+      1  18.8 OJ        3
+      2  18.8 OJ        4
+
+---
+
+    Code
+      new_data(ToothGrowth, ref = list(dose = c(3, 4), len = c(10.1, 12, 13)))
+    Output
+      # A tibble: 6 x 3
+          len supp   dose
+        <dbl> <fct> <dbl>
+      1  10.1 OJ        3
+      2  10.1 OJ        4
+      3  12   OJ        3
+      4  12   OJ        4
+      5  13   OJ        3
+      6  13   OJ        4
+
+---
+
+    Code
+      new_data(ToothGrowth, ref = list(supp = factor("VC")))
+    Output
+      # A tibble: 1 x 3
+          len supp   dose
+        <dbl> <fct> <dbl>
+      1  18.8 VC     1.17
+
+---
+
+    Code
+      new_data(ToothGrowth, ref = list(supp = factor("TP")))
+    Output
+      # A tibble: 1 x 3
+          len supp   dose
+        <dbl> <fct> <dbl>
+      1  18.8 TP     1.17
+
+---
+
+    Code
+      new_data(ToothGrowth, ref = list(supp = factor(c("VC", "OJ"))))
+    Output
+      # A tibble: 2 x 3
+          len supp   dose
+        <dbl> <fct> <dbl>
+      1  18.8 VC     1.17
+      2  18.8 OJ     1.17
+
+# new_data ref overridden by seq
+
+    Code
+      new_data(Orange, seq = "age", ref = list(age = 118))
+    Output
+      # A tibble: 30 x 3
+         Tree    age circumference
+         <ord> <dbl>         <dbl>
+       1 5      118           116.
+       2 5      168.          116.
+       3 5      219.          116.
+       4 5      269.          116.
+       5 5      320.          116.
+       6 5      370.          116.
+       7 5      421.          116.
+       8 5      471.          116.
+       9 5      522.          116.
+      10 5      572.          116.
+      # i 20 more rows
+
