@@ -145,8 +145,10 @@ test_that("new_value character", {
 test_that("new_value factor", {
   # zero length
   expect_identical(new_value(factor()), factor(NA))
+  expect_identical(new_value(factor(), obs_only = TRUE), factor(NA))
   # missing value
   expect_identical(new_value(factor(NA)), factor(NA))
+  expect_identical(new_value(factor(NA), obs_only = TRUE), factor(NA))
   # single value
   expect_identical(
     new_value(factor("b", levels = "b")),
@@ -214,6 +216,13 @@ test_that("new_value factor", {
     new_value(factor(c("a", "b", "a", NA), levels = c("b", "a"))),
     factor("b", levels = c("b", "a"))
   )
+})
+
+test_that("new_value ordered", {
+  expect_identical(new_value(factor(1:2, levels = c(0:2))),
+                   factor(0, levels = c(0:2)))
+  expect_identical(new_value(factor(1:2, levels = c(0:2)), obs_only = TRUE),
+                   factor(1, levels = c(0:2)))
 })
 
 test_that("new_value ordered", {

@@ -165,17 +165,22 @@ new_seq.character <- function(x, length_out = Inf, obs_only = FALSE) {
 new_seq.factor <- function(x, length_out = Inf, obs_only = FALSE) {
   chk_count(length_out)
   levels <- levels(x)
+  nlevels <- length(levels)
   if (length_out == 0L) {
     return(factor(levels = levels))
   }
   if (!length(levels)) {
     return(factor(NA_character_, levels = levels))
   }
-  out <- factor(levels(x), levels = levels(x))
-  if (length(out) > length_out) {
-    out <- out[1:length_out]
+  if(obs_only) {
   }
-  out
+  out <- if(obs_only) {
+    as.integer(x)
+  } else {
+    1:nlevels
+  }
+  indices <- obs_only1(out, length_out = length_out, first = TRUE)
+  factor(levels[indices], levels = levels)
 }
 
 #' @describeIn new_seq Generate new sequence of values for ordered factors

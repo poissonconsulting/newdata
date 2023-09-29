@@ -234,7 +234,7 @@
       # A tibble: 1 x 4
         period  year annual ordered
         <fct>  <int> <fct>  <ord>  
-      1 before  2005 2000   2005   
+      1 before  2005 2001   2005   
     Code
       auto_expand(data, tidyr::nesting(period, year))
     Output

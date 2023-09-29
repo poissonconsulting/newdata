@@ -49,7 +49,6 @@ test_that("factors", {
     data
     auto_expand(data)
     auto_expand(data, new_valuex(annual))
-    # FIXME: annual should be 2001
     auto_expand(data, new_valuex(annual, obs_only = TRUE))
     auto_expand(data, tidyr::nesting(period, year))
     auto_expand(data, tidyr::nesting(period, year, annual))
