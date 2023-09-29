@@ -37,18 +37,6 @@ expand2 <- function(.data, ..., .default = NULL, .order = FALSE) {
   out
 }
 
-expand3 <- function(.data, ..., .filter = NULL) {
-  filter_quo <- enquo(.filter)
-
-  out <- expand2(.data, ...)
-
-  if (!quo_is_null(filter_quo)) {
-    out <- dplyr::filter(out, !!filter_quo)
-  }
-
-  out
-}
-
-auto_expand <- function(.data, ..., .filter = NULL) {
-  expand3(.data, ..., .filter = {{ .filter }}, .default = new_value, .order = TRUE)
+auto_expand <- function(.data, ...) {
+  expand2(.data, ..., .default = new_value, .order = TRUE)
 }

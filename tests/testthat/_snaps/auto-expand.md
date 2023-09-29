@@ -175,30 +175,26 @@
       4   3.5     5 d     TRUE  2023-09-29
       5   3.5     5 e     FALSE 2023-09-29
     Code
-      auto_expand(data, tidyr::nesting(c, d), .filter = c %in% c("a", "b", "c"))
+      auto_expand(data, b = 8:10, z = "zed", tidyr::nesting(c, d))
     Output
-      # A tibble: 3 x 5
-            a     b c     d     e         
-        <dbl> <int> <fct> <lgl> <date>    
-      1   3.5     5 a     TRUE  2023-09-29
-      2   3.5     5 b     FALSE 2023-09-29
-      3   3.5     5 c     FALSE 2023-09-29
-    Code
-      auto_expand(data, b = 8:10, z = "zed", tidyr::nesting(c, d), .filter = c %in% c(
-        "a", "b", "c"))
-    Output
-      # A tibble: 9 x 6
-            a     b c     d     e          z    
-        <dbl> <int> <fct> <lgl> <date>     <chr>
-      1   3.5     8 a     TRUE  2023-09-29 zed  
-      2   3.5     8 b     FALSE 2023-09-29 zed  
-      3   3.5     8 c     FALSE 2023-09-29 zed  
-      4   3.5     9 a     TRUE  2023-09-29 zed  
-      5   3.5     9 b     FALSE 2023-09-29 zed  
-      6   3.5     9 c     FALSE 2023-09-29 zed  
-      7   3.5    10 a     TRUE  2023-09-29 zed  
-      8   3.5    10 b     FALSE 2023-09-29 zed  
-      9   3.5    10 c     FALSE 2023-09-29 zed  
+      # A tibble: 15 x 6
+             a     b c     d     e          z    
+         <dbl> <int> <fct> <lgl> <date>     <chr>
+       1   3.5     8 a     TRUE  2023-09-29 zed  
+       2   3.5     8 b     FALSE 2023-09-29 zed  
+       3   3.5     8 c     FALSE 2023-09-29 zed  
+       4   3.5     8 d     TRUE  2023-09-29 zed  
+       5   3.5     8 e     FALSE 2023-09-29 zed  
+       6   3.5     9 a     TRUE  2023-09-29 zed  
+       7   3.5     9 b     FALSE 2023-09-29 zed  
+       8   3.5     9 c     FALSE 2023-09-29 zed  
+       9   3.5     9 d     TRUE  2023-09-29 zed  
+      10   3.5     9 e     FALSE 2023-09-29 zed  
+      11   3.5    10 a     TRUE  2023-09-29 zed  
+      12   3.5    10 b     FALSE 2023-09-29 zed  
+      13   3.5    10 c     FALSE 2023-09-29 zed  
+      14   3.5    10 d     TRUE  2023-09-29 zed  
+      15   3.5    10 e     FALSE 2023-09-29 zed  
 
 # factors
 
