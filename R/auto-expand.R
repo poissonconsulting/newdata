@@ -1,4 +1,10 @@
-new_tseq <- function(x, ...) {
+new_valuex <- function(x, ...) {
+  expr <- ensym(x)
+  out <- new_value(x, ...)
+  tibble::tibble(!!expr := out)
+}
+
+new_seqx <- function(x, ...) {
   expr <- ensym(x)
   out <- new_seq(x, ...)
   tibble::tibble(!!expr := out)
@@ -22,7 +28,7 @@ expand2 <- function(.data, ..., .default = NULL, .order = FALSE) {
     quos <- c(quos, expand_defaults(.data, quos, .default))
   }
 
-  out <- tidyr::expand(data, !!!quos)
+  out <- tidyr::expand(.data, !!!quos)
 
   if (.order) {
     out <- dplyr::select(out, !!!names(.data), !!!setdiff(names(out), names(.data)))
