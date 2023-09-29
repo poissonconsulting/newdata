@@ -45,4 +45,16 @@
   <url>
     <loc>/reference/newdata-package.html</loc>
   </url>
+  <url>
+    <loc>/reference/xnew_data.html</loc>
+  </url>
+  <url>
+    <loc>/reference/xnew_seq.html</loc>
+  </url>
+  <url>
+    <loc>/reference/xnew_value.html</loc>
+  </url>
+  <url>
+    <loc>/reference/xobs_only.html</loc>
+  </url>
 </urlset>
