@@ -48,8 +48,12 @@ test_that("factors", {
   testthat::expect_snapshot({
     data
     auto_expand(data)
+    auto_expand(data, new_valuex(annual))
+    # FIXME: annual should be 2001
+    auto_expand(data, new_valuex(annual, obs_only = TRUE))
     auto_expand(data, tidyr::nesting(period, year))
     auto_expand(data, tidyr::nesting(period, year, annual))
+    # FIXME: possible to nest on new_value?
     auto_expand(data, tidyr::nesting(period, year, new_valuex(annual)))
   })
 })
