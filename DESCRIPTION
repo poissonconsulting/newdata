@@ -24,6 +24,7 @@ Imports:
     chk,
     dplyr,
     hms,
+    lifecycle,
     rlang,
     tibble,
     tidyr,

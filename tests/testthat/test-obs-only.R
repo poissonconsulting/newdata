@@ -1,4 +1,6 @@
 test_that("obs_only", {
+  withr::local_options(lifecycle_verbosity = "quiet")
+
   newdata <- expand.grid(
     Tree = unique(Orange$Tree), age = c(1, 2, 3, 4, 5),
     circumference = c(6, 7, 8, 9, 10)
@@ -9,6 +11,8 @@ test_that("obs_only", {
 })
 
 test_that("new_data obs_only", {
+  withr::local_options(lifecycle_verbosity = "quiet")
+
   data <- expand.grid(
     Fac1 = c("1", "2", "4"), Fac2 = c("1", "3"),
     Fac3 = factor(1:2, levels = 1:3), Random = 1:2

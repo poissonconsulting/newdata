@@ -1,4 +1,5 @@
 test_that("newdata", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   chickwts <- datasets::chickwts
 
   feed <- sort(unique(chickwts$feed))
@@ -14,6 +15,8 @@ test_that("newdata", {
 })
 
 test_that("new_data generates data frame with correct number of rows", {
+  withr::local_options(lifecycle_verbosity = "quiet")
+
   data <- data.frame(
     dlogical = as.logical(0:9),
     dinteger = 1:10,
@@ -34,6 +37,8 @@ test_that("new_data generates data frame with correct number of rows", {
 })
 
 test_that("new_data ref works", {
+  withr::local_options(lifecycle_verbosity = "quiet")
+
   testthat::expect_snapshot({
     new_data(Orange)
     new_data(Orange, ref = list(age = 1))
@@ -42,6 +47,8 @@ test_that("new_data ref works", {
 })
 
 test_that("new_data ref errors", {
+  withr::local_options(lifecycle_verbosity = "quiet")
+
   expect_error(
     new_data(Orange, ref = list(1, 2)),
     "`ref` must be a named list."
@@ -58,6 +65,8 @@ test_that("new_data ref errors", {
 
 # FIXME: use one snapshot
 test_that("new_data ref works", {
+  withr::local_options(lifecycle_verbosity = "quiet")
+
   testthat::expect_snapshot(new_data(ToothGrowth, ref = list(dose = 4)))
   testthat::expect_snapshot(new_data(ToothGrowth, ref = list(dose = c(3, 4))))
   testthat::expect_snapshot(new_data(ToothGrowth, ref = list(dose = c(3, 4), len = c(10.1, 12, 13))))
@@ -67,5 +76,7 @@ test_that("new_data ref works", {
 })
 
 test_that("new_data ref overridden by seq", {
+  withr::local_options(lifecycle_verbosity = "quiet")
+
   testthat::expect_snapshot(new_data(Orange, seq = "age", ref = list(age = 118)))
 })

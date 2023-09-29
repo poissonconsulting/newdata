@@ -59,6 +59,7 @@ new_data <- function(
     ref = list(),
     obs_only = list(character(0)),
     length_out = 30) {
+  lifecycle::deprecate_soft("0.1.0", "new_data()", "xnew_data()")
   chk_data(data)
   chk_count(length_out)
   chk_character(seq)
