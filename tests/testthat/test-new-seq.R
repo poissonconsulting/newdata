@@ -3,6 +3,37 @@ test_that("new_seq logical", {
   expect_identical(new_seq(logical()), c(FALSE, TRUE))
   # missing value
   expect_identical(new_seq(NA), c(FALSE, TRUE))
+  # single value
+  expect_identical(new_seq(TRUE), c(FALSE, TRUE))
+  expect_identical(new_seq(FALSE), c(FALSE, TRUE))
+  expect_identical(new_seq(FALSE), c(FALSE, TRUE))
+  # multiple value
+  expect_identical(new_seq(c(FALSE, TRUE)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(TRUE, FALSE)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(TRUE, TRUE)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(FALSE, FALSE)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(FALSE, FALSE, TRUE)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(TRUE, TRUE, FALSE)), c(FALSE, TRUE))
+  # multiple value with missing
+  expect_identical(new_seq(c(FALSE, TRUE, NA)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(TRUE, FALSE, NA)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(TRUE, TRUE, NA)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(FALSE, FALSE, NA)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(FALSE, FALSE, TRUE, NA)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(TRUE, TRUE, FALSE, NA)), c(FALSE, TRUE))
+  # length_out not count
+  expect_error(new_seq(TRUE, length_out = -1), "`length_out` must be a count")
+  expect_error(new_seq(TRUE, length_out = 0.5), "`length_out` must be a count")
+  # matrices and arrays
+  expect_identical(new_seq(matrix(TRUE)), c(FALSE, TRUE))
+  expect_identical(new_seq(array(TRUE)), c(FALSE, TRUE))
+})
+
+test_that("new_seq logical", {
+  # zero length
+  expect_identical(new_seq(logical()), c(FALSE, TRUE))
+  # missing value
+  expect_identical(new_seq(NA), c(FALSE, TRUE))
   expect_identical(new_seq(NA, obs_only = TRUE), NA)
   # single value
   expect_identical(new_seq(TRUE), c(FALSE, TRUE))
@@ -96,6 +127,7 @@ test_that("new_seq logical", {
   expect_identical(new_seq(matrix(TRUE)), c(FALSE, TRUE))
   expect_identical(new_seq(array(TRUE)), c(FALSE, TRUE))
 })
+
 
 test_that("new_seq integer", {
   # zero length

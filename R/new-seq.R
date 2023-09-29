@@ -70,15 +70,20 @@
 #' # for logical objects the longest possible sequence is `c(TRUE, FALSE)`
 #' new_seq(c(TRUE, TRUE, FALSE), length_out = 3)
 #' @export
-new_seq <- function(x, length_out = 30, obs_only = getOption("new_data.obs_only", FALSE)) {
+new_seq <- function(x, length_out = 30, obs_only = FALSE) {
   UseMethod("new_seq")
 }
 
 #' @describeIn new_seq Generate new sequence of values for logical objects
 #' @export
-new_seq.logical <- function(x, length_out = 2, obs_only = getOption("new_data.obs_only", FALSE)) {
+new_seq.logical <- function(
+    x,
+    length_out = getOption("new_data.length_out_lgl", 2L),
+    obs_only = getOption("new_data.obs_only", FALSE)) {
+
   chk_count(length_out)
   chk_flag(obs_only)
+
   if (length_out == 0L) {
     return(logical())
   }
@@ -96,8 +101,14 @@ new_seq.logical <- function(x, length_out = 2, obs_only = getOption("new_data.ob
 
 #' @describeIn new_seq Generate new sequence of values for integer objects
 #' @export
-new_seq.integer <- function(x, length_out = 30, obs_only = getOption("new_data.obs_only", FALSE)) {
+new_seq.integer <- function(
+    x,
+    length_out = getOption("new_data.length_out_int", 30L),
+    obs_only = getOption("new_data.obs_only", FALSE)) {
+
   chk_count(length_out)
+  chk_flag(obs_only)
+
   if (length_out == 0L) {
     return(integer())
   }
@@ -112,9 +123,15 @@ new_seq.integer <- function(x, length_out = 30, obs_only = getOption("new_data.o
 
 #' @describeIn new_seq Generate new sequence of values for double objects
 #' @export
-new_seq.double <- function(x, length_out = 30, obs_only = getOption("new_data.obs_only", FALSE)) {
+new_seq.double <- function(
+    x,
+    length_out = getOption("new_data.length_out_dbl", 30L),
+    obs_only = getOption("new_data.obs_only", FALSE)) {
+
   chk_count(length_out)
   chk_lt(length_out, Inf)
+  chk_flag(obs_only)
+
   if (length_out == 0L) {
     return(double())
   }
@@ -129,9 +146,13 @@ new_seq.double <- function(x, length_out = 30, obs_only = getOption("new_data.ob
 
 #' @describeIn new_seq Generate new sequence of values for character objects
 #' @export
-new_seq.character <- function(x, length_out = Inf, obs_only = getOption("new_data.obs_only", FALSE)) {
-  chk_count(length_out)
+new_seq.character <- function(
+    x,
+    length_out = getOption("new_data.length_out_chr", Inf),
+    obs_only = getOption("new_data.obs_only", FALSE)) {
+
   chk_flag(obs_only)
+
   if (length_out == 0L) {
     return(character())
   }
@@ -141,16 +162,23 @@ new_seq.character <- function(x, length_out = Inf, obs_only = getOption("new_dat
   table <- x %>% table()
   char <- names(table[order(table * -1, names(table))])
   factor(char, levels = char) %>%
-  new_seq(length_out = length_out, obs_only = getOption("new_data.obs_only", FALSE)) %>%
+    new_seq(length_out = length_out, obs_only = TRUE) %>%
     as.character()
 }
 
 #' @describeIn new_seq Generate new sequence of values for factors
 #' @export
-new_seq.factor <- function(x, length_out = Inf, obs_only = getOption("new_data.obs_only", FALSE)) {
+new_seq.factor <- function(
+    x,
+    length_out = getOption("new_data.length_out_chr", Inf),
+    obs_only = getOption("new_data.obs_only", FALSE)) {
+
   chk_count(length_out)
+  chk_flag(obs_only)
+
   levels <- levels(x)
   nlevels <- length(levels)
+
   if (length_out == 0L) {
     return(factor(levels = levels))
   }
@@ -170,10 +198,16 @@ new_seq.factor <- function(x, length_out = Inf, obs_only = getOption("new_data.o
 
 #' @describeIn new_seq Generate new sequence of values for ordered factors
 #' @export
-new_seq.ordered <- function(x, length_out = Inf, obs_only = getOption("new_data.obs_only", FALSE)) {
-  chk_count(length_out)
+new_seq.ordered <- function(
+    x,
+    length_out = getOption("new_data.length_out_chr", Inf),
+    obs_only = getOption("new_data.obs_only", FALSE)) {
+
+  chk_flag(obs_only)
+
   levels <- levels(x)
   nlevels <- length(levels)
+
   if (length_out == 0L) {
     return(ordered(levels = levels))
   }
@@ -191,7 +225,11 @@ new_seq.ordered <- function(x, length_out = Inf, obs_only = getOption("new_data.
 
 #' @describeIn new_seq Generate new sequence of values for Date vectors
 #' @export
-new_seq.Date <- function(x, length_out = 30, obs_only = getOption("new_data.obs_only", FALSE)) {
+new_seq.Date <- function(
+    x,
+    length_out = getOption("new_data.length_out_int", 30L),
+    obs_only = getOption("new_data.obs_only", FALSE)) {
+
   x %>%
     as.integer() %>%
     new_seq(length_out = length_out, obs_only = obs_only) %>%
@@ -200,8 +238,13 @@ new_seq.Date <- function(x, length_out = 30, obs_only = getOption("new_data.obs_
 
 #' @describeIn new_seq Generate new sequence of values for POSIXct vectors
 #' @export
-new_seq.POSIXct <- function(x, length_out = 30, obs_only = getOption("new_data.obs_only", FALSE)) {
+new_seq.POSIXct <- function(
+    x,
+    length_out = getOption("new_data.length_out_int", 30L),
+    obs_only = getOption("new_data.obs_only", FALSE)) {
+
   tz <- attr(x, "tzone", exact = TRUE)
+
   x %>%
     as.integer() %>%
     new_seq(length_out = length_out, obs_only = obs_only) %>%
@@ -210,7 +253,11 @@ new_seq.POSIXct <- function(x, length_out = 30, obs_only = getOption("new_data.o
 
 #' @describeIn new_seq Generate new sequence of values for hms vectors
 #' @export
-new_seq.hms <- function(x, length_out = 30, obs_only = getOption("new_data.obs_only", FALSE)) {
+new_seq.hms <- function(
+    x,
+    length_out = getOption("new_data.length_out_int", 30L),
+    obs_only = getOption("new_data.obs_only", FALSE)) {
+
   x %>%
     as.integer() %>%
     new_seq(length_out = length_out, obs_only = obs_only) %>%
