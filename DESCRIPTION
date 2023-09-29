@@ -32,8 +32,6 @@ Imports:
 Suggests:
     covr,
     datasets,
-    ggplot2,
-    stats,
     testthat (>= 3.0.0),
     withr
 Encoding: UTF-8

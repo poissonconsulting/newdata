@@ -15,48 +15,65 @@ status](https://www.r-pkg.org/badges/version/newdata)](https://CRAN.R-project.or
 
 ## Introduction
 
-`newdata` is an R package to generate new data frames for passing to
-`predict` functions. In the new data the column(s) of interest vary
-across their range while the remaining columns are held constant at
-their reference value.
+`newdata` is an R package to generate data frames (in the form of
+tibbles) for predictive purposes.
 
-For more information see `new_data()`.
+The `xnew_data()` function varies all specified variables across their
+range of the observed data as a unique ordered sequence while holding
+all other variables constant at their reference values.
 
-## Demonstration
+By default all variables are held constant at their reference value with
+their type preserved.
 
 ``` r
-library(ggplot2)
 library(newdata)
+data <- tibble::tibble(
+  a = c(1L, 3L, 6L, 10L),
+  b = c(1,4.5, 8.2, 10))
 
-mtcars <- datasets::mtcars
 
-model <- lm(mpg ~ wt + hp + poly(disp, 2), data = mtcars)
-
-# generate a data frame across range of disp with other predictor
-# variables held constant
-disp <- new_data(mtcars, "disp")
-head(disp)
-#> # A tibble: 6 × 11
-#>     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-#>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1  20.1  6.19  71.1  147.  3.60  3.22  17.8 0.438 0.406  3.69  2.81
-#> 2  20.1  6.19  84.9  147.  3.60  3.22  17.8 0.438 0.406  3.69  2.81
-#> 3  20.1  6.19  98.7  147.  3.60  3.22  17.8 0.438 0.406  3.69  2.81
-#> 4  20.1  6.19 113.   147.  3.60  3.22  17.8 0.438 0.406  3.69  2.81
-#> 5  20.1  6.19 126.   147.  3.60  3.22  17.8 0.438 0.406  3.69  2.81
-#> 6  20.1  6.19 140.   147.  3.60  3.22  17.8 0.438 0.406  3.69  2.81
-
-disp <- cbind(disp, predict(model, newdata = disp, interval = "confidence"))
-
-ggplot(data = disp, aes(x = disp, y = fit)) +
-  geom_point(data = mtcars, aes(y = mpg)) +
-  geom_line() +
-  geom_line(aes(y = lwr), linetype = "dotted") +
-  geom_line(aes(y = upr), linetype = "dotted") +
-  ylab("mpg")
+xnew_data(data)
+#> # A tibble: 1 × 2
+#>       a     b
+#>   <int> <dbl>
+#> 1     5  5.92
 ```
 
-![](man/figures/README-unnamed-chunk-2-1.png)<!-- -->
+Naming a variable causes it to vary across its range
+
+``` r
+library(newdata)
+xnew_data(data, a)
+#> # A tibble: 4 × 2
+#>       a     b
+#>   <int> <dbl>
+#> 1     1  5.92
+#> 2     3  5.92
+#> 3     6  5.92
+#> 4    10  5.92
+xnew_data(data, a, obs_only = TRUE)
+#> # A tibble: 4 × 3
+#>       a     b obs_only
+#>   <int> <dbl> <lgl>   
+#> 1     1  5.92 TRUE    
+#> 2     3  5.92 TRUE    
+#> 3     6  5.92 TRUE    
+#> 4    10  5.92 TRUE
+xnew_data(data, xnew_seq(a, obs_only = FALSE))
+#> # A tibble: 10 × 2
+#>        a     b
+#>    <int> <dbl>
+#>  1     1  5.92
+#>  2     2  5.92
+#>  3     3  5.92
+#>  4     4  5.92
+#>  5     5  5.92
+#>  6     6  5.92
+#>  7     7  5.92
+#>  8     8  5.92
+#>  9     9  5.92
+#> 10    10  5.92
+```
 
 ## Installation
 
