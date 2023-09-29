@@ -30,8 +30,7 @@ test_that("simple dataset", {
       tidyr::nesting(c, d)
     )
   })
-  # FIXME: this should error out like the following code
-  xnew_data(data, b, b)
+  expect_error(xnew_data(data, b, b), "These names are duplicated:")
   expect_error(xnew_data(data, b, xnew_seq(b)), "Names must be unique.")
   expect_error(xnew_data(
     data,

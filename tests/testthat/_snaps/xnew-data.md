@@ -21,14 +21,20 @@
     Code
       xnew_data(data, a)
     Output
-      # A tibble: 5 x 5
-            a     b c     d     e         
-        <dbl> <int> <fct> <lgl> <date>    
-      1   1.5     5 a     FALSE 2023-09-29
-      2   2.5     5 a     FALSE 2023-09-29
-      3   3.5     5 a     FALSE 2023-09-29
-      4   4.5     5 a     FALSE 2023-09-29
-      5   5.5     5 a     FALSE 2023-09-29
+      # A tibble: 30 x 5
+             a     b c     d     e         
+         <dbl> <int> <fct> <lgl> <date>    
+       1  1.5      5 a     FALSE 2023-09-29
+       2  1.64     5 a     FALSE 2023-09-29
+       3  1.78     5 a     FALSE 2023-09-29
+       4  1.91     5 a     FALSE 2023-09-29
+       5  2.05     5 a     FALSE 2023-09-29
+       6  2.19     5 a     FALSE 2023-09-29
+       7  2.33     5 a     FALSE 2023-09-29
+       8  2.47     5 a     FALSE 2023-09-29
+       9  2.60     5 a     FALSE 2023-09-29
+      10  2.74     5 a     FALSE 2023-09-29
+      # i 20 more rows
     Code
       xnew_data(data, a = new_value(a))
     Output
