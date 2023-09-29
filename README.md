@@ -15,15 +15,13 @@ status](https://www.r-pkg.org/badges/version/newdata)](https://CRAN.R-project.or
 
 ## Introduction
 
-`newdata` is an R package to generate data frames (in the form of
-tibbles) for predictive purposes.
+`newdata` is an R package to generate new data frames for predictive
+purposes. By default, all specified variables vary across their range
+while all other variables are held constant. The user can specify the
+length of each sequence, require that only observed values are used and
+add new variables.
 
-The `xnew_data()` function varies all specified variables across their
-range of the observed data as a unique ordered sequence while holding
-all other variables constant at their reference values.
-
-By default all variables are held constant at their reference value with
-their type preserved.
+By default all variables are held constant.
 
 ``` r
 library(newdata)
@@ -39,10 +37,10 @@ xnew_data(data)
 #> 1     5  5.92
 ```
 
-Naming a variable causes it to vary across its range
+Specifying a variable causes it to vary across its range.
 
 ``` r
-library(newdata)
+# FIXME: this should obs_only = FALSE by default
 xnew_data(data, a)
 #> # A tibble: 4 × 2
 #>       a     b
@@ -51,28 +49,19 @@ xnew_data(data, a)
 #> 2     3  5.92
 #> 3     6  5.92
 #> 4    10  5.92
-xnew_data(data, a, obs_only = TRUE)
-#> # A tibble: 4 × 3
-#>       a     b obs_only
-#>   <int> <dbl> <lgl>   
-#> 1     1  5.92 TRUE    
-#> 2     3  5.92 TRUE    
-#> 3     6  5.92 TRUE    
-#> 4    10  5.92 TRUE
-xnew_data(data, xnew_seq(a, obs_only = FALSE))
-#> # A tibble: 10 × 2
-#>        a     b
-#>    <int> <dbl>
-#>  1     1  5.92
-#>  2     2  5.92
-#>  3     3  5.92
-#>  4     4  5.92
-#>  5     5  5.92
-#>  6     6  5.92
-#>  7     7  5.92
-#>  8     8  5.92
-#>  9     9  5.92
-#> 10    10  5.92
+```
+
+The user can specify the length of each sequence.
+
+``` r
+# FIXME: this should obs_only = FALSE by default
+xnew_data(data, xnew_seq(a, length_out = 3))
+#> # A tibble: 3 × 2
+#>       a     b
+#>   <int> <dbl>
+#> 1     1  5.92
+#> 2     5  5.92
+#> 3    10  5.92
 ```
 
 ## Installation

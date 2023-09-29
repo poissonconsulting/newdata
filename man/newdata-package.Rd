@@ -4,9 +4,9 @@
 \name{newdata-package}
 \alias{newdata}
 \alias{newdata-package}
-\title{newdata: Generate New Data Values, Sequences and Frames}
+\title{newdata: Generate New Data Frames for Prediction}
 \description{
-Generates new data values, sequences and frames. In the new data the column(s) of interest vary across their range while the remaining columns are held constant at their reference value.
+Generates new data frames for predictive purposes. By default, all specified variables vary across their range while all other variables are held constant. The user can specify the length of each sequence, require that only observed values are used and add new variables.
 }
 \seealso{
 Useful links:

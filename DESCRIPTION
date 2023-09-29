@@ -1,5 +1,5 @@
 Package: newdata
-Title: Generate New Data Frames
+Title: Generate New Data Frames for Prediction
 Version: 0.0.0.9018
 Authors@R: c(
     person("Joe", "Thorley", , "joe@poissonconsulting.ca", role = c("aut", "cre"),
@@ -12,10 +12,11 @@ Authors@R: c(
            comment = c(ORCID = "0000-0003-4470-8361")),
     person("Poisson Consulting", role = c("fnd", "cph"))
   )
-Description: Generates new data values, sequences and frames.
-    In the new data the column(s) of interest vary across their
-    range while the remaining columns are held constant at their reference
-    value.
+Description: Generates new data frames for predictive purposes. 
+    By default, all specified variables vary across their range 
+    while all other variables are held constant.
+    The user can specify the length of each sequence, require that only
+    observed values are used and add new variables.
 License: MIT + file LICENSE
 URL: https://poissonconsulting.github.io/newdata, https://github.com/poissonconsulting/newdata
 BugReports: https://github.com/poissonconsulting/newdata/issues

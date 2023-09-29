@@ -23,15 +23,13 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-`newdata` is an R package to generate data frames (in the form of tibbles)
-for predictive purposes.
+`newdata` is an R package to generate new data frames for predictive purposes. 
+By default, all specified variables vary across their range 
+while all other variables are held constant.
+The user can specify the length of each sequence, require that only
+observed values are used and add new variables.
 
-The `xnew_data()` function varies all specified variables across their range
-of the observed data as a unique ordered sequence while holding all other
-variables constant at their reference values.
-
-By default all variables are held constant at their reference value 
-with their type preserved.
+By default all variables are held constant.
 ```{r}
 library(newdata)
 data <- tibble::tibble(
@@ -42,13 +40,19 @@ data <- tibble::tibble(
 xnew_data(data)
 ```
 
-Naming a variable causes it to vary across its range
+Specifying a variable causes it to vary across its range.
+
 ```{r}
-library(newdata)
+# FIXME: this should obs_only = FALSE by default
 xnew_data(data, a)
-xnew_data(data, a, obs_only = TRUE)
-xnew_data(data, xnew_seq(a, obs_only = FALSE))
 ```
+
+The user can specify the length of each sequence.
+```{r}
+# FIXME: this should obs_only = FALSE by default
+xnew_data(data, xnew_seq(a, length_out = 3))
+```
+
 ## Installation
 
 To install the latest release version from CRAN.
