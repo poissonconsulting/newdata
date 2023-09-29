@@ -76,52 +76,111 @@
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p><code>newdata</code> is an R package to generate new data frames for predictive purposes. By default, all specified variables vary across their range while all other variables are held constant. The user can specify the length of each sequence, require that only observed values are used and add new variables.</p>
-<p>By default all variables are held constant.</p>
+<p>By default all variables are held constant at the default reference value. Types, classes, factor levels and time zones are always preserved.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://poissonconsulting.github.io/newdata" class="external-link">newdata</a></span><span class="op">)</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
-<span>  a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">3L</span>, <span class="fl">6L</span>, <span class="fl">10L</span><span class="op">)</span>,</span>
-<span>  b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4.5</span>, <span class="fl">8.2</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>  lgl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
+<span>  int <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">4L</span>, <span class="fl">6L</span><span class="op">)</span>,</span>
+<span>  dbl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4.5</span>, <span class="fl">8.2</span><span class="op">)</span>,</span>
+<span>  chr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"most"</span>, <span class="st">"most"</span>, <span class="st">"a rarity"</span><span class="op">)</span>,</span>
+<span>  fct <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">chr</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bonus"</span>, <span class="st">"a rarity"</span>, <span class="st">"most"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  ord <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">ordered</a></span><span class="op">(</span><span class="va">chr</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a rarity"</span>, <span class="st">"most"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  dte <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">int</span><span class="op">)</span>,</span>
+<span>  dtt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="va">int</span>, tz <span class="op">=</span> <span class="st">"PST8PDT"</span><span class="op">)</span>,</span>
+<span>  hms <span class="op">=</span> <span class="fu">hms</span><span class="fu">::</span><span class="fu"><a href="https://hms.tidyverse.org/reference/hms.html" class="external-link">as_hms</a></span><span class="op">(</span><span class="va">int</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 1 × 2</span></span>
-<span><span class="co">#&gt;       a     b</span></span>
-<span><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1     5  5.92</span></span></code></pre></div>
+<span><span class="co">#&gt; # A tibble: 1 × 9</span></span>
+<span><span class="co">#&gt;   lgl     int   dbl chr   fct   ord      dte        dtt                 hms   </span></span>
+<span><span class="co">#&gt;   &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt; &lt;ord&gt;    &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
+<span><span class="co">#&gt; 1 FALSE     3  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
 <p>Specifying a variable causes it to vary across its range.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># FIXME: this should obs_only = FALSE by default</span></span>
-<span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">a</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 4 × 2</span></span>
-<span><span class="co">#&gt;       a     b</span></span>
-<span><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1     1  5.92</span></span>
-<span><span class="co">#&gt; 2     3  5.92</span></span>
-<span><span class="co">#&gt; 3     6  5.92</span></span>
-<span><span class="co">#&gt; 4    10  5.92</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">int</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 9</span></span>
+<span><span class="co">#&gt;   lgl     int   dbl chr   fct   ord      dte        dtt                 hms   </span></span>
+<span><span class="co">#&gt;   &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt; &lt;ord&gt;    &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
+<span><span class="co">#&gt; 1 FALSE     1  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 2 FALSE     2  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 3 FALSE     3  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 4 FALSE     4  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 5 FALSE     5  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 6 FALSE     6  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
 <p>The user can specify the length of each sequence.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># FIXME: this should obs_only = FALSE by default</span></span>
-<span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="reference/xnew_seq.html">xnew_seq</a></span><span class="op">(</span><span class="va">a</span>, length_out <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 3 × 2</span></span>
-<span><span class="co">#&gt;       a     b</span></span>
-<span><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1     1  5.92</span></span>
-<span><span class="co">#&gt; 2     5  5.92</span></span>
-<span><span class="co">#&gt; 3    10  5.92</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="reference/xnew_seq.html">xnew_seq</a></span><span class="op">(</span><span class="va">int</span>, length_out <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 3 × 9</span></span>
+<span><span class="co">#&gt;   lgl     int   dbl chr   fct   ord      dte        dtt                 hms   </span></span>
+<span><span class="co">#&gt;   &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt; &lt;ord&gt;    &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
+<span><span class="co">#&gt; 1 FALSE     1  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 2 FALSE     3  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 3 FALSE     6  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
+<p>and indicate whether only observed values should be used.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="reference/xnew_seq.html">xnew_seq</a></span><span class="op">(</span><span class="va">int</span>, length_out <span class="op">=</span> <span class="fl">3</span>, obs_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 3 × 9</span></span>
+<span><span class="co">#&gt;   lgl     int   dbl chr   fct   ord      dte        dtt                 hms   </span></span>
+<span><span class="co">#&gt;   &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt; &lt;ord&gt;    &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
+<span><span class="co">#&gt; 1 FALSE     1  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 2 FALSE     4  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 3 FALSE     6  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
+<p>With two or more variables all combinations are used.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">int</span>, <span class="va">fct</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 18 × 9</span></span>
+<span><span class="co">#&gt;    lgl     int   dbl chr   fct      ord    dte        dtt                 hms   </span></span>
+<span><span class="co">#&gt;    &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;    &lt;ord&gt;  &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
+<span><span class="co">#&gt;  1 FALSE     1  4.57 most  bonus    a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt;  2 FALSE     1  4.57 most  a rarity a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt;  3 FALSE     1  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt;  4 FALSE     2  4.57 most  bonus    a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt;  5 FALSE     2  4.57 most  a rarity a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt;  6 FALSE     2  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt;  7 FALSE     3  4.57 most  bonus    a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt;  8 FALSE     3  4.57 most  a rarity a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt;  9 FALSE     3  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 10 FALSE     4  4.57 most  bonus    a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 11 FALSE     4  4.57 most  a rarity a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 12 FALSE     4  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 13 FALSE     5  4.57 most  bonus    a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 14 FALSE     5  4.57 most  a rarity a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 15 FALSE     5  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 16 FALSE     6  4.57 most  bonus    a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 17 FALSE     6  4.57 most  a rarity a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 18 FALSE     6  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
+<p>To only get observed combinations use <code><a href="reference/xobs_only.html">xobs_only()</a></code></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="reference/xobs_only.html">xobs_only</a></span><span class="op">(</span><span class="va">int</span>, <span class="va">fct</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 3 × 9</span></span>
+<span><span class="co">#&gt;   lgl     int   dbl chr   fct      ord     dte        dtt                 hms   </span></span>
+<span><span class="co">#&gt;   &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;    &lt;ord&gt;   &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
+<span><span class="co">#&gt; 1 FALSE     1  4.57 most  most     a rari… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 2 FALSE     4  4.57 most  most     a rari… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 3 FALSE     6  4.57 most  a rarity a rari… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
+<p>Adding a new variable is simple.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">data</span>, new <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 2 × 10</span></span>
+<span><span class="co">#&gt;   lgl     int   dbl chr   fct   ord      dte        dtt                 hms   </span></span>
+<span><span class="co">#&gt;   &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt; &lt;ord&gt;    &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
+<span><span class="co">#&gt; 1 FALSE     3  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 2 FALSE     3  4.57 most  bonus a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; # ℹ 1 more variable: new &lt;lgl&gt;</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>To install the latest release version from CRAN.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"newdata"</span><span class="op">)</span></span></code></pre></div>
 <p>To install the latest development version from <a href="https://poissonconsulting.r-universe.dev/newdata" class="external-link">r-universe</a>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"newdata"</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://poissonconsulting.r-universe.dev"</span>, <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>To install the latest development version from <a href="https://github.com/poissonconsulting/newdata" class="external-link">GitHub</a></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"newdata"</span><span class="op">)</span></span></code></pre></div>
 </div>
