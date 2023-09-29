@@ -30,14 +30,14 @@
       4   4.5     5 a     FALSE 2023-09-29
       5   5.5     5 a     FALSE 2023-09-29
     Code
-      auto_expand(data, new_valuex(a))
+      auto_expand(data, a = new_value(a))
     Output
       # A tibble: 1 x 5
             a     b c     d     e         
         <dbl> <int> <fct> <lgl> <date>    
       1   3.5     5 a     FALSE 2023-09-29
     Code
-      auto_expand(data, a = new_value(a))
+      auto_expand(data, new_valuex(a))
     Output
       # A tibble: 1 x 5
             a     b c     d     e         
