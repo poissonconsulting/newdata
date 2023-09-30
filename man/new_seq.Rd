@@ -46,7 +46,7 @@ new_seq(x, length_out = NULL, ..., obs_only = NULL)
 A vector of the same class as the object.
 }
 \description{
-Generate a new sequence of values for a vector, matrix or array.
+Generate a new sequence of values.
 A sequence of values is used to predict the effect of a variable.
 }
 \details{

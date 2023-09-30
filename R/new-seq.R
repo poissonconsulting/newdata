@@ -1,6 +1,6 @@
 #' Generate New Sequence
 #'
-#' Generate a new sequence of values for a vector, matrix or array.
+#' Generate a new sequence of values.
 #' A sequence of values is used to predict the effect of a variable.
 #'
 #' By default the sequence of values for objects of class numeric

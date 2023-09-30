@@ -1,58 +1,44 @@
 #' Generate New Reference Value
 #'
-#' Generate a new reference value for a vector, matrix or array.
-#' A reference value is used to control for a variable
-#' during predictions.
+#' Generate a new reference value for a vector.
 #'
-#' The reference value for objects (vectors, matrices or arrays)
-#' of class numeric is the mean.
-#' Missing values are always removed
-#' unless it's the only value
-#' or the object is zero length.
-#' For integer objects it's the rounded mean.
-#' For character vectors it's the most common value
-#' and the (locale-dependent) minimum of the most common values if a tie.
-#' For factors and ordered factors it's the first level and
-#' the factor levels are preserved.
-#' For dates and hms vectors it's the rounded mean.
-#' For POSIXct vectors it's the rounded mean and the time zone is preserved.
-#' For logical objects it's always `FALSE` as this is
-#' the natural reference value.
-#' And finally by default it's simply the mean.
+#' By default the reference value for double vectors is the mean,
+#' unless obs_only = TRUE, in which case its the median of the unique values.
+#' For integer vectors it's the floored mean unless obs_only = TRUE, in which case
+#' it's also the median of the unique values.
+#' For character vectors it's the minimum of the most common values while
+#' for factors it's the first level.
+#' Ordered factors, Dates, times (hms), POSIXct and logical vectors are
+#' treated like integers.
+#' The factor levels and time zone are preserved.
 #'
 #' @param x The object to generate the reference value from.
 #' @inheritParams new_seq
 #' @returns A scalar of the same class as the object.
-#' @seealso [new_seq()] and [new_data()].
+#' @seealso [xnew_value()] and [new_seq()].
 #' @examples
 #' # the reference value for objects of class numeric is the mean
 #' new_value(c(1, 4))
-#' # missing values are always removed
-#' new_value(c(1, 4, NA))
-#' # unless it's the only value
-#' new_value(NA_real_)
-#' # or the object is zero length
-#' new_value(numeric())
-#' # for integer objects it's the rounded mean
+#' # unless obs_only = TRUE, in which case its the median of the unique values
+#' new_value(c(1, 4), obs_only = TRUE)
+#'
+#' # for integer objects it's the floored mean
 #' new_value(c(1L, 4L))
-#' # for character objects it's the most common value
-#' new_value(c("a", "b", "c", "c"))
-#' # and the minimum of the most common values if a tie
+#'
+#' # for character objects it's the minimum of the most common values
 #' new_value(c("a", "b", "c", "c", "b"))
+#'
 #' # for factors its the first level and the factor levels are preserved
 #' new_value(factor(c("a", "b", "c", "c"), levels = c("b", "a", "g")))
-#' # for ordered factors its also the first level
+#'
+#' # other classes are treated like integers
 #' new_value(ordered(c("a", "b", "c", "c"), levels = c("b", "a", "g")))
-#' # for dates it's the rounded mean
 #' new_value(as.Date(c("2000-01-01", "2000-01-04")))
-#' # it's also the rounded mean for times
 #' new_value(hms::as_hms(c("00:00:01", "00:00:04")))
-#' # for POSIXct vectors it's the rounded mean and the time zone is preserved
-#' new_value(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04"),
-#'   tz = "PST8PDT"
-#' ))
-#' # for logical objects it's always FALSE
-#' new_value(logical())
+#' new_value(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04")),
+#'   tzone = "PST8PDT")
+#' new_value(c(TRUE, FALSE, TRUE))
+#'
 #' @export
 new_value <- function(x, ..., obs_only = NULL) {
   new_seq(x, length_out = 1L, obs_only = obs_only)
