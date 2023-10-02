@@ -10,6 +10,8 @@ Authors@R: c(
            comment = c(ORCID = "0000-0001-7388-1222")),
     person("Nadine", "Hussein", , "nadine@poissonconsulting.ca", role = "ctb",
            comment = c(ORCID = "0000-0003-4470-8361")),
+    person("Maëlle", "Salmon", , "maelle@cynkra.com", role = "ctb",
+           comment = c(ORCID = "0000-0002-2815-0399")),
     person("Poisson Consulting", role = c("fnd", "cph"))
   )
 Description: Generates new data frames for predictive purposes. 
