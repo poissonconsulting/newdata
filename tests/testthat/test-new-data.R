@@ -80,3 +80,13 @@ test_that("new_data ref overridden by seq", {
 
   testthat::expect_snapshot(new_data(Orange, seq = "age", ref = list(age = 118)))
 })
+
+
+test_that("new_data factor with 100 levels", {
+  withr::local_options(lifecycle_verbosity = "quiet")
+
+  data <- tibble::tibble(fct = factor(1:100, levels = 1:100))
+  testthat::expect_snapshot(new_seq(data$fct))
+
+  testthat::expect_snapshot(new_data(data, "fct"))
+})

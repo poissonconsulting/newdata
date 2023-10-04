@@ -59,8 +59,6 @@ new_data <- function(
     ref = list(),
     obs_only = list(character(0)),
     length_out = 30) {
-  # FIXME: just deprecate for ref, obs_only and length_out
-#  lifecycle::deprecate_soft("0.1.0", "new_data()", "xnew_data()")
   chk_data(data)
   chk_count(length_out)
   chk_character(seq)
@@ -98,14 +96,21 @@ new_data <- function(
       check_classes(data[names(ref)], x_name = "ref", y_name = "data")
   }
 
-  new_seqs <- lapply(data[names(data) %in% seq], new_seq, length_out)
+  ops <- options(new_data.length_out_lgl = 2L,
+                 new_data.length_out_int = length_out,
+                 new_data.length_out_dbl = length_out,
+                 new_data.length_out_chr = Inf,
+                 new_data.obs_only = FALSE)
+  on.exit(options(ops))
+
+  new_seqs <- lapply(data[names(data) %in% seq], new_seq)
   new_ref <- lapply(
     data[!names(data) %in% seq & !names(data) %in% names(ref)],
     new_value
   )
 
   new_data <- expand.grid(c(new_seqs, new_ref, ref),
-    KEEP.OUT.ATTRS = FALSE, stringsAsFactors = FALSE
+                          KEEP.OUT.ATTRS = FALSE, stringsAsFactors = FALSE
   )
 
   for (obo in obs_only) {

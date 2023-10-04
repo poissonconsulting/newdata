@@ -197,7 +197,7 @@
     Code
       new_data(data, c("dfactor", "dinteger"), length_out = 5)
     Output
-      # A tibble: 25 x 6
+      # A tibble: 50 x 6
          dlogical dinteger dnumeric dfactor ddate      dhms    
          <lgl>       <int>    <dbl> <fct>   <date>     <time>  
        1 FALSE           1      5.6 1       2000-01-06 10:00:05
@@ -210,7 +210,7 @@
        8 FALSE           5      5.6 2       2000-01-06 10:00:05
        9 FALSE           7      5.6 2       2000-01-06 10:00:05
       10 FALSE          10      5.6 2       2000-01-06 10:00:05
-      # i 15 more rows
+      # i 40 more rows
     Code
       new_data(data, c("dhms"), length_out = 5)
     Output
@@ -334,4 +334,37 @@
        9 5      522.          116.
       10 5      572.          116.
       # i 20 more rows
+
+# new_data factor with 100 levels
+
+    Code
+      new_seq(data$fct)
+    Output
+        [1] 1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18 
+       [19] 19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36 
+       [37] 37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54 
+       [55] 55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71  72 
+       [73] 73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88  89  90 
+       [91] 91  92  93  94  95  96  97  98  99  100
+      100 Levels: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 ... 100
+
+---
+
+    Code
+      new_data(data, "fct")
+    Output
+      # A tibble: 100 x 1
+         fct  
+         <fct>
+       1 1    
+       2 2    
+       3 3    
+       4 4    
+       5 5    
+       6 6    
+       7 7    
+       8 8    
+       9 9    
+      10 10   
+      # i 90 more rows
 
