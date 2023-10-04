@@ -29,6 +29,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Nadine Hussein \email{nadine@poissonconsulting.ca} (\href{https://orcid.org/0000-0003-4470-8361}{ORCID}) [contributor]
+  \item Maëlle Salmon \email{maelle@cynkra.com} (\href{https://orcid.org/0000-0002-2815-0399}{ORCID}) [contributor]
   \item Poisson Consulting [funder, copyright holder]
 }
 
