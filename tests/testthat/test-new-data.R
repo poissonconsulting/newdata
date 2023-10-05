@@ -90,3 +90,11 @@ test_that("new_data factor with 100 levels", {
 
   testthat::expect_snapshot(new_data(data, "fct"))
 })
+
+test_that("new_data factor with 100 levels obs_only works", {
+  withr::local_options(lifecycle_verbosity = "quiet")
+
+  data <- tibble::tibble(fct = factor(1:100, levels = 1:100))
+
+  testthat::expect_snapshot(new_data(data, "fct", obs_only = TRUE))
+})

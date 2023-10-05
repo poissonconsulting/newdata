@@ -368,3 +368,23 @@
       10 10   
       # i 90 more rows
 
+# new_data factor with 100 levels obs_only works
+
+    Code
+      new_data(data, "fct", obs_only = TRUE)
+    Output
+      # A tibble: 100 x 1
+         fct  
+         <fct>
+       1 1    
+       2 10   
+       3 100  
+       4 11   
+       5 12   
+       6 13   
+       7 14   
+       8 15   
+       9 16   
+      10 17   
+      # i 90 more rows
+

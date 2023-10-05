@@ -16,26 +16,16 @@ new_data(
 \item{data}{The data frame to generate the new data from.}
 
 \item{seq}{A character vector of the variables in \code{data} to generate
-sequences for or a named integer vector of the maximum length for each
-sequence where each name is the respective variable.}
+sequences for.}
 
-\item{ref}{A named list of vectors to add to the new data frame.
-The variables must not be in
-\code{seq} but they do not need to be in \code{data}.}
+\item{ref}{A named list of reference values for variables that are not in seq.}
 
-\item{obs_only}{A character vector specifying the
-character, factor, and ordered (factor) variables in \code{seq} that
-should only be represented by their unique combinations or a list
-of character vectors specifying the groupings of character, factor
-and ordered (factor) variables in \code{seq} that should each only
-be represented by their unique combinations.
-If \code{TRUE} it is set to be all character, factor,
-and ordered (factor) variables specified in \code{seq}.}
+\item{obs_only}{A list of character vectors indicating the sets of variables
+to only allow observed combinations for.
+If TRUE then obs_only is set to be seq.}
 
 \item{length_out}{A count indicating the maximum length of sequences for all
-types of variables except character, factor and ordered factors.
-If the maximum length for each variable is specified in \code{seq}
-then \code{length_out} is ignored.}
+types of variables except logical, character, factor and ordered factors.}
 }
 \value{
 A tibble of the new data.
@@ -44,16 +34,9 @@ A tibble of the new data.
 Generates a new data frame (in the form of a tibble) with each variable
 held constant or varying as a unique ordered sequence.
 All possible unique combinations are included and the columns
-are in the same order as those in \code{data} with new columns added from
-\code{ref}.
+are in the same order as those in \code{data}.
 }
 \details{
-It is worth noting that \code{ref} can be used to specify reference values
-as well as sequences.
-The \code{ref} argument is useful for introducing new variables,
-overriding the default reference values, extrapolating outside
-the range of the data and/or changing the levels of a factor
-or time zone of a POSIXct vector.
 If an element of \code{ref} is a character vector and the corresponding
 column is a data frame, then the ref element is assigned the same
 factor levels as the column in the data. This is useful for choosing
