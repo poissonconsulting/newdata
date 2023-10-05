@@ -10,6 +10,13 @@
       2     3   4.5 b    
       3     4   6   c    
     Code
+      xnew_data(xnew_data(data, a))
+    Output
+      # A tibble: 1 x 3
+            a     b d    
+        <int> <dbl> <chr>
+      1     2  4.83 a    
+    Code
       xnew_data(xnew_data(data, a, b = new_value(b), xnew_value(d)))
     Output
       # A tibble: 1 x 3

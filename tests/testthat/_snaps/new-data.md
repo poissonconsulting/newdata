@@ -257,9 +257,6 @@
           len supp   dose
         <dbl> <fct> <dbl>
       1  18.8 OJ        4
-
----
-
     Code
       new_data(ToothGrowth, ref = list(dose = c(3, 4)))
     Output
@@ -268,9 +265,6 @@
         <dbl> <fct> <dbl>
       1  18.8 OJ        3
       2  18.8 OJ        4
-
----
-
     Code
       new_data(ToothGrowth, ref = list(dose = c(3, 4), len = c(10.1, 12, 13)))
     Output
@@ -283,9 +277,6 @@
       4  12   OJ        4
       5  13   OJ        3
       6  13   OJ        4
-
----
-
     Code
       new_data(ToothGrowth, ref = list(supp = factor("VC")))
     Output
@@ -293,9 +284,6 @@
           len supp   dose
         <dbl> <fct> <dbl>
       1  18.8 VC     1.17
-
----
-
     Code
       new_data(ToothGrowth, ref = list(supp = factor("TP")))
     Output
@@ -303,9 +291,6 @@
           len supp   dose
         <dbl> <fct> <dbl>
       1  18.8 TP     1.17
-
----
-
     Code
       new_data(ToothGrowth, ref = list(supp = factor(c("VC", "OJ"))))
     Output

@@ -63,16 +63,16 @@ test_that("new_data ref errors", {
   )
 })
 
-# FIXME: use one snapshot
 test_that("new_data ref works", {
   withr::local_options(lifecycle_verbosity = "quiet")
 
-  testthat::expect_snapshot(new_data(ToothGrowth, ref = list(dose = 4)))
-  testthat::expect_snapshot(new_data(ToothGrowth, ref = list(dose = c(3, 4))))
-  testthat::expect_snapshot(new_data(ToothGrowth, ref = list(dose = c(3, 4), len = c(10.1, 12, 13))))
-  testthat::expect_snapshot(new_data(ToothGrowth, ref = list(supp = factor("VC"))))
-  testthat::expect_snapshot(new_data(ToothGrowth, ref = list(supp = factor("TP"))))
-  testthat::expect_snapshot(new_data(ToothGrowth, ref = list(supp = factor(c("VC", "OJ")))))
+  testthat::expect_snapshot({
+    new_data(ToothGrowth, ref = list(dose = 4))
+    new_data(ToothGrowth, ref = list(dose = c(3, 4)))
+    new_data(ToothGrowth, ref = list(dose = c(3, 4), len = c(10.1, 12, 13)))
+    new_data(ToothGrowth, ref = list(supp = factor("VC")))
+    new_data(ToothGrowth, ref = list(supp = factor("TP")))
+    new_data(ToothGrowth, ref = list(supp = factor(c("VC", "OJ"))))})
 })
 
 test_that("new_data ref overridden by seq", {
