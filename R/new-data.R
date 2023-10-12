@@ -27,7 +27,7 @@
 #'   vecint = c(1L, 3L),
 #'   vecreal = c(1, 3),
 #'   vecchar = c("b", "a"),
-#'   vecdate = as.Date("2001-01-01", "2001-01-01")
+#'   vecdate = as.Date(c("2001-01-01", "2001-01-01"))
 #' )
 #'
 #' # vary count while holding other values constant
