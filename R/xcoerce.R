@@ -1,6 +1,6 @@
 #' Coerce
 #'
-#' @param ... One or more variables to generate combinations for.
+#' @param ... TBD
 #' @param .data TBD
 #' @seealso [xnew_data()], [xnew_value()] and [xnew_seq()]
 #' @export
