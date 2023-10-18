@@ -7,7 +7,7 @@
 #' @examples
 #' # TBD
 xcoerce <- function(..., .data = xnew_data_env$data) {
-  values <- list2(...)
+  values <- tibble(...)
   stopifnot(all(names2(values) != ""))
 
   stopifnot(all(names(values) %in% names(.data)))
