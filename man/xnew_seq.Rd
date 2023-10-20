@@ -12,11 +12,11 @@ xnew_seq(x, ...)
 \item{...}{Additional arguments passed to \code{\link[=new_seq]{new_seq()}}.}
 }
 \description{
-Generate a new sequence of values for a vector, matrix or array.
-A sequence of values is used to predict the effect of a variable.
+Generate a new sequence of values for a vector.
 }
 \details{
-\code{xnew_seq()} is a wrapper function for use in \code{\link[=xnew_seq]{xnew_seq()}} to avoid
+\code{xnew_seq()} is a wrapper function on \code{new_seq()}
+for use in \code{\link[=xnew_data]{xnew_data()}} to avoid
 having to repeating the column name.
 }
 \examples{
