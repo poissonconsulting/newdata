@@ -90,6 +90,18 @@ xnew_data(obs_data, xnew_seq(int, length_out = 3, obs_only = TRUE))
 #> 3 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
 
+The `xobs_only()` function can also be used to specify only observed
+values.
+
+``` r
+xnew_data(obs_data, xobs_only(xnew_seq(int, length_out = 3)))
+#> # A tibble: 2 × 9
+#>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
+#>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
+#> 1 FALSE     1  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 2 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+```
+
 With two or more variables all combinations are used.
 
 ``` r
