@@ -24,5 +24,5 @@ xnew_data(data, xobs_only(period, annual))
 xnew_data(data, xobs_only(period, xnew_seq(annual, length_out = 3)))
 }
 \seealso{
-\code{\link[=xnew_data]{xnew_data()}}, \code{\link[=xnew_value]{xnew_value()}} and \code{\link[=xnew_seq]{xnew_seq()}}
+\code{\link[=xnew_data]{xnew_data()}}
 }

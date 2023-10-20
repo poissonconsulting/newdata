@@ -21,8 +21,14 @@ for use in \code{\link[=xnew_data]{xnew_data()}} to avoid
 having to repeating the column name.
 }
 \examples{
-# TBD
+data <- tibble::tibble(
+  period = factor(c("before", "before", "after", "after"),
+    levels = c("before", "after")),
+  annual = factor(c(1, 3, 5, 8), levels = c(1, 3, 5, 8)))
+
+xnew_data(data, xcast(period = "before"))
+xnew_data(data, xcast(period = "before", annual = c("1", "3")))
 }
 \seealso{
-\code{\link[=xnew_data]{xnew_data()}}
+\code{\link[vctrs:vec_cast]{vctrs::vec_cast()}} and \code{\link[=xnew_data]{xnew_data()}}
 }

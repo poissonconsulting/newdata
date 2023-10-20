@@ -46,9 +46,12 @@ xnew_data(data, xnew_seq(annual, length_out = 3, obs_only = TRUE))
 # With multiple variables all combinations are produced
 xnew_data(data, period, xnew_seq(annual, length_out = 3, obs_only = TRUE))
 
-# To only produce observed combinations use `xobs_only()`.
+# To only preserve observed combinations use
 xnew_data(data, xobs_only(period, annual))
+
+# And to cast the values use
+xnew_data(data, xcast(annual = "3"))
 }
 \seealso{
-\code{\link[=xnew_value]{xnew_value()}}, \code{\link[=xnew_seq]{xnew_seq()}} and \code{\link[=xobs_only]{xobs_only()}}
+\code{\link[=xnew_value]{xnew_value()}}, \code{\link[=xnew_seq]{xnew_seq()}}, \code{\link[=xcast]{xcast()}} and \code{\link[=xobs_only]{xobs_only()}}
 }

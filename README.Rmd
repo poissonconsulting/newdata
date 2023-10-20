@@ -83,6 +83,13 @@ Adding a new variable is simple.
 xnew_data(obs_data, new = c(TRUE, FALSE))
 ```
 
+### Casting Variables
+
+Casting variables is easy.
+```{r}
+xnew_data(obs_data, xcast(int = 7, dbl = 10L, fct = "a rarity"))
+```
+
 ## Installation
 
 To install the latest release version from CRAN.
