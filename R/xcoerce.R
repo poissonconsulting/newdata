@@ -7,9 +7,9 @@
 #' @examples
 #' # TBD
 xcoerce <- function(..., .data = xnew_data_env$data) {
-  values <- tibble(...)
+  values <- tibble::tibble(...)
 
   stopifnot(all(names(values) %in% names(.data)))
 
-  vec_cast(values, .data[names(values)])
+  vctrs::vec_cast(values, .data[names(values)])
 }
