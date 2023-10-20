@@ -2,7 +2,7 @@
 #'
 #' @param ... One or more variables to generate combinations for.
 #' @param .length_out A count to override the default length of sequences.
-#' @seealso [xnew_data()], [xnew_value()] and [xnew_seq()]
+#' @seealso [xnew_data()]
 #' @export
 #' @examples
 #' data <- tibble::tibble(

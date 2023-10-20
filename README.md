@@ -143,6 +143,18 @@ xnew_data(obs_data, new = c(TRUE, FALSE))
 #> # ℹ 1 more variable: new <lgl>
 ```
 
+### Casting Variables
+
+Casting variables is easy.
+
+``` r
+xnew_data(obs_data, xcast(int = 7, dbl = 10L, fct = "a rarity"))
+#> # A tibble: 1 × 9
+#>   lgl     int   dbl chr   fct      ord     dte        dtt                 hms   
+#>   <lgl> <int> <dbl> <chr> <fct>    <ord>   <date>     <dttm>              <time>
+#> 1 FALSE     7    10 most  a rarity a rari… 1970-01-04 1969-12-31 16:00:03 00'03"
+```
+
 ## Installation
 
 To install the latest release version from CRAN.
