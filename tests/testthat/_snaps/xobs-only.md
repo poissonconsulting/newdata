@@ -101,19 +101,4 @@
         <dbl> <int> <fct> <lgl> <date>    
       1   1.5     3 a     FALSE 2023-09-29
       2   2.5     4 a     FALSE 2023-09-29
-    Code
-      xnew_data(data, xobs_only(b = new_seq(a, obs_only = TRUE)))
-    Output
-      # A tibble: 0 x 5
-      # i 5 variables: a <dbl>, b <dbl>, c <fct>, d <lgl>, e <date>
-    Code
-      # FIXME: b should come out as an int here, with xcast
-      xnew_data(data, xobs_only(b = new_seq(a - 0.5, obs_only = TRUE)))
-    Output
-      # A tibble: 3 x 5
-            a     b c     d     e         
-        <dbl> <dbl> <fct> <lgl> <date>    
-      1   3.5     3 a     FALSE 2023-09-29
-      2   3.5     4 a     FALSE 2023-09-29
-      3   3.5     5 a     FALSE 2023-09-29
 

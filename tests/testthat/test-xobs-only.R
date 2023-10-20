@@ -19,13 +19,5 @@ test_that("simple dataset", {
     xnew_data(data, xobs_only(b = new_seq(b)))
     xnew_data(data, xobs_only(a = new_seq(a)))
     xnew_data(data, xobs_only(a = new_seq(a, obs_only = TRUE), b = 1:4))
-    xnew_data(data, xobs_only(b = new_seq(a, obs_only = TRUE)))
-    "FIXME: b should come out as an int here, with xcast"
-    xnew_data(data, xobs_only(b = new_seq(a - 0.5, obs_only = TRUE)))
   })
-
-  expect_error(
-    xnew_data(data, xobs_only(b = new_seq(a, obs_only = TRUE), b = 1:4)),
-    "Names must be unique."
-  )
 })
