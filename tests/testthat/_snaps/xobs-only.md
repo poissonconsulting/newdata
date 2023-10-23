@@ -101,4 +101,11 @@
         <dbl> <int> <fct> <lgl> <date>    
       1   1.5     3 a     FALSE 2023-09-29
       2   2.5     4 a     FALSE 2023-09-29
+    Code
+      expect_error(xnew_data(data, xobs_only(b = new_value(a), b = 1:4)),
+      "Names must be unique.")
+      xnew_data(data, xobs_only(b = new_value(a)))
+    Output
+      # A tibble: 0 x 5
+      # i 5 variables: a <dbl>, b <dbl>, c <fct>, d <lgl>, e <date>
 
