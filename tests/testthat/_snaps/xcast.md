@@ -165,7 +165,7 @@
     Output
       # A tibble: 2 x 5
             a     b c     d     e         
-        <dbl> <int> <chr> <lgl> <date>    
+        <dbl> <int> <fct> <lgl> <date>    
       1   3.5     3 a     FALSE 2023-09-29
       2   3.5     3 b     FALSE 2023-09-29
     Code
@@ -173,7 +173,7 @@
     Output
       # A tibble: 2 x 5
             a     b c     d     e         
-        <dbl> <int> <chr> <lgl> <date>    
+        <dbl> <int> <fct> <lgl> <date>    
       1   3.5     3 a     FALSE 2023-09-29
       2   3.5     4 b     FALSE 2023-09-29
 
