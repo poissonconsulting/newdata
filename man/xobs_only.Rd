@@ -11,7 +11,8 @@ xobs_only(..., .length_out = NULL, .data = xnew_data_env$data)
 
 \item{.length_out}{A count to override the default length of sequences.}
 
-\item{.data}{TBD}
+\item{.data}{Normally defined by \code{\link[=xnew_data]{xnew_data()}}, users must pass a
+data frame or tibble if using this function directly.}
 }
 \description{
 Generate Observed Combinations Only
