@@ -22,5 +22,8 @@ test_that("simple dataset", {
     xnew_data(data, xobs_only(b = new_seq(a, obs_only = TRUE)))
   })
 
-  expect_error(xnew_data(data, xobs_only(b = new_seq(a, obs_only = TRUE), b = 1:4)), "Names must be unique.")
+  expect_error(
+    xnew_data(data, xobs_only(b = new_seq(a, obs_only = TRUE), b = 1:4)),
+    "Names must be unique."
+  )
 })
