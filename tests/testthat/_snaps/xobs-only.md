@@ -102,8 +102,6 @@
       1   1.5     3 a     FALSE 2023-09-29
       2   2.5     4 a     FALSE 2023-09-29
     Code
-      expect_error(xnew_data(data, xobs_only(b = new_seq(a, obs_only = TRUE), b = 1:4)),
-      "Names must be unique.")
       xnew_data(data, xobs_only(b = new_seq(a, obs_only = TRUE)))
     Output
       # A tibble: 0 x 5
