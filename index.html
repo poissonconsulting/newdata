@@ -133,8 +133,16 @@
 <span><span class="co">#&gt; 1 FALSE     1  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
 <span><span class="co">#&gt; 2 FALSE     4  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
 <span><span class="co">#&gt; 3 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
-<p>With two or more variables all combinations are used.</p>
+<p>The <code><a href="reference/xobs_only.html">xobs_only()</a></code> function can also be used to specify only observed values.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">obs_data</span>, <span class="fu"><a href="reference/xobs_only.html">xobs_only</a></span><span class="op">(</span><span class="fu"><a href="reference/xnew_seq.html">xnew_seq</a></span><span class="op">(</span><span class="va">int</span>, length_out <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 2 × 9</span></span>
+<span><span class="co">#&gt;   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   </span></span>
+<span><span class="co">#&gt;   &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;   &lt;ord&gt;    &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
+<span><span class="co">#&gt; 1 FALSE     1  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 2 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
+<p>With two or more variables all combinations are used.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">obs_data</span>, <span class="va">int</span>, <span class="va">fct</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 18 × 9</span></span>
 <span><span class="co">#&gt;    lgl     int   dbl chr   fct      ord    dte        dtt                 hms   </span></span>
@@ -158,7 +166,7 @@
 <span><span class="co">#&gt; 17 FALSE     6  4.57 most  a rarity a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
 <span><span class="co">#&gt; 18 FALSE     6  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
 <p>To only get observed combinations use <code><a href="reference/xobs_only.html">xobs_only()</a></code></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">obs_data</span>, <span class="fu"><a href="reference/xobs_only.html">xobs_only</a></span><span class="op">(</span><span class="va">int</span>, <span class="va">fct</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 3 × 9</span></span>
 <span><span class="co">#&gt;   lgl     int   dbl chr   fct      ord     dte        dtt                 hms   </span></span>
@@ -171,7 +179,7 @@
 <h3 id="add-new-variables">Add New Variables<a class="anchor" aria-label="anchor" href="#add-new-variables"></a>
 </h3>
 <p>Adding a new variable is simple.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">obs_data</span>, new <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 10</span></span>
 <span><span class="co">#&gt;   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   </span></span>
@@ -185,13 +193,13 @@
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>To install the latest release version from CRAN.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"newdata"</span><span class="op">)</span></span></code></pre></div>
 <p>To install the latest development version from <a href="https://poissonconsulting.r-universe.dev/newdata" class="external-link">r-universe</a>.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"newdata"</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://poissonconsulting.r-universe.dev"</span>, <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>To install the latest development version from <a href="https://github.com/poissonconsulting/newdata" class="external-link">GitHub</a></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"poissonconsulting/newdata"</span><span class="op">)</span></span></code></pre></div>
 </div>
