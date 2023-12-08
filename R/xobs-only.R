@@ -2,7 +2,8 @@
 #'
 #' @param ... One or more variables to generate combinations for.
 #' @param .length_out A count to override the default length of sequences.
-#' @seealso [xnew_data()], [xnew_value()] and [xnew_seq()]
+#' @inheritParams xcast
+#' @seealso [xnew_data()]
 #' @export
 #' @examples
 #' data <- tibble::tibble(
@@ -12,12 +13,13 @@
 #' xnew_data(data, period, annual)
 #' xnew_data(data, xobs_only(period, annual))
 #' xnew_data(data, xobs_only(period, xnew_seq(annual, length_out = 3)))
-xobs_only <- function(..., .length_out = NULL) {
+xobs_only <- function(..., .length_out = NULL, .data = xnew_data_env$data) {
   quos <- enquos(...)
 
   translated <- map(quos, quo_translate_xobs_only, .length_out)
 
-  semi_crossing(!!!translated)
+  out <- semi_crossing(!!!translated)
+  xcast(out, .data = .data)
 }
 
 quo_translate_xobs_only <- function(quo, length_out) {

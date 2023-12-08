@@ -1,9 +1,9 @@
 #' Generate New Sequence for `xnew_data()`
 #'
-#' Generate a new sequence of values for a vector, matrix or array.
-#' A sequence of values is used to predict the effect of a variable.
+#' Generate a new sequence of values for a vector.
 #'
-#' `xnew_seq()` is a wrapper function for use in [xnew_seq()] to avoid
+#' `xnew_seq()` is a wrapper function on `new_seq()`
+#' for use in [xnew_data()] to avoid
 #' having to repeating the column name.
 #' @inheritParams new_seq
 #' @param ... Additional arguments passed to [new_seq()].

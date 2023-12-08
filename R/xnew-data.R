@@ -12,7 +12,7 @@
 #' @param .length_out NULL or a count specifying the maximum length
 #' of all sequences.
 #' @param ... A list of variables to generate sequences for.
-#' @seealso [xnew_value()], [xnew_seq()] and [xobs_only()]
+#' @seealso [xnew_value()], [xnew_seq()], [xcast()] and [xobs_only()]
 #' @export
 #' @examples
 #' data <- tibble::tibble(
@@ -36,8 +36,11 @@
 #' # With multiple variables all combinations are produced
 #' xnew_data(data, period, xnew_seq(annual, length_out = 3, obs_only = TRUE))
 #'
-#' # To only produce observed combinations use `xobs_only()`.
+#' # To only preserve observed combinations use
 #' xnew_data(data, xobs_only(period, annual))
+#'
+#' # And to cast the values use
+#' xnew_data(data, xcast(annual = "3"))
 xnew_data <- function(.data, ..., .length_out = NULL) {
   stopifnot(is.null(xnew_data_env$data))
   local_bindings(data = .data, .env = xnew_data_env)

@@ -31,7 +31,8 @@ Imports:
     lifecycle,
     rlang,
     tibble,
-    tidyr
+    tidyr,
+    vctrs
 Suggests:
     covr,
     datasets,
