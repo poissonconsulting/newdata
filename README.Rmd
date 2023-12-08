@@ -56,9 +56,14 @@ xnew_data(obs_data, xnew_seq(int, length_out = 3))
 
 ### Observed Values and Combinations
 
-The user can also indicate whether only observed values should be used.
+The user can also indicate whether only observed values should be used in the sequence.
 ```{r}
 xnew_data(obs_data, xnew_seq(int, length_out = 3, obs_only = TRUE))
+```
+
+The `xobs_only()` function can be used to filter out unobserved values after the sequence has been generated.
+```{r}
+xnew_data(obs_data, xobs_only(xnew_seq(int, length_out = 3)))
 ```
 
 With two or more variables all combinations are used.

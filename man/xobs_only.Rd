@@ -4,12 +4,15 @@
 \alias{xobs_only}
 \title{Generate Observed Combinations Only}
 \usage{
-xobs_only(..., .length_out = NULL)
+xobs_only(..., .length_out = NULL, .data = xnew_data_env$data)
 }
 \arguments{
 \item{...}{One or more variables to generate combinations for.}
 
 \item{.length_out}{A count to override the default length of sequences.}
+
+\item{.data}{Normally defined by \code{\link[=xnew_data]{xnew_data()}}, users must pass a
+data frame or tibble if using this function directly.}
 }
 \description{
 Generate Observed Combinations Only

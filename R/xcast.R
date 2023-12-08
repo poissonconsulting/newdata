@@ -7,7 +7,8 @@
 #' for use in [xnew_data()] to avoid
 #' having to repeating the column name.
 #' @param ... TBD
-#' @param .data TBD
+#' @param .data Normally defined by [xnew_data()], users must pass a
+#'   data frame or tibble if using this function directly.
 #' @seealso [vctrs::vec_cast()] and [xnew_data()]
 #' @export
 #' @examples

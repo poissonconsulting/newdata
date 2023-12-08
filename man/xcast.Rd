@@ -9,7 +9,8 @@ xcast(..., .data = xnew_data_env$data)
 \arguments{
 \item{...}{TBD}
 
-\item{.data}{TBD}
+\item{.data}{Normally defined by \code{\link[=xnew_data]{xnew_data()}}, users must pass a
+data frame or tibble if using this function directly.}
 }
 \description{
 Casts a sequence of values to the same class as the original
