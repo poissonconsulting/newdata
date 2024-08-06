@@ -21,7 +21,7 @@ Description: Generates new data frames for predictive purposes.
     The user can specify the length of each sequence, require that only
     observed values and combinations are used and add new variables.
 License: MIT + file LICENSE
-URL: https://poissonconsulting.github.io/newdata, https://github.com/poissonconsulting/newdata
+URL: https://poissonconsulting.github.io/newdata/, https://github.com/poissonconsulting/newdata/
 BugReports: https://github.com/poissonconsulting/newdata/issues
 Depends: R (>= 3.6)
 Imports:

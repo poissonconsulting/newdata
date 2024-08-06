@@ -13,8 +13,8 @@ Generates new data frames for predictive purposes. By default, all specified var
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://poissonconsulting.github.io/newdata}
-  \item \url{https://github.com/poissonconsulting/newdata}
+  \item \url{https://poissonconsulting.github.io/newdata/}
+  \item \url{https://github.com/poissonconsulting/newdata/}
   \item Report bugs at \url{https://github.com/poissonconsulting/newdata/issues}
 }
 
