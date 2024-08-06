@@ -42,23 +42,25 @@ new_data <- function(
     ref = list(),
     obs_only = list(character(0)),
     length_out = 30) {
-
-  if(!missing(ref)) {
+  if (!missing(ref)) {
     lifecycle::deprecate_soft(
       "0.0.0.9020", "new_data(ref)",
-      details = "Use `xnew_data(data, col_name = 'new_value')`")
+      details = "Use `xnew_data(data, col_name = 'new_value')`"
+    )
   }
 
-  if(!missing(obs_only)) {
+  if (!missing(obs_only)) {
     lifecycle::deprecate_soft(
       "0.0.0.9020", "new_data(obs_only)",
-      details = "Use `xnew_data(data, xobs_only(col_name))`")
+      details = "Use `xnew_data(data, xobs_only(col_name))`"
+    )
   }
 
-  if(!missing(length_out)) {
+  if (!missing(length_out)) {
     lifecycle::deprecate_soft(
       "0.0.0.9020", "new_data(length_out)",
-      details = "Use `xnew_data(data, xnew_seq(col_name, length_out = 30))`")
+      details = "Use `xnew_data(data, xnew_seq(col_name, length_out = 30))`"
+    )
   }
 
   chk_data(data)
@@ -97,11 +99,13 @@ new_data <- function(
       check_classes(data[names(ref)], x_name = "ref", y_name = "data")
   }
 
-  ops <- options(new_data.length_out_lgl = 2L,
-                 new_data.length_out_int = length_out,
-                 new_data.length_out_dbl = length_out,
-                 new_data.length_out_chr = Inf,
-                 new_data.obs_only = FALSE)
+  ops <- options(
+    new_data.length_out_lgl = 2L,
+    new_data.length_out_int = length_out,
+    new_data.length_out_dbl = length_out,
+    new_data.length_out_chr = Inf,
+    new_data.obs_only = FALSE
+  )
   on.exit(options(ops))
 
   new_seqs <- lapply(data[names(data) %in% seq], new_seq)
@@ -111,7 +115,7 @@ new_data <- function(
   )
 
   new_data <- expand.grid(c(new_seqs, new_ref, ref),
-                          KEEP.OUT.ATTRS = FALSE, stringsAsFactors = FALSE
+    KEEP.OUT.ATTRS = FALSE, stringsAsFactors = FALSE
   )
   for (obo in obs_only) {
     new_data <- new_data %>% obs_only(data, obo)

@@ -36,7 +36,8 @@
 #' new_value(as.Date(c("2000-01-01", "2000-01-04")))
 #' new_value(hms::as_hms(c("00:00:01", "00:00:04")))
 #' new_value(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04")),
-#'   tzone = "PST8PDT")
+#'   tzone = "PST8PDT"
+#' )
 #' new_value(c(TRUE, FALSE, TRUE))
 #'
 #' @export

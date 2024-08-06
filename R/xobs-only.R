@@ -8,8 +8,10 @@
 #' @examples
 #' data <- tibble::tibble(
 #'   period = factor(c("before", "before", "after", "after"),
-#'     levels = c("before", "after")),
-#'   annual = factor(c(1, 3, 5, 8), levels = c(1, 3, 5, 8)))
+#'     levels = c("before", "after")
+#'   ),
+#'   annual = factor(c(1, 3, 5, 8), levels = c(1, 3, 5, 8))
+#' )
 #' xnew_data(data, period, annual)
 #' xnew_data(data, xobs_only(period, annual))
 #' xnew_data(data, xobs_only(period, xnew_seq(annual, length_out = 3)))

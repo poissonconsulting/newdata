@@ -27,9 +27,11 @@ observed values and combinations are used and add new variables.
 \examples{
 data <- tibble::tibble(
   period = factor(c("before", "before", "after", "after"),
-    levels = c("before", "after")),
+    levels = c("before", "after")
+  ),
   count = c(0L, 1L, 5L, 4L),
-  annual = factor(c(2, 3, 5, 8), levels = c(1, 2, 3, 5, 8)))
+  annual = factor(c(2, 3, 5, 8), levels = c(1, 2, 3, 5, 8))
+)
 
 # By default all other variables are held constant at their reference value.
 xnew_data(data)

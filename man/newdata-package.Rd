@@ -6,6 +6,8 @@
 \alias{newdata-package}
 \title{newdata: Generate New Data Frames for Prediction}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Generates new data frames for predictive purposes. By default, all specified variables vary across their range while all other variables are held constant at the default reference value. Types, classes, factor levels and time zones are always preserved. The user can specify the length of each sequence, require that only observed values and combinations are used and add new variables.
 }
 \seealso{

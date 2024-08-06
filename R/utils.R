@@ -23,18 +23,18 @@ as_factor <- function(x, y) {
 }
 
 seq1 <- function(x, length_out, integer = FALSE) {
-  out <- if(length_out == 1) {
+  out <- if (length_out == 1) {
     mean(x, na.rm = TRUE)
   } else {
     range <- range(x, na.rm = TRUE)
     from <- range[1]
     to <- range[2]
-    if(integer) {
+    if (integer) {
       length_out <- min(length_out, to - from + 1L)
     }
     seq(from = from, to = to, length.out = length_out)
   }
-  if(integer) {
+  if (integer) {
     out <- out %>%
       as.integer()
     return(out)
@@ -49,11 +49,11 @@ obs_only1 <- function(x, length_out, first = FALSE) {
     sort()
 
   n <- length(out)
-  if(n > length_out) {
-    if(first) {
+  if (n > length_out) {
+    if (first) {
       out <- out[1:length_out]
     } else {
-      out <- out[seq1(c(1,n), length_out = length_out, integer = TRUE)]
+      out <- out[seq1(c(1, n), length_out = length_out, integer = TRUE)]
     }
   }
   out
