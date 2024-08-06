@@ -1,15 +1,3 @@
+url: https://poissonconsulting.github.io/newdata/
 template:
   bootstrap: 5
-authors:
-  Joe Thorley:
-    href: "https://github.com/joethorley"
-  Kirill Müller:
-    href: "https://github.com/krlmlr"
-  Ayla Pearson:
-    href: "https://github.com/aylapear"
-  Nadine Hussein:
-    href: "https://github.com/nadinehussein"
-  Evan Amies-Galonski:
-    href: "https://github.com/evanamiesgalonski"
-  Poisson Consulting:
-    href: "http://poissonconsulting.ca"
