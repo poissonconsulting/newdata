@@ -7,7 +7,7 @@ test_that("obs_only", {
   )
   data <- Orange[c(1, 35), ]
 
-  testthat::expect_snapshot({
+  expect_snapshot({
     obs_only(newdata, data, "Tree")
     obs_only(newdata, data[1, ], "Tree")
   })
