@@ -22,7 +22,7 @@ test_that("new_data obs_only", {
   )
   data <- data[as.character(data$Fac1) != as.character(data$Fac2), ]
 
-  testthat::expect_snapshot({
+  expect_snapshot({
     new_data(data)
     new_data(data, c("Fac1"))
     new_data(data, c("Fac2"))
