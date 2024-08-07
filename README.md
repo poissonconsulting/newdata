@@ -8,8 +8,7 @@
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/poissonconsulting/newdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/poissonconsulting/newdata/actions/workflows/R-CMD-check.yaml)
-[![Codecov test
-coverage](https://codecov.io/gh/poissonconsulting/newdata/graph/badge.svg)](https://app.codecov.io/gh/poissonconsulting/newdata)
+[![codecov](https://codecov.io/gh/poissonconsulting/newdata/graph/badge.svg?token=pJO8edj5Wu)](https://codecov.io/gh/poissonconsulting/newdata)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit)
 [![CRAN
