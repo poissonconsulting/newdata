@@ -4,22 +4,24 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, echo = FALSE}
+```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-"
+  fig.path = "man/figures/README-",
+  out.width = "100%"
 )
 ```
 
-<!-- badges: start -->
-[![R-CMD-check](https://github.com/poissonconsulting/newdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/poissonconsulting/newdata/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/poissonconsulting/newdata/branch/main/graph/badge.svg)](https://codecov.io/gh/poissonconsulting/newdata?branch=main)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![CRAN status](https://www.r-pkg.org/badges/version/newdata)](https://CRAN.R-project.org/package=newdata)
-<!-- badges: end -->
+# newdata <img src="man/figures/logo.png" style="float: right;" />
 
-# newdata
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/poissonconsulting/newdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/poissonconsulting/newdata/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/poissonconsulting/newdata/graph/badge.svg)](https://app.codecov.io/gh/poissonconsulting/newdata)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit)
+[![CRAN status](https://www.r-pkg.org/badges/version/newdata)](https://cran.r-project.org/package=newdata)
+<!-- badges: end -->
 
 ## Introduction
 

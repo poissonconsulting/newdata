@@ -14,8 +14,10 @@
 #' @examples
 #' data <- tibble::tibble(
 #'   period = factor(c("before", "before", "after", "after"),
-#'     levels = c("before", "after")),
-#'   annual = factor(c(1, 3, 5, 8), levels = c(1, 3, 5, 8)))
+#'     levels = c("before", "after")
+#'   ),
+#'   annual = factor(c(1, 3, 5, 8), levels = c(1, 3, 5, 8))
+#' )
 #'
 #' xnew_data(data, xcast(period = "before"))
 #' xnew_data(data, xcast(period = "before", annual = c("1", "3")))

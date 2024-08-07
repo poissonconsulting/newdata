@@ -72,7 +72,8 @@ test_that("new_data ref works", {
     new_data(ToothGrowth, ref = list(dose = c(3, 4), len = c(10.1, 12, 13)))
     new_data(ToothGrowth, ref = list(supp = factor("VC")))
     new_data(ToothGrowth, ref = list(supp = factor("TP")))
-    new_data(ToothGrowth, ref = list(supp = factor(c("VC", "OJ"))))})
+    new_data(ToothGrowth, ref = list(supp = factor(c("VC", "OJ"))))
+  })
 })
 
 test_that("new_data ref overridden by seq", {

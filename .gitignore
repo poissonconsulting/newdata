@@ -10,5 +10,5 @@
 
 *.html
 
-docs/
-inst/docs/
+/inst/docs/
+/docs/

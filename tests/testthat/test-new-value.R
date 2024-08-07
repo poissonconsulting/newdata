@@ -285,10 +285,14 @@ test_that("new_value factor", {
 })
 
 test_that("new_value ordered", {
-  expect_identical(new_value(factor(1:2, levels = c(0:2))),
-                   factor(0, levels = c(0:2)))
-  expect_identical(new_value(factor(1:2, levels = c(0:2)), obs_only = TRUE),
-                   factor(1, levels = c(0:2)))
+  expect_identical(
+    new_value(factor(1:2, levels = c(0:2))),
+    factor(0, levels = c(0:2))
+  )
+  expect_identical(
+    new_value(factor(1:2, levels = c(0:2)), obs_only = TRUE),
+    factor(1, levels = c(0:2))
+  )
 })
 
 test_that("new_value ordered", {

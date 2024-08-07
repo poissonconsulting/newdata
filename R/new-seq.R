@@ -83,13 +83,12 @@ new_seq.logical <- function(
     length_out = NULL,
     ...,
     obs_only = NULL) {
-
-  if(is.null(length_out)) {
+  if (is.null(length_out)) {
     length_out <- getOption("new_data.length_out_lgl", 2L)
   }
   chk_count(length_out)
 
-  if(is.null(obs_only)) {
+  if (is.null(obs_only)) {
     obs_only <- getOption("new_data.obs_only", FALSE)
   }
   chk_flag(obs_only)
@@ -97,8 +96,8 @@ new_seq.logical <- function(
   if (length_out == 0L) {
     return(logical())
   }
-  if(obs_only) {
-    if(all(is.na(x))) {
+  if (obs_only) {
+    if (all(is.na(x))) {
       return(NA)
     }
     return(obs_only1(x, length_out, first = TRUE))
@@ -116,13 +115,12 @@ new_seq.integer <- function(
     length_out = NULL,
     ...,
     obs_only = NULL) {
-
-  if(is.null(length_out)) {
+  if (is.null(length_out)) {
     length_out <- getOption("new_data.length_out_int", 30L)
   }
   chk_count(length_out)
 
-  if(is.null(obs_only)) {
+  if (is.null(obs_only)) {
     obs_only <- getOption("new_data.obs_only", FALSE)
   }
   chk_flag(obs_only)
@@ -133,7 +131,7 @@ new_seq.integer <- function(
   if (all(is.na(x))) {
     return(NA_integer_)
   }
-  if(obs_only) {
+  if (obs_only) {
     return(obs_only1(x, length_out))
   }
   seq1(x, length_out, integer = TRUE)
@@ -146,14 +144,13 @@ new_seq.double <- function(
     length_out = NULL,
     ...,
     obs_only = NULL) {
-
-  if(is.null(length_out)) {
+  if (is.null(length_out)) {
     length_out <- getOption("new_data.length_out_dbl", 30L)
   }
   chk_count(length_out)
   chk_lt(length_out, Inf)
 
-  if(is.null(obs_only)) {
+  if (is.null(obs_only)) {
     obs_only <- getOption("new_data.obs_only", FALSE)
   }
   chk_flag(obs_only)
@@ -164,7 +161,7 @@ new_seq.double <- function(
   if (all(is.na(x))) {
     return(NA_real_)
   }
-  if(obs_only) {
+  if (obs_only) {
     return(obs_only1(x, length_out))
   }
   seq1(x, length_out)
@@ -177,13 +174,12 @@ new_seq.character <- function(
     length_out = NULL,
     ...,
     obs_only = NULL) {
-
-  if(is.null(length_out)) {
+  if (is.null(length_out)) {
     length_out <- getOption("new_data.length_out_chr", Inf)
   }
   chk_count(length_out)
 
-  if(is.null(obs_only)) {
+  if (is.null(obs_only)) {
     obs_only <- getOption("new_data.obs_only", FALSE)
   }
   chk_flag(obs_only)
@@ -208,13 +204,12 @@ new_seq.factor <- function(
     length_out = NULL,
     ...,
     obs_only = NULL) {
-
-  if(is.null(length_out)) {
+  if (is.null(length_out)) {
     length_out <- getOption("new_data.length_out_chr", Inf)
   }
   chk_count(length_out)
 
-  if(is.null(obs_only)) {
+  if (is.null(obs_only)) {
     obs_only <- getOption("new_data.obs_only", FALSE)
   }
   chk_flag(obs_only)
@@ -228,9 +223,9 @@ new_seq.factor <- function(
   if (!length(levels)) {
     return(factor(NA_character_, levels = levels))
   }
-  if(obs_only) {
+  if (obs_only) {
   }
-  out <- if(obs_only) {
+  out <- if (obs_only) {
     as.integer(x)
   } else {
     1:nlevels
@@ -246,13 +241,12 @@ new_seq.ordered <- function(
     length_out = NULL,
     ...,
     obs_only = NULL) {
-
-  if(is.null(length_out)) {
+  if (is.null(length_out)) {
     length_out <- getOption("new_data.length_out_chr", Inf)
   }
   chk_count(length_out)
 
-  if(is.null(obs_only)) {
+  if (is.null(obs_only)) {
     obs_only <- getOption("new_data.obs_only", FALSE)
   }
   chk_flag(obs_only)
@@ -266,7 +260,7 @@ new_seq.ordered <- function(
   if (!nlevels) {
     return(ordered(NA_character_, levels = levels))
   }
-  out <- if(obs_only) {
+  out <- if (obs_only) {
     as.integer(x)
   } else {
     1:nlevels
@@ -282,7 +276,6 @@ new_seq.Date <- function(
     length_out = NULL,
     ...,
     obs_only = NULL) {
-
   x %>%
     as.integer() %>%
     new_seq(length_out = length_out, obs_only = obs_only) %>%
@@ -296,7 +289,6 @@ new_seq.POSIXct <- function(
     length_out = NULL,
     ...,
     obs_only = NULL) {
-
   tz <- attr(x, "tzone", exact = TRUE)
 
   x %>%
@@ -312,7 +304,6 @@ new_seq.hms <- function(
     length_out = NULL,
     ...,
     obs_only = NULL) {
-
   x %>%
     as.integer() %>%
     new_seq(length_out = length_out, obs_only = obs_only) %>%

@@ -1,17 +1,20 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# newdata <img src="man/figures/logo.png" style="float: right;" />
+
 <!-- badges: start -->
 
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/poissonconsulting/newdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/poissonconsulting/newdata/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/poissonconsulting/newdata/branch/main/graph/badge.svg)](https://codecov.io/gh/poissonconsulting/newdata?branch=main)
+coverage](https://codecov.io/gh/poissonconsulting/newdata/graph/badge.svg)](https://app.codecov.io/gh/poissonconsulting/newdata)
 [![License:
-MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit)
 [![CRAN
-status](https://www.r-pkg.org/badges/version/newdata)](https://CRAN.R-project.org/package=newdata)
+status](https://www.r-pkg.org/badges/version/newdata)](https://cran.r-project.org/package=newdata)
 <!-- badges: end -->
-
-# newdata
 
 ## Introduction
 
@@ -78,7 +81,8 @@ xnew_data(obs_data, xnew_seq(int, length_out = 3))
 
 ### Observed Values and Combinations
 
-The user can also indicate whether only observed values should be used.
+The user can also indicate whether only observed values should be used
+in the sequence.
 
 ``` r
 xnew_data(obs_data, xnew_seq(int, length_out = 3, obs_only = TRUE))
@@ -90,8 +94,8 @@ xnew_data(obs_data, xnew_seq(int, length_out = 3, obs_only = TRUE))
 #> 3 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
 
-The `xobs_only()` function can also be used to specify only observed
-values.
+The `xobs_only()` function can be used to filter out unobserved values
+after the sequence has been generated.
 
 ``` r
 xnew_data(obs_data, xobs_only(xnew_seq(int, length_out = 3)))
