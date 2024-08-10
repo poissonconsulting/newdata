@@ -1,5 +1,28 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# newdata 0.0.0.9021
+
+## Continuous integration
+
+- Use workflows from actions-sync.
+
+- Sync rcc workflows.
+
+- Sync codecov workflows.
+
+## Draft
+
+- Xcoerce() (#18).
+
+## Uncategorized
+
+- Merge pull request #23 from poissonconsulting/f-snapshots.
+
+- Merge pull request #21 from poissonconsulting/upkeep-2024-08.
+
+- Soft-deprecate all arguments to `new_data()` except `data` and `seq`.
+
+
 # newdata 0.0.0.9020
 
 - Same as previous version.

@@ -1,6 +1,6 @@
 Package: newdata
 Title: Generate New Data Frames for Prediction
-Version: 0.0.0.9020
+Version: 0.0.0.9021
 Authors@R: c(
     person("Joe", "Thorley", , "joe@poissonconsulting.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7683-4592")),
