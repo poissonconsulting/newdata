@@ -1,5 +1,54 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# newdata 0.0.0.9021
+
+## Chore
+
+- Auto-update from GitHub Actions (#24).
+
+## Continuous integration
+
+- Use Ubuntu 24.04 and styler PR (#33).
+
+- Correctly detect branch protection (#30).
+
+- Use stable pak (#29).
+
+- Latest changes (#27).
+
+- Use pkgdown branch (#26).
+
+- Install via R CMD INSTALL ., not pak (#25).
+
+- Install local package for pkgdown builds.
+
+- Improve support for protected branches with fledge.
+
+- Improve support for protected branches, without fledge.
+
+- Sync with latest developments.
+
+- Fix edge case of no suggested packages.
+
+- Use workflows from actions-sync.
+
+- Sync rcc workflows.
+
+- Sync codecov workflows.
+
+## Draft
+
+- Xcoerce() (#18).
+
+## Uncategorized
+
+- Merge pull request #23 from poissonconsulting/f-snapshots.
+
+- Merge pull request #21 from poissonconsulting/upkeep-2024-08.
+
+- Soft-deprecate all arguments to `new_data()` except `data` and `seq`.
+
+
 # newdata 0.0.0.9020
 
 - Same as previous version.
