@@ -26,10 +26,8 @@ to only allow observed combinations for.
 If TRUE then obs_only is set to be seq.
 Deprecated for \code{\link[=xobs_only]{xobs_only()}}.}
 
-\item{length_out}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
-A count indicating the maximum length of sequences for all
-types of variables except logical, character, factor and ordered factors.
-Deprecated for \code{\link[=xnew_seq]{xnew_seq()}}.}
+\item{length_out}{A count indicating the maximum length of sequences for all
+types of variables except logical, character, factor and ordered factors.}
 }
 \value{
 A tibble of the new data.
@@ -37,14 +35,15 @@ A tibble of the new data.
 \description{
 Generates a new data frame (in the form of a tibble) with each variable
 held constant or varying as a unique ordered sequence.
-All possible unique combinations are included up to a maximum of 30 values for
-each variable.
 }
 \details{
-All arguments except seq have been deprecated and the function has been superseded by \code{\link[=xnew_data]{xnew_data()}}.
-The functionality \code{new_data(data, c("a", "b"))} which is effectively a wrapper for
-\code{xnew_data(data, a, b)} to allow a string of column names to be passed
-is maintained for backwards compatibility with existing code.
+Although superseded it is maintained for backwards compatibility with existing code.
+
+The code
+\code{new_data(data, c("a", "b"), length_out = 30)}
+is effectively a wrapper for
+\code{xnew_data(data, a, b, .length_out = 30)}
+to allow a string of column names to be passed.
 }
 \examples{
 new_data(old_data, "int")

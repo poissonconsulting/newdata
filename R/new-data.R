@@ -2,13 +2,14 @@
 #'
 #' Generates a new data frame (in the form of a tibble) with each variable
 #' held constant or varying as a unique ordered sequence.
-#' All possible unique combinations are included up to a maximum of 30 values for
-#' each variable.
 #'
-#' All arguments except seq have been deprecated and the function has been superseded by [xnew_data()].
-#' The functionality `new_data(data, c("a", "b"))` which is effectively a wrapper for
-#' `xnew_data(data, a, b)` to allow a string of column names to be passed
-#' is maintained for backwards compatibility with existing code.
+#' Although superseded it is maintained for backwards compatibility with existing code.
+#'
+#' The code
+#' `new_data(data, c("a", "b"), length_out = 30)`
+#' is effectively a wrapper for
+#' `xnew_data(data, a, b, .length_out = 30)`
+#' to allow a string of column names to be passed.
 #'
 #' @param data The data frame to generate the new data from.
 #' @param seq A character vector of the variables in `data` to generate
@@ -19,10 +20,9 @@
 #' to only allow observed combinations for.
 #' If TRUE then obs_only is set to be seq.
 #' Deprecated for [xobs_only()].
-#' @param length_out `r lifecycle::badge("deprecated")`
+#' @param length_out
 #' A count indicating the maximum length of sequences for all
 #' types of variables except logical, character, factor and ordered factors.
-#' Deprecated for [xnew_seq()].
 #' @return A tibble of the new data.
 #' @seealso [xnew_data()].
 #' @examples
@@ -69,8 +69,8 @@ new_data <- function(
     err("`obs_only` must be a list of character vectors")
   }
 
-  if(missing(ref) && missing(obs_only) && missing(length_out)) {
-    # TODO: use xnew_data(data, seq)
+  if(missing(ref) && missing(obs_only)) {
+    # TODO: use xnew_data(data, seq, .length_out = length_out)
   }
 
   obs_only <- obs_only %>% unique()
