@@ -42,6 +42,7 @@ new_data <- function(
     ref = list(),
     obs_only = list(character(0)),
     length_out = 30) {
+
   if (!missing(ref)) {
     lifecycle::deprecate_soft(
       "0.0.0.9020", "new_data(ref)",

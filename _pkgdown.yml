@@ -3,5 +3,27 @@ template:
   bootstrap: 5
   package: poissontemplate
 
+reference:
+- title: New Data
+  contents:
+  - xnew_data
+  reference:
+- title: New Value
+  contents:
+  - new_value
+  - xnew_value
+- title: New Sequence
+  contents:
+  - new_seq
+  - xnew_seq
+- title: Helper Functions
+  contents:
+  - new_data
+  - xobs_only
+  - xcast
+- title: Example datasets
+  contents:
+  - old_data
+
 development:
   mode: auto
