@@ -66,6 +66,16 @@ test_that("one column no row dataset", {
   })
 })
 
+test_that("no column no row dataset", {
+  data <- tibble::tibble(
+  )
+  testthat::expect_snapshot({
+    data
+    xnew_data(data)
+    xnew_data(as.data.frame(data))
+  })
+})
+
 test_that("factors", {
   data <- tibble::tibble(
     period = factor(c(rep("before", 5), rep("after", 5)), levels = c("before", "after")),

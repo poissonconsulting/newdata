@@ -286,6 +286,21 @@
         <int>
       1    NA
 
+# no column no row dataset
+
+    Code
+      data
+    Output
+      # A tibble: 0 x 0
+    Code
+      xnew_data(data)
+    Output
+      # A tibble: 1 x 0
+    Code
+      xnew_data(as.data.frame(data))
+    Output
+      # A tibble: 1 x 0
+
 # factors
 
     Code
