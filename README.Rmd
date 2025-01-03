@@ -90,7 +90,7 @@ xnew_data(old_data, extra = c(TRUE, FALSE))
 
 Casting variables to be the same class as the original is achieved as follows.
 ```{r}
-xnew_data(old_data, xcast(int = 7, dbl = 10L, fct = "a rarity"))
+xnew_data(old_data, xcast(lgl = 1, int = 7, dbl = 10L, fct = "a rarity", hms = "00:00:02"))
 ```
 
 ## Installation
