@@ -1,30 +1,32 @@
-#' Generate New Data
+#' Generate New Data `r lifecycle::badge("superseded")`
 #'
 #' Generates a new data frame (in the form of a tibble) with each variable
 #' held constant or varying as a unique ordered sequence.
-#' All possible unique combinations are included and the columns
-#' are in the same order as those in `data`.
+#' All possible unique combinations are included up to a maximum of 30 values for
+#' each variable.
 #'
-#' All arguments except seq have been deprecated for the `x` versions.
-#' The `new_data(data, c("a", "b"))` is a wrapper function for
-#' `xnew_data(data, a, b)` to allow a string of column names to be passed.
+#' All arguments except seq have been deprecated and the function has been superseded by [xnew_data()].
+#' The functionality `new_data(data, c("a", "b"))` which is effectively a wrapper for
+#' `xnew_data(data, a, b)` to allow a string of column names to be passed
+#' is maintained for backwards compatibility with existing code.
 #'
 #' @param data The data frame to generate the new data from.
 #' @param seq A character vector of the variables in `data` to generate
 #' sequences for.
-#' @param ref A named list of reference values for variables that are not in seq. `r lifecycle::badge("deprecated")`
-#' @param obs_only A list of character vectors indicating the sets of variables
+#' @param ref `r lifecycle::badge("deprecated")` A named list of reference values for variables that are not in seq.
+#' Deprecated for [xnew_value()].
+#' @param obs_only `r lifecycle::badge("deprecated")` A list of character vectors indicating the sets of variables
 #' to only allow observed combinations for.
-#' If TRUE then obs_only is set to be seq. `r lifecycle::badge("deprecated")`
-#' @param length_out A count indicating the maximum length of sequences for all
-#' types of variables except logical, character, factor and ordered factors. `r lifecycle::badge("deprecated")`
+#' If TRUE then obs_only is set to be seq.
+#' Deprecated for [xobs_only()].
+#' @param length_out `r lifecycle::badge("deprecated")`
+#' A count indicating the maximum length of sequences for all
+#' types of variables except logical, character, factor and ordered factors.
+#' Deprecated for [xnew_seq()].
 #' @return A tibble of the new data.
-#' @seealso [new_value()] and [new_seq()].
+#' @seealso [xnew_data()].
 #' @examples
-#'
-#' # vary count while holding other values constant
 #' new_data(old_data, "int")
-#' # vary continual
 #' new_data(old_data, "dbl")
 #' new_data(old_data, c("int", "dbl"))
 #' @export
@@ -68,7 +70,7 @@ new_data <- function(
   }
 
   if(missing(ref) && missing(obs_only) && missing(length_out)) {
-    # TODO: use xnew_data
+    # TODO: use xnew_data(data, seq)
   }
 
   obs_only <- obs_only %>% unique()

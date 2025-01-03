@@ -2,7 +2,7 @@
 % Please edit documentation in R/new-data.R
 \name{new_data}
 \alias{new_data}
-\title{Generate New Data}
+\title{Generate New Data \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}}
 \usage{
 new_data(
   data,
@@ -18,14 +18,18 @@ new_data(
 \item{seq}{A character vector of the variables in \code{data} to generate
 sequences for.}
 
-\item{ref}{A named list of reference values for variables that are not in seq. \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
+\item{ref}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A named list of reference values for variables that are not in seq.
+Deprecated for \code{\link[=xnew_value]{xnew_value()}}.}
 
-\item{obs_only}{A list of character vectors indicating the sets of variables
+\item{obs_only}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A list of character vectors indicating the sets of variables
 to only allow observed combinations for.
-If TRUE then obs_only is set to be seq. \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
+If TRUE then obs_only is set to be seq.
+Deprecated for \code{\link[=xobs_only]{xobs_only()}}.}
 
-\item{length_out}{A count indicating the maximum length of sequences for all
-types of variables except logical, character, factor and ordered factors. \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
+\item{length_out}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+A count indicating the maximum length of sequences for all
+types of variables except logical, character, factor and ordered factors.
+Deprecated for \code{\link[=xnew_seq]{xnew_seq()}}.}
 }
 \value{
 A tibble of the new data.
@@ -33,22 +37,20 @@ A tibble of the new data.
 \description{
 Generates a new data frame (in the form of a tibble) with each variable
 held constant or varying as a unique ordered sequence.
-All possible unique combinations are included and the columns
-are in the same order as those in \code{data}.
+All possible unique combinations are included up to a maximum of 30 values for
+each variable.
 }
 \details{
-All arguments except seq have been deprecated for the \code{x} versions.
-The \code{new_data(data, c("a", "b"))} is a wrapper function for
-\code{xnew_data(data, a, b)} to allow a string of column names to be passed.
+All arguments except seq have been deprecated and the function has been superseded by \code{\link[=xnew_data]{xnew_data()}}.
+The functionality \code{new_data(data, c("a", "b"))} which is effectively a wrapper for
+\code{xnew_data(data, a, b)} to allow a string of column names to be passed
+is maintained for backwards compatibility with existing code.
 }
 \examples{
-
-# vary count while holding other values constant
 new_data(old_data, "int")
-# vary continual
 new_data(old_data, "dbl")
 new_data(old_data, c("int", "dbl"))
 }
 \seealso{
-\code{\link[=new_value]{new_value()}} and \code{\link[=new_seq]{new_seq()}}.
+\code{\link[=xnew_data]{xnew_data()}}.
 }
