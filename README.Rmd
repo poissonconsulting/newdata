@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 # newdata <img src="man/figures/logo.png" align="right" alt= "Poisson Consulting logo"/>
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/poissonconsulting/newdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/poissonconsulting/newdata/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/poissonconsulting/newdata/graph/badge.svg?token=pJO8edj5Wu)](https://codecov.io/gh/poissonconsulting/newdata)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit)
@@ -25,12 +25,13 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-`newdata` is an R package to generate new data frames for predictive purposes. 
+`newdata` is an R package to generate new data frames by varying some variables while holding the others constant.
+
 By default, all specified variables vary across their range 
-while all other variables are held constant at the default reference value.
-Types, classes, factor levels and time zones are always preserved.
+while all other variables are held constant at a reference value.
 The user can specify the length of each sequence, require that only
 observed values and combinations are used and add new variables.
+Types, classes, factor levels and time zones are always preserved.
 
 Consider the following observed data frame.
 ```{r}
@@ -41,7 +42,7 @@ obs_data
 
 ### Length of Sequences
 
-By default all variables are held constant (length of 1).
+By default all variables are set to a reference value.
 ```{r}
 xnew_data(obs_data)
 ```
@@ -68,7 +69,7 @@ The `xobs_only()` function can be used to filter out unobserved values after the
 xnew_data(obs_data, xobs_only(xnew_seq(int, length_out = 3)))
 ```
 
-With two or more variables all combinations are used.
+When two or more variables are specified all combinations are used.
 ```{r}
 xnew_data(obs_data, int, fct)
 ```
@@ -82,12 +83,12 @@ xnew_data(obs_data, xobs_only(int, fct))
 
 Adding a new variable is simple.
 ```{r}
-xnew_data(obs_data, new = c(TRUE, FALSE))
+xnew_data(obs_data, extra = c(TRUE, FALSE))
 ```
 
 ### Casting Variables
 
-Casting variables is easy.
+Casting variables to be the same class as the original is achieved as follows.
 ```{r}
 xnew_data(obs_data, xcast(int = 7, dbl = 10L, fct = "a rarity"))
 ```
@@ -104,10 +105,10 @@ To install the latest development version from [r-universe](https://poissonconsu
 install.packages("newdata", repos = c("https://poissonconsulting.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
-To install the latest development version from [GitHub](https://github.com/poissonconsulting/newdata)
+or from [GitHub](https://github.com/poissonconsulting/newdata)
 ```r
-# install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
-pak::pak("poissonconsulting/newdata")
+# install.packages("remotes")
+remotes::install_github("poissonconsulting/newdata")
 ```
 
 ## Contribution

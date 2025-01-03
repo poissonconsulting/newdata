@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/poissonconsulting/newdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/poissonconsulting/newdata/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/poissonconsulting/newdata/graph/badge.svg?token=pJO8edj5Wu)](https://codecov.io/gh/poissonconsulting/newdata)
 [![License:
@@ -17,13 +17,14 @@ status](https://www.r-pkg.org/badges/version/newdata)](https://cran.r-project.or
 
 ## Introduction
 
-`newdata` is an R package to generate new data frames for predictive
-purposes. By default, all specified variables vary across their range
-while all other variables are held constant at the default reference
-value. Types, classes, factor levels and time zones are always
-preserved. The user can specify the length of each sequence, require
-that only observed values and combinations are used and add new
-variables.
+`newdata` is an R package to generate new data frames by varying some
+variables while holding the others constant.
+
+By default, all specified variables vary across their range while all
+other variables are held constant at a reference value. The user can
+specify the length of each sequence, require that only observed values
+and combinations are used and add new variables. Types, classes, factor
+levels and time zones are always preserved.
 
 Consider the following observed data frame.
 
@@ -41,7 +42,7 @@ obs_data
 
 ### Length of Sequences
 
-By default all variables are held constant (length of 1).
+By default all variables are set to a reference value.
 
 ``` r
 xnew_data(obs_data)
@@ -105,7 +106,7 @@ xnew_data(obs_data, xobs_only(xnew_seq(int, length_out = 3)))
 #> 2 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
 
-With two or more variables all combinations are used.
+When two or more variables are specified all combinations are used.
 
 ``` r
 xnew_data(obs_data, int, fct)
@@ -149,18 +150,19 @@ xnew_data(obs_data, xobs_only(int, fct))
 Adding a new variable is simple.
 
 ``` r
-xnew_data(obs_data, new = c(TRUE, FALSE))
+xnew_data(obs_data, extra = c(TRUE, FALSE))
 #> # A tibble: 2 × 10
 #>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
 #>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
 #> 1 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 #> 2 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
-#> # ℹ 1 more variable: new <lgl>
+#> # ℹ 1 more variable: extra <lgl>
 ```
 
 ### Casting Variables
 
-Casting variables is easy.
+Casting variables to be the same class as the original is achieved as
+follows.
 
 ``` r
 xnew_data(obs_data, xcast(int = 7, dbl = 10L, fct = "a rarity"))
@@ -185,12 +187,11 @@ To install the latest development version from
 install.packages("newdata", repos = c("https://poissonconsulting.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
-To install the latest development version from
-[GitHub](https://github.com/poissonconsulting/newdata)
+or from [GitHub](https://github.com/poissonconsulting/newdata)
 
 ``` r
-# install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
-pak::pak("poissonconsulting/newdata")
+# install.packages("remotes")
+remotes::install_github("poissonconsulting/newdata")
 ```
 
 ## Contribution
