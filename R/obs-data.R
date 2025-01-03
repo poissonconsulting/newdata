@@ -14,5 +14,5 @@
 #'   \item{hms}{A hms vector.}
 #' }
 #' @examples
-#' obs_data
-"obs_data"
+#' old_data
+"old_data"

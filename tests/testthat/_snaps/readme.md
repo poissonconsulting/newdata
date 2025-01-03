@@ -1,14 +1,14 @@
 # readme examples
 
     Code
-      xnew_data(obs_data)
+      xnew_data(old_data)
     Output
       # A tibble: 1 x 9
         lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
         <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
       1 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
     Code
-      xnew_data(obs_data, int)
+      xnew_data(old_data, int)
     Output
       # A tibble: 6 x 9
         lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
@@ -20,7 +20,7 @@
       5 FALSE     5  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
       6 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
     Code
-      xnew_data(obs_data, xnew_seq(int, length_out = 3))
+      xnew_data(old_data, xnew_seq(int, length_out = 3))
     Output
       # A tibble: 3 x 9
         lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
@@ -29,7 +29,7 @@
       2 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
       3 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
     Code
-      xnew_data(obs_data, xnew_seq(int, length_out = 3, obs_only = TRUE))
+      xnew_data(old_data, xnew_seq(int, length_out = 3, obs_only = TRUE))
     Output
       # A tibble: 3 x 9
         lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
@@ -38,7 +38,7 @@
       2 FALSE     4  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
       3 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
     Code
-      xnew_data(obs_data, int, fct)
+      xnew_data(old_data, int, fct)
     Output
       # A tibble: 18 x 9
          lgl     int   dbl chr   fct      ord    dte        dtt                 hms   
@@ -62,7 +62,7 @@
       17 FALSE     6  4.57 most  a rarity a rar~ 1970-01-04 1969-12-31 16:00:03 00'03"
       18 FALSE     6  4.57 most  most     a rar~ 1970-01-04 1969-12-31 16:00:03 00'03"
     Code
-      xnew_data(obs_data, xobs_only(int, fct))
+      xnew_data(old_data, xobs_only(int, fct))
     Output
       # A tibble: 3 x 9
         lgl     int   dbl chr   fct      ord     dte        dtt                 hms   
@@ -71,7 +71,7 @@
       2 FALSE     4  4.57 most  most     a rari~ 1970-01-04 1969-12-31 16:00:03 00'03"
       3 FALSE     6  4.57 most  a rarity a rari~ 1970-01-04 1969-12-31 16:00:03 00'03"
     Code
-      xnew_data(obs_data, new = c(TRUE, FALSE))
+      xnew_data(old_data, new = c(TRUE, FALSE))
     Output
       # A tibble: 2 x 10
         lgl     int   dbl chr   fct     ord      dte        dtt                 hms   

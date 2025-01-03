@@ -26,12 +26,12 @@ specify the length of each sequence, require that only observed values
 and combinations are used and add new variables. Types, classes, factor
 levels and time zones are always preserved.
 
-Consider the following observed data frame.
+Consider the following observed ‘old’ data frame.
 
 ``` r
 library(newdata)
 
-obs_data
+newdata::old_data
 #> # A tibble: 3 × 9
 #>   lgl     int   dbl chr      fct     ord   dte        dtt                 hms   
 #>   <lgl> <int> <dbl> <chr>    <fct>   <ord> <date>     <dttm>              <time>
@@ -45,7 +45,7 @@ obs_data
 By default all variables are set to a reference value.
 
 ``` r
-xnew_data(obs_data)
+xnew_data(old_data)
 #> # A tibble: 1 × 9
 #>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
 #>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
@@ -55,7 +55,7 @@ xnew_data(obs_data)
 Specifying a variable causes it to vary sequentially across its range.
 
 ``` r
-xnew_data(obs_data, int)
+xnew_data(old_data, int)
 #> # A tibble: 6 × 9
 #>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
 #>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
@@ -70,7 +70,7 @@ xnew_data(obs_data, int)
 The user can specify the length of each sequence.
 
 ``` r
-xnew_data(obs_data, xnew_seq(int, length_out = 3))
+xnew_data(old_data, xnew_seq(int, length_out = 3))
 #> # A tibble: 3 × 9
 #>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
 #>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
@@ -85,7 +85,7 @@ The user can also indicate whether only observed values should be used
 in the sequence.
 
 ``` r
-xnew_data(obs_data, xnew_seq(int, length_out = 3, obs_only = TRUE))
+xnew_data(old_data, xnew_seq(int, length_out = 3, obs_only = TRUE))
 #> # A tibble: 3 × 9
 #>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
 #>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
@@ -98,7 +98,7 @@ The `xobs_only()` function can be used to filter out unobserved values
 after the sequence has been generated.
 
 ``` r
-xnew_data(obs_data, xobs_only(xnew_seq(int, length_out = 3)))
+xnew_data(old_data, xobs_only(xnew_seq(int, length_out = 3)))
 #> # A tibble: 2 × 9
 #>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
 #>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
@@ -109,7 +109,7 @@ xnew_data(obs_data, xobs_only(xnew_seq(int, length_out = 3)))
 When two or more variables are specified all combinations are used.
 
 ``` r
-xnew_data(obs_data, int, fct)
+xnew_data(old_data, int, fct)
 #> # A tibble: 18 × 9
 #>    lgl     int   dbl chr   fct      ord    dte        dtt                 hms   
 #>    <lgl> <int> <dbl> <chr> <fct>    <ord>  <date>     <dttm>              <time>
@@ -136,7 +136,7 @@ xnew_data(obs_data, int, fct)
 To only get observed combinations use `xobs_only()`
 
 ``` r
-xnew_data(obs_data, xobs_only(int, fct))
+xnew_data(old_data, xobs_only(int, fct))
 #> # A tibble: 3 × 9
 #>   lgl     int   dbl chr   fct      ord     dte        dtt                 hms   
 #>   <lgl> <int> <dbl> <chr> <fct>    <ord>   <date>     <dttm>              <time>
@@ -150,7 +150,7 @@ xnew_data(obs_data, xobs_only(int, fct))
 Adding a new variable is simple.
 
 ``` r
-xnew_data(obs_data, extra = c(TRUE, FALSE))
+xnew_data(old_data, extra = c(TRUE, FALSE))
 #> # A tibble: 2 × 10
 #>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
 #>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
@@ -165,7 +165,7 @@ Casting variables to be the same class as the original is achieved as
 follows.
 
 ``` r
-xnew_data(obs_data, xcast(int = 7, dbl = 10L, fct = "a rarity"))
+xnew_data(old_data, xcast(int = 7, dbl = 10L, fct = "a rarity"))
 #> # A tibble: 1 × 9
 #>   lgl     int   dbl chr   fct      ord     dte        dtt                 hms   
 #>   <lgl> <int> <dbl> <chr> <fct>    <ord>   <date>     <dttm>              <time>
