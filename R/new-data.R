@@ -70,7 +70,11 @@ new_data <- function(
   }
 
   if(missing(ref) && missing(obs_only)) {
-    # TODO: use xnew_data(data, seq, .length_out = length_out)
+    args <- c(list(.data = data, .length_out = length_out), seq)
+    # TODO: make work when seq is specified
+   if(missing(seq)) {
+      return(do.call("xnew_data", args = args))
+    }
   }
 
   obs_only <- obs_only %>% unique()
