@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# newdata 0.0.0.9022
+
+## Continuous integration
+
+- Sync workflows (#36).
+
+
 # newdata 0.0.0.9021
 
 ## Chore
