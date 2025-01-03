@@ -1,6 +1,6 @@
 expand_defaults <- function(data, quos, default) {
   default <- as_function(default)
-  ptype <- tidyr::expand(data[0, ], !!!quos)
+  ptype <- tidyr::expand(dplyr::slice(data, 0), !!!quos)
 
   default_names <- setdiff(names(data), names(ptype))
   default_values <- map(data[default_names], default)

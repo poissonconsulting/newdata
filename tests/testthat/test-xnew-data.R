@@ -10,6 +10,7 @@ test_that("simple dataset", {
   testthat::expect_snapshot({
     data
     xnew_data(data)
+    xnew_data(as.data.frame(data))
     xnew_data(data, a)
     xnew_data(data, a = new_value(a))
     xnew_data(data, xnew_value(a))
@@ -37,6 +38,32 @@ test_that("simple dataset", {
     b = 8:10,
     tidyr::nesting(b, d),
   ))
+})
+
+test_that("one column dataset", {
+  data <- tibble::tibble(
+    a = 1:2
+  )
+  testthat::expect_snapshot({
+    data
+    xnew_data(data)
+    xnew_data(as.data.frame(data))
+    xnew_data(data, a)
+    xnew_data(as.data.frame(data), a)
+  })
+})
+
+test_that("one column no row dataset", {
+  data <- tibble::tibble(
+    a = integer()
+  )
+  testthat::expect_snapshot({
+    data
+    xnew_data(data)
+    xnew_data(as.data.frame(data))
+    xnew_data(data, a)
+    xnew_data(as.data.frame(data), a)
+  })
 })
 
 test_that("factors", {

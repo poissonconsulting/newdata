@@ -19,6 +19,13 @@
         <dbl> <int> <fct> <lgl> <date>    
       1   3.5     5 a     FALSE 2023-09-29
     Code
+      xnew_data(as.data.frame(data))
+    Output
+      # A tibble: 1 x 5
+            a     b c     d     e         
+        <dbl> <int> <fct> <lgl> <date>    
+      1   3.5     5 a     FALSE 2023-09-29
+    Code
       xnew_data(data, a)
     Output
       # A tibble: 30 x 5
@@ -201,6 +208,83 @@
       13   3.5    10 c     FALSE 2023-09-29 zed  
       14   3.5    10 d     TRUE  2023-09-29 zed  
       15   3.5    10 e     FALSE 2023-09-29 zed  
+
+# one column dataset
+
+    Code
+      data
+    Output
+      # A tibble: 2 x 1
+            a
+        <int>
+      1     1
+      2     2
+    Code
+      xnew_data(data)
+    Output
+      # A tibble: 1 x 1
+            a
+        <int>
+      1     1
+    Code
+      xnew_data(as.data.frame(data))
+    Output
+      # A tibble: 1 x 1
+            a
+        <int>
+      1     1
+    Code
+      xnew_data(data, a)
+    Output
+      # A tibble: 2 x 1
+            a
+        <int>
+      1     1
+      2     2
+    Code
+      xnew_data(as.data.frame(data), a)
+    Output
+      # A tibble: 2 x 1
+            a
+        <int>
+      1     1
+      2     2
+
+# one column no row dataset
+
+    Code
+      data
+    Output
+      # A tibble: 0 x 1
+      # i 1 variable: a <int>
+    Code
+      xnew_data(data)
+    Output
+      # A tibble: 1 x 1
+            a
+        <int>
+      1    NA
+    Code
+      xnew_data(as.data.frame(data))
+    Output
+      # A tibble: 1 x 1
+            a
+        <int>
+      1    NA
+    Code
+      xnew_data(data, a)
+    Output
+      # A tibble: 1 x 1
+            a
+        <int>
+      1    NA
+    Code
+      xnew_data(as.data.frame(data), a)
+    Output
+      # A tibble: 1 x 1
+            a
+        <int>
+      1    NA
 
 # factors
 
