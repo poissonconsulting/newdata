@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# newdata <img src="man/figures/logo.png" style="float: right;" />
+# newdata <img src="man/figures/logo.png" align="right" alt= "Poisson Consulting logo"/>
 
 <!-- badges: start -->
 
