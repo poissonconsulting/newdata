@@ -1,6 +1,6 @@
-#' Observed Data
+#' Example Data
 #'
-#' An example tibble of observed data.
+#' An example tibble of example 'old' data.
 #'
 #' \describe{
 #'   \item{lgl}{A logical vector.}
