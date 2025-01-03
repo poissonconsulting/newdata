@@ -18,14 +18,14 @@ new_data(
 \item{seq}{A character vector of the variables in \code{data} to generate
 sequences for.}
 
-\item{ref}{A named list of reference values for variables that are not in seq.}
+\item{ref}{A named list of reference values for variables that are not in seq. \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 
 \item{obs_only}{A list of character vectors indicating the sets of variables
 to only allow observed combinations for.
-If TRUE then obs_only is set to be seq.}
+If TRUE then obs_only is set to be seq. \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 
 \item{length_out}{A count indicating the maximum length of sequences for all
-types of variables except logical, character, factor and ordered factors.}
+types of variables except logical, character, factor and ordered factors. \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}}
 }
 \value{
 A tibble of the new data.
@@ -37,10 +37,9 @@ All possible unique combinations are included and the columns
 are in the same order as those in \code{data}.
 }
 \details{
-If an element of \code{ref} is a character vector and the corresponding
-column is a data frame, then the ref element is assigned the same
-factor levels as the column in the data. This is useful for choosing
-a factor level without having to set the correct levels.
+All arguments except seq have been deprecated for the \code{x} versions.
+The \code{new_data(data, c("a", "b"))} is a wrapper function for
+\code{xnew_data(data, a, b)} to allow a string of column names to be passed.
 }
 \examples{
 

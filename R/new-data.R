@@ -5,20 +5,19 @@
 #' All possible unique combinations are included and the columns
 #' are in the same order as those in `data`.
 #'
-#' If an element of `ref` is a character vector and the corresponding
-#' column is a data frame, then the ref element is assigned the same
-#' factor levels as the column in the data. This is useful for choosing
-#' a factor level without having to set the correct levels.
+#' All arguments except seq have been deprecated for the `x` versions.
+#' The `new_data(data, c("a", "b"))` is a wrapper function for
+#' `xnew_data(data, a, b)` to allow a string of column names to be passed.
 #'
 #' @param data The data frame to generate the new data from.
 #' @param seq A character vector of the variables in `data` to generate
 #' sequences for.
-#' @param ref A named list of reference values for variables that are not in seq.
+#' @param ref A named list of reference values for variables that are not in seq. `r lifecycle::badge("deprecated")`
 #' @param obs_only A list of character vectors indicating the sets of variables
 #' to only allow observed combinations for.
-#' If TRUE then obs_only is set to be seq.
+#' If TRUE then obs_only is set to be seq. `r lifecycle::badge("deprecated")`
 #' @param length_out A count indicating the maximum length of sequences for all
-#' types of variables except logical, character, factor and ordered factors.
+#' types of variables except logical, character, factor and ordered factors. `r lifecycle::badge("deprecated")`
 #' @return A tibble of the new data.
 #' @seealso [new_value()] and [new_seq()].
 #' @examples
@@ -67,6 +66,11 @@ new_data <- function(
   if (!all(map_lgl(obs_only, is.character))) {
     err("`obs_only` must be a list of character vectors")
   }
+
+  if(missing(ref) && missing(obs_only) && missing(length_out)) {
+    # TODO: use xnew_data
+  }
+
   obs_only <- obs_only %>% unique()
 
   if (!all(has_name(data, seq))) {
