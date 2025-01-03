@@ -79,7 +79,7 @@ test_that("new_data ref works", {
 test_that("new_data ref overridden by seq", {
   withr::local_options(lifecycle_verbosity = "quiet")
 
-  testthat::expect_snapshot(new_data(Orange, seq = "age", ref = list(age = 118)))
+  testthat::expect_snapshot(expect_warning(new_data(Orange, seq = "age", ref = list(age = 118)), "`ref` should not contain variables in `seq`"))
 })
 
 test_that("new_data factor with 100 levels", {

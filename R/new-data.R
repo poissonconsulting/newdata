@@ -22,19 +22,12 @@
 #' @return A tibble of the new data.
 #' @seealso [new_value()] and [new_seq()].
 #' @examples
-#' # an example data set
-#' data <- tibble::tibble(
-#'   vecint = c(1L, 3L),
-#'   vecreal = c(1, 3),
-#'   vecchar = c("b", "a"),
-#'   vecdate = as.Date(c("2001-01-01", "2001-01-01"))
-#' )
 #'
 #' # vary count while holding other values constant
-#' new_data(data, "vecint")
+#' new_data(old_data, "int")
 #' # vary continual
-#' new_data(data, "vecreal")
-#' new_data(data, c("vecchar", "vecint"))
+#' new_data(old_data, "dbl")
+#' new_data(old_data, c("int", "dbl"))
 #' @export
 new_data <- function(
     data,
@@ -90,6 +83,10 @@ new_data <- function(
 
   if (length(ref)) {
     if (!is_named(ref)) err("`ref` must be a named list")
+
+    if(any(names(ref) %in% seq)) {
+      wrn("`ref` should not contain variables in `seq`")
+    }
 
     ref <- ref[!names(ref) %in% seq]
 

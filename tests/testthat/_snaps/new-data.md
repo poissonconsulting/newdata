@@ -303,22 +303,8 @@
 # new_data ref overridden by seq
 
     Code
-      new_data(Orange, seq = "age", ref = list(age = 118))
-    Output
-      # A tibble: 30 x 3
-         Tree    age circumference
-         <ord> <dbl>         <dbl>
-       1 5      118           116.
-       2 5      168.          116.
-       3 5      219.          116.
-       4 5      269.          116.
-       5 5      320.          116.
-       6 5      370.          116.
-       7 5      421.          116.
-       8 5      471.          116.
-       9 5      522.          116.
-      10 5      572.          116.
-      # i 20 more rows
+      expect_warning(new_data(Orange, seq = "age", ref = list(age = 118)),
+      "`ref` should not contain variables in `seq`")
 
 # new_data factor with 100 levels
 

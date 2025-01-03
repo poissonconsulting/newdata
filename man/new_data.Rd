@@ -43,19 +43,12 @@ factor levels as the column in the data. This is useful for choosing
 a factor level without having to set the correct levels.
 }
 \examples{
-# an example data set
-data <- tibble::tibble(
-  vecint = c(1L, 3L),
-  vecreal = c(1, 3),
-  vecchar = c("b", "a"),
-  vecdate = as.Date(c("2001-01-01", "2001-01-01"))
-)
 
 # vary count while holding other values constant
-new_data(data, "vecint")
+new_data(old_data, "int")
 # vary continual
-new_data(data, "vecreal")
-new_data(data, c("vecchar", "vecint"))
+new_data(old_data, "dbl")
+new_data(old_data, c("int", "dbl"))
 }
 \seealso{
 \code{\link[=new_value]{new_value()}} and \code{\link[=new_seq]{new_seq()}}.
