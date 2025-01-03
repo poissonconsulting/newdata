@@ -1,3 +1,7 @@
 url: https://poissonconsulting.github.io/newdata/
 template:
   bootstrap: 5
+  package: poissontemplate
+
+development:
+  mode: auto
