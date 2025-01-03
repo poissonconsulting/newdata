@@ -6,11 +6,20 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Generate New Data Frames for Prediction • newdata</title>
-<script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- favicons --><link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
+<link rel="icon" type="”image/svg+xml”" href="favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" sizes="any" href="favicon.ico">
+<link rel="manifest" href="site.webmanifest">
+<script src="katex-auto.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Roboto_Condensed-0.4.9/font.css" rel="stylesheet">
+<link href="deps/Roboto_Mono-0.4.9/font.css" rel="stylesheet">
+<link href="deps/Playfair_Display-0.4.9/font.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Generate New Data Frames for Prediction">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><link href="deps/KaTex-0.16.10/katex.min.css" rel="stylesheet">
+<script src="deps/KaTex-0.16.10/katex.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Generate New Data Frames for Prediction">
 <meta name="description" content="Generates new data frames for predictive purposes. By default, all specified variables vary across their range while all other variables are held constant at the default reference value. Types, classes, factor levels and time zones are always preserved. The user can specify the length of each sequence, require that only observed values and combinations are used and add new variables.">
 <meta property="og:description" content="Generates new data frames for predictive purposes. By default, all specified variables vary across their range while all other variables are held constant at the default reference value. Types, classes, factor levels and time zones are always preserved. The user can specify the length of each sequence, require that only observed values and combinations are used and add new variables.">
 <meta property="og:image" content="https://poissonconsulting.github.io/newdata/logo.png">
@@ -23,7 +32,7 @@
 
     <a class="navbar-brand me-2" href="index.html">newdata</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9021</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9022</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,12 +66,13 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p><code>newdata</code> is an R package to generate new data frames for predictive purposes. By default, all specified variables vary across their range while all other variables are held constant at the default reference value. Types, classes, factor levels and time zones are always preserved. The user can specify the length of each sequence, require that only observed values and combinations are used and add new variables.</p>
-<p>Consider the following observed data frame.</p>
+<p><code>newdata</code> is an R package to generate new data frames by varying some variables while holding the others constant.</p>
+<p>By default, all specified variables vary across their range while all other variables are held constant at a reference value. The user can specify the length of each sequence, require that only observed values and combinations are used and add new variables. Types, classes, factor levels and time zones are always preserved.</p>
+<p>Consider the following observed ‘old’ data frame.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://poissonconsulting.github.io/newdata/">newdata</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">obs_data</span></span>
+<span><span class="fu">newdata</span><span class="fu">::</span><span class="va"><a href="reference/old_data.html">old_data</a></span></span>
 <span><span class="co">#&gt; # A tibble: 3 × 9</span></span>
 <span><span class="co">#&gt;   lgl     int   dbl chr      fct     ord   dte        dtt                 hms   </span></span>
 <span><span class="co">#&gt;   &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;fct&gt;   &lt;ord&gt; &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
@@ -72,16 +82,16 @@
 <div class="section level3">
 <h3 id="length-of-sequences">Length of Sequences<a class="anchor" aria-label="anchor" href="#length-of-sequences"></a>
 </h3>
-<p>By default all variables are held constant (length of 1).</p>
+<p>By default all variables are set to a reference value.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">obs_data</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">old_data</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 1 × 9</span></span>
 <span><span class="co">#&gt;   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   </span></span>
 <span><span class="co">#&gt;   &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;   &lt;ord&gt;    &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
 <span><span class="co">#&gt; 1 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
 <p>Specifying a variable causes it to vary sequentially across its range.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">obs_data</span>, <span class="va">int</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">old_data</span>, <span class="va">int</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 9</span></span>
 <span><span class="co">#&gt;   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   </span></span>
 <span><span class="co">#&gt;   &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;   &lt;ord&gt;    &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
@@ -93,7 +103,7 @@
 <span><span class="co">#&gt; 6 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
 <p>The user can specify the length of each sequence.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">obs_data</span>, <span class="fu"><a href="reference/xnew_seq.html">xnew_seq</a></span><span class="op">(</span><span class="va">int</span>, length_out <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">old_data</span>, <span class="fu"><a href="reference/xnew_seq.html">xnew_seq</a></span><span class="op">(</span><span class="va">int</span>, length_out <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 3 × 9</span></span>
 <span><span class="co">#&gt;   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   </span></span>
 <span><span class="co">#&gt;   &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;   &lt;ord&gt;    &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
@@ -106,7 +116,7 @@
 </h3>
 <p>The user can also indicate whether only observed values should be used in the sequence.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">obs_data</span>, <span class="fu"><a href="reference/xnew_seq.html">xnew_seq</a></span><span class="op">(</span><span class="va">int</span>, length_out <span class="op">=</span> <span class="fl">3</span>, obs_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">old_data</span>, <span class="fu"><a href="reference/xnew_seq.html">xnew_seq</a></span><span class="op">(</span><span class="va">int</span>, length_out <span class="op">=</span> <span class="fl">3</span>, obs_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 3 × 9</span></span>
 <span><span class="co">#&gt;   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   </span></span>
 <span><span class="co">#&gt;   &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;   &lt;ord&gt;    &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
@@ -115,15 +125,15 @@
 <span><span class="co">#&gt; 3 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
 <p>The <code><a href="reference/xobs_only.html">xobs_only()</a></code> function can be used to filter out unobserved values after the sequence has been generated.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">obs_data</span>, <span class="fu"><a href="reference/xobs_only.html">xobs_only</a></span><span class="op">(</span><span class="fu"><a href="reference/xnew_seq.html">xnew_seq</a></span><span class="op">(</span><span class="va">int</span>, length_out <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">old_data</span>, <span class="fu"><a href="reference/xobs_only.html">xobs_only</a></span><span class="op">(</span><span class="fu"><a href="reference/xnew_seq.html">xnew_seq</a></span><span class="op">(</span><span class="va">int</span>, length_out <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 9</span></span>
 <span><span class="co">#&gt;   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   </span></span>
 <span><span class="co">#&gt;   &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;   &lt;ord&gt;    &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
 <span><span class="co">#&gt; 1 FALSE     1  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
 <span><span class="co">#&gt; 2 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
-<p>With two or more variables all combinations are used.</p>
+<p>When two or more variables are specified all combinations are used.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">obs_data</span>, <span class="va">int</span>, <span class="va">fct</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">old_data</span>, <span class="va">int</span>, <span class="va">fct</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 18 × 9</span></span>
 <span><span class="co">#&gt;    lgl     int   dbl chr   fct      ord    dte        dtt                 hms   </span></span>
 <span><span class="co">#&gt;    &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;    &lt;ord&gt;  &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
@@ -147,7 +157,7 @@
 <span><span class="co">#&gt; 18 FALSE     6  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
 <p>To only get observed combinations use <code><a href="reference/xobs_only.html">xobs_only()</a></code></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">obs_data</span>, <span class="fu"><a href="reference/xobs_only.html">xobs_only</a></span><span class="op">(</span><span class="va">int</span>, <span class="va">fct</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">old_data</span>, <span class="fu"><a href="reference/xobs_only.html">xobs_only</a></span><span class="op">(</span><span class="va">int</span>, <span class="va">fct</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 3 × 9</span></span>
 <span><span class="co">#&gt;   lgl     int   dbl chr   fct      ord     dte        dtt                 hms   </span></span>
 <span><span class="co">#&gt;   &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;    &lt;ord&gt;   &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
@@ -160,24 +170,24 @@
 </h3>
 <p>Adding a new variable is simple.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">obs_data</span>, new <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">old_data</span>, extra <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 10</span></span>
 <span><span class="co">#&gt;   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   </span></span>
 <span><span class="co">#&gt;   &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;   &lt;ord&gt;    &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
 <span><span class="co">#&gt; 1 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
 <span><span class="co">#&gt; 2 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
-<span><span class="co">#&gt; # ℹ 1 more variable: new &lt;lgl&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; # ℹ 1 more variable: extra &lt;lgl&gt;</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="casting-variables">Casting Variables<a class="anchor" aria-label="anchor" href="#casting-variables"></a>
 </h3>
-<p>Casting variables is easy.</p>
+<p>Casting variables to be the same class as the original is achieved as follows.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">obs_data</span>, <span class="fu"><a href="reference/xcast.html">xcast</a></span><span class="op">(</span>int <span class="op">=</span> <span class="fl">7</span>, dbl <span class="op">=</span> <span class="fl">10L</span>, fct <span class="op">=</span> <span class="st">"a rarity"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">old_data</span>, <span class="fu"><a href="reference/xcast.html">xcast</a></span><span class="op">(</span>lgl <span class="op">=</span> <span class="fl">1</span>, int <span class="op">=</span> <span class="fl">7</span>, dbl <span class="op">=</span> <span class="fl">10L</span>, fct <span class="op">=</span> <span class="st">"a rarity"</span>, hms <span class="op">=</span> <span class="st">"00:00:02"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 1 × 9</span></span>
 <span><span class="co">#&gt;   lgl     int   dbl chr   fct      ord     dte        dtt                 hms   </span></span>
 <span><span class="co">#&gt;   &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;    &lt;ord&gt;   &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
-<span><span class="co">#&gt; 1 FALSE     7    10 most  a rarity a rari… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 TRUE      7    10 most  a rarity a rari… 1970-01-04 1969-12-31 16:00:03 00'02"</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -189,10 +199,10 @@
 <p>To install the latest development version from <a href="https://poissonconsulting.r-universe.dev/newdata" class="external-link">r-universe</a>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"newdata"</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://poissonconsulting.r-universe.dev"</span>, <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>To install the latest development version from <a href="https://github.com/poissonconsulting/newdata" class="external-link">GitHub</a></p>
+<p>or from <a href="https://github.com/poissonconsulting/newdata" class="external-link">GitHub</a></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"poissonconsulting/newdata"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"poissonconsulting/newdata"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="contribution">Contribution<a class="anchor" aria-label="anchor" href="#contribution"></a>
@@ -241,10 +251,14 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Joe Thorley <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-7683-4592" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Kirill Müller <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-1416-3412" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Ayla Pearson <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-7388-1222" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Poisson Consulting <br><small class="roles"> Funder, copyright holder </small>  </li>
+<li>
+<a href="https://www.poissonconsulting.ca/author/joe-thorley/" class="external-link">Joe Thorley</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-7683-4592" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>
+<a href="https://krlmlr.info" class="external-link">Kirill Müller</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-1416-3412" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>
+<a href="https://www.poissonconsulting.ca/author/ayla-pearson/" class="external-link">Ayla Pearson</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-7388-1222" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>
+<a href="https://www.poissonconsulting.ca/" class="external-link"><img src="https://github.com/poissonconsulting.png" height="24" alt=""></a> <br><small class="roles"> Funder, copyright holder </small>  </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
@@ -252,7 +266,7 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
 <li><a href="https://github.com/poissonconsulting/newdata/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/poissonconsulting/newdata/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://codecov.io/gh/poissonconsulting/newdata" class="external-link"><img src="https://codecov.io/gh/poissonconsulting/newdata/graph/badge.svg?token=pJO8edj5Wu" alt="codecov"></a></li>
 <li><a href="https://opensource.org/license/mit" class="external-link"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT"></a></li>
@@ -265,7 +279,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Joe Thorley, Kirill Müller, Ayla Pearson, Poisson Consulting.</p>
+  <p>Developed by <a href="https://www.poissonconsulting.ca/author/joe-thorley/" class="external-link">Joe Thorley</a>, <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="https://www.poissonconsulting.ca/author/ayla-pearson/" class="external-link">Ayla Pearson</a>, <a href="https://www.poissonconsulting.ca/" class="external-link"><img src="https://github.com/poissonconsulting.png" height="24" alt=""></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
