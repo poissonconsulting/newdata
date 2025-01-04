@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# newdata 0.0.0.9023
+
+- Start calling xnew_data issue #40.
+
+- Closes #39.
+
+- Warn if in seq and ref closes #7.
+
+- Test xcast.
+
+- Obs_data to old_data.
+
+- Merge branch 'main' of github.com:poissonconsulting/newdata.
+
+
 # newdata 0.0.0.9022
 
 ## Continuous integration
