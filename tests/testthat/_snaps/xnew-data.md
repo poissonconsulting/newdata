@@ -431,3 +431,132 @@
         <int> <dbl> <chr>
       1     2  4.83 a    
 
+# xnew_data factor with 100 levels
+
+    Code
+      data
+    Output
+      # A tibble: 100 x 2
+         fct     dbl
+         <fct> <dbl>
+       1 1         1
+       2 2         2
+       3 3         3
+       4 4         4
+       5 5         5
+       6 6         6
+       7 7         7
+       8 8         8
+       9 9         9
+      10 10       10
+      # i 90 more rows
+    Code
+      xnew_data(data)
+    Output
+      # A tibble: 1 x 2
+        fct     dbl
+        <fct> <dbl>
+      1 1      50.5
+    Code
+      xnew_data(data, fct)
+    Output
+      # A tibble: 100 x 2
+         fct     dbl
+         <fct> <dbl>
+       1 1      50.5
+       2 2      50.5
+       3 3      50.5
+       4 4      50.5
+       5 5      50.5
+       6 6      50.5
+       7 7      50.5
+       8 8      50.5
+       9 9      50.5
+      10 10     50.5
+      # i 90 more rows
+    Code
+      xnew_data(data, dbl)
+    Output
+      # A tibble: 30 x 2
+         fct     dbl
+         <fct> <dbl>
+       1 1      1   
+       2 1      4.41
+       3 1      7.83
+       4 1     11.2 
+       5 1     14.7 
+       6 1     18.1 
+       7 1     21.5 
+       8 1     24.9 
+       9 1     28.3 
+      10 1     31.7 
+      # i 20 more rows
+    Code
+      xnew_data(data, dbl, fct)
+    Output
+      # A tibble: 3,000 x 2
+         fct     dbl
+         <fct> <dbl>
+       1 1         1
+       2 2         1
+       3 3         1
+       4 4         1
+       5 5         1
+       6 6         1
+       7 7         1
+       8 8         1
+       9 9         1
+      10 10        1
+      # i 2,990 more rows
+    Code
+      xnew_data(data, fct, dbl)
+    Output
+      # A tibble: 3,000 x 2
+         fct     dbl
+         <fct> <dbl>
+       1 1      1   
+       2 1      4.41
+       3 1      7.83
+       4 1     11.2 
+       5 1     14.7 
+       6 1     18.1 
+       7 1     21.5 
+       8 1     24.9 
+       9 1     28.3 
+      10 1     31.7 
+      # i 2,990 more rows
+    Code
+      xnew_data(data, fct, dbl, .length_out = 30)
+    Output
+      # A tibble: 900 x 2
+         fct     dbl
+         <fct> <dbl>
+       1 1      1   
+       2 1      4.41
+       3 1      7.83
+       4 1     11.2 
+       5 1     14.7 
+       6 1     18.1 
+       7 1     21.5 
+       8 1     24.9 
+       9 1     28.3 
+      10 1     31.7 
+      # i 890 more rows
+    Code
+      xnew_data(data, fct, dbl, .length_out = 29)
+    Output
+      # A tibble: 841 x 2
+         fct     dbl
+         <fct> <dbl>
+       1 1      1   
+       2 1      4.54
+       3 1      8.07
+       4 1     11.6 
+       5 1     15.1 
+       6 1     18.7 
+       7 1     22.2 
+       8 1     25.8 
+       9 1     29.3 
+      10 1     32.8 
+      # i 831 more rows
+

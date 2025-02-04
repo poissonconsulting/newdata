@@ -108,3 +108,21 @@ test_that("xnew_data called twice works", {
     xnew_data(xnew_data(data, a, b = new_value(b), xnew_value(d)))
   })
 })
+
+test_that("xnew_data factor with 100 levels", {
+  withr::local_options(lifecycle_verbosity = "quiet")
+
+  data <- tibble::tibble(fct = factor(1:100, levels = 1:100),
+                         dbl = seq(1, 100, length.out = 100))
+
+  testthat::expect_snapshot({
+    data
+    xnew_data(data)
+    xnew_data(data, fct)
+    xnew_data(data, dbl)
+    xnew_data(data, dbl, fct)
+    xnew_data(data, fct, dbl)
+    xnew_data(data, fct, dbl, .length_out = 30)
+    xnew_data(data, fct, dbl, .length_out = 29)
+  })
+})

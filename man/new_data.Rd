@@ -19,12 +19,13 @@ new_data(
 sequences for.}
 
 \item{ref}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A named list of reference values for variables that are not in seq.
-Deprecated for \code{\link[=xnew_value]{xnew_value()}}.}
+Deprecated for \verb{[xnew_value()]} in \verb{[xnew_data()]}.}
 
-\item{obs_only}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A list of character vectors indicating the sets of variables
+\item{obs_only}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A list of character vectors
+indicating the sets of variables
 to only allow observed combinations for.
 If TRUE then obs_only is set to be seq.
-Deprecated for \code{\link[=xobs_only]{xobs_only()}}.}
+Deprecated for \verb{[xobs_only()]} in \verb{[xnew_data()]}.}
 
 \item{length_out}{A count indicating the maximum length of sequences for all
 types of variables except logical, character, factor and ordered factors.}
@@ -40,7 +41,7 @@ held constant or varying as a unique ordered sequence.
 Although superseded it is maintained for backwards compatibility with existing code.
 
 The code
-\code{new_data(data, c("a", "b"), length_out = 30)}
+\code{new_data(data, seq = c("a", "b"), length_out = 30)}
 is effectively a wrapper for
 \code{xnew_data(data, a, b, .length_out = 30)}
 to allow a string of column names to be passed.

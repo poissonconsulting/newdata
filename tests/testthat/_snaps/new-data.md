@@ -115,18 +115,18 @@
       new_data(datasets::chickwts, c("weight", "feed"))
     Output
       # A tibble: 180 x 2
-         weight feed  
-          <dbl> <fct> 
-       1   108  casein
-       2   119. casein
-       3   130. casein
-       4   141. casein
-       5   151. casein
-       6   162. casein
-       7   173. casein
-       8   184. casein
-       9   195. casein
-      10   206. casein
+         weight feed     
+          <dbl> <fct>    
+       1   108  casein   
+       2   108  horsebean
+       3   108  linseed  
+       4   108  meatmeal 
+       5   108  soybean  
+       6   108  sunflower
+       7   119. casein   
+       8   119. horsebean
+       9   119. linseed  
+      10   119. meatmeal 
       # i 170 more rows
 
 # new_data generates data frame with correct number of rows
@@ -197,7 +197,7 @@
     Code
       new_data(data, c("dfactor", "dinteger"), length_out = 5)
     Output
-      # A tibble: 50 x 6
+      # A tibble: 25 x 6
          dlogical dinteger dnumeric dfactor ddate      dhms    
          <lgl>       <int>    <dbl> <fct>   <date>     <time>  
        1 FALSE           1      5.6 1       2000-01-06 10:00:05
@@ -210,7 +210,7 @@
        8 FALSE           5      5.6 2       2000-01-06 10:00:05
        9 FALSE           7      5.6 2       2000-01-06 10:00:05
       10 FALSE          10      5.6 2       2000-01-06 10:00:05
-      # i 40 more rows
+      # i 15 more rows
     Code
       new_data(data, c("dhms"), length_out = 5)
     Output

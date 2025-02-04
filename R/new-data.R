@@ -6,7 +6,7 @@
 #' Although superseded it is maintained for backwards compatibility with existing code.
 #'
 #' The code
-#' `new_data(data, c("a", "b"), length_out = 30)`
+#' `new_data(data, seq = c("a", "b"), length_out = 30)`
 #' is effectively a wrapper for
 #' `xnew_data(data, a, b, .length_out = 30)`
 #' to allow a string of column names to be passed.
@@ -15,11 +15,12 @@
 #' @param seq A character vector of the variables in `data` to generate
 #' sequences for.
 #' @param ref `r lifecycle::badge("deprecated")` A named list of reference values for variables that are not in seq.
-#' Deprecated for [xnew_value()].
-#' @param obs_only `r lifecycle::badge("deprecated")` A list of character vectors indicating the sets of variables
+#' Deprecated for `[xnew_value()]` in `[xnew_data()]`.
+#' @param obs_only `r lifecycle::badge("deprecated")` A list of character vectors
+#' indicating the sets of variables
 #' to only allow observed combinations for.
 #' If TRUE then obs_only is set to be seq.
-#' Deprecated for [xobs_only()].
+#' Deprecated for `[xobs_only()]` in `[xnew_data()]`.
 #' @param length_out
 #' A count indicating the maximum length of sequences for all
 #' types of variables except logical, character, factor and ordered factors.
@@ -36,6 +37,7 @@ new_data <- function(
     ref = list(),
     obs_only = list(character(0)),
     length_out = 30) {
+
   if (!missing(ref)) {
     lifecycle::deprecate_soft(
       "0.0.0.9020", "new_data(ref)",
@@ -50,18 +52,12 @@ new_data <- function(
     )
   }
 
-  if (!missing(length_out)) {
-    lifecycle::deprecate_soft(
-      "0.0.0.9020", "new_data(length_out)",
-      details = "Use `xnew_data(data, xnew_seq(col_name, length_out = 30))`"
-    )
-  }
-
   chk_data(data)
   chk_count(length_out)
   chk_character(seq)
   chk_list(ref)
   chk_range(length_out, c(2L, 1000L))
+
   if (isTRUE(obs_only)) obs_only <- list(seq)
   chk_list(obs_only)
   if (!all(map_lgl(obs_only, is.character))) {
@@ -69,11 +65,17 @@ new_data <- function(
   }
 
   if (missing(ref) && missing(obs_only)) {
-    args <- c(list(.data = data, .length_out = length_out), seq)
-    # TODO: make work when seq is specified
     if (missing(seq)) {
+      args <- list(.data = data, .length_out = length_out)
       return(do.call("xnew_data", args = args))
     }
+    seq <- paste(seq, collapse = ", ")
+    if(missing(length_out)) {
+      length_out <- NULL
+    }
+    text <- paste("xnew_data(data", seq, ".length_out = length_out)", sep = ", ")
+    expr <- parse(text = text)
+    return(eval(expr))
   }
 
   obs_only <- obs_only %>% unique()

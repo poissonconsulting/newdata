@@ -67,16 +67,55 @@ xnew_data(old_data, int)
 #> 6 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
 
-The user can specify the length of each sequence.
+By default the sequence depends on the class of the variable:
+
+- logical vectors are length 2 (TRUE and FALSE);
+- double vectors are 30 equally spaced values from the minimum value to
+  the maximum value;
+- integer, Date, POSIXct and hms vectors are up to 30 discrete values
+  from the minimum to the maximum value as evenly spaced as possible;
+- character vectors are the number of unique values.
+- factor and ordered vectors are the number of levels.
+
+These values can be overridden by setting the following options:
+
+- `new_data.length_out_lgl`, which is 2 by default, for logical vectors;
+- `new_data.length_out_dbl`, which is 30 by default, for double vectors;
+- `new_data.length_out_int`, which is 30 by default, for integer, Date,
+  POSIXct and hms vectors;
+- `new_data.length_out_chr`, which is Inf by default, for character,
+  factor and ordered vectors.
+
+The length of Date, POSIXct and hms sequences are controlled by
+`new_data.length_out_int` as they are treated as integers for the
+purpose of generating a sequence.
+
+The user can also specify the length of each sequence individually.
 
 ``` r
-xnew_data(old_data, xnew_seq(int, length_out = 3))
-#> # A tibble: 3 × 9
+xnew_data(old_data, lgl, xnew_seq(int, length_out = 3))
+#> # A tibble: 6 × 9
 #>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
 #>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
 #> 1 FALSE     1  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 #> 2 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 #> 3 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 4 TRUE      1  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 5 TRUE      3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 6 TRUE      6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+```
+
+Or specify the length of all the sequences.
+
+``` r
+xnew_data(old_data, dbl, int, .length_out = 2)
+#> # A tibble: 4 × 9
+#>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
+#>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
+#> 1 FALSE     1   1   most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 2 FALSE     6   1   most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 3 FALSE     1   8.2 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 4 FALSE     6   8.2 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
 
 ### Observed Values and Combinations
@@ -172,6 +211,34 @@ xnew_data(old_data, xcast(lgl = 1, int = 7, dbl = 10L, fct = "a rarity", hms = "
 #> 1 TRUE      7    10 most  a rarity a rari… 1970-01-04 1969-12-31 16:00:03 00'02"
 ```
 
+### A Simple Wrapper
+
+Although superseded, a simple wrapper on `xnew_data()` that allows the
+user to pass a character vector and to specifying the maximum length of
+the sequences is also provided.
+
+``` r
+new_data(old_data, seq = c("int", "fct"), length_out = 5)
+#> # A tibble: 15 × 9
+#>    lgl     int   dbl chr   fct      ord    dte        dtt                 hms   
+#>    <lgl> <int> <dbl> <chr> <fct>    <ord>  <date>     <dttm>              <time>
+#>  1 FALSE     1  4.57 most  not obs  a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+#>  2 FALSE     1  4.57 most  a rarity a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+#>  3 FALSE     1  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+#>  4 FALSE     2  4.57 most  not obs  a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+#>  5 FALSE     2  4.57 most  a rarity a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+#>  6 FALSE     2  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+#>  7 FALSE     3  4.57 most  not obs  a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+#>  8 FALSE     3  4.57 most  a rarity a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+#>  9 FALSE     3  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 10 FALSE     4  4.57 most  not obs  a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 11 FALSE     4  4.57 most  a rarity a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 12 FALSE     4  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 13 FALSE     6  4.57 most  not obs  a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 14 FALSE     6  4.57 most  a rarity a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 15 FALSE     6  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
+```
+
 ## Installation
 
 To install the latest release version from CRAN.
@@ -181,17 +248,17 @@ install.packages("newdata")
 ```
 
 To install the latest development version from
-[r-universe](https://poissonconsulting.r-universe.dev/newdata).
+[GitHub](https://github.com/poissonconsulting/newdata)
+
+``` r
+# install.packages("pak")
+pak::pak("poissonconsulting/newdata")
+```
+
+or from [r-universe](https://poissonconsulting.r-universe.dev/newdata).
 
 ``` r
 install.packages("newdata", repos = c("https://poissonconsulting.r-universe.dev", "https://cloud.r-project.org"))
-```
-
-or from [GitHub](https://github.com/poissonconsulting/newdata)
-
-``` r
-# install.packages("remotes")
-remotes::install_github("poissonconsulting/newdata")
 ```
 
 ## Contribution

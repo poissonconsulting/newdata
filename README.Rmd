@@ -52,9 +52,32 @@ Specifying a variable causes it to vary sequentially across its range.
 xnew_data(old_data, int)
 ```
 
-The user can specify the length of each sequence.
+By default the sequence depends on the class of the variable:
+
+- logical vectors are length 2 (TRUE and FALSE);
+- double vectors are 30 equally spaced values from the minimum value to the maximum value;
+- integer, Date, POSIXct and hms vectors are up to 30 discrete values from the minimum to the maximum value as evenly spaced as possible;
+- character vectors are the number of unique values.
+- factor and ordered vectors are the number of levels.
+
+These values can be overridden by setting the following options:
+
+- `new_data.length_out_lgl`, which is 2 by default, for logical vectors;
+- `new_data.length_out_dbl`, which is 30 by default, for double vectors;
+- `new_data.length_out_int`, which is 30 by default, for integer, Date, POSIXct and hms vectors;
+- `new_data.length_out_chr`, which is Inf by default, for character, factor and ordered vectors.
+
+The length of Date, POSIXct and hms sequences are controlled by `new_data.length_out_int` as they are treated as integers for the purpose of generating a sequence.
+
+The user can also specify the length of each sequence individually.
 ```{r}
-xnew_data(old_data, xnew_seq(int, length_out = 3))
+xnew_data(old_data, lgl, xnew_seq(int, length_out = 3))
+```
+
+Or specify the length of all the sequences.
+
+```{r}
+xnew_data(old_data, dbl, int, .length_out = 2)
 ```
 
 ### Observed Values and Combinations
@@ -93,6 +116,14 @@ Casting variables to be the same class as the original is achieved as follows.
 xnew_data(old_data, xcast(lgl = 1, int = 7, dbl = 10L, fct = "a rarity", hms = "00:00:02"))
 ```
 
+### A Simple Wrapper
+
+Although superseded, a simple wrapper on `xnew_data()` that allows the user to pass a character vector and to specifying the maximum length of the sequences is also provided.
+
+```{r}
+new_data(old_data, seq = c("int", "fct"), length_out = 5)
+```
+
 ## Installation
 
 To install the latest release version from CRAN.
@@ -100,15 +131,15 @@ To install the latest release version from CRAN.
 install.packages("newdata")
 ```
 
-To install the latest development version from [r-universe](https://poissonconsulting.r-universe.dev/newdata).
+To install the latest development version from [GitHub](https://github.com/poissonconsulting/newdata)
 ```r
-install.packages("newdata", repos = c("https://poissonconsulting.r-universe.dev", "https://cloud.r-project.org"))
+# install.packages("pak")
+pak::pak("poissonconsulting/newdata")
 ```
 
-or from [GitHub](https://github.com/poissonconsulting/newdata)
+or from [r-universe](https://poissonconsulting.r-universe.dev/newdata).
 ```r
-# install.packages("remotes")
-remotes::install_github("poissonconsulting/newdata")
+install.packages("newdata", repos = c("https://poissonconsulting.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
 ## Contribution
