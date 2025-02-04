@@ -36,7 +36,6 @@ new_data <- function(
     ref = list(),
     obs_only = list(character(0)),
     length_out = 30) {
-
   if (!missing(ref)) {
     lifecycle::deprecate_soft(
       "0.0.0.9020", "new_data(ref)",
@@ -69,10 +68,10 @@ new_data <- function(
     err("`obs_only` must be a list of character vectors")
   }
 
-  if(missing(ref) && missing(obs_only)) {
+  if (missing(ref) && missing(obs_only)) {
     args <- c(list(.data = data, .length_out = length_out), seq)
     # TODO: make work when seq is specified
-   if(missing(seq)) {
+    if (missing(seq)) {
       return(do.call("xnew_data", args = args))
     }
   }
@@ -94,7 +93,7 @@ new_data <- function(
   if (length(ref)) {
     if (!is_named(ref)) err("`ref` must be a named list")
 
-    if(any(names(ref) %in% seq)) {
+    if (any(names(ref) %in% seq)) {
       wrn("`ref` should not contain variables in `seq`")
     }
 

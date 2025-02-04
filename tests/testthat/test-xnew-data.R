@@ -67,8 +67,7 @@ test_that("one column no row dataset", {
 })
 
 test_that("no column no row dataset", {
-  data <- tibble::tibble(
-  )
+  data <- tibble::tibble()
   testthat::expect_snapshot({
     data
     xnew_data(data)
