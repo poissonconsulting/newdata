@@ -33,41 +33,6 @@ test_that("new_value logical", {
   expect_identical(new_value(array(TRUE)), FALSE)
 })
 
-test_that("new_value logical", {
-  # zero length
-  expect_identical(new_value(logical()), FALSE)
-  expect_identical(new_value(logical(), obs_only = TRUE), NA)
-  # missing value
-  expect_identical(new_value(NA), FALSE)
-  expect_identical(new_value(NA, obs_only = TRUE), NA)
-  # single value
-  expect_identical(new_value(FALSE), FALSE)
-  expect_identical(new_value(TRUE), FALSE)
-  expect_identical(new_value(FALSE, obs_only = TRUE), FALSE)
-  expect_identical(new_value(TRUE, obs_only = TRUE), TRUE)
-  # multiple values
-  expect_identical(new_value(c(TRUE, FALSE)), FALSE)
-  expect_identical(new_value(c(FALSE, TRUE)), FALSE)
-  expect_identical(new_value(c(TRUE, TRUE)), FALSE)
-  expect_identical(new_value(c(TRUE, TRUE, FALSE)), FALSE)
-  expect_identical(new_value(c(TRUE, FALSE), obs_only = TRUE), FALSE)
-  expect_identical(new_value(c(FALSE, TRUE), obs_only = TRUE), FALSE)
-  expect_identical(new_value(c(TRUE, TRUE), obs_only = TRUE), TRUE)
-  expect_identical(new_value(c(TRUE, TRUE, FALSE), obs_only = TRUE), FALSE)
-  # multiple values with missing
-  expect_identical(new_value(c(TRUE, FALSE, NA)), FALSE)
-  expect_identical(new_value(c(FALSE, TRUE, NA)), FALSE)
-  expect_identical(new_value(c(TRUE, TRUE, NA)), FALSE)
-  expect_identical(new_value(c(TRUE, TRUE, FALSE, NA)), FALSE)
-  expect_identical(new_value(c(TRUE, FALSE, NA), obs_only = TRUE), FALSE)
-  expect_identical(new_value(c(FALSE, TRUE, NA), obs_only = TRUE), FALSE)
-  expect_identical(new_value(c(TRUE, TRUE, NA), obs_only = TRUE), TRUE)
-  expect_identical(new_value(c(TRUE, TRUE, FALSE, NA), obs_only = TRUE), FALSE)
-  # matrices and arrays
-  expect_identical(new_value(matrix(TRUE)), FALSE)
-  expect_identical(new_value(array(TRUE)), FALSE)
-})
-
 test_that("new_value integer", {
   # zero length
   expect_identical(new_value(integer()), NA_integer_)
@@ -101,30 +66,10 @@ test_that("new_value integer", {
   # matrices and arrays
   expect_identical(new_value(matrix(1L)), 1L)
   expect_identical(new_value(array(1L)), 1L)
-})
-
-
-test_that("new_value logical", {
-  # zero length
-  expect_identical(new_value(logical()), FALSE)
-  # missing value
-  expect_identical(new_value(NA), FALSE)
-  # single value
-  expect_identical(new_value(FALSE), FALSE)
-  expect_identical(new_value(TRUE), FALSE)
-  # multiple values
-  expect_identical(new_value(c(TRUE, FALSE)), FALSE)
-  expect_identical(new_value(c(FALSE, TRUE)), FALSE)
-  expect_identical(new_value(c(TRUE, TRUE)), FALSE)
-  expect_identical(new_value(c(TRUE, TRUE, FALSE)), FALSE)
-  # multiple values with missing
-  expect_identical(new_value(c(TRUE, FALSE, NA)), FALSE)
-  expect_identical(new_value(c(FALSE, TRUE, NA)), FALSE)
-  expect_identical(new_value(c(TRUE, TRUE, NA)), FALSE)
-  expect_identical(new_value(c(TRUE, TRUE, FALSE, NA)), FALSE)
-  # matrices and arrays
-  expect_identical(new_value(matrix(TRUE)), FALSE)
-  expect_identical(new_value(array(TRUE)), FALSE)
+  # median
+  expect_identical(new_value(c(0:1), obs_only = TRUE), as.integer(median(0:1)))
+  expect_identical(new_value(c(1:10), obs_only = TRUE), as.integer(median(1:10)))
+  expect_identical(new_value(c(2:10), obs_only = TRUE), as.integer(median(2:10)))
 })
 
 test_that("new_value integer obs_only", {
