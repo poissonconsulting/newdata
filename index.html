@@ -80,7 +80,7 @@
 <span><span class="co">#&gt; 2 FALSE     4   4.5 most     most    most  1970-01-05 1969-12-31 16:00:04 00'04"</span></span>
 <span><span class="co">#&gt; 3 NA        6   8.2 a rarity a rari… a ra… 1970-01-07 1969-12-31 16:00:06 00'06"</span></span></code></pre></div>
 <div class="section level3">
-<h3 id="length-of-sequences">Length of Sequences<a class="anchor" aria-label="anchor" href="#length-of-sequences"></a>
+<h3 id="reference-value">Reference Value<a class="anchor" aria-label="anchor" href="#reference-value"></a>
 </h3>
 <p>By default all variables are set to a reference value.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -89,6 +89,18 @@
 <span><span class="co">#&gt;   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   </span></span>
 <span><span class="co">#&gt;   &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;   &lt;ord&gt;    &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
 <span><span class="co">#&gt; 1 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
+<p>The reference value depends on the class of the variable, by default:</p>
+<ul>
+<li>logical vectors are FALSE;</li>
+<li>double vectors are the mean;</li>
+<li>integer, Date, POSIXct and hms vectors are the floored mean;</li>
+<li>character vectors are the most common value or the first when sorted of the most common values;</li>
+<li>factor and ordered vectors are the first level.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="sequences">Sequences<a class="anchor" aria-label="anchor" href="#sequences"></a>
+</h3>
 <p>Specifying a variable causes it to vary sequentially across its range.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">old_data</span>, <span class="va">int</span><span class="op">)</span></span>
@@ -116,12 +128,14 @@
 <li>
 <code>new_data.length_out_dbl</code>, which is 30 by default, for double vectors;</li>
 <li>
-<code>new_data.length_out_int</code>, which is 30 by default, for integer, Date, POSIXct and hms vectors;</li>
+<code>new_data.length_out_int</code>, which is 30 by default, for integer, Date, POSIXct and hms vectors^1;</li>
 <li>
 <code>new_data.length_out_chr</code>, which is Inf by default, for character, factor and ordered vectors.</li>
 </ul>
-<p>The length of Date, POSIXct and hms sequences are controlled by <code>new_data.length_out_int</code> as they are treated as integers for the purpose of generating a sequence.</p>
-<p>The user can also specify the length of each sequence individually.</p>
+<ol style="list-style-type: decimal">
+<li>The length of Date, POSIXct and hms sequences are controlled by <code>new_data.length_out_int</code> as they are treated as integers for the purpose of generating a sequence.</li>
+</ol>
+<p>When programming it is strongly recommended that the user explicitly specify the length of each sequence individually.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">old_data</span>, <span class="va">lgl</span>, <span class="fu"><a href="reference/xnew_seq.html">xnew_seq</a></span><span class="op">(</span><span class="va">int</span>, length_out <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 9</span></span>
@@ -133,7 +147,7 @@
 <span><span class="co">#&gt; 4 TRUE      1  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
 <span><span class="co">#&gt; 5 TRUE      3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
 <span><span class="co">#&gt; 6 TRUE      6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
-<p>Or specify the length of all the sequences.</p>
+<p>A third alternative is to specify the length of all the sequences in the data set but this can result in less common character strings or later factor or ordered levels being dropped.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">old_data</span>, <span class="va">dbl</span>, <span class="va">int</span>, .length_out <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 4 × 9</span></span>
@@ -145,7 +159,7 @@
 <span><span class="co">#&gt; 4 FALSE     6   8.2 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="observed-values-and-combinations">Observed Values and Combinations<a class="anchor" aria-label="anchor" href="#observed-values-and-combinations"></a>
+<h3 id="observed-values">Observed Values<a class="anchor" aria-label="anchor" href="#observed-values"></a>
 </h3>
 <p>The user can also indicate whether only observed values should be used in the sequence.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -164,7 +178,7 @@
 <span><span class="co">#&gt;   &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;   &lt;ord&gt;    &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
 <span><span class="co">#&gt; 1 FALSE     1  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
 <span><span class="co">#&gt; 2 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
-<p>When two or more variables are specified all combinations are used.</p>
+<p>and when two or more variables are specified all combinations are used.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">old_data</span>, <span class="va">int</span>, <span class="va">fct</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 18 × 9</span></span>
@@ -188,7 +202,7 @@
 <span><span class="co">#&gt; 16 FALSE     6  4.57 most  not obs  a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
 <span><span class="co">#&gt; 17 FALSE     6  4.57 most  a rarity a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
 <span><span class="co">#&gt; 18 FALSE     6  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
-<p>To only get observed combinations use <code><a href="reference/xobs_only.html">xobs_only()</a></code></p>
+<p>to only get observed combinations.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">old_data</span>, <span class="fu"><a href="reference/xobs_only.html">xobs_only</a></span><span class="op">(</span><span class="va">int</span>, <span class="va">fct</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 3 × 9</span></span>
@@ -199,16 +213,16 @@
 <span><span class="co">#&gt; 3 FALSE     6  4.57 most  a rarity a rari… 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="add-new-variables">Add New Variables<a class="anchor" aria-label="anchor" href="#add-new-variables"></a>
+<h3 id="modifying-variables">Modifying Variables<a class="anchor" aria-label="anchor" href="#modifying-variables"></a>
 </h3>
-<p>Adding a new variable is simple.</p>
+<p>Modifying an existing variable or changing an existing one is simple.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">old_data</span>, extra <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/xnew_data.html">xnew_data</a></span><span class="op">(</span><span class="va">old_data</span>, lgl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">lgl</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, extra <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 10</span></span>
-<span><span class="co">#&gt;   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   </span></span>
-<span><span class="co">#&gt;   &lt;lgl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;   &lt;ord&gt;    &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
-<span><span class="co">#&gt; 1 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
-<span><span class="co">#&gt; 2 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt;     lgl   int   dbl chr   fct     ord      dte        dtt                 hms   </span></span>
+<span><span class="co">#&gt;   &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;   &lt;ord&gt;    &lt;date&gt;     &lt;dttm&gt;              &lt;time&gt;</span></span>
+<span><span class="co">#&gt; 1   0.5     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
+<span><span class="co">#&gt; 2   0.5     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span>
 <span><span class="co">#&gt; # ℹ 1 more variable: extra &lt;lgl&gt;</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -225,7 +239,7 @@
 <div class="section level3">
 <h3 id="a-simple-wrapper">A Simple Wrapper<a class="anchor" aria-label="anchor" href="#a-simple-wrapper"></a>
 </h3>
-<p>Although superseded, a simple wrapper on <code><a href="reference/xnew_data.html">xnew_data()</a></code> that allows the user to pass a character vector and to specifying the maximum length of the sequences is also provided.</p>
+<p>Although superseded, for consistency with existing code <code><a href="reference/new_data.html">new_data()</a></code> which is a simple wrapper on <code><a href="reference/xnew_data.html">xnew_data()</a></code> allows the user to pass a character vector and to specifying the length of all the sequences is also provided.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/new_data.html">new_data</a></span><span class="op">(</span><span class="va">old_data</span>, seq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"int"</span>, <span class="st">"fct"</span><span class="op">)</span>, length_out <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 15 × 9</span></span>
