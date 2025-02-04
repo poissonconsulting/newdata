@@ -40,7 +40,7 @@ newdata::old_data
 #> 3 NA        6   8.2 a rarity a rari… a ra… 1970-01-07 1969-12-31 16:00:06 00'06"
 ```
 
-### Length of Sequences
+### Reference Value
 
 By default all variables are set to a reference value.
 
@@ -51,6 +51,17 @@ xnew_data(old_data)
 #>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
 #> 1 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
+
+The reference value depends on the class of the variable, by default:
+
+- logical vectors are FALSE;
+- double vectors are the mean;
+- integer, Date, POSIXct and hms vectors are the floored mean;
+- character vectors are the most common value or the first when sorted
+  of the most common values;
+- factor and ordered vectors are the first level.
+
+### Sequences
 
 Specifying a variable causes it to vary sequentially across its range.
 
@@ -82,15 +93,16 @@ These values can be overridden by setting the following options:
 - `new_data.length_out_lgl`, which is 2 by default, for logical vectors;
 - `new_data.length_out_dbl`, which is 30 by default, for double vectors;
 - `new_data.length_out_int`, which is 30 by default, for integer, Date,
-  POSIXct and hms vectors;
+  POSIXct and hms vectors^1;
 - `new_data.length_out_chr`, which is Inf by default, for character,
   factor and ordered vectors.
 
-The length of Date, POSIXct and hms sequences are controlled by
-`new_data.length_out_int` as they are treated as integers for the
-purpose of generating a sequence.
+1.  The length of Date, POSIXct and hms sequences are controlled by
+    `new_data.length_out_int` as they are treated as integers for the
+    purpose of generating a sequence.
 
-The user can also specify the length of each sequence individually.
+When programming it is strongly recommended that the user explicitly
+specify the length of each sequence individually.
 
 ``` r
 xnew_data(old_data, lgl, xnew_seq(int, length_out = 3))
@@ -105,7 +117,9 @@ xnew_data(old_data, lgl, xnew_seq(int, length_out = 3))
 #> 6 TRUE      6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
 
-Or specify the length of all the sequences.
+A third alternative is to specify the length of all the sequences in the
+data set but this can result in less common character strings or later
+factor or ordered levels being dropped.
 
 ``` r
 xnew_data(old_data, dbl, int, .length_out = 2)
@@ -118,7 +132,7 @@ xnew_data(old_data, dbl, int, .length_out = 2)
 #> 4 FALSE     6   8.2 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
 
-### Observed Values and Combinations
+### Observed Values
 
 The user can also indicate whether only observed values should be used
 in the sequence.
@@ -145,7 +159,7 @@ xnew_data(old_data, xobs_only(xnew_seq(int, length_out = 3)))
 #> 2 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
 
-When two or more variables are specified all combinations are used.
+and when two or more variables are specified all combinations are used.
 
 ``` r
 xnew_data(old_data, int, fct)
@@ -172,7 +186,7 @@ xnew_data(old_data, int, fct)
 #> 18 FALSE     6  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
 
-To only get observed combinations use `xobs_only()`
+to only get observed combinations.
 
 ``` r
 xnew_data(old_data, xobs_only(int, fct))
@@ -184,17 +198,17 @@ xnew_data(old_data, xobs_only(int, fct))
 #> 3 FALSE     6  4.57 most  a rarity a rari… 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
 
-### Add New Variables
+### Modifying Variables
 
-Adding a new variable is simple.
+Modifying an existing variable or changing an existing one is simple.
 
 ``` r
-xnew_data(old_data, extra = c(TRUE, FALSE))
+xnew_data(old_data, lgl = median(lgl, na.rm = TRUE), extra = c(TRUE, FALSE))
 #> # A tibble: 2 × 10
-#>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
-#>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
-#> 1 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
-#> 2 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#>     lgl   int   dbl chr   fct     ord      dte        dtt                 hms   
+#>   <dbl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
+#> 1   0.5     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 2   0.5     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 #> # ℹ 1 more variable: extra <lgl>
 ```
 
@@ -213,9 +227,10 @@ xnew_data(old_data, xcast(lgl = 1, int = 7, dbl = 10L, fct = "a rarity", hms = "
 
 ### A Simple Wrapper
 
-Although superseded, a simple wrapper on `xnew_data()` that allows the
-user to pass a character vector and to specifying the maximum length of
-the sequences is also provided.
+Although superseded, for consistency with existing code `new_data()`
+which is a simple wrapper on `xnew_data()` allows the user to pass a
+character vector and to specifying the length of all the sequences is
+also provided.
 
 ``` r
 new_data(old_data, seq = c("int", "fct"), length_out = 5)
