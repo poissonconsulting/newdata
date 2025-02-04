@@ -1,6 +1,10 @@
 url: https://poissonconsulting.github.io/newdata/
+
 template:
   package: poissontemplate
+
+development:
+  mode: auto
 
 reference:
 - title: New Data
@@ -23,6 +27,3 @@ reference:
 - title: Example datasets
   contents:
   - old_data
-
-development:
-  mode: auto
