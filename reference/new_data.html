@@ -65,14 +65,15 @@ sequences for.</p></dd>
 
 <dt id="arg-ref">ref<a class="anchor" aria-label="anchor" href="#arg-ref"></a></dt>
 <dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> A named list of reference values for variables that are not in seq.
-Deprecated for <code><a href="xnew_value.html">xnew_value()</a></code>.</p></dd>
+Deprecated for <code>[xnew_value()]</code> in <code>[xnew_data()]</code>.</p></dd>
 
 
 <dt id="arg-obs-only">obs_only<a class="anchor" aria-label="anchor" href="#arg-obs-only"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> A list of character vectors indicating the sets of variables
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> A list of character vectors
+indicating the sets of variables
 to only allow observed combinations for.
 If TRUE then obs_only is set to be seq.
-Deprecated for <code><a href="xobs_only.html">xobs_only()</a></code>.</p></dd>
+Deprecated for <code>[xobs_only()]</code> in <code>[xnew_data()]</code>.</p></dd>
 
 
 <dt id="arg-length-out">length_out<a class="anchor" aria-label="anchor" href="#arg-length-out"></a></dt>
@@ -88,7 +89,7 @@ types of variables except logical, character, factor and ordered factors.</p></d
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Although superseded it is maintained for backwards compatibility with existing code.</p>
 <p>The code
-<code>new_data(data, c("a", "b"), length_out = 30)</code>
+<code>new_data(data, seq = c("a", "b"), length_out = 30)</code>
 is effectively a wrapper for
 <code>xnew_data(data, a, b, .length_out = 30)</code>
 to allow a string of column names to be passed.</p>
@@ -130,15 +131,15 @@ to allow a string of column names to be passed.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    lgl     int   dbl chr   fct     ord     dte        dtt                 hms   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;time&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> FALSE     1  1    most  not obs a rari… 1970-01-04 1969-12-31 <span style="color: #949494;">16:00:03</span> 00<span style="color: #949494;">'</span>03<span style="color: #949494;">"</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> FALSE     2  1    most  not obs a rari… 1970-01-04 1969-12-31 <span style="color: #949494;">16:00:03</span> 00<span style="color: #949494;">'</span>03<span style="color: #949494;">"</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> FALSE     3  1    most  not obs a rari… 1970-01-04 1969-12-31 <span style="color: #949494;">16:00:03</span> 00<span style="color: #949494;">'</span>03<span style="color: #949494;">"</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> FALSE     4  1    most  not obs a rari… 1970-01-04 1969-12-31 <span style="color: #949494;">16:00:03</span> 00<span style="color: #949494;">'</span>03<span style="color: #949494;">"</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> FALSE     5  1    most  not obs a rari… 1970-01-04 1969-12-31 <span style="color: #949494;">16:00:03</span> 00<span style="color: #949494;">'</span>03<span style="color: #949494;">"</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> FALSE     6  1    most  not obs a rari… 1970-01-04 1969-12-31 <span style="color: #949494;">16:00:03</span> 00<span style="color: #949494;">'</span>03<span style="color: #949494;">"</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> FALSE     1  1.25 most  not obs a rari… 1970-01-04 1969-12-31 <span style="color: #949494;">16:00:03</span> 00<span style="color: #949494;">'</span>03<span style="color: #949494;">"</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> FALSE     2  1.25 most  not obs a rari… 1970-01-04 1969-12-31 <span style="color: #949494;">16:00:03</span> 00<span style="color: #949494;">'</span>03<span style="color: #949494;">"</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> FALSE     3  1.25 most  not obs a rari… 1970-01-04 1969-12-31 <span style="color: #949494;">16:00:03</span> 00<span style="color: #949494;">'</span>03<span style="color: #949494;">"</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> FALSE     4  1.25 most  not obs a rari… 1970-01-04 1969-12-31 <span style="color: #949494;">16:00:03</span> 00<span style="color: #949494;">'</span>03<span style="color: #949494;">"</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> FALSE     1  1.25 most  not obs a rari… 1970-01-04 1969-12-31 <span style="color: #949494;">16:00:03</span> 00<span style="color: #949494;">'</span>03<span style="color: #949494;">"</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> FALSE     1  1.50 most  not obs a rari… 1970-01-04 1969-12-31 <span style="color: #949494;">16:00:03</span> 00<span style="color: #949494;">'</span>03<span style="color: #949494;">"</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> FALSE     1  1.74 most  not obs a rari… 1970-01-04 1969-12-31 <span style="color: #949494;">16:00:03</span> 00<span style="color: #949494;">'</span>03<span style="color: #949494;">"</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> FALSE     1  1.99 most  not obs a rari… 1970-01-04 1969-12-31 <span style="color: #949494;">16:00:03</span> 00<span style="color: #949494;">'</span>03<span style="color: #949494;">"</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> FALSE     1  2.24 most  not obs a rari… 1970-01-04 1969-12-31 <span style="color: #949494;">16:00:03</span> 00<span style="color: #949494;">'</span>03<span style="color: #949494;">"</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> FALSE     1  2.49 most  not obs a rari… 1970-01-04 1969-12-31 <span style="color: #949494;">16:00:03</span> 00<span style="color: #949494;">'</span>03<span style="color: #949494;">"</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> FALSE     1  2.74 most  not obs a rari… 1970-01-04 1969-12-31 <span style="color: #949494;">16:00:03</span> 00<span style="color: #949494;">'</span>03<span style="color: #949494;">"</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> FALSE     1  2.99 most  not obs a rari… 1970-01-04 1969-12-31 <span style="color: #949494;">16:00:03</span> 00<span style="color: #949494;">'</span>03<span style="color: #949494;">"</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> FALSE     1  3.23 most  not obs a rari… 1970-01-04 1969-12-31 <span style="color: #949494;">16:00:03</span> 00<span style="color: #949494;">'</span>03<span style="color: #949494;">"</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 170 more rows</span></span>
 </code></pre></div>
     </div>
