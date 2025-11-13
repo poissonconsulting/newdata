@@ -1,5 +1,36 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# newdata 0.0.0.9025
+
+## Chore
+
+- Auto-update from GitHub Actions (#52).
+
+## Continuous integration
+
+- Fix reviewdog and add commenting workflow (#56).
+
+- Use workflows for fledge (#55).
+
+- Sync (#54).
+
+- Use reviewdog for external PRs (#53).
+
+- Cleanup and fix macOS (#51).
+
+- Format with air, check detritus, better handling of `extra-packages` (#50).
+
+- Enhance permissions for workflow (#49).
+
+- Permissions, better tests for missing suggests, lints (#48).
+
+- Always use `_R_CHECK_FORCE_SUGGESTS_=false` (#47).
+
+- Correct installation of xml2 (#46).
+
+- Sync (#45).
+
+
 # newdata 0.0.0.9024
 
 - Closes #40.
