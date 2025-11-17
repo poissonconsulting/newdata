@@ -1,5 +1,45 @@
 # Changelog
 
+## newdata 0.0.0.9025
+
+### Chore
+
+- Auto-update from GitHub Actions
+  ([\#52](https://github.com/poissonconsulting/newdata/issues/52)).
+
+### Continuous integration
+
+- Fix reviewdog and add commenting workflow
+  ([\#56](https://github.com/poissonconsulting/newdata/issues/56)).
+
+- Use workflows for fledge
+  ([\#55](https://github.com/poissonconsulting/newdata/issues/55)).
+
+- Sync ([\#54](https://github.com/poissonconsulting/newdata/issues/54)).
+
+- Use reviewdog for external PRs
+  ([\#53](https://github.com/poissonconsulting/newdata/issues/53)).
+
+- Cleanup and fix macOS
+  ([\#51](https://github.com/poissonconsulting/newdata/issues/51)).
+
+- Format with air, check detritus, better handling of `extra-packages`
+  ([\#50](https://github.com/poissonconsulting/newdata/issues/50)).
+
+- Enhance permissions for workflow
+  ([\#49](https://github.com/poissonconsulting/newdata/issues/49)).
+
+- Permissions, better tests for missing suggests, lints
+  ([\#48](https://github.com/poissonconsulting/newdata/issues/48)).
+
+- Always use `_R_CHECK_FORCE_SUGGESTS_=false`
+  ([\#47](https://github.com/poissonconsulting/newdata/issues/47)).
+
+- Correct installation of xml2
+  ([\#46](https://github.com/poissonconsulting/newdata/issues/46)).
+
+- Sync ([\#45](https://github.com/poissonconsulting/newdata/issues/45)).
+
 ## newdata 0.0.0.9024
 
 - Closes [\#40](https://github.com/poissonconsulting/newdata/issues/40).
