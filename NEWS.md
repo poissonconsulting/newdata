@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# newdata 0.0.0.9026
+
+## Continuous integration
+
+- Install binaries from r-universe for dev workflow (#58).
+
+
 # newdata 0.0.0.9025
 
 ## Chore
