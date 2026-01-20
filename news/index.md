@@ -1,5 +1,12 @@
 # Changelog
 
+## newdata 0.0.0.9026
+
+### Continuous integration
+
+- Install binaries from r-universe for dev workflow
+  ([\#58](https://github.com/poissonconsulting/newdata/issues/58)).
+
 ## newdata 0.0.0.9025
 
 ### Chore
