@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# newdata 0.0.0.9027
+
+## Continuous integration
+
+- Test all R versions on branches that start with cran- (#60).
+
+
 # newdata 0.0.0.9026
 
 ## Continuous integration
