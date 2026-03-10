@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# newdata 0.0.0.9028
+
+## Chore
+
+- Auto-update from GitHub Actions (#62).
+
+
 # newdata 0.0.0.9027
 
 ## Continuous integration
