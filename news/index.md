@@ -1,5 +1,26 @@
 # Changelog
 
+## newdata 0.0.0.9029
+
+### Chore
+
+- Auto-update from GitHub Actions
+  ([\#64](https://github.com/poissonconsulting/newdata/issues/64)).
+
+## newdata 0.0.0.9028
+
+### Chore
+
+- Auto-update from GitHub Actions
+  ([\#62](https://github.com/poissonconsulting/newdata/issues/62)).
+
+## newdata 0.0.0.9027
+
+### Continuous integration
+
+- Test all R versions on branches that start with cran-
+  ([\#60](https://github.com/poissonconsulting/newdata/issues/60)).
+
 ## newdata 0.0.0.9026
 
 ### Continuous integration

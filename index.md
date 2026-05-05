@@ -14,6 +14,7 @@ levels and time zones are always preserved.
 Consider the following observed ‘old’ data frame.
 
 ``` r
+
 library(newdata)
 
 newdata::old_data
@@ -30,6 +31,7 @@ newdata::old_data
 By default all variables are set to a reference value.
 
 ``` r
+
 xnew_data(old_data)
 #> # A tibble: 1 × 9
 #>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
@@ -51,6 +53,7 @@ The reference value depends on the class of the variable, by default:
 Specifying a variable causes it to vary sequentially across its range.
 
 ``` r
+
 xnew_data(old_data, int)
 #> # A tibble: 6 × 9
 #>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
@@ -90,6 +93,7 @@ When programming it is strongly recommended that the user explicitly
 specify the length of each sequence individually.
 
 ``` r
+
 xnew_data(old_data, lgl, xnew_seq(int, length_out = 3))
 #> # A tibble: 6 × 9
 #>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
@@ -107,6 +111,7 @@ data set but this can result in less common character strings or later
 factor or ordered levels being dropped.
 
 ``` r
+
 xnew_data(old_data, dbl, int, .length_out = 2)
 #> # A tibble: 4 × 9
 #>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
@@ -123,6 +128,7 @@ The user can also indicate whether only observed values should be used
 in the sequence.
 
 ``` r
+
 xnew_data(old_data, xnew_seq(int, length_out = 3, obs_only = TRUE))
 #> # A tibble: 3 × 9
 #>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
@@ -138,6 +144,7 @@ function can be used to filter out unobserved values after the sequence
 has been generated.
 
 ``` r
+
 xnew_data(old_data, xobs_only(xnew_seq(int, length_out = 3)))
 #> # A tibble: 2 × 9
 #>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
@@ -149,6 +156,7 @@ xnew_data(old_data, xobs_only(xnew_seq(int, length_out = 3)))
 and when two or more variables are specified all combinations are used.
 
 ``` r
+
 xnew_data(old_data, int, fct)
 #> # A tibble: 18 × 9
 #>    lgl     int   dbl chr   fct      ord    dte        dtt                 hms   
@@ -176,6 +184,7 @@ xnew_data(old_data, int, fct)
 to only get observed combinations.
 
 ``` r
+
 xnew_data(old_data, xobs_only(int, fct))
 #> # A tibble: 3 × 9
 #>   lgl     int   dbl chr   fct      ord     dte        dtt                 hms   
@@ -190,6 +199,7 @@ xnew_data(old_data, xobs_only(int, fct))
 Modifying an existing variable or changing an existing one is simple.
 
 ``` r
+
 xnew_data(old_data, lgl = median(lgl, na.rm = TRUE), extra = c(TRUE, FALSE))
 #> # A tibble: 2 × 10
 #>     lgl   int   dbl chr   fct     ord      dte        dtt                 hms   
@@ -205,6 +215,7 @@ Casting variables to be the same class as the original is achieved as
 follows.
 
 ``` r
+
 xnew_data(old_data, xcast(lgl = 1, int = 7, dbl = 10L, fct = "a rarity", hms = "00:00:02"))
 #> # A tibble: 1 × 9
 #>   lgl     int   dbl chr   fct      ord     dte        dtt                 hms   
@@ -222,6 +233,7 @@ allows the user to pass a character vector and to specifying the length
 of all the sequences is also provided.
 
 ``` r
+
 new_data(old_data, seq = c("int", "fct"), length_out = 5)
 #> # A tibble: 15 × 9
 #>    lgl     int   dbl chr   fct      ord    dte        dtt                 hms   
@@ -248,6 +260,7 @@ new_data(old_data, seq = c("int", "fct"), length_out = 5)
 To install the latest release version from CRAN.
 
 ``` r
+
 install.packages("newdata")
 ```
 
@@ -255,6 +268,7 @@ To install the latest development version from
 [GitHub](https://github.com/poissonconsulting/newdata)
 
 ``` r
+
 # install.packages("pak")
 pak::pak("poissonconsulting/newdata")
 ```
@@ -262,6 +276,7 @@ pak::pak("poissonconsulting/newdata")
 or from [r-universe](https://poissonconsulting.r-universe.dev/newdata).
 
 ``` r
+
 install.packages("newdata", repos = c("https://poissonconsulting.r-universe.dev", "https://cloud.r-project.org"))
 ```
 

@@ -36,6 +36,7 @@ and
 ## Examples
 
 ``` r
+
 data <- tibble::tibble(
   a = c(1L, 3L, 4L),
   b = c(4, 4.5, 6),
