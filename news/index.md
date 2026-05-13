@@ -1,5 +1,19 @@
 # Changelog
 
+## newdata 0.0.0.9030
+
+### Continuous integration
+
+- Cosmetics.
+
+- Bump action versions.
+
+- Install clang-format-21.
+
+- Align fledge workflow.
+
+- Harmonize.
+
 ## newdata 0.0.0.9029
 
 ### Chore
