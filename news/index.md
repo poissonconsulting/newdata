@@ -1,5 +1,28 @@
 # Changelog
 
+## newdata 0.0.0.9031
+
+### Chore
+
+- Add ccache to `.gitignore` and `.Rbuildignore`.
+
+### Continuous integration
+
+- Create snapshot update PR against correct branch.
+
+- Add reference to `/apply-patch` workflow in commit message.
+
+- Clarify rationale for not deploying on schedule.
+
+- Only run fledge on pushes to main.
+
+- Tweak fledge workflow and ccache action.
+
+### Uncategorized
+
+- Ci: Unify fledge.yaml across cynkratemplate and fledge
+  ([\#86](https://github.com/poissonconsulting/newdata/issues/86)).
+
 ## newdata 0.0.0.9030
 
 ### Continuous integration
