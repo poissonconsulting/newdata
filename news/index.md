@@ -1,5 +1,13 @@
 # Changelog
 
+## newdata 0.0.0.9032
+
+### Continuous integration
+
+- Update ccache-action reference.
+
+- Bump action version.
+
 ## newdata 0.0.0.9031
 
 ### Chore
