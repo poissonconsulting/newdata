@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# newdata 0.0.0.9033
+
+- Merge pull request #82 from poissonconsulting/add-codeowners.
+
+  Add CODEOWNERS assigning @joethorley
+
+
 # newdata 0.0.0.9032
 
 ## Continuous integration
