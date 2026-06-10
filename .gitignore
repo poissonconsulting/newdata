@@ -13,3 +13,6 @@
 /inst/docs/
 /docs/
 .ccache/
+
+.claude/
+!CLAUDE.md
