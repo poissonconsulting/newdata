@@ -10,10 +10,7 @@ old_data
 
 ## Format
 
-An object of class `tbl_df` (inherits from `tbl`, `data.frame`) with 3
-rows and 9 columns.
-
-## Details
+A tibble with 3 rows and 9 columns:
 
 - lgl:
 

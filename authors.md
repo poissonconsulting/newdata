@@ -26,16 +26,16 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/poissonconsulting/newdata/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/poissonconsulting/newdata/blob/cran-0.1.0/DESCRIPTION)
 
 Thorley J, Müller K, Pearson A (2026). *newdata: Generate New Data
-Frames for Prediction*. R package version 0.0.0.9032,
+Frames for Prediction*. R package version 0.1.0,
 <https://poissonconsulting.github.io/newdata/>.
 
     @Manual{,
       title = {newdata: Generate New Data Frames for Prediction},
       author = {Joe Thorley and Kirill Müller and Ayla Pearson},
       year = {2026},
-      note = {R package version 0.0.0.9032},
+      note = {R package version 0.1.0},
       url = {https://poissonconsulting.github.io/newdata/},
     }

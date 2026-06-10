@@ -25,6 +25,10 @@ xobs_only(..., .length_out = NULL, .data = xnew_data_env$data)
   users must pass a data frame or tibble if using this function
   directly.
 
+## Value
+
+A tibble of the observed combinations of the variables.
+
 ## See also
 
 [`xnew_data()`](https://poissonconsulting.github.io/newdata/reference/xnew_data.md)
