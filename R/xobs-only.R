@@ -3,6 +3,7 @@
 #' @param ... One or more variables to generate combinations for.
 #' @param .length_out A count to override the default length of sequences.
 #' @inheritParams xcast
+#' @return A tibble of the observed combinations of the variables.
 #' @seealso [xnew_data()]
 #' @export
 #' @examples
