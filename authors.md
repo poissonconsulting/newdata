@@ -26,7 +26,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/poissonconsulting/newdata/blob/cran-0.1.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/poissonconsulting/newdata/blob/main/DESCRIPTION)
 
 Thorley J, Müller K, Pearson A (2026). *newdata: Generate New Data
 Frames for Prediction*. R package version 0.1.0,
