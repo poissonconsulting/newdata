@@ -5,15 +5,7 @@
 \alias{old_data}
 \title{Example Data}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 3 rows and 9 columns.
-}
-\usage{
-old_data
-}
-\description{
-An example tibble of example 'old' data.
-}
-\details{
+A tibble with 3 rows and 9 columns:
 \describe{
 \item{lgl}{A logical vector.}
 \item{int}{An integer vector.}
@@ -25,6 +17,12 @@ An example tibble of example 'old' data.
 \item{dtt}{A POSIXct vector.}
 \item{hms}{A hms vector.}
 }
+}
+\usage{
+old_data
+}
+\description{
+An example tibble of example 'old' data.
 }
 \examples{
 old_data

@@ -2,6 +2,7 @@
 #'
 #' An example tibble of example 'old' data.
 #'
+#' @format A tibble with 3 rows and 9 columns:
 #' \describe{
 #'   \item{lgl}{A logical vector.}
 #'   \item{int}{An integer vector.}
