@@ -39,14 +39,14 @@ new_data <- function(
     length_out = 30) {
 
   if (!missing(ref)) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "0.0.0.9020", "new_data(ref)",
       details = "Use `xnew_data(data, col_name = 'new_value')`"
     )
   }
 
   if (!missing(obs_only)) {
-    lifecycle::deprecate_soft(
+    lifecycle::deprecate_warn(
       "0.0.0.9020", "new_data(obs_only)",
       details = "Use `xnew_data(data, xobs_only(col_name))`"
     )
