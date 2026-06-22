@@ -4,14 +4,14 @@
 \alias{new_value}
 \title{Generate New Reference Value}
 \usage{
-new_value(x, ..., obs_only = NULL)
+new_value(x, ..., .obs_only = NULL, obs_only = deprecated())
 }
 \arguments{
 \item{x}{The object to generate the reference value from.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{obs_only}{A flag specifying whether to only use observed values.}
+\item{.obs_only, obs_only}{A flag specifying whether to only use observed values.}
 }
 \value{
 A scalar of the same class as the object.
@@ -21,8 +21,8 @@ Generate a new reference value for a vector.
 }
 \details{
 By default the reference value for double vectors is the mean,
-unless obs_only = TRUE, in which case its the median of the unique values.
-For integer vectors it's the floored mean unless obs_only = TRUE, in which case
+unless .obs_only = TRUE, in which case its the median of the unique values.
+For integer vectors it's the floored mean unless .obs_only = TRUE, in which case
 it's also the median of the unique values.
 For character vectors it's the minimum of the most common values while
 for factors it's the first level.
@@ -33,8 +33,8 @@ The factor levels and time zone are preserved.
 \examples{
 # the reference value for objects of class numeric is the mean
 new_value(c(1, 4))
-# unless obs_only = TRUE, in which case its the median of the unique values
-new_value(c(1, 4), obs_only = TRUE)
+# unless .obs_only = TRUE, in which case its the median of the unique values
+new_value(c(1, 4), .obs_only = TRUE)
 
 # for integer objects it's the floored mean
 new_value(c(1L, 4L))
