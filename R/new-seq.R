@@ -71,38 +71,71 @@
 #' # for logical objects the longest possible sequence is `c(TRUE, FALSE)`
 #' new_seq(c(TRUE, TRUE, FALSE), length_out = 3)
 #' @export
-new_seq <- function(x, length_out = NULL, ..., obs_only = NULL) {
+new_seq <- function(x,
+                    .length_out = NULL,
+                    ...,
+                    .obs_only = NULL,
+                    length_out = deprecated(),
+                    obs_only = deprecated()) {
   chk_unused(...)
+  if (lifecycle::is_present(length_out)) {
+    lifecycle::deprecate_warn(
+      "0.1.0", "new_seq(length_out)", "new_seq(.length_out)"
+    )
+  }
+  if (lifecycle::is_present(obs_only)) {
+    lifecycle::deprecate_warn(
+      "0.1.0", "new_seq(obs_only)", "new_seq(.obs_only)"
+    )
+  }
   UseMethod("new_seq")
+}
+
+# Fold deprecated `length_out`/`obs_only` into `.length_out`/`.obs_only`.
+# The deprecation warning is emitted by the generic; methods coalesce silently.
+new_seq_args <- function(.length_out, .obs_only, length_out, obs_only) {
+  if (lifecycle::is_present(length_out)) {
+    .length_out <- length_out
+  }
+  if (lifecycle::is_present(obs_only)) {
+    .obs_only <- obs_only
+  }
+  list(.length_out = .length_out, .obs_only = .obs_only)
 }
 
 #' @describeIn new_seq Generate new sequence of values for logical objects
 #' @export
 new_seq.logical <- function(
     x,
-    length_out = NULL,
+    .length_out = NULL,
     ...,
-    obs_only = NULL) {
-  if (is.null(length_out)) {
-    length_out <- getOption("new_data.length_out_lgl", 2L)
-  }
-  chk_count(length_out)
+    .obs_only = NULL,
+    length_out = deprecated(),
+    obs_only = deprecated()) {
+  args <- new_seq_args(.length_out, .obs_only, length_out, obs_only)
+  .length_out <- args$.length_out
+  .obs_only <- args$.obs_only
 
-  if (is.null(obs_only)) {
-    obs_only <- getOption("new_data.obs_only", FALSE)
+  if (is.null(.length_out)) {
+    .length_out <- getOption("new_data.length_out_lgl", 2L)
   }
-  chk_flag(obs_only)
+  chk_count(.length_out)
 
-  if (length_out == 0L) {
+  if (is.null(.obs_only)) {
+    .obs_only <- getOption("new_data.obs_only", FALSE)
+  }
+  chk_flag(.obs_only)
+
+  if (.length_out == 0L) {
     return(logical())
   }
-  if (obs_only) {
+  if (.obs_only) {
     if (all(is.na(x))) {
       return(NA)
     }
-    return(obs_only1(x, length_out, first = TRUE))
+    return(obs_only1(x, .length_out, first = TRUE))
   }
-  if (length_out == 1L) {
+  if (.length_out == 1L) {
     return(FALSE)
   }
   return(c(FALSE, TRUE))
@@ -112,79 +145,97 @@ new_seq.logical <- function(
 #' @export
 new_seq.integer <- function(
     x,
-    length_out = NULL,
+    .length_out = NULL,
     ...,
-    obs_only = NULL) {
-  if (is.null(length_out)) {
-    length_out <- getOption("new_data.length_out_int", 30L)
-  }
-  chk_count(length_out)
+    .obs_only = NULL,
+    length_out = deprecated(),
+    obs_only = deprecated()) {
+  args <- new_seq_args(.length_out, .obs_only, length_out, obs_only)
+  .length_out <- args$.length_out
+  .obs_only <- args$.obs_only
 
-  if (is.null(obs_only)) {
-    obs_only <- getOption("new_data.obs_only", FALSE)
+  if (is.null(.length_out)) {
+    .length_out <- getOption("new_data.length_out_int", 30L)
   }
-  chk_flag(obs_only)
+  chk_count(.length_out)
 
-  if (length_out == 0L) {
+  if (is.null(.obs_only)) {
+    .obs_only <- getOption("new_data.obs_only", FALSE)
+  }
+  chk_flag(.obs_only)
+
+  if (.length_out == 0L) {
     return(integer())
   }
   if (all(is.na(x))) {
     return(NA_integer_)
   }
-  if (obs_only) {
-    return(obs_only1(x, length_out))
+  if (.obs_only) {
+    return(obs_only1(x, .length_out))
   }
-  seq1(x, length_out, integer = TRUE)
+  seq1(x, .length_out, integer = TRUE)
 }
 
 #' @describeIn new_seq Generate new sequence of values for double objects
 #' @export
 new_seq.double <- function(
     x,
-    length_out = NULL,
+    .length_out = NULL,
     ...,
-    obs_only = NULL) {
-  if (is.null(length_out)) {
-    length_out <- getOption("new_data.length_out_dbl", 30L)
-  }
-  chk_count(length_out)
-  chk_lt(length_out, Inf)
+    .obs_only = NULL,
+    length_out = deprecated(),
+    obs_only = deprecated()) {
+  args <- new_seq_args(.length_out, .obs_only, length_out, obs_only)
+  .length_out <- args$.length_out
+  .obs_only <- args$.obs_only
 
-  if (is.null(obs_only)) {
-    obs_only <- getOption("new_data.obs_only", FALSE)
+  if (is.null(.length_out)) {
+    .length_out <- getOption("new_data.length_out_dbl", 30L)
   }
-  chk_flag(obs_only)
+  chk_count(.length_out)
+  chk_lt(.length_out, Inf)
 
-  if (length_out == 0L) {
+  if (is.null(.obs_only)) {
+    .obs_only <- getOption("new_data.obs_only", FALSE)
+  }
+  chk_flag(.obs_only)
+
+  if (.length_out == 0L) {
     return(double())
   }
   if (all(is.na(x))) {
     return(NA_real_)
   }
-  if (obs_only) {
-    return(obs_only1(x, length_out))
+  if (.obs_only) {
+    return(obs_only1(x, .length_out))
   }
-  seq1(x, length_out)
+  seq1(x, .length_out)
 }
 
 #' @describeIn new_seq Generate new sequence of values for character objects
 #' @export
 new_seq.character <- function(
     x,
-    length_out = NULL,
+    .length_out = NULL,
     ...,
-    obs_only = NULL) {
-  if (is.null(length_out)) {
-    length_out <- getOption("new_data.length_out_chr", Inf)
-  }
-  chk_count(length_out)
+    .obs_only = NULL,
+    length_out = deprecated(),
+    obs_only = deprecated()) {
+  args <- new_seq_args(.length_out, .obs_only, length_out, obs_only)
+  .length_out <- args$.length_out
+  .obs_only <- args$.obs_only
 
-  if (is.null(obs_only)) {
-    obs_only <- getOption("new_data.obs_only", FALSE)
+  if (is.null(.length_out)) {
+    .length_out <- getOption("new_data.length_out_chr", Inf)
   }
-  chk_flag(obs_only)
+  chk_count(.length_out)
 
-  if (length_out == 0L) {
+  if (is.null(.obs_only)) {
+    .obs_only <- getOption("new_data.obs_only", FALSE)
+  }
+  chk_flag(.obs_only)
+
+  if (.length_out == 0L) {
     return(character())
   }
   if (all(is.na(x))) {
@@ -193,7 +244,7 @@ new_seq.character <- function(
   table <- x %>% table()
   char <- names(table[order(table * -1, names(table))])
   factor(char, levels = char) %>%
-    new_seq(length_out = length_out, obs_only = TRUE) %>%
+    new_seq(.length_out = .length_out, .obs_only = TRUE) %>%
     as.character()
 }
 
@@ -201,36 +252,40 @@ new_seq.character <- function(
 #' @export
 new_seq.factor <- function(
     x,
-    length_out = NULL,
+    .length_out = NULL,
     ...,
-    obs_only = NULL) {
-  if (is.null(length_out)) {
-    length_out <- getOption("new_data.length_out_chr", Inf)
-  }
-  chk_count(length_out)
+    .obs_only = NULL,
+    length_out = deprecated(),
+    obs_only = deprecated()) {
+  args <- new_seq_args(.length_out, .obs_only, length_out, obs_only)
+  .length_out <- args$.length_out
+  .obs_only <- args$.obs_only
 
-  if (is.null(obs_only)) {
-    obs_only <- getOption("new_data.obs_only", FALSE)
+  if (is.null(.length_out)) {
+    .length_out <- getOption("new_data.length_out_chr", Inf)
   }
-  chk_flag(obs_only)
+  chk_count(.length_out)
+
+  if (is.null(.obs_only)) {
+    .obs_only <- getOption("new_data.obs_only", FALSE)
+  }
+  chk_flag(.obs_only)
 
   levels <- levels(x)
   nlevels <- length(levels)
 
-  if (length_out == 0L) {
+  if (.length_out == 0L) {
     return(factor(levels = levels))
   }
   if (!length(levels)) {
     return(factor(NA_character_, levels = levels))
   }
-  if (obs_only) {
-  }
-  out <- if (obs_only) {
+  out <- if (.obs_only) {
     as.integer(x)
   } else {
     1:nlevels
   }
-  indices <- obs_only1(out, length_out = length_out, first = TRUE)
+  indices <- obs_only1(out, length_out = .length_out, first = TRUE)
   factor(levels[indices], levels = levels)
 }
 
@@ -238,34 +293,40 @@ new_seq.factor <- function(
 #' @export
 new_seq.ordered <- function(
     x,
-    length_out = NULL,
+    .length_out = NULL,
     ...,
-    obs_only = NULL) {
-  if (is.null(length_out)) {
-    length_out <- getOption("new_data.length_out_chr", Inf)
-  }
-  chk_count(length_out)
+    .obs_only = NULL,
+    length_out = deprecated(),
+    obs_only = deprecated()) {
+  args <- new_seq_args(.length_out, .obs_only, length_out, obs_only)
+  .length_out <- args$.length_out
+  .obs_only <- args$.obs_only
 
-  if (is.null(obs_only)) {
-    obs_only <- getOption("new_data.obs_only", FALSE)
+  if (is.null(.length_out)) {
+    .length_out <- getOption("new_data.length_out_chr", Inf)
   }
-  chk_flag(obs_only)
+  chk_count(.length_out)
+
+  if (is.null(.obs_only)) {
+    .obs_only <- getOption("new_data.obs_only", FALSE)
+  }
+  chk_flag(.obs_only)
 
   levels <- levels(x)
   nlevels <- length(levels)
 
-  if (length_out == 0L) {
+  if (.length_out == 0L) {
     return(ordered(levels = levels))
   }
   if (!nlevels) {
     return(ordered(NA_character_, levels = levels))
   }
-  out <- if (obs_only) {
+  out <- if (.obs_only) {
     as.integer(x)
   } else {
     1:nlevels
   }
-  indices <- new_seq(out, length_out = length_out, obs_only = TRUE)
+  indices <- new_seq(out, .length_out = .length_out, .obs_only = TRUE)
   ordered(levels[indices], levels = levels)
 }
 
@@ -273,12 +334,16 @@ new_seq.ordered <- function(
 #' @export
 new_seq.Date <- function(
     x,
-    length_out = NULL,
+    .length_out = NULL,
     ...,
-    obs_only = NULL) {
+    .obs_only = NULL,
+    length_out = deprecated(),
+    obs_only = deprecated()) {
+  args <- new_seq_args(.length_out, .obs_only, length_out, obs_only)
+
   x %>%
     as.integer() %>%
-    new_seq(length_out = length_out, obs_only = obs_only) %>%
+    new_seq(.length_out = args$.length_out, .obs_only = args$.obs_only) %>%
     as.Date()
 }
 
@@ -286,14 +351,17 @@ new_seq.Date <- function(
 #' @export
 new_seq.POSIXct <- function(
     x,
-    length_out = NULL,
+    .length_out = NULL,
     ...,
-    obs_only = NULL) {
+    .obs_only = NULL,
+    length_out = deprecated(),
+    obs_only = deprecated()) {
+  args <- new_seq_args(.length_out, .obs_only, length_out, obs_only)
   tz <- attr(x, "tzone", exact = TRUE)
 
   x %>%
     as.integer() %>%
-    new_seq(length_out = length_out, obs_only = obs_only) %>%
+    new_seq(.length_out = args$.length_out, .obs_only = args$.obs_only) %>%
     as.POSIXct(tz = tz)
 }
 
@@ -301,11 +369,15 @@ new_seq.POSIXct <- function(
 #' @export
 new_seq.hms <- function(
     x,
-    length_out = NULL,
+    .length_out = NULL,
     ...,
-    obs_only = NULL) {
+    .obs_only = NULL,
+    length_out = deprecated(),
+    obs_only = deprecated()) {
+  args <- new_seq_args(.length_out, .obs_only, length_out, obs_only)
+
   x %>%
     as.integer() %>%
-    new_seq(length_out = length_out, obs_only = obs_only) %>%
+    new_seq(.length_out = args$.length_out, .obs_only = args$.obs_only) %>%
     as_hms()
 }

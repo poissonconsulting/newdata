@@ -63,7 +63,7 @@ quo_translate_xnew_data <- function(quo, length_out) {
 
 expr_translate_xnew_data <- function(expr, length_out) {
   if (is_symbol(expr)) {
-    expr(xnew_seq(!!expr, length_out = !!length_out))
+    expr(xnew_seq(!!expr, .length_out = !!length_out))
   } else {
     expr
   }
