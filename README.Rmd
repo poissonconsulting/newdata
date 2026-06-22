@@ -81,7 +81,7 @@ These values can be overridden by setting the following options:
 
 When programming it is strongly recommended that the user explicitly specify the length of each sequence individually.
 ```{r}
-xnew_data(old_data, lgl, xnew_seq(int, length_out = 3))
+xnew_data(old_data, lgl, xnew_seq(int, .length_out = 3))
 ```
 
 A third alternative is to specify the length of all the sequences in the data set but this can result in less common character strings or later factor or ordered levels being dropped.
@@ -94,12 +94,12 @@ xnew_data(old_data, dbl, int, .length_out = 2)
 
 The user can also indicate whether only observed values should be used in the sequence.
 ```{r}
-xnew_data(old_data, xnew_seq(int, length_out = 3, obs_only = TRUE))
+xnew_data(old_data, xnew_seq(int, .length_out = 3, .obs_only = TRUE))
 ```
 
 The `xobs_only()` function can be used to filter out unobserved values after the sequence has been generated.
 ```{r}
-xnew_data(old_data, xobs_only(xnew_seq(int, length_out = 3)))
+xnew_data(old_data, xobs_only(xnew_seq(int, .length_out = 3)))
 ```
 
 and when two or more variables are specified all combinations are used.

@@ -20,7 +20,7 @@
       5 FALSE     5  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
       6 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
     Code
-      xnew_data(old_data, xnew_seq(int, length_out = 3))
+      xnew_data(old_data, xnew_seq(int, .length_out = 3))
     Output
       # A tibble: 3 x 9
         lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
@@ -29,7 +29,7 @@
       2 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
       3 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
     Code
-      xnew_data(old_data, xnew_seq(int, length_out = 3, obs_only = TRUE))
+      xnew_data(old_data, xnew_seq(int, .length_out = 3, .obs_only = TRUE))
     Output
       # A tibble: 3 x 9
         lgl     int   dbl chr   fct     ord      dte        dtt                 hms   

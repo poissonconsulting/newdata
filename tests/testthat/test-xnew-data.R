@@ -19,10 +19,10 @@ test_that("simple dataset", {
     xnew_data(data, c)
     xnew_data(data, xnew_seq(c))
     xnew_data(data, xnew_seq(a))
-    xnew_data(data, xnew_seq(a, length_out = 12))
-    xnew_data(data, xnew_seq(a, length_out = 12, obs_only = TRUE))
-    xnew_data(data, xnew_seq(a, length_out = 12), b)
-    xnew_data(data, b, xnew_seq(a, length_out = 12))
+    xnew_data(data, xnew_seq(a, .length_out = 12))
+    xnew_data(data, xnew_seq(a, .length_out = 12, .obs_only = TRUE))
+    xnew_data(data, xnew_seq(a, .length_out = 12), b)
+    xnew_data(data, b, xnew_seq(a, .length_out = 12))
     xnew_data(data, tidyr::nesting(c, d))
     xnew_data(
       data,
@@ -86,7 +86,7 @@ test_that("factors", {
     data
     xnew_data(data)
     xnew_data(data, xnew_value(annual))
-    xnew_data(data, xnew_value(annual, obs_only = TRUE))
+    xnew_data(data, xnew_value(annual, .obs_only = TRUE))
     xnew_data(data, tidyr::nesting(period, year))
     xnew_data(data, tidyr::nesting(period, year, annual))
     # FIXME: possible to nest on new_value?
