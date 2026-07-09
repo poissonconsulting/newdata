@@ -4,7 +4,11 @@ as.Date <- function(x, ...) {
 }
 
 as.POSIXct <- function(x, ...) {
-  base::as.POSIXct(x, ..., origin = structure(0, class = c("POSIXct", "POSIXt")))
+  base::as.POSIXct(
+    x,
+    ...,
+    origin = structure(0, class = c("POSIXct", "POSIXt"))
+  )
 }
 
 ordered <- function(x = character(), ...) {

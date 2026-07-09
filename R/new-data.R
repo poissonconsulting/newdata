@@ -32,22 +32,24 @@
 #' new_data(old_data, c("int", "dbl"))
 #' @export
 new_data <- function(
-    data,
-    seq = character(0),
-    ref = list(),
-    obs_only = list(character(0)),
-    length_out = 30) {
-
+  data,
+  seq = character(0),
+  ref = list(),
+  obs_only = list(character(0)),
+  length_out = 30
+) {
   if (!missing(ref)) {
     lifecycle::deprecate_warn(
-      "0.0.0.9020", "new_data(ref)",
+      "0.0.0.9020",
+      "new_data(ref)",
       details = "Use `xnew_data(data, col_name = 'new_value')`"
     )
   }
 
   if (!missing(obs_only)) {
     lifecycle::deprecate_warn(
-      "0.0.0.9020", "new_data(obs_only)",
+      "0.0.0.9020",
+      "new_data(obs_only)",
       details = "Use `xnew_data(data, xobs_only(col_name))`"
     )
   }
@@ -58,7 +60,9 @@ new_data <- function(
   chk_list(ref)
   chk_range(length_out, c(2L, 1000L))
 
-  if (isTRUE(obs_only)) obs_only <- list(seq)
+  if (isTRUE(obs_only)) {
+    obs_only <- list(seq)
+  }
   chk_list(obs_only)
   if (!all(map_lgl(obs_only, is.character))) {
     err("`obs_only` must be a list of character vectors")
@@ -70,10 +74,15 @@ new_data <- function(
       return(do.call("xnew_data", args = args))
     }
     seq <- paste(seq, collapse = ", ")
-    if(missing(length_out)) {
+    if (missing(length_out)) {
       length_out <- NULL
     }
-    text <- paste("xnew_data(data", seq, ".length_out = length_out)", sep = ", ")
+    text <- paste(
+      "xnew_data(data",
+      seq,
+      ".length_out = length_out)",
+      sep = ", "
+    )
     expr <- parse(text = text)
     return(eval(expr))
   }
@@ -93,7 +102,9 @@ new_data <- function(
   }
 
   if (length(ref)) {
-    if (!is_named(ref)) err("`ref` must be a named list")
+    if (!is_named(ref)) {
+      err("`ref` must be a named list")
+    }
 
     if (any(names(ref) %in% seq)) {
       wrn("`ref` should not contain variables in `seq`")
@@ -123,8 +134,10 @@ new_data <- function(
     new_value
   )
 
-  new_data <- expand.grid(c(new_seqs, new_ref, ref),
-    KEEP.OUT.ATTRS = FALSE, stringsAsFactors = FALSE
+  new_data <- expand.grid(
+    c(new_seqs, new_ref, ref),
+    KEEP.OUT.ATTRS = FALSE,
+    stringsAsFactors = FALSE
   )
   for (obo in obs_only) {
     new_data <- new_data %>% obs_only(data, obo)

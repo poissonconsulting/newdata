@@ -10,8 +10,11 @@ check_classes <- function(x, y, x_name, y_name) {
 
   if (!identical(classes_x[!character], classes_y[!character])) {
     err(
-      "classes of variables in `", x_name, "` must match those in `",
-      y_name, "`"
+      "classes of variables in `",
+      x_name,
+      "` must match those in `",
+      y_name,
+      "`"
     )
   }
 
