@@ -68,8 +68,14 @@ test_that("new_value integer", {
   expect_identical(new_value(array(1L)), 1L)
   # median
   expect_identical(new_value(c(0:1), obs_only = TRUE), as.integer(median(0:1)))
-  expect_identical(new_value(c(1:10), obs_only = TRUE), as.integer(median(1:10)))
-  expect_identical(new_value(c(2:10), obs_only = TRUE), as.integer(median(2:10)))
+  expect_identical(
+    new_value(c(1:10), obs_only = TRUE),
+    as.integer(median(1:10))
+  )
+  expect_identical(
+    new_value(c(2:10), obs_only = TRUE),
+    as.integer(median(2:10))
+  )
 })
 
 test_that("new_value integer obs_only", {
@@ -319,16 +325,34 @@ test_that("new_value Date", {
   expect_identical(new_value(as.Date(character())), as.Date(NA_integer_))
   expect_identical(new_value(as.Date(integer())), as.Date(NA_integer_))
   expect_identical(new_value(as.Date(double())), as.Date(NA_integer_))
-  expect_identical(new_value(as.Date(character()), obs_only = TRUE), as.Date(NA_integer_))
-  expect_identical(new_value(as.Date(integer()), obs_only = TRUE), as.Date(NA_integer_))
-  expect_identical(new_value(as.Date(double()), obs_only = TRUE), as.Date(NA_integer_))
+  expect_identical(
+    new_value(as.Date(character()), obs_only = TRUE),
+    as.Date(NA_integer_)
+  )
+  expect_identical(
+    new_value(as.Date(integer()), obs_only = TRUE),
+    as.Date(NA_integer_)
+  )
+  expect_identical(
+    new_value(as.Date(double()), obs_only = TRUE),
+    as.Date(NA_integer_)
+  )
   # missing value
   expect_identical(new_value(as.Date(NA_character_)), as.Date(NA_integer_))
   expect_identical(new_value(as.Date(NA_real_)), as.Date(NA_integer_))
   expect_identical(new_value(as.Date(NA_integer_)), as.Date(NA_integer_))
-  expect_identical(new_value(as.Date(NA_character_), obs_only = TRUE), as.Date(NA_integer_))
-  expect_identical(new_value(as.Date(NA_real_), obs_only = TRUE), as.Date(NA_integer_))
-  expect_identical(new_value(as.Date(NA_integer_), obs_only = TRUE), as.Date(NA_integer_))
+  expect_identical(
+    new_value(as.Date(NA_character_), obs_only = TRUE),
+    as.Date(NA_integer_)
+  )
+  expect_identical(
+    new_value(as.Date(NA_real_), obs_only = TRUE),
+    as.Date(NA_integer_)
+  )
+  expect_identical(
+    new_value(as.Date(NA_integer_), obs_only = TRUE),
+    as.Date(NA_integer_)
+  )
   # single value
   expect_identical(new_value(as.Date(1L)), as.Date(1L))
   expect_identical(new_value(as.Date(1)), as.Date(1L))
@@ -351,24 +375,54 @@ test_that("new_value Date", {
   expect_identical(new_value(as.Date(c(0, 1, NA))), as.Date(0L))
   expect_identical(new_value(as.Date(c(1, 2, NA))), as.Date(1L))
   expect_identical(new_value(as.Date(c(1, 3, NA))), as.Date(2L))
-  expect_identical(new_value(as.Date(c(0, 1, NA)), obs_only = TRUE), as.Date(0L))
-  expect_identical(new_value(as.Date(c(1, 2, NA)), obs_only = TRUE), as.Date(1L))
-  expect_identical(new_value(as.Date(c(1, 3, NA)), obs_only = TRUE), as.Date(1L))
+  expect_identical(
+    new_value(as.Date(c(0, 1, NA)), obs_only = TRUE),
+    as.Date(0L)
+  )
+  expect_identical(
+    new_value(as.Date(c(1, 2, NA)), obs_only = TRUE),
+    as.Date(1L)
+  )
+  expect_identical(
+    new_value(as.Date(c(1, 3, NA)), obs_only = TRUE),
+    as.Date(1L)
+  )
 })
 
 test_that("new_value POSIXct", {
   # zero length
   expect_identical(new_value(as.POSIXct(character())), as.POSIXct(NA_integer_))
-  expect_identical(new_value(as.POSIXct(character(), tz = "UTC")), as.POSIXct(NA_integer_, tz = "UTC"))
-  expect_identical(new_value(as.POSIXct(character(), tz = "PST8PDT")), as.POSIXct(NA_integer_, tz = "PST8PDT"))
+  expect_identical(
+    new_value(as.POSIXct(character(), tz = "UTC")),
+    as.POSIXct(NA_integer_, tz = "UTC")
+  )
+  expect_identical(
+    new_value(as.POSIXct(character(), tz = "PST8PDT")),
+    as.POSIXct(NA_integer_, tz = "PST8PDT")
+  )
   # missing value
-  expect_identical(new_value(as.POSIXct(NA_character_)), as.POSIXct(NA_integer_))
-  expect_identical(new_value(as.POSIXct(NA_character_, tz = "UTC")), as.POSIXct(NA_integer_, tz = "UTC"))
-  expect_identical(new_value(as.POSIXct(NA_character_, tz = "PST8PDT")), as.POSIXct(NA_integer_, tz = "PST8PDT"))
+  expect_identical(
+    new_value(as.POSIXct(NA_character_)),
+    as.POSIXct(NA_integer_)
+  )
+  expect_identical(
+    new_value(as.POSIXct(NA_character_, tz = "UTC")),
+    as.POSIXct(NA_integer_, tz = "UTC")
+  )
+  expect_identical(
+    new_value(as.POSIXct(NA_character_, tz = "PST8PDT")),
+    as.POSIXct(NA_integer_, tz = "PST8PDT")
+  )
   # single value
   expect_identical(new_value(as.POSIXct(1L)), as.POSIXct(1L))
-  expect_identical(new_value(as.POSIXct(1L, tz = "UTC")), as.POSIXct(1L, tz = "UTC"))
-  expect_identical(new_value(as.POSIXct(1L, tz = "PST8PDT")), as.POSIXct(1L, tz = "PST8PDT"))
+  expect_identical(
+    new_value(as.POSIXct(1L, tz = "UTC")),
+    as.POSIXct(1L, tz = "UTC")
+  )
+  expect_identical(
+    new_value(as.POSIXct(1L, tz = "PST8PDT")),
+    as.POSIXct(1L, tz = "PST8PDT")
+  )
   expect_identical(new_value(as.POSIXct(1)), as.POSIXct(1L))
   expect_identical(new_value(as.POSIXct(1.1)), as.POSIXct(1L))
   expect_identical(new_value(as.POSIXct(1.6)), as.POSIXct(1L))
@@ -378,12 +432,18 @@ test_that("new_value POSIXct", {
   expect_identical(new_value(as.POSIXct(c(1, 2))), as.POSIXct(1L))
   expect_identical(new_value(as.POSIXct(c(1, 3))), as.POSIXct(2L))
   expect_identical(new_value(as.POSIXct(c(1, 4))), as.POSIXct(2L))
-  expect_identical(new_value(as.POSIXct(c(1, 4), tz = "PST8PDT")), as.POSIXct(2L, tz = "PST8PDT"))
+  expect_identical(
+    new_value(as.POSIXct(c(1, 4), tz = "PST8PDT")),
+    as.POSIXct(2L, tz = "PST8PDT")
+  )
   # multiple values with missing
   expect_identical(new_value(as.POSIXct(c(0, 1, NA))), as.POSIXct(0L))
   expect_identical(new_value(as.POSIXct(c(1, 2, NA))), as.POSIXct(1L))
   expect_identical(new_value(as.POSIXct(c(1, 3, NA))), as.POSIXct(2L))
-  expect_identical(new_value(as.POSIXct(c(1, 4, NA), tz = "PST8PDT")), as.POSIXct(2L, tz = "PST8PDT"))
+  expect_identical(
+    new_value(as.POSIXct(c(1, 4, NA), tz = "PST8PDT")),
+    as.POSIXct(2L, tz = "PST8PDT")
+  )
 })
 
 test_that("new_value hms", {
@@ -401,7 +461,10 @@ test_that("new_value hms", {
   expect_identical(new_value(as_hms(c(0, 1))), as_hms(0))
   expect_identical(new_value(as_hms(c(1, 2))), as_hms(1))
   expect_identical(new_value(as_hms(c(1, 3))), as_hms(2))
-  expect_identical(new_value(as_hms(c("23:59:59", "00:00:02"))), as_hms("12:00:00"))
+  expect_identical(
+    new_value(as_hms(c("23:59:59", "00:00:02"))),
+    as_hms("12:00:00")
+  )
   # multiple values with missing
   expect_identical(new_value(as_hms(c(0, 1, NA))), as_hms(0))
   expect_identical(new_value(as_hms(c(1, 2, NA))), as_hms(1))

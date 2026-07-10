@@ -79,10 +79,11 @@ new_seq <- function(x, length_out = NULL, ..., obs_only = NULL) {
 #' @describeIn new_seq Generate new sequence of values for logical objects
 #' @export
 new_seq.logical <- function(
-    x,
-    length_out = NULL,
-    ...,
-    obs_only = NULL) {
+  x,
+  length_out = NULL,
+  ...,
+  obs_only = NULL
+) {
   if (is.null(length_out)) {
     length_out <- getOption("new_data.length_out_lgl", 2L)
   }
@@ -111,10 +112,11 @@ new_seq.logical <- function(
 #' @describeIn new_seq Generate new sequence of values for integer objects
 #' @export
 new_seq.integer <- function(
-    x,
-    length_out = NULL,
-    ...,
-    obs_only = NULL) {
+  x,
+  length_out = NULL,
+  ...,
+  obs_only = NULL
+) {
   if (is.null(length_out)) {
     length_out <- getOption("new_data.length_out_int", 30L)
   }
@@ -140,10 +142,11 @@ new_seq.integer <- function(
 #' @describeIn new_seq Generate new sequence of values for double objects
 #' @export
 new_seq.double <- function(
-    x,
-    length_out = NULL,
-    ...,
-    obs_only = NULL) {
+  x,
+  length_out = NULL,
+  ...,
+  obs_only = NULL
+) {
   if (is.null(length_out)) {
     length_out <- getOption("new_data.length_out_dbl", 30L)
   }
@@ -170,10 +173,11 @@ new_seq.double <- function(
 #' @describeIn new_seq Generate new sequence of values for character objects
 #' @export
 new_seq.character <- function(
-    x,
-    length_out = NULL,
-    ...,
-    obs_only = NULL) {
+  x,
+  length_out = NULL,
+  ...,
+  obs_only = NULL
+) {
   if (is.null(length_out)) {
     length_out <- getOption("new_data.length_out_chr", Inf)
   }
@@ -200,10 +204,11 @@ new_seq.character <- function(
 #' @describeIn new_seq Generate new sequence of values for factors
 #' @export
 new_seq.factor <- function(
-    x,
-    length_out = NULL,
-    ...,
-    obs_only = NULL) {
+  x,
+  length_out = NULL,
+  ...,
+  obs_only = NULL
+) {
   if (is.null(length_out)) {
     length_out <- getOption("new_data.length_out_chr", Inf)
   }
@@ -223,8 +228,7 @@ new_seq.factor <- function(
   if (!length(levels)) {
     return(factor(NA_character_, levels = levels))
   }
-  if (obs_only) {
-  }
+  if (obs_only) {}
   out <- if (obs_only) {
     as.integer(x)
   } else {
@@ -237,10 +241,11 @@ new_seq.factor <- function(
 #' @describeIn new_seq Generate new sequence of values for ordered factors
 #' @export
 new_seq.ordered <- function(
-    x,
-    length_out = NULL,
-    ...,
-    obs_only = NULL) {
+  x,
+  length_out = NULL,
+  ...,
+  obs_only = NULL
+) {
   if (is.null(length_out)) {
     length_out <- getOption("new_data.length_out_chr", Inf)
   }
@@ -272,10 +277,11 @@ new_seq.ordered <- function(
 #' @describeIn new_seq Generate new sequence of values for Date vectors
 #' @export
 new_seq.Date <- function(
-    x,
-    length_out = NULL,
-    ...,
-    obs_only = NULL) {
+  x,
+  length_out = NULL,
+  ...,
+  obs_only = NULL
+) {
   x %>%
     as.integer() %>%
     new_seq(length_out = length_out, obs_only = obs_only) %>%
@@ -285,10 +291,11 @@ new_seq.Date <- function(
 #' @describeIn new_seq Generate new sequence of values for POSIXct vectors
 #' @export
 new_seq.POSIXct <- function(
-    x,
-    length_out = NULL,
-    ...,
-    obs_only = NULL) {
+  x,
+  length_out = NULL,
+  ...,
+  obs_only = NULL
+) {
   tz <- attr(x, "tzone", exact = TRUE)
 
   x %>%
@@ -300,10 +307,11 @@ new_seq.POSIXct <- function(
 #' @describeIn new_seq Generate new sequence of values for hms vectors
 #' @export
 new_seq.hms <- function(
-    x,
-    length_out = NULL,
-    ...,
-    obs_only = NULL) {
+  x,
+  length_out = NULL,
+  ...,
+  obs_only = NULL
+) {
   x %>%
     as.integer() %>%
     new_seq(length_out = length_out, obs_only = obs_only) %>%

@@ -77,7 +77,10 @@ test_that("no column no row dataset", {
 
 test_that("factors", {
   data <- tibble::tibble(
-    period = factor(c(rep("before", 5), rep("after", 5)), levels = c("before", "after")),
+    period = factor(
+      c(rep("before", 5), rep("after", 5)),
+      levels = c("before", "after")
+    ),
     year = 2001:2010,
     annual = factor(year, levels = 2000:2010),
     ordered = ordered(year)
@@ -112,8 +115,10 @@ test_that("xnew_data called twice works", {
 test_that("xnew_data factor with 100 levels", {
   withr::local_options(lifecycle_verbosity = "quiet")
 
-  data <- tibble::tibble(fct = factor(1:100, levels = 1:100),
-                         dbl = seq(1, 100, length.out = 100))
+  data <- tibble::tibble(
+    fct = factor(1:100, levels = 1:100),
+    dbl = seq(1, 100, length.out = 100)
+  )
 
   testthat::expect_snapshot({
     data

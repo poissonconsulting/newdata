@@ -15,4 +15,5 @@
 ^README\.Rmd$
 ^CODE_OF_CONDUCT\.md$
 ^\.ccache$
-^\.claude$
+^\.claude$^[.]?air[.]toml$
+^\.vscode$

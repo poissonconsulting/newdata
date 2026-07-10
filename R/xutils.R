@@ -19,7 +19,11 @@ expand2 <- function(.data, ..., .default = NULL, .order = FALSE) {
   out <- tidyr::expand(.data, !!!quos)
 
   if (.order) {
-    out <- dplyr::select(out, !!!names(.data), !!!setdiff(names(out), names(.data)))
+    out <- dplyr::select(
+      out,
+      !!!names(.data),
+      !!!setdiff(names(out), names(.data))
+    )
   }
 
   out
