@@ -34,7 +34,7 @@ quo_translate_xobs_only <- function(quo, length_out) {
 
 expr_translate_xobs_only <- function(expr, length_out) {
   if (is_symbol(expr)) {
-    expr(xnew_seq(!!expr, length_out = !!length_out, obs_only = TRUE))
+    expr(xnew_seq(!!expr, .length_out = !!length_out, .obs_only = TRUE))
   } else {
     expr
   }

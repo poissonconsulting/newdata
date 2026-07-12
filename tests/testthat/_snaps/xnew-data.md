@@ -114,7 +114,7 @@
       10  2.74     5 a     FALSE 2023-09-29
       # i 20 more rows
     Code
-      xnew_data(data, xnew_seq(a, length_out = 12))
+      xnew_data(data, xnew_seq(a, .length_out = 12))
     Output
       # A tibble: 12 x 5
              a     b c     d     e         
@@ -132,7 +132,7 @@
       11  5.14     5 a     FALSE 2023-09-29
       12  5.5      5 a     FALSE 2023-09-29
     Code
-      xnew_data(data, xnew_seq(a, length_out = 12, obs_only = TRUE))
+      xnew_data(data, xnew_seq(a, .length_out = 12, .obs_only = TRUE))
     Output
       # A tibble: 5 x 5
             a     b c     d     e         
@@ -143,7 +143,7 @@
       4   4.5     5 a     FALSE 2023-09-29
       5   5.5     5 a     FALSE 2023-09-29
     Code
-      xnew_data(data, xnew_seq(a, length_out = 12), b)
+      xnew_data(data, xnew_seq(a, .length_out = 12), b)
     Output
       # A tibble: 60 x 5
              a     b c     d     e         
@@ -160,7 +160,7 @@
       10  1.86     7 a     FALSE 2023-09-29
       # i 50 more rows
     Code
-      xnew_data(data, b, xnew_seq(a, length_out = 12))
+      xnew_data(data, b, xnew_seq(a, .length_out = 12))
     Output
       # A tibble: 60 x 5
              a     b c     d     e         
@@ -334,7 +334,7 @@
         <fct>  <int> <fct>  <ord>  
       1 before  2005 2000   2005   
     Code
-      xnew_data(data, xnew_value(annual, obs_only = TRUE))
+      xnew_data(data, xnew_value(annual, .obs_only = TRUE))
     Output
       # A tibble: 1 x 4
         period  year annual ordered

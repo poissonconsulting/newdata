@@ -13,34 +13,108 @@
 \alias{new_seq.hms}
 \title{Generate New Sequence}
 \usage{
-new_seq(x, length_out = NULL, ..., obs_only = NULL)
+new_seq(
+  x,
+  .length_out = NULL,
+  ...,
+  .obs_only = NULL,
+  length_out = NULL,
+  obs_only = NULL
+)
 
-\method{new_seq}{logical}(x, length_out = NULL, ..., obs_only = NULL)
+\method{new_seq}{logical}(
+  x,
+  .length_out = NULL,
+  ...,
+  .obs_only = NULL,
+  length_out = NULL,
+  obs_only = NULL
+)
 
-\method{new_seq}{integer}(x, length_out = NULL, ..., obs_only = NULL)
+\method{new_seq}{integer}(
+  x,
+  .length_out = NULL,
+  ...,
+  .obs_only = NULL,
+  length_out = NULL,
+  obs_only = NULL
+)
 
-\method{new_seq}{double}(x, length_out = NULL, ..., obs_only = NULL)
+\method{new_seq}{double}(
+  x,
+  .length_out = NULL,
+  ...,
+  .obs_only = NULL,
+  length_out = NULL,
+  obs_only = NULL
+)
 
-\method{new_seq}{character}(x, length_out = NULL, ..., obs_only = NULL)
+\method{new_seq}{character}(
+  x,
+  .length_out = NULL,
+  ...,
+  .obs_only = NULL,
+  length_out = NULL,
+  obs_only = NULL
+)
 
-\method{new_seq}{factor}(x, length_out = NULL, ..., obs_only = NULL)
+\method{new_seq}{factor}(
+  x,
+  .length_out = NULL,
+  ...,
+  .obs_only = NULL,
+  length_out = NULL,
+  obs_only = NULL
+)
 
-\method{new_seq}{ordered}(x, length_out = NULL, ..., obs_only = NULL)
+\method{new_seq}{ordered}(
+  x,
+  .length_out = NULL,
+  ...,
+  .obs_only = NULL,
+  length_out = NULL,
+  obs_only = NULL
+)
 
-\method{new_seq}{Date}(x, length_out = NULL, ..., obs_only = NULL)
+\method{new_seq}{Date}(
+  x,
+  .length_out = NULL,
+  ...,
+  .obs_only = NULL,
+  length_out = NULL,
+  obs_only = NULL
+)
 
-\method{new_seq}{POSIXct}(x, length_out = NULL, ..., obs_only = NULL)
+\method{new_seq}{POSIXct}(
+  x,
+  .length_out = NULL,
+  ...,
+  .obs_only = NULL,
+  length_out = NULL,
+  obs_only = NULL
+)
 
-\method{new_seq}{hms}(x, length_out = NULL, ..., obs_only = NULL)
+\method{new_seq}{hms}(
+  x,
+  .length_out = NULL,
+  ...,
+  .obs_only = NULL,
+  length_out = NULL,
+  obs_only = NULL
+)
 }
 \arguments{
 \item{x}{The object to generate the sequence from.}
 
-\item{length_out}{The maximum length of the sequence.}
+\item{.length_out}{The maximum length of the sequence.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{obs_only}{A flag specifying whether to only use observed values.}
+\item{.obs_only}{A flag specifying whether to only use observed values.}
+
+\item{length_out}{Use \code{.length_out} instead.}
+
+\item{obs_only}{Use \code{.obs_only} instead.}
 }
 \value{
 A vector of the same class as the object.

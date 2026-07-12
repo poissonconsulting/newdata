@@ -21,5 +21,7 @@ import(chk)
 import(rlang)
 importFrom(hms,as_hms)
 importFrom(lifecycle,deprecated)
-importFrom(tibble,"%>%")
-importFrom(tibble,as_tibble)
+importFrom(tibble,
+  "%>%",
+  as_tibble
+)
