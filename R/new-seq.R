@@ -7,7 +7,7 @@
 #' is 30 evenly space values across the range of the data.
 #' Missing values are always removed unless it's the only value
 #' or the object is zero length.
-#' The length of the sequence can be varied using the `length_out` argument
+#' The length of the sequence can be varied using the `.length_out` argument
 #' which gives the reference value when 1 and can even be 0.
 #' For integer objects the sequence is the unique integers.
 #' For character objects it's the actual values sorted by
@@ -40,29 +40,29 @@
 #' new_seq(NA_real_)
 #' # or the object is zero length
 #' new_seq(numeric())
-#' # the length of the sequence can be varied using the length_out argument
-#' new_seq(c(1, 4), length_out = 3)
-#' new_seq(c(1, 4), length_out = 2)
+#' # the length of the sequence can be varied using the .length_out argument
+#' new_seq(c(1, 4), .length_out = 3)
+#' new_seq(c(1, 4), .length_out = 2)
 #' # which gives the reference value when 1
-#' new_seq(c(1, 4), length_out = 1)
+#' new_seq(c(1, 4), .length_out = 1)
 #' # and can even be 0
-#' new_seq(c(1, 4), length_out = 0)
+#' new_seq(c(1, 4), .length_out = 0)
 #' # for integer objects the sequence is the unique integers
 #' new_seq(c(1L, 4L))
 #' new_seq(c(1L, 100L))
 #' # for character objects it's the actual values sorted by
 #' # how common they are followed by their actual value
 #' new_seq(c("a", "c", "c", "b", "b"))
-#' new_seq(c("a", "c", "c", "b", "b"), length_out = 2)
+#' new_seq(c("a", "c", "c", "b", "b"), .length_out = 2)
 #' # for factors its the factor levels in order
 #' new_seq(factor(c("a", "b", "c", "c"), levels = c("b", "a", "g")))
 #' # with the trailing levels dropped first
 #' new_seq(factor(c("a", "b", "c", "c"), levels = c("b", "a", "g")),
-#'   length_out = 2
+#'   .length_out = 2
 #' )
 #' # for ordered factors the intermediate levels are dropped first
 #' new_seq(ordered(c("a", "b", "c", "c"), levels = c("b", "a", "g")),
-#'   length_out = 2
+#'   .length_out = 2
 #' )
 #' # for Date vectors it's the unique dates
 #' new_seq(as.Date(c("2000-01-01", "2000-01-04")))
@@ -73,7 +73,7 @@
 #'   tz = "PST8PDT"
 #' ))
 #' # for logical objects the longest possible sequence is `c(TRUE, FALSE)`
-#' new_seq(c(TRUE, TRUE, FALSE), length_out = 3)
+#' new_seq(c(TRUE, TRUE, FALSE), .length_out = 3)
 #' @export
 new_seq <- function(
   x,

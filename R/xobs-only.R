@@ -15,7 +15,7 @@
 #' )
 #' xnew_data(data, period, annual)
 #' xnew_data(data, xobs_only(period, annual))
-#' xnew_data(data, xobs_only(period, xnew_seq(annual, length_out = 3)))
+#' xnew_data(data, xobs_only(period, xnew_seq(annual, .length_out = 3)))
 xobs_only <- function(..., .length_out = NULL, .data = xnew_data_env$data) {
   quos <- enquos(...)
 

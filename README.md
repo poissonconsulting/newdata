@@ -105,7 +105,7 @@ When programming it is strongly recommended that the user explicitly
 specify the length of each sequence individually.
 
 ``` r
-xnew_data(old_data, lgl, xnew_seq(int, length_out = 3))
+xnew_data(old_data, lgl, xnew_seq(int, .length_out = 3))
 #> # A tibble: 6 × 9
 #>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
 #>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
@@ -138,7 +138,7 @@ The user can also indicate whether only observed values should be used
 in the sequence.
 
 ``` r
-xnew_data(old_data, xnew_seq(int, length_out = 3, obs_only = TRUE))
+xnew_data(old_data, xnew_seq(int, .length_out = 3, .obs_only = TRUE))
 #> # A tibble: 3 × 9
 #>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
 #>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
@@ -151,7 +151,7 @@ The `xobs_only()` function can be used to filter out unobserved values
 after the sequence has been generated.
 
 ``` r
-xnew_data(old_data, xobs_only(xnew_seq(int, length_out = 3)))
+xnew_data(old_data, xobs_only(xnew_seq(int, .length_out = 3)))
 #> # A tibble: 2 × 9
 #>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
 #>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>

@@ -27,7 +27,7 @@ data <- tibble::tibble(
   d = c("a", "b", "c")
 )
 
-xnew_data(data, a, b = new_seq(b, length_out = 3), xnew_seq(d, length_out = 2))
+xnew_data(data, a, b = new_seq(b, .length_out = 3), xnew_seq(d, .length_out = 2))
 }
 \seealso{
 \code{\link[=new_seq]{new_seq()}} and \code{\link[=xnew_data]{xnew_data()}}.
