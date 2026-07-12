@@ -18,8 +18,8 @@ new_seq(
   .length_out = NULL,
   ...,
   .obs_only = NULL,
-  length_out = NULL,
-  obs_only = NULL
+  length_out = deprecated(),
+  obs_only = deprecated()
 )
 
 \method{new_seq}{logical}(
@@ -27,8 +27,8 @@ new_seq(
   .length_out = NULL,
   ...,
   .obs_only = NULL,
-  length_out = NULL,
-  obs_only = NULL
+  length_out = deprecated(),
+  obs_only = deprecated()
 )
 
 \method{new_seq}{integer}(
@@ -36,8 +36,8 @@ new_seq(
   .length_out = NULL,
   ...,
   .obs_only = NULL,
-  length_out = NULL,
-  obs_only = NULL
+  length_out = deprecated(),
+  obs_only = deprecated()
 )
 
 \method{new_seq}{double}(
@@ -45,8 +45,8 @@ new_seq(
   .length_out = NULL,
   ...,
   .obs_only = NULL,
-  length_out = NULL,
-  obs_only = NULL
+  length_out = deprecated(),
+  obs_only = deprecated()
 )
 
 \method{new_seq}{character}(
@@ -54,8 +54,8 @@ new_seq(
   .length_out = NULL,
   ...,
   .obs_only = NULL,
-  length_out = NULL,
-  obs_only = NULL
+  length_out = deprecated(),
+  obs_only = deprecated()
 )
 
 \method{new_seq}{factor}(
@@ -63,8 +63,8 @@ new_seq(
   .length_out = NULL,
   ...,
   .obs_only = NULL,
-  length_out = NULL,
-  obs_only = NULL
+  length_out = deprecated(),
+  obs_only = deprecated()
 )
 
 \method{new_seq}{ordered}(
@@ -72,8 +72,8 @@ new_seq(
   .length_out = NULL,
   ...,
   .obs_only = NULL,
-  length_out = NULL,
-  obs_only = NULL
+  length_out = deprecated(),
+  obs_only = deprecated()
 )
 
 \method{new_seq}{Date}(
@@ -81,8 +81,8 @@ new_seq(
   .length_out = NULL,
   ...,
   .obs_only = NULL,
-  length_out = NULL,
-  obs_only = NULL
+  length_out = deprecated(),
+  obs_only = deprecated()
 )
 
 \method{new_seq}{POSIXct}(
@@ -90,8 +90,8 @@ new_seq(
   .length_out = NULL,
   ...,
   .obs_only = NULL,
-  length_out = NULL,
-  obs_only = NULL
+  length_out = deprecated(),
+  obs_only = deprecated()
 )
 
 \method{new_seq}{hms}(
@@ -99,8 +99,8 @@ new_seq(
   .length_out = NULL,
   ...,
   .obs_only = NULL,
-  length_out = NULL,
-  obs_only = NULL
+  length_out = deprecated(),
+  obs_only = deprecated()
 )
 }
 \arguments{
@@ -112,9 +112,11 @@ new_seq(
 
 \item{.obs_only}{A flag specifying whether to only use observed values.}
 
-\item{length_out}{Use \code{.length_out} instead.}
+\item{length_out}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{.length_out}
+instead.}
 
-\item{obs_only}{Use \code{.obs_only} instead.}
+\item{obs_only}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use \code{.obs_only}
+instead.}
 }
 \value{
 A vector of the same class as the object.

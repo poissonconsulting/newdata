@@ -41,8 +41,15 @@
 #' new_value(c(TRUE, FALSE, TRUE))
 #'
 #' @export
-new_value <- function(x, ..., .obs_only = NULL, obs_only = NULL) {
+new_value <- function(x, ..., .obs_only = NULL, obs_only = deprecated()) {
   chk_unused(...)
-  .obs_only <- .obs_only %||% obs_only
+  if (lifecycle::is_present(obs_only)) {
+    lifecycle::deprecate_warn(
+      "0.1.0",
+      "new_value(obs_only)",
+      "new_value(.obs_only)"
+    )
+    .obs_only <- obs_only
+  }
   new_seq(x, .length_out = 1L, .obs_only = .obs_only)
 }

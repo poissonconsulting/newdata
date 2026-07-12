@@ -4,7 +4,7 @@
 \alias{new_value}
 \title{Generate New Reference Value}
 \usage{
-new_value(x, ..., .obs_only = NULL, obs_only = NULL)
+new_value(x, ..., .obs_only = NULL, obs_only = deprecated())
 }
 \arguments{
 \item{x}{The object to generate the reference value from.}

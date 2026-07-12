@@ -24,8 +24,10 @@
 #' @param .length_out The maximum length of the sequence.
 #' @inheritParams rlang::args_dots_empty
 #' @param .obs_only A flag specifying whether to only use observed values.
-#' @param length_out Use `.length_out` instead.
-#' @param obs_only Use `.obs_only` instead.
+#' @param length_out `r lifecycle::badge("deprecated")` Use `.length_out`
+#'   instead.
+#' @param obs_only `r lifecycle::badge("deprecated")` Use `.obs_only`
+#'   instead.
 #' @returns A vector of the same class as the object.
 #' @seealso [new_value()] and [new_data()].
 #' @examples
@@ -78,21 +80,39 @@ new_seq <- function(
   .length_out = NULL,
   ...,
   .obs_only = NULL,
-  length_out = NULL,
-  obs_only = NULL
+  length_out = deprecated(),
+  obs_only = deprecated()
 ) {
   chk_unused(...)
+  if (lifecycle::is_present(length_out)) {
+    lifecycle::deprecate_warn(
+      "0.1.0",
+      "new_seq(length_out)",
+      "new_seq(.length_out)"
+    )
+  }
+  if (lifecycle::is_present(obs_only)) {
+    lifecycle::deprecate_warn(
+      "0.1.0",
+      "new_seq(obs_only)",
+      "new_seq(.obs_only)"
+    )
+  }
   UseMethod("new_seq")
 }
 
-# Fold the old `length_out`/`obs_only` spellings into `.length_out`/`.obs_only`.
-# Methods coalesce for themselves because `UseMethod()` does not propagate
-# values remapped in the generic body.
+# Fold deprecated `length_out`/`obs_only` into `.length_out`/`.obs_only`.
+# The deprecation warning is emitted by the generic (correct caller
+# attribution); methods coalesce silently because `UseMethod()` does not
+# propagate values remapped in the generic body.
 new_seq_args <- function(.length_out, .obs_only, length_out, obs_only) {
-  list(
-    .length_out = .length_out %||% length_out,
-    .obs_only = .obs_only %||% obs_only
-  )
+  if (lifecycle::is_present(length_out)) {
+    .length_out <- length_out
+  }
+  if (lifecycle::is_present(obs_only)) {
+    .obs_only <- obs_only
+  }
+  list(.length_out = .length_out, .obs_only = .obs_only)
 }
 
 #' @describeIn new_seq Generate new sequence of values for logical objects
@@ -102,8 +122,8 @@ new_seq.logical <- function(
   .length_out = NULL,
   ...,
   .obs_only = NULL,
-  length_out = NULL,
-  obs_only = NULL
+  length_out = deprecated(),
+  obs_only = deprecated()
 ) {
   chk_unused(...)
   args <- new_seq_args(.length_out, .obs_only, length_out, obs_only)
@@ -142,8 +162,8 @@ new_seq.integer <- function(
   .length_out = NULL,
   ...,
   .obs_only = NULL,
-  length_out = NULL,
-  obs_only = NULL
+  length_out = deprecated(),
+  obs_only = deprecated()
 ) {
   chk_unused(...)
   args <- new_seq_args(.length_out, .obs_only, length_out, obs_only)
@@ -179,8 +199,8 @@ new_seq.double <- function(
   .length_out = NULL,
   ...,
   .obs_only = NULL,
-  length_out = NULL,
-  obs_only = NULL
+  length_out = deprecated(),
+  obs_only = deprecated()
 ) {
   chk_unused(...)
   args <- new_seq_args(.length_out, .obs_only, length_out, obs_only)
@@ -217,8 +237,8 @@ new_seq.character <- function(
   .length_out = NULL,
   ...,
   .obs_only = NULL,
-  length_out = NULL,
-  obs_only = NULL
+  length_out = deprecated(),
+  obs_only = deprecated()
 ) {
   chk_unused(...)
   args <- new_seq_args(.length_out, .obs_only, length_out, obs_only)
@@ -255,8 +275,8 @@ new_seq.factor <- function(
   .length_out = NULL,
   ...,
   .obs_only = NULL,
-  length_out = NULL,
-  obs_only = NULL
+  length_out = deprecated(),
+  obs_only = deprecated()
 ) {
   chk_unused(...)
   args <- new_seq_args(.length_out, .obs_only, length_out, obs_only)
@@ -298,8 +318,8 @@ new_seq.ordered <- function(
   .length_out = NULL,
   ...,
   .obs_only = NULL,
-  length_out = NULL,
-  obs_only = NULL
+  length_out = deprecated(),
+  obs_only = deprecated()
 ) {
   chk_unused(...)
   args <- new_seq_args(.length_out, .obs_only, length_out, obs_only)
@@ -341,8 +361,8 @@ new_seq.Date <- function(
   .length_out = NULL,
   ...,
   .obs_only = NULL,
-  length_out = NULL,
-  obs_only = NULL
+  length_out = deprecated(),
+  obs_only = deprecated()
 ) {
   chk_unused(...)
   args <- new_seq_args(.length_out, .obs_only, length_out, obs_only)
@@ -360,8 +380,8 @@ new_seq.POSIXct <- function(
   .length_out = NULL,
   ...,
   .obs_only = NULL,
-  length_out = NULL,
-  obs_only = NULL
+  length_out = deprecated(),
+  obs_only = deprecated()
 ) {
   chk_unused(...)
   args <- new_seq_args(.length_out, .obs_only, length_out, obs_only)
@@ -380,8 +400,8 @@ new_seq.hms <- function(
   .length_out = NULL,
   ...,
   .obs_only = NULL,
-  length_out = NULL,
-  obs_only = NULL
+  length_out = deprecated(),
+  obs_only = deprecated()
 ) {
   chk_unused(...)
   args <- new_seq_args(.length_out, .obs_only, length_out, obs_only)
