@@ -29,7 +29,7 @@ data <- tibble::tibble(
 )
 xnew_data(data, period, annual)
 xnew_data(data, xobs_only(period, annual))
-xnew_data(data, xobs_only(period, xnew_seq(annual, length_out = 3)))
+xnew_data(data, xobs_only(period, xnew_seq(annual, .length_out = 3)))
 }
 \seealso{
 \code{\link[=xnew_data]{xnew_data()}}

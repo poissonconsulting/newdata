@@ -30,13 +30,13 @@
 #' xnew_data(data, annual)
 #'
 #' # The user can specify the length of a sequence.
-#' xnew_data(data, xnew_seq(annual, length_out = 3))
+#' xnew_data(data, xnew_seq(annual, .length_out = 3))
 #'
 #' # And only allow observed values.
-#' xnew_data(data, xnew_seq(annual, length_out = 3, obs_only = TRUE))
+#' xnew_data(data, xnew_seq(annual, .length_out = 3, .obs_only = TRUE))
 #'
 #' # With multiple variables all combinations are produced
-#' xnew_data(data, period, xnew_seq(annual, length_out = 3, obs_only = TRUE))
+#' xnew_data(data, period, xnew_seq(annual, .length_out = 3, .obs_only = TRUE))
 #'
 #' # To only preserve observed combinations use
 #' xnew_data(data, xobs_only(period, annual))
@@ -63,7 +63,7 @@ quo_translate_xnew_data <- function(quo, length_out) {
 
 expr_translate_xnew_data <- function(expr, length_out) {
   if (is_symbol(expr)) {
-    expr(xnew_seq(!!expr, length_out = !!length_out))
+    expr(xnew_seq(!!expr, .length_out = !!length_out))
   } else {
     expr
   }

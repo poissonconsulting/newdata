@@ -15,7 +15,7 @@
 #' )
 #' xnew_data(data, period, annual)
 #' xnew_data(data, xobs_only(period, annual))
-#' xnew_data(data, xobs_only(period, xnew_seq(annual, length_out = 3)))
+#' xnew_data(data, xobs_only(period, xnew_seq(annual, .length_out = 3)))
 xobs_only <- function(..., .length_out = NULL, .data = xnew_data_env$data) {
   quos <- enquos(...)
 
@@ -34,7 +34,7 @@ quo_translate_xobs_only <- function(quo, length_out) {
 
 expr_translate_xobs_only <- function(expr, length_out) {
   if (is_symbol(expr)) {
-    expr(xnew_seq(!!expr, length_out = !!length_out, obs_only = TRUE))
+    expr(xnew_seq(!!expr, .length_out = !!length_out, .obs_only = TRUE))
   } else {
     expr
   }

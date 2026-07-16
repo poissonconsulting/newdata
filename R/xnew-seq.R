@@ -17,7 +17,7 @@
 #'   d = c("a", "b", "c")
 #' )
 #'
-#' xnew_data(data, a, b = new_seq(b, length_out = 3), xnew_seq(d, length_out = 2))
+#' xnew_data(data, a, b = new_seq(b, .length_out = 3), xnew_seq(d, .length_out = 2))
 xnew_seq <- function(x, ...) {
   expr <- ensym(x)
   out <- new_seq(x, ...)

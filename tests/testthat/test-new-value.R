@@ -1,33 +1,33 @@
 test_that("new_value logical", {
   # zero length
   expect_identical(new_value(logical()), FALSE)
-  expect_identical(new_value(logical(), obs_only = TRUE), NA)
+  expect_identical(new_value(logical(), .obs_only = TRUE), NA)
   # missing value
   expect_identical(new_value(NA), FALSE)
-  expect_identical(new_value(NA, obs_only = TRUE), NA)
+  expect_identical(new_value(NA, .obs_only = TRUE), NA)
   # single value
   expect_identical(new_value(FALSE), FALSE)
   expect_identical(new_value(TRUE), FALSE)
-  expect_identical(new_value(FALSE, obs_only = TRUE), FALSE)
-  expect_identical(new_value(TRUE, obs_only = TRUE), TRUE)
+  expect_identical(new_value(FALSE, .obs_only = TRUE), FALSE)
+  expect_identical(new_value(TRUE, .obs_only = TRUE), TRUE)
   # multiple values
   expect_identical(new_value(c(TRUE, FALSE)), FALSE)
   expect_identical(new_value(c(FALSE, TRUE)), FALSE)
   expect_identical(new_value(c(TRUE, TRUE)), FALSE)
   expect_identical(new_value(c(TRUE, TRUE, FALSE)), FALSE)
-  expect_identical(new_value(c(TRUE, FALSE), obs_only = TRUE), FALSE)
-  expect_identical(new_value(c(FALSE, TRUE), obs_only = TRUE), FALSE)
-  expect_identical(new_value(c(TRUE, TRUE), obs_only = TRUE), TRUE)
-  expect_identical(new_value(c(TRUE, TRUE, FALSE), obs_only = TRUE), FALSE)
+  expect_identical(new_value(c(TRUE, FALSE), .obs_only = TRUE), FALSE)
+  expect_identical(new_value(c(FALSE, TRUE), .obs_only = TRUE), FALSE)
+  expect_identical(new_value(c(TRUE, TRUE), .obs_only = TRUE), TRUE)
+  expect_identical(new_value(c(TRUE, TRUE, FALSE), .obs_only = TRUE), FALSE)
   # multiple values with missing
   expect_identical(new_value(c(TRUE, FALSE, NA)), FALSE)
   expect_identical(new_value(c(FALSE, TRUE, NA)), FALSE)
   expect_identical(new_value(c(TRUE, TRUE, NA)), FALSE)
   expect_identical(new_value(c(TRUE, TRUE, FALSE, NA)), FALSE)
-  expect_identical(new_value(c(TRUE, FALSE, NA), obs_only = TRUE), FALSE)
-  expect_identical(new_value(c(FALSE, TRUE, NA), obs_only = TRUE), FALSE)
-  expect_identical(new_value(c(TRUE, TRUE, NA), obs_only = TRUE), TRUE)
-  expect_identical(new_value(c(TRUE, TRUE, FALSE, NA), obs_only = TRUE), FALSE)
+  expect_identical(new_value(c(TRUE, FALSE, NA), .obs_only = TRUE), FALSE)
+  expect_identical(new_value(c(FALSE, TRUE, NA), .obs_only = TRUE), FALSE)
+  expect_identical(new_value(c(TRUE, TRUE, NA), .obs_only = TRUE), TRUE)
+  expect_identical(new_value(c(TRUE, TRUE, FALSE, NA), .obs_only = TRUE), FALSE)
   # matrices and arrays
   expect_identical(new_value(matrix(TRUE)), FALSE)
   expect_identical(new_value(array(TRUE)), FALSE)
@@ -36,44 +36,44 @@ test_that("new_value logical", {
 test_that("new_value integer", {
   # zero length
   expect_identical(new_value(integer()), NA_integer_)
-  expect_identical(new_value(integer(), obs_only = TRUE), NA_integer_)
+  expect_identical(new_value(integer(), .obs_only = TRUE), NA_integer_)
   # missing value
   expect_identical(new_value(NA_integer_), NA_integer_)
-  expect_identical(new_value(NA_integer_, obs_only = TRUE), NA_integer_)
+  expect_identical(new_value(NA_integer_, .obs_only = TRUE), NA_integer_)
   # single value
   expect_identical(new_value(1L), 1L)
   expect_identical(new_value(10L), 10L)
   expect_identical(new_value(-1L), -1L)
   expect_identical(new_value(0L), 0L)
-  expect_identical(new_value(1L, obs_only = TRUE), 1L)
-  expect_identical(new_value(10L, obs_only = TRUE), 10L)
-  expect_identical(new_value(-1L, obs_only = TRUE), -1L)
-  expect_identical(new_value(0L, obs_only = TRUE), 0L)
+  expect_identical(new_value(1L, .obs_only = TRUE), 1L)
+  expect_identical(new_value(10L, .obs_only = TRUE), 10L)
+  expect_identical(new_value(-1L, .obs_only = TRUE), -1L)
+  expect_identical(new_value(0L, .obs_only = TRUE), 0L)
   # multiple values
   expect_identical(new_value(0:1), 0L)
   expect_identical(new_value(1:2), 1L)
   expect_identical(new_value(c(1L, 3L)), 2L)
-  expect_identical(new_value(0:1, obs_only = TRUE), 0L)
-  expect_identical(new_value(1:2, obs_only = TRUE), 1L)
-  expect_identical(new_value(c(1L, 3L), obs_only = TRUE), 1L)
+  expect_identical(new_value(0:1, .obs_only = TRUE), 0L)
+  expect_identical(new_value(1:2, .obs_only = TRUE), 1L)
+  expect_identical(new_value(c(1L, 3L), .obs_only = TRUE), 1L)
   # multiple values with missing
   expect_identical(new_value(c(0:1, NA)), 0L)
   expect_identical(new_value(c(1:2, NA)), 1L)
   expect_identical(new_value(c(1L, 3L, NA)), 2L)
-  expect_identical(new_value(c(0:1, NA), obs_only = TRUE), 0L)
-  expect_identical(new_value(c(1:2, NA), obs_only = TRUE), 1L)
-  expect_identical(new_value(c(1L, 3L, NA), obs_only = TRUE), 1L)
+  expect_identical(new_value(c(0:1, NA), .obs_only = TRUE), 0L)
+  expect_identical(new_value(c(1:2, NA), .obs_only = TRUE), 1L)
+  expect_identical(new_value(c(1L, 3L, NA), .obs_only = TRUE), 1L)
   # matrices and arrays
   expect_identical(new_value(matrix(1L)), 1L)
   expect_identical(new_value(array(1L)), 1L)
   # median
-  expect_identical(new_value(c(0:1), obs_only = TRUE), as.integer(median(0:1)))
+  expect_identical(new_value(c(0:1), .obs_only = TRUE), as.integer(median(0:1)))
   expect_identical(
-    new_value(c(1:10), obs_only = TRUE),
+    new_value(c(1:10), .obs_only = TRUE),
     as.integer(median(1:10))
   )
   expect_identical(
-    new_value(c(2:10), obs_only = TRUE),
+    new_value(c(2:10), .obs_only = TRUE),
     as.integer(median(2:10))
   )
 })
@@ -105,35 +105,35 @@ test_that("new_value integer obs_only", {
 test_that("new_value real", {
   # zero length
   expect_identical(new_value(double()), NA_real_)
-  expect_identical(new_value(double(), obs_only = TRUE), NA_real_)
+  expect_identical(new_value(double(), .obs_only = TRUE), NA_real_)
   # missing value
   expect_identical(new_value(NA_real_), NA_real_)
-  expect_identical(new_value(NA_real_, obs_only = TRUE), NA_real_)
+  expect_identical(new_value(NA_real_, .obs_only = TRUE), NA_real_)
   # single value
   expect_identical(new_value(1), 1)
   expect_identical(new_value(1.1), 1.1)
   expect_identical(new_value(10), 10)
   expect_identical(new_value(-1), -1)
   expect_identical(new_value(0), 0)
-  expect_identical(new_value(1, obs_only = TRUE), 1)
-  expect_identical(new_value(1.1, obs_only = TRUE), 1.1)
-  expect_identical(new_value(10, obs_only = TRUE), 10)
-  expect_identical(new_value(-1, obs_only = TRUE), -1)
-  expect_identical(new_value(0, obs_only = TRUE), 0)
+  expect_identical(new_value(1, .obs_only = TRUE), 1)
+  expect_identical(new_value(1.1, .obs_only = TRUE), 1.1)
+  expect_identical(new_value(10, .obs_only = TRUE), 10)
+  expect_identical(new_value(-1, .obs_only = TRUE), -1)
+  expect_identical(new_value(0, .obs_only = TRUE), 0)
   # multiple values
   expect_identical(new_value(c(0, 1)), 0.5)
   expect_identical(new_value(c(1, 2)), 1.5)
   expect_identical(new_value(c(1, 3)), 2)
-  expect_identical(new_value(c(0, 1), obs_only = TRUE), 0)
-  expect_identical(new_value(c(1, 2), obs_only = TRUE), 1)
-  expect_identical(new_value(c(1, 3), obs_only = TRUE), 1)
+  expect_identical(new_value(c(0, 1), .obs_only = TRUE), 0)
+  expect_identical(new_value(c(1, 2), .obs_only = TRUE), 1)
+  expect_identical(new_value(c(1, 3), .obs_only = TRUE), 1)
   # multiple values with missing
   expect_identical(new_value(c(0, 1, NA)), 0.5)
   expect_identical(new_value(c(1, 2, NA)), 1.5)
   expect_identical(new_value(c(1, 3, NA)), 2)
-  expect_identical(new_value(c(0, 1, NA), obs_only = TRUE), 0)
-  expect_identical(new_value(c(1, 2, NA), obs_only = TRUE), 1)
-  expect_identical(new_value(c(1, 3, NA), obs_only = TRUE), 1)
+  expect_identical(new_value(c(0, 1, NA), .obs_only = TRUE), 0)
+  expect_identical(new_value(c(1, 2, NA), .obs_only = TRUE), 1)
+  expect_identical(new_value(c(1, 3, NA), .obs_only = TRUE), 1)
   # matrices and arrays
   expect_identical(new_value(matrix(1)), 1)
   expect_identical(new_value(array(1)), 1)
@@ -162,10 +162,10 @@ test_that("new_value character", {
 test_that("new_value factor", {
   # zero length
   expect_identical(new_value(factor()), factor(NA))
-  expect_identical(new_value(factor(), obs_only = TRUE), factor(NA))
+  expect_identical(new_value(factor(), .obs_only = TRUE), factor(NA))
   # missing value
   expect_identical(new_value(factor(NA)), factor(NA))
-  expect_identical(new_value(factor(NA), obs_only = TRUE), factor(NA))
+  expect_identical(new_value(factor(NA), .obs_only = TRUE), factor(NA))
   # single value
   expect_identical(
     new_value(factor("b", levels = "b")),
@@ -241,7 +241,7 @@ test_that("new_value ordered", {
     factor(0, levels = c(0:2))
   )
   expect_identical(
-    new_value(factor(1:2, levels = c(0:2)), obs_only = TRUE),
+    new_value(factor(1:2, levels = c(0:2)), .obs_only = TRUE),
     factor(1, levels = c(0:2))
   )
 })
@@ -326,15 +326,15 @@ test_that("new_value Date", {
   expect_identical(new_value(as.Date(integer())), as.Date(NA_integer_))
   expect_identical(new_value(as.Date(double())), as.Date(NA_integer_))
   expect_identical(
-    new_value(as.Date(character()), obs_only = TRUE),
+    new_value(as.Date(character()), .obs_only = TRUE),
     as.Date(NA_integer_)
   )
   expect_identical(
-    new_value(as.Date(integer()), obs_only = TRUE),
+    new_value(as.Date(integer()), .obs_only = TRUE),
     as.Date(NA_integer_)
   )
   expect_identical(
-    new_value(as.Date(double()), obs_only = TRUE),
+    new_value(as.Date(double()), .obs_only = TRUE),
     as.Date(NA_integer_)
   )
   # missing value
@@ -342,15 +342,15 @@ test_that("new_value Date", {
   expect_identical(new_value(as.Date(NA_real_)), as.Date(NA_integer_))
   expect_identical(new_value(as.Date(NA_integer_)), as.Date(NA_integer_))
   expect_identical(
-    new_value(as.Date(NA_character_), obs_only = TRUE),
+    new_value(as.Date(NA_character_), .obs_only = TRUE),
     as.Date(NA_integer_)
   )
   expect_identical(
-    new_value(as.Date(NA_real_), obs_only = TRUE),
+    new_value(as.Date(NA_real_), .obs_only = TRUE),
     as.Date(NA_integer_)
   )
   expect_identical(
-    new_value(as.Date(NA_integer_), obs_only = TRUE),
+    new_value(as.Date(NA_integer_), .obs_only = TRUE),
     as.Date(NA_integer_)
   )
   # single value
@@ -359,32 +359,32 @@ test_that("new_value Date", {
   expect_identical(new_value(as.Date(1.1)), as.Date(1L))
   expect_identical(new_value(as.Date(1.6)), as.Date(1L))
   expect_identical(new_value(as.Date(10)), as.Date(10L))
-  expect_identical(new_value(as.Date(1L), obs_only = TRUE), as.Date(1L))
-  expect_identical(new_value(as.Date(1), obs_only = TRUE), as.Date(1L))
-  expect_identical(new_value(as.Date(1.1), obs_only = TRUE), as.Date(1L))
-  expect_identical(new_value(as.Date(1.6), obs_only = TRUE), as.Date(1L))
-  expect_identical(new_value(as.Date(10), obs_only = TRUE), as.Date(10L))
+  expect_identical(new_value(as.Date(1L), .obs_only = TRUE), as.Date(1L))
+  expect_identical(new_value(as.Date(1), .obs_only = TRUE), as.Date(1L))
+  expect_identical(new_value(as.Date(1.1), .obs_only = TRUE), as.Date(1L))
+  expect_identical(new_value(as.Date(1.6), .obs_only = TRUE), as.Date(1L))
+  expect_identical(new_value(as.Date(10), .obs_only = TRUE), as.Date(10L))
   # multiple values
   expect_identical(new_value(as.Date(c(0, 1))), as.Date(0L))
   expect_identical(new_value(as.Date(c(1, 2))), as.Date(1L))
   expect_identical(new_value(as.Date(c(1, 3))), as.Date(2L))
-  expect_identical(new_value(as.Date(c(0, 1)), obs_only = TRUE), as.Date(0L))
-  expect_identical(new_value(as.Date(c(1, 2)), obs_only = TRUE), as.Date(1L))
-  expect_identical(new_value(as.Date(c(1, 3)), obs_only = TRUE), as.Date(1L))
+  expect_identical(new_value(as.Date(c(0, 1)), .obs_only = TRUE), as.Date(0L))
+  expect_identical(new_value(as.Date(c(1, 2)), .obs_only = TRUE), as.Date(1L))
+  expect_identical(new_value(as.Date(c(1, 3)), .obs_only = TRUE), as.Date(1L))
   # multiple values with missing
   expect_identical(new_value(as.Date(c(0, 1, NA))), as.Date(0L))
   expect_identical(new_value(as.Date(c(1, 2, NA))), as.Date(1L))
   expect_identical(new_value(as.Date(c(1, 3, NA))), as.Date(2L))
   expect_identical(
-    new_value(as.Date(c(0, 1, NA)), obs_only = TRUE),
+    new_value(as.Date(c(0, 1, NA)), .obs_only = TRUE),
     as.Date(0L)
   )
   expect_identical(
-    new_value(as.Date(c(1, 2, NA)), obs_only = TRUE),
+    new_value(as.Date(c(1, 2, NA)), .obs_only = TRUE),
     as.Date(1L)
   )
   expect_identical(
-    new_value(as.Date(c(1, 3, NA)), obs_only = TRUE),
+    new_value(as.Date(c(1, 3, NA)), .obs_only = TRUE),
     as.Date(1L)
   )
 })
