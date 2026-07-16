@@ -6,34 +6,104 @@ predict the effect of a variable.
 ## Usage
 
 ``` r
-new_seq(x, length_out = NULL, ..., obs_only = NULL)
+new_seq(
+  x,
+  .length_out = NULL,
+  ...,
+  .obs_only = NULL,
+  length_out = deprecated(),
+  obs_only = deprecated()
+)
 
 # S3 method for class 'logical'
-new_seq(x, length_out = NULL, ..., obs_only = NULL)
+new_seq(
+  x,
+  .length_out = NULL,
+  ...,
+  .obs_only = NULL,
+  length_out = deprecated(),
+  obs_only = deprecated()
+)
 
 # S3 method for class 'integer'
-new_seq(x, length_out = NULL, ..., obs_only = NULL)
+new_seq(
+  x,
+  .length_out = NULL,
+  ...,
+  .obs_only = NULL,
+  length_out = deprecated(),
+  obs_only = deprecated()
+)
 
 # S3 method for class 'double'
-new_seq(x, length_out = NULL, ..., obs_only = NULL)
+new_seq(
+  x,
+  .length_out = NULL,
+  ...,
+  .obs_only = NULL,
+  length_out = deprecated(),
+  obs_only = deprecated()
+)
 
 # S3 method for class 'character'
-new_seq(x, length_out = NULL, ..., obs_only = NULL)
+new_seq(
+  x,
+  .length_out = NULL,
+  ...,
+  .obs_only = NULL,
+  length_out = deprecated(),
+  obs_only = deprecated()
+)
 
 # S3 method for class 'factor'
-new_seq(x, length_out = NULL, ..., obs_only = NULL)
+new_seq(
+  x,
+  .length_out = NULL,
+  ...,
+  .obs_only = NULL,
+  length_out = deprecated(),
+  obs_only = deprecated()
+)
 
 # S3 method for class 'ordered'
-new_seq(x, length_out = NULL, ..., obs_only = NULL)
+new_seq(
+  x,
+  .length_out = NULL,
+  ...,
+  .obs_only = NULL,
+  length_out = deprecated(),
+  obs_only = deprecated()
+)
 
 # S3 method for class 'Date'
-new_seq(x, length_out = NULL, ..., obs_only = NULL)
+new_seq(
+  x,
+  .length_out = NULL,
+  ...,
+  .obs_only = NULL,
+  length_out = deprecated(),
+  obs_only = deprecated()
+)
 
 # S3 method for class 'POSIXct'
-new_seq(x, length_out = NULL, ..., obs_only = NULL)
+new_seq(
+  x,
+  .length_out = NULL,
+  ...,
+  .obs_only = NULL,
+  length_out = deprecated(),
+  obs_only = deprecated()
+)
 
 # S3 method for class 'hms'
-new_seq(x, length_out = NULL, ..., obs_only = NULL)
+new_seq(
+  x,
+  .length_out = NULL,
+  ...,
+  .obs_only = NULL,
+  length_out = deprecated(),
+  obs_only = deprecated()
+)
 ```
 
 ## Arguments
@@ -42,7 +112,7 @@ new_seq(x, length_out = NULL, ..., obs_only = NULL)
 
   The object to generate the sequence from.
 
-- length_out:
+- .length_out:
 
   The maximum length of the sequence.
 
@@ -50,9 +120,17 @@ new_seq(x, length_out = NULL, ..., obs_only = NULL)
 
   These dots are for future extensions and must be empty.
 
-- obs_only:
+- .obs_only:
 
   A flag specifying whether to only use observed values.
+
+- length_out:
+
+  **\[deprecated\]** Use `.length_out` instead.
+
+- obs_only:
+
+  **\[deprecated\]** Use `.obs_only` instead.
 
 ## Value
 
@@ -63,15 +141,15 @@ A vector of the same class as the object.
 By default the sequence of values for objects of class numeric is 30
 evenly space values across the range of the data. Missing values are
 always removed unless it's the only value or the object is zero length.
-The length of the sequence can be varied using the `length_out` argument
-which gives the reference value when 1 and can even be 0. For integer
-objects the sequence is the unique integers. For character objects it's
-the actual values sorted by how common they are followed by their actual
-value. For factors it's the factor levels in order with the trailing
-levels dropped first. For ordered factors the intermediate levels are
-dropped first. For Date vectors it's the unique dates; same for hms
-vectors. For POSIXct vectors the time zone is preserved. For logical
-objects the longest possible sequence is `c(TRUE, FALSE)`.
+The length of the sequence can be varied using the `.length_out`
+argument which gives the reference value when 1 and can even be 0. For
+integer objects the sequence is the unique integers. For character
+objects it's the actual values sorted by how common they are followed by
+their actual value. For factors it's the factor levels in order with the
+trailing levels dropped first. For ordered factors the intermediate
+levels are dropped first. For Date vectors it's the unique dates; same
+for hms vectors. For POSIXct vectors the time zone is preserved. For
+logical objects the longest possible sequence is `c(TRUE, FALSE)`.
 
 ## Methods (by class)
 
@@ -126,16 +204,16 @@ new_seq(NA_real_)
 # or the object is zero length
 new_seq(numeric())
 #> [1] NA
-# the length of the sequence can be varied using the length_out argument
-new_seq(c(1, 4), length_out = 3)
+# the length of the sequence can be varied using the .length_out argument
+new_seq(c(1, 4), .length_out = 3)
 #> [1] 1.0 2.5 4.0
-new_seq(c(1, 4), length_out = 2)
+new_seq(c(1, 4), .length_out = 2)
 #> [1] 1 4
 # which gives the reference value when 1
-new_seq(c(1, 4), length_out = 1)
+new_seq(c(1, 4), .length_out = 1)
 #> [1] 2.5
 # and can even be 0
-new_seq(c(1, 4), length_out = 0)
+new_seq(c(1, 4), .length_out = 0)
 #> numeric(0)
 # for integer objects the sequence is the unique integers
 new_seq(c(1L, 4L))
@@ -147,7 +225,7 @@ new_seq(c(1L, 100L))
 # how common they are followed by their actual value
 new_seq(c("a", "c", "c", "b", "b"))
 #> [1] "b" "c" "a"
-new_seq(c("a", "c", "c", "b", "b"), length_out = 2)
+new_seq(c("a", "c", "c", "b", "b"), .length_out = 2)
 #> [1] "b" "c"
 # for factors its the factor levels in order
 new_seq(factor(c("a", "b", "c", "c"), levels = c("b", "a", "g")))
@@ -155,13 +233,13 @@ new_seq(factor(c("a", "b", "c", "c"), levels = c("b", "a", "g")))
 #> Levels: b a g
 # with the trailing levels dropped first
 new_seq(factor(c("a", "b", "c", "c"), levels = c("b", "a", "g")),
-  length_out = 2
+  .length_out = 2
 )
 #> [1] b a
 #> Levels: b a g
 # for ordered factors the intermediate levels are dropped first
 new_seq(ordered(c("a", "b", "c", "c"), levels = c("b", "a", "g")),
-  length_out = 2
+  .length_out = 2
 )
 #> [1] b g
 #> Levels: b < a < g
@@ -181,6 +259,6 @@ new_seq(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04"),
 #> [1] "2000-01-01 00:00:01 PST" "2000-01-01 00:00:02 PST"
 #> [3] "2000-01-01 00:00:03 PST" "2000-01-01 00:00:04 PST"
 # for logical objects the longest possible sequence is `c(TRUE, FALSE)`
-new_seq(c(TRUE, TRUE, FALSE), length_out = 3)
+new_seq(c(TRUE, TRUE, FALSE), .length_out = 3)
 #> [1] FALSE  TRUE
 ```

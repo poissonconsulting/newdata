@@ -38,7 +38,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, obs_only <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_value</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, .obs_only <span class="op">=</span> <span class="cn">NULL</span>, obs_only <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -53,7 +53,7 @@
 <dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
-<dt id="arg-obs-only">obs_only<a class="anchor" aria-label="anchor" href="#arg-obs-only"></a></dt>
+<dt id="arg--obs-only-obs-only">.obs_only, obs_only<a class="anchor" aria-label="anchor" href="#arg--obs-only-obs-only"></a></dt>
 <dd><p>A flag specifying whether to only use observed values.</p></dd>
 
 </dl></div>
@@ -64,8 +64,8 @@
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>By default the reference value for double vectors is the mean,
-unless obs_only = TRUE, in which case its the median of the unique values.
-For integer vectors it's the floored mean unless obs_only = TRUE, in which case
+unless .obs_only = TRUE, in which case its the median of the unique values.
+For integer vectors it's the floored mean unless .obs_only = TRUE, in which case
 it's also the median of the unique values.
 For character vectors it's the minimum of the most common values while
 for factors it's the first level.
@@ -83,8 +83,8 @@ The factor levels and time zone are preserved.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># the reference value for objects of class numeric is the mean</span></span></span>
 <span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.5</span>
-<span class="r-in"><span><span class="co"># unless obs_only = TRUE, in which case its the median of the unique values</span></span></span>
-<span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span>, obs_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># unless .obs_only = TRUE, in which case its the median of the unique values</span></span></span>
+<span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span>, .obs_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># for integer objects it's the floored mean</span></span></span>
@@ -108,10 +108,10 @@ The factor levels and time zone are preserved.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2000-01-02"</span>
 <span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu">hms</span><span class="fu">::</span><span class="fu"><a href="https://hms.tidyverse.org/reference/hms.html" class="external-link">as_hms</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"00:00:01"</span>, <span class="st">"00:00:04"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 00:00:02</span>
-<span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2000-01-01 00:00:01"</span>, <span class="st">"2000-01-01 00:00:04"</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  tzone <span class="op">=</span> <span class="st">"PST8PDT"</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2000-01-01 00:00:02 UTC"</span>
+<span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2000-01-01 00:00:01"</span>, <span class="st">"2000-01-01 00:00:04"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  tz <span class="op">=</span> <span class="st">"PST8PDT"</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2000-01-01 00:00:02 PST"</span>
 <span class="r-in"><span><span class="fu">new_value</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>

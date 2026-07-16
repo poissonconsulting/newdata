@@ -68,7 +68,7 @@ xnew_data(data, annual)
 #> 5 before     2 8     
 
 # The user can specify the length of a sequence.
-xnew_data(data, xnew_seq(annual, length_out = 3))
+xnew_data(data, xnew_seq(annual, .length_out = 3))
 #> # A tibble: 3 × 3
 #>   period count annual
 #>   <fct>  <int> <fct> 
@@ -77,7 +77,7 @@ xnew_data(data, xnew_seq(annual, length_out = 3))
 #> 3 before     2 3     
 
 # And only allow observed values.
-xnew_data(data, xnew_seq(annual, length_out = 3, obs_only = TRUE))
+xnew_data(data, xnew_seq(annual, .length_out = 3, .obs_only = TRUE))
 #> # A tibble: 3 × 3
 #>   period count annual
 #>   <fct>  <int> <fct> 
@@ -86,7 +86,7 @@ xnew_data(data, xnew_seq(annual, length_out = 3, obs_only = TRUE))
 #> 3 before     2 5     
 
 # With multiple variables all combinations are produced
-xnew_data(data, period, xnew_seq(annual, length_out = 3, obs_only = TRUE))
+xnew_data(data, period, xnew_seq(annual, .length_out = 3, .obs_only = TRUE))
 #> # A tibble: 6 × 3
 #>   period count annual
 #>   <fct>  <int> <fct> 

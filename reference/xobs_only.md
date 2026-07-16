@@ -62,7 +62,7 @@ xnew_data(data, xobs_only(period, annual))
 #> 2 before 3     
 #> 3 after  5     
 #> 4 after  8     
-xnew_data(data, xobs_only(period, xnew_seq(annual, length_out = 3)))
+xnew_data(data, xobs_only(period, xnew_seq(annual, .length_out = 3)))
 #> # A tibble: 3 × 2
 #>   period annual
 #>   <fct>  <fct> 

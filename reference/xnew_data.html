@@ -100,7 +100,7 @@ observed values and combinations are used and add new variables.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> before     2 8     </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># The user can specify the length of a sequence.</span></span></span>
-<span class="r-in"><span><span class="fu">xnew_data</span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="xnew_seq.html">xnew_seq</a></span><span class="op">(</span><span class="va">annual</span>, length_out <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">xnew_data</span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="xnew_seq.html">xnew_seq</a></span><span class="op">(</span><span class="va">annual</span>, .length_out <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   period count annual</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> </span>
@@ -109,7 +109,7 @@ observed values and combinations are used and add new variables.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> before     2 3     </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># And only allow observed values.</span></span></span>
-<span class="r-in"><span><span class="fu">xnew_data</span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="xnew_seq.html">xnew_seq</a></span><span class="op">(</span><span class="va">annual</span>, length_out <span class="op">=</span> <span class="fl">3</span>, obs_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">xnew_data</span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="xnew_seq.html">xnew_seq</a></span><span class="op">(</span><span class="va">annual</span>, .length_out <span class="op">=</span> <span class="fl">3</span>, .obs_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   period count annual</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> </span>
@@ -118,7 +118,7 @@ observed values and combinations are used and add new variables.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> before     2 5     </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># With multiple variables all combinations are produced</span></span></span>
-<span class="r-in"><span><span class="fu">xnew_data</span><span class="op">(</span><span class="va">data</span>, <span class="va">period</span>, <span class="fu"><a href="xnew_seq.html">xnew_seq</a></span><span class="op">(</span><span class="va">annual</span>, length_out <span class="op">=</span> <span class="fl">3</span>, obs_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">xnew_data</span><span class="op">(</span><span class="va">data</span>, <span class="va">period</span>, <span class="fu"><a href="xnew_seq.html">xnew_seq</a></span><span class="op">(</span><span class="va">annual</span>, .length_out <span class="op">=</span> <span class="fl">3</span>, .obs_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   period count annual</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> </span>

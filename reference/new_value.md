@@ -5,7 +5,7 @@ Generate a new reference value for a vector.
 ## Usage
 
 ``` r
-new_value(x, ..., obs_only = NULL)
+new_value(x, ..., .obs_only = NULL, obs_only = deprecated())
 ```
 
 ## Arguments
@@ -18,7 +18,7 @@ new_value(x, ..., obs_only = NULL)
 
   These dots are for future extensions and must be empty.
 
-- obs_only:
+- .obs_only, obs_only:
 
   A flag specifying whether to only use observed values.
 
@@ -29,8 +29,8 @@ A scalar of the same class as the object.
 ## Details
 
 By default the reference value for double vectors is the mean, unless
-obs_only = TRUE, in which case its the median of the unique values. For
-integer vectors it's the floored mean unless obs_only = TRUE, in which
+.obs_only = TRUE, in which case its the median of the unique values. For
+integer vectors it's the floored mean unless .obs_only = TRUE, in which
 case it's also the median of the unique values. For character vectors
 it's the minimum of the most common values while for factors it's the
 first level. Ordered factors, Dates, times (hms), POSIXct and logical
@@ -49,8 +49,8 @@ and
 # the reference value for objects of class numeric is the mean
 new_value(c(1, 4))
 #> [1] 2.5
-# unless obs_only = TRUE, in which case its the median of the unique values
-new_value(c(1, 4), obs_only = TRUE)
+# unless .obs_only = TRUE, in which case its the median of the unique values
+new_value(c(1, 4), .obs_only = TRUE)
 #> [1] 1
 
 # for integer objects it's the floored mean
@@ -74,10 +74,10 @@ new_value(as.Date(c("2000-01-01", "2000-01-04")))
 #> [1] "2000-01-02"
 new_value(hms::as_hms(c("00:00:01", "00:00:04")))
 #> 00:00:02
-new_value(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04")),
-  tzone = "PST8PDT"
-)
-#> [1] "2000-01-01 00:00:02 UTC"
+new_value(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04"),
+  tz = "PST8PDT"
+))
+#> [1] "2000-01-01 00:00:02 PST"
 new_value(c(TRUE, FALSE, TRUE))
 #> [1] FALSE
 ```

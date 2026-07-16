@@ -43,7 +43,7 @@ data <- tibble::tibble(
   d = c("a", "b", "c")
 )
 
-xnew_data(data, a, b = new_seq(b, length_out = 3), xnew_seq(d, length_out = 2))
+xnew_data(data, a, b = new_seq(b, .length_out = 3), xnew_seq(d, .length_out = 2))
 #> # A tibble: 24 × 3
 #>        a     b d    
 #>    <int> <dbl> <chr>
