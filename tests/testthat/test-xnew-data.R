@@ -139,10 +139,17 @@ test_that("named symbol adds a new column with that name (#99)", {
   )
 
   new_data <- xnew_data(data, Length = lengths)
-
   expect_named(new_data, c("lengths", "x", "Length"))
   expect_identical(new_data$Length, 1:2)
+  expect_identical(new_data$Length, data$lengths)
   expect_identical(new_data$lengths, c(1L, 1L))
+
+  lengths_vec <- 10:12
+  new_data <- xnew_data(data, Length = lengths_vec)
+  expect_named(new_data, c("lengths", "x", "Length"))
+  expect_identical(new_data$Length, 10:12)
+  expect_identical(new_data$Length, lengths_vec)
+  expect_identical(new_data$lengths, c(1L, 1L, 1L))
 })
 
 test_that("named symbol respects .length_out (#99)", {
