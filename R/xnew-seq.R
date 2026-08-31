@@ -7,6 +7,7 @@
 #' having to repeating the column name.
 #' @inheritParams new_seq
 #' @param ... Additional arguments passed to [new_seq()].
+#' @return A one column tibble named after `x` of the new sequence.
 #' @seealso [new_seq()] and [xnew_data()].
 #' @export
 #' @examples

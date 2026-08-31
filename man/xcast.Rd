@@ -7,17 +7,21 @@
 xcast(..., .data = xnew_data_env$data)
 }
 \arguments{
-\item{...}{TBD}
+\item{...}{Named vectors of values to cast to the class of the
+identically named columns in \code{.data}.}
 
 \item{.data}{Normally defined by \code{\link[=xnew_data]{xnew_data()}}, users must pass a
 data frame or tibble if using this function directly.}
+}
+\value{
+A tibble of the cast values.
 }
 \description{
 Casts a sequence of values to the same class as the original
 vector.
 }
 \details{
-\code{xnew_seq()} is a wrapper function on \code{vctrs::vec_cast()}
+\code{xcast()} is a wrapper function on \code{\link[vctrs:vec_cast]{vctrs::vec_cast()}}
 for use in \code{\link[=xnew_data]{xnew_data()}} to avoid
 having to repeating the column name.
 }

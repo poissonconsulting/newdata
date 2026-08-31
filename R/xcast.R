@@ -3,12 +3,14 @@
 #' Casts a sequence of values to the same class as the original
 #' vector.
 #'
-#' `xnew_seq()` is a wrapper function on `vctrs::vec_cast()`
+#' `xcast()` is a wrapper function on [vctrs::vec_cast()]
 #' for use in [xnew_data()] to avoid
 #' having to repeating the column name.
-#' @param ... TBD
+#' @param ... Named vectors of values to cast to the class of the
+#'   identically named columns in `.data`.
 #' @param .data Normally defined by [xnew_data()], users must pass a
 #'   data frame or tibble if using this function directly.
+#' @return A tibble of the cast values.
 #' @seealso [vctrs::vec_cast()] and [xnew_data()]
 #' @export
 #' @examples

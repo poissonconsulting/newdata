@@ -11,6 +11,9 @@ xnew_seq(x, ...)
 
 \item{...}{Additional arguments passed to \code{\link[=new_seq]{new_seq()}}.}
 }
+\value{
+A one column tibble named after \code{x} of the new sequence.
+}
 \description{
 Generate a new sequence of values for a vector.
 }
