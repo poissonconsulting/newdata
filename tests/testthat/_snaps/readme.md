@@ -8,6 +8,13 @@
         <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
       1 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
     Code
+      xnew_data(old_data, xnew_value(dbl, .obs_only = TRUE))
+    Output
+      # A tibble: 1 x 9
+        lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
+        <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
+      1 FALSE     3   4.5 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+    Code
       xnew_data(old_data, int)
     Output
       # A tibble: 6 x 9
@@ -71,12 +78,12 @@
       2 FALSE     4  4.57 most  most     a rari~ 1970-01-04 1969-12-31 16:00:03 00'03"
       3 FALSE     6  4.57 most  a rarity a rari~ 1970-01-04 1969-12-31 16:00:03 00'03"
     Code
-      xnew_data(old_data, new = c(TRUE, FALSE))
+      xnew_data(old_data, dbl = median(dbl, na.rm = TRUE), extra = c(TRUE, FALSE))
     Output
       # A tibble: 2 x 10
         lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
         <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
-      1 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
-      2 FALSE     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
-      # i 1 more variable: new <lgl>
+      1 FALSE     3   4.5 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+      2 FALSE     3   4.5 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+      # i 1 more variable: extra <lgl>
 
