@@ -7,6 +7,8 @@
 #' having to repeating the column name.
 #' @inheritParams new_value
 #' @param ... Additional arguments passed to [new_value()].
+#' @return A one row, one column tibble named after `x` of the new reference
+#'   value.
 #' @seealso [new_value()] and [xnew_data()].
 #' @export
 #' @examples

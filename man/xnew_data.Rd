@@ -14,6 +14,9 @@ xnew_data(.data, ..., .length_out = NULL)
 \item{.length_out}{NULL or a count specifying the maximum length
 of all sequences.}
 }
+\value{
+A tibble of the new data.
+}
 \description{
 Generates a new data frame (in the form of a tibble)
 }

@@ -11,6 +11,10 @@ xnew_value(x, ...)
 
 \item{...}{Additional arguments passed to \code{\link[=new_value]{new_value()}}.}
 }
+\value{
+A one row, one column tibble named after \code{x} of the new reference
+value.
+}
 \description{
 Generate a new reference value for a vector.
 }

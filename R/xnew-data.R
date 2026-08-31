@@ -12,6 +12,7 @@
 #' @param .length_out NULL or a count specifying the maximum length
 #' of all sequences.
 #' @param ... A list of variables to generate sequences for.
+#' @return A tibble of the new data.
 #' @seealso [xnew_value()], [xnew_seq()], [xcast()] and [xobs_only()]
 #' @export
 #' @examples

@@ -38,11 +38,13 @@ Imports:
 Suggests:
     covr,
     datasets,
+    spelling,
     testthat (>= 3.0.0),
     withr
 Config/Needs/website: poissonconsulting/poissontemplate
+Config/roxygen2/version: 8.1.0
 Config/testthat/edition: 3
 Encoding: UTF-8
+Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-Config/roxygen2/version: 8.0.0.9000
