@@ -22,6 +22,10 @@ xnew_data(.data, ..., .length_out = NULL)
 
   NULL or a count specifying the maximum length of all sequences.
 
+## Value
+
+A tibble of the new data.
+
 ## Details
 
 By default, all specified variables vary across their range while all

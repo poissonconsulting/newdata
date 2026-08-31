@@ -11,7 +11,7 @@ specify the length of each sequence, require that only observed values
 and combinations are used and add new variables. Types, classes, factor
 levels and time zones are always preserved.
 
-Consider the following observed ‘old’ data frame.
+Consider the following observed `old_data` data frame.
 
 ``` r
 
