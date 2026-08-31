@@ -51,6 +51,9 @@ xnew_data(data, xnew_seq(annual, .length_out = 3, .obs_only = TRUE))
 # With multiple variables all combinations are produced
 xnew_data(data, period, xnew_seq(annual, .length_out = 3, .obs_only = TRUE))
 
+# Naming a variable generates a new column of that name.
+xnew_data(data, Annual = annual)
+
 # To only preserve observed combinations use
 xnew_data(data, xobs_only(period, annual))
 

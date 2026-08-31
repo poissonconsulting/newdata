@@ -39,6 +39,9 @@
 #' # With multiple variables all combinations are produced
 #' xnew_data(data, period, xnew_seq(annual, .length_out = 3, .obs_only = TRUE))
 #'
+#' # Naming a variable generates a new column of that name.
+#' xnew_data(data, Annual = annual)
+#'
 #' # To only preserve observed combinations use
 #' xnew_data(data, xobs_only(period, annual))
 #'
@@ -50,24 +53,34 @@ xnew_data <- function(.data, ..., .length_out = NULL) {
 
   quos <- enquos(...)
 
-  translated <- map(quos, quo_translate_xnew_data, .length_out)
+  names <- names2(quos)
+  translated <- map2(quos, names, quo_translate_xnew_data, .length_out)
+
+  # a symbol is translated into a one column tibble which is already named
+  symbol <- map_lgl(quos, function(quo) is_symbol(quo_get_expr(quo)))
+  names(translated) <- ifelse(symbol, "", names)
 
   expand2(.data, !!!translated, .default = new_value, .order = TRUE)
 }
 
-quo_translate_xnew_data <- function(quo, length_out) {
+quo_translate_xnew_data <- function(quo, name, length_out) {
   new_quosure(
-    expr_translate_xnew_data(quo_get_expr(quo), length_out),
+    expr_translate_xnew_data(quo_get_expr(quo), name, length_out),
     quo_get_env(quo)
   )
 }
 
-expr_translate_xnew_data <- function(expr, length_out) {
-  if (is_symbol(expr)) {
-    expr(xnew_seq(!!expr, .length_out = !!length_out))
-  } else {
-    expr
+expr_translate_xnew_data <- function(expr, name, length_out) {
+  if (!is_symbol(expr)) {
+    return(expr)
   }
+  seq <- expr(xnew_seq(!!expr, .length_out = !!length_out))
+  if (!nzchar(name)) {
+    return(seq)
+  }
+  # renaming the one column tibble means a named symbol generates a new column
+  # of that name as opposed to a data frame column
+  expr(rlang::set_names(!!seq, !!name))
 }
 
 # Environment to store the .data argument
