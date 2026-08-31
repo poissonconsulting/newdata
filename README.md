@@ -61,6 +61,17 @@ The reference value depends on the class of the variable, by default:
   of the most common values;
 - factor and ordered vectors are the first level.
 
+The reference value of a variable can be modified with `xnew_value()`,
+which passes additional arguments to `new_value()`.
+
+``` r
+xnew_data(old_data, xnew_value(dbl, .obs_only = TRUE))
+#> # A tibble: 1 × 9
+#>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
+#>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
+#> 1 FALSE     3   4.5 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+```
+
 ### Sequences
 
 Specifying a variable causes it to vary sequentially across its range.
@@ -85,7 +96,7 @@ By default the sequence depends on the class of the variable:
   the maximum value;
 - integer, Date, POSIXct and hms vectors are up to 30 discrete values
   from the minimum to the maximum value as evenly spaced as possible;
-- character vectors are the number of unique values.
+- character vectors are the number of unique values;
 - factor and ordered vectors are the number of levels.
 
 These values can be overridden by setting the following options:
@@ -159,7 +170,7 @@ xnew_data(old_data, xobs_only(xnew_seq(int, .length_out = 3)))
 #> 2 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
 
-and when two or more variables are specified all combinations are used.
+When two or more variables are specified all combinations are used.
 
 ``` r
 xnew_data(old_data, int, fct)
@@ -186,7 +197,7 @@ xnew_data(old_data, int, fct)
 #> 18 FALSE     6  4.57 most  most     a rar… 1970-01-04 1969-12-31 16:00:03 00'03"
 ```
 
-to only get observed combinations.
+To only get the observed combinations use `xobs_only()`.
 
 ``` r
 xnew_data(old_data, xobs_only(int, fct))
@@ -200,22 +211,24 @@ xnew_data(old_data, xobs_only(int, fct))
 
 ### Modifying Variables
 
-Modifying an existing variable or changing an existing one is simple.
+Modifying an existing variable or adding a new one is simple.
 
 ``` r
-xnew_data(old_data, lgl = median(lgl, na.rm = TRUE), extra = c(TRUE, FALSE))
+xnew_data(old_data, dbl = median(dbl, na.rm = TRUE), extra = c(TRUE, FALSE))
 #> # A tibble: 2 × 10
-#>     lgl   int   dbl chr   fct     ord      dte        dtt                 hms   
-#>   <dbl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
-#> 1   0.5     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
-#> 2   0.5     3  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#>   lgl     int   dbl chr   fct     ord      dte        dtt                 hms   
+#>   <lgl> <int> <dbl> <chr> <fct>   <ord>    <date>     <dttm>              <time>
+#> 1 FALSE     3   4.5 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
+#> 2 FALSE     3   4.5 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"
 #> # ℹ 1 more variable: extra <lgl>
 ```
 
+A modified or new variable takes the class of the values provided.
+
 ### Casting Variables
 
-Casting variables to be the same class as the original is achieved as
-follows.
+New values can be cast to the class of the original variable with
+`xcast()`.
 
 ``` r
 xnew_data(old_data, xcast(lgl = 1, int = 7, dbl = 10L, fct = "a rarity", hms = "00:00:02"))
@@ -227,10 +240,9 @@ xnew_data(old_data, xcast(lgl = 1, int = 7, dbl = 10L, fct = "a rarity", hms = "
 
 ### A Simple Wrapper
 
-Although superseded, for consistency with existing code `new_data()`
-which is a simple wrapper on `xnew_data()` allows the user to pass a
-character vector and to specifying the length of all the sequences is
-also provided.
+`new_data()` is a superseded wrapper on `xnew_data()` that is provided
+for consistency with existing code. It takes the variables to vary as a
+character vector and the length of all the sequences as a count.
 
 ``` r
 new_data(old_data, seq = c("int", "fct"), length_out = 5)
