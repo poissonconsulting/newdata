@@ -19,6 +19,10 @@ xnew_seq(x, ...)
   Additional arguments passed to
   [`new_seq()`](https://poissonconsulting.github.io/newdata/reference/new_seq.md).
 
+## Value
+
+A one column tibble named after `x` of the new sequence.
+
 ## Details
 
 `xnew_seq()` is a wrapper function on

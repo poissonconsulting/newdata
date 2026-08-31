@@ -12,7 +12,8 @@ xcast(..., .data = xnew_data_env$data)
 
 - ...:
 
-  TBD
+  Named vectors of values to cast to the class of the identically named
+  columns in `.data`.
 
 - .data:
 
@@ -21,10 +22,13 @@ xcast(..., .data = xnew_data_env$data)
   users must pass a data frame or tibble if using this function
   directly.
 
+## Value
+
+A tibble of the cast values.
+
 ## Details
 
-[`xnew_seq()`](https://poissonconsulting.github.io/newdata/reference/xnew_seq.md)
-is a wrapper function on
+`xcast()` is a wrapper function on
 [`vctrs::vec_cast()`](https://vctrs.r-lib.org/reference/vec_cast.html)
 for use in
 [`xnew_data()`](https://poissonconsulting.github.io/newdata/reference/xnew_data.md)

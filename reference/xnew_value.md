@@ -19,6 +19,10 @@ xnew_value(x, ...)
   Additional arguments passed to
   [`new_value()`](https://poissonconsulting.github.io/newdata/reference/new_value.md).
 
+## Value
+
+A one row, one column tibble named after `x` of the new reference value.
+
 ## Details
 
 `xnew_value()` is a wrapper function on
