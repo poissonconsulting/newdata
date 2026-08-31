@@ -33,7 +33,11 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="newdata-010">newdata 0.1.0<a class="anchor" aria-label="anchor" href="#newdata-010"></a></h2>
-<ul><li>Initial CRAN release.</li>
+<ul><li><p>Initial CRAN release.</p></li>
+<li><p><code><a href="../reference/xnew_data.html">xnew_data()</a></code> generates a new data frame (in the form of a tibble) for predictive purposes. By default all specified variables vary across their range while all other variables are held constant at their reference value. Types, classes, factor levels and time zones are always preserved.</p></li>
+<li><p><code><a href="../reference/xnew_seq.html">xnew_seq()</a></code>, <code><a href="../reference/xnew_value.html">xnew_value()</a></code>, <code><a href="../reference/xobs_only.html">xobs_only()</a></code> and <code><a href="../reference/xcast.html">xcast()</a></code> are used within <code><a href="../reference/xnew_data.html">xnew_data()</a></code> to set the length of individual sequences, override reference values, restrict combinations to those observed and cast new values to the class of an existing column.</p></li>
+<li><p><code><a href="../reference/new_seq.html">new_seq()</a></code> and <code><a href="../reference/new_value.html">new_value()</a></code> generate the sequence and the reference value for an individual vector.</p></li>
+<li><p><code><a href="../reference/new_data.html">new_data()</a></code> provides a string based interface to the same functionality and is superseded by <code><a href="../reference/xnew_data.html">xnew_data()</a></code>.</p></li>
 </ul></div>
   </main></div>
 
