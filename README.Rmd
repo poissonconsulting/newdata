@@ -27,7 +27,7 @@ knitr::opts_chunk$set(
 
 `newdata` is an R package to generate new data frames by varying some variables while holding the others constant.
 
-By default, all specified variables vary across their range 
+By default, all specified variables vary across their range
 while all other variables are held constant at a reference value.
 The user can specify the length of each sequence, require that only
 observed values and combinations are used and add new variables.
@@ -55,6 +55,12 @@ The reference value depends on the class of the variable, by default:
 - character vectors are the most common value or the first when sorted of the most common values;
 - factor and ordered vectors are the first level.
 
+The reference value of a variable can be modified with `xnew_value()`,
+which passes additional arguments to `new_value()`.
+```{r}
+xnew_data(old_data, xnew_value(dbl, .obs_only = TRUE))
+```
+
 ### Sequences
 
 Specifying a variable causes it to vary sequentially across its range.
@@ -67,7 +73,7 @@ By default the sequence depends on the class of the variable:
 - logical vectors are length 2 (TRUE and FALSE);
 - double vectors are 30 equally spaced values from the minimum value to the maximum value;
 - integer, Date, POSIXct and hms vectors are up to 30 discrete values from the minimum to the maximum value as evenly spaced as possible;
-- character vectors are the number of unique values.
+- character vectors are the number of unique values;
 - factor and ordered vectors are the number of levels.
 
 These values can be overridden by setting the following options:
@@ -102,33 +108,36 @@ The `xobs_only()` function can be used to filter out unobserved values after the
 xnew_data(old_data, xobs_only(xnew_seq(int, .length_out = 3)))
 ```
 
-and when two or more variables are specified all combinations are used.
+When two or more variables are specified all combinations are used.
 ```{r}
 xnew_data(old_data, int, fct)
 ```
 
-to only get observed combinations.
+To only get the observed combinations use `xobs_only()`.
 ```{r}
 xnew_data(old_data, xobs_only(int, fct))
 ```
 
 ### Modifying Variables
 
-Modifying an existing variable or changing an existing one is simple.
+Modifying an existing variable or adding a new one is simple.
 ```{r}
-xnew_data(old_data, lgl = median(lgl, na.rm = TRUE), extra = c(TRUE, FALSE))
+xnew_data(old_data, dbl = median(dbl, na.rm = TRUE), extra = c(TRUE, FALSE))
 ```
+
+A modified or new variable takes the class of the values provided.
 
 ### Casting Variables
 
-Casting variables to be the same class as the original is achieved as follows.
+New values can be cast to the class of the original variable with `xcast()`.
 ```{r}
 xnew_data(old_data, xcast(lgl = 1, int = 7, dbl = 10L, fct = "a rarity", hms = "00:00:02"))
 ```
 
 ### A Simple Wrapper
 
-Although superseded, for consistency with existing code `new_data()` which is a simple wrapper on `xnew_data()` allows the user to pass a character vector and to specifying the length of all the sequences is also provided.
+`new_data()` is a superseded wrapper on `xnew_data()` that is provided for consistency with existing code.
+It takes the variables to vary as a character vector and the length of all the sequences as a count.
 
 ```{r}
 new_data(old_data, seq = c("int", "fct"), length_out = 5)
