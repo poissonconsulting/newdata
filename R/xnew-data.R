@@ -63,7 +63,7 @@ xnew_data <- function(.data, ..., .length_out = NULL) {
 
   # a symbol is translated into a one column tibble which is already named
   symbol <- map_lgl(quos, function(quo) is_symbol(quo_get_expr(quo)))
-  names(translated) <- ifelse(symbol, "", names)
+  names(translated)[symbol] <- ""
 
   expand2(.data, !!!translated, .default = new_value, .order = TRUE)
 }
