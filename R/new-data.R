@@ -15,12 +15,12 @@
 #' @param seq A character vector of the variables in `data` to generate
 #' sequences for.
 #' @param ref `r lifecycle::badge("deprecated")` A named list of reference values for variables that are not in seq.
-#' Deprecated for `[xnew_value()]` in `[xnew_data()]`.
+#' Deprecated in favour of [xnew_value()] in [xnew_data()].
 #' @param obs_only `r lifecycle::badge("deprecated")` A list of character vectors
 #' indicating the sets of variables
 #' to only allow observed combinations for.
-#' If TRUE then obs_only is set to be seq.
-#' Deprecated for `[xobs_only()]` in `[xnew_data()]`.
+#' If `TRUE` then `obs_only` is set to be `seq`.
+#' Deprecated in favour of [xobs_only()] in [xnew_data()].
 #' @param length_out
 #' A count indicating the maximum length of sequences for all
 #' types of variables except logical, character, factor and ordered factors.

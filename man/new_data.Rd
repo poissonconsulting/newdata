@@ -19,13 +19,13 @@ new_data(
 sequences for.}
 
 \item{ref}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A named list of reference values for variables that are not in seq.
-Deprecated for \verb{[xnew_value()]} in \verb{[xnew_data()]}.}
+Deprecated in favour of \code{\link[=xnew_value]{xnew_value()}} in \code{\link[=xnew_data]{xnew_data()}}.}
 
 \item{obs_only}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A list of character vectors
 indicating the sets of variables
 to only allow observed combinations for.
-If TRUE then obs_only is set to be seq.
-Deprecated for \verb{[xobs_only()]} in \verb{[xnew_data()]}.}
+If \code{TRUE} then \code{obs_only} is set to be \code{seq}.
+Deprecated in favour of \code{\link[=xobs_only]{xobs_only()}} in \code{\link[=xnew_data]{xnew_data()}}.}
 
 \item{length_out}{A count indicating the maximum length of sequences for all
 types of variables except logical, character, factor and ordered factors.}

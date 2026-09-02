@@ -1,5 +1,11 @@
 #' Generate Observed Combinations Only
 #'
+#' Generates the observed combinations of one or more variables.
+#'
+#' By default [xnew_data()] generates all the combinations of the variables
+#' it is given. `xobs_only()` drops the combinations that do not occur in the
+#' data.
+#'
 #' @param ... One or more variables to generate combinations for.
 #' @param .length_out A count to override the default length of sequences.
 #' @inheritParams xcast

@@ -18,7 +18,12 @@ data frame or tibble if using this function directly.}
 A tibble of the observed combinations of the variables.
 }
 \description{
-Generate Observed Combinations Only
+Generates the observed combinations of one or more variables.
+}
+\details{
+By default \code{\link[=xnew_data]{xnew_data()}} generates all the combinations of the variables
+it is given. \code{xobs_only()} drops the combinations that do not occur in the
+data.
 }
 \examples{
 data <- tibble::tibble(
