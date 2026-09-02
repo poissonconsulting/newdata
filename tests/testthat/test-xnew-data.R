@@ -167,3 +167,30 @@ test_that("named symbol respects .length_out (#99)", {
     factor(c("a", "b"), levels = letters[1:5])
   )
 })
+
+test_that("named non-symbol adds a new column with that name (#109)", {
+  data <- tibble::tibble(
+    a = 1:5 + 0.5,
+    b = factor(letters[1:5])
+  )
+
+  # a bare vector was expanded to all of its factor levels
+  expect_identical(
+    xnew_data(data, z = new_seq(b, .length_out = 2))$z,
+    factor(c("a", "b"), levels = letters[1:5])
+  )
+  expect_identical(
+    xnew_data(data, z = new_seq(a, .length_out = 3))$z,
+    c(1.5, 3.5, 5.5)
+  )
+
+  # a one column data frame became a packed data frame column
+  new_data <- xnew_data(data, z = xnew_seq(b, .length_out = 2))
+  expect_named(new_data, c("a", "b", "z"))
+  expect_identical(new_data$z, factor(c("a", "b"), levels = letters[1:5]))
+
+  # a multi column data frame is still packed into a data frame column
+  new_data <- xnew_data(data, z = tidyr::nesting(a, b))
+  expect_named(new_data, c("a", "b", "z"))
+  expect_named(new_data$z, c("a", "b"))
+})
