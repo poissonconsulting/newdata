@@ -58,8 +58,7 @@ xnew_data <- function(.data, ..., .length_out = NULL) {
 
   quos <- enquos(...)
 
-  names <- names2(quos)
-  translated <- map2(quos, names, quo_translate_xnew_data, .length_out)
+  translated <- imap(quos, quo_translate_xnew_data, .length_out)
 
   # a symbol is translated into a one column tibble which is already named
   symbol <- map_lgl(quos, function(quo) is_symbol(quo_get_expr(quo)))
