@@ -39,10 +39,9 @@
 #' # With multiple variables all combinations are produced
 #' xnew_data(data, period, xnew_seq(annual, .length_out = 3, .obs_only = TRUE))
 #'
-#' # Naming a variable generates a new column of that name.
 #' # Naming a variable generates a new column of that name
 #' xnew_data(data, Annual = annual)
-#' 
+#'
 #' # The new variable can be generated using an external vector, too
 #' new_annual <- unique(data$annual)
 #' xnew_data(data, Annual = new_annual)
