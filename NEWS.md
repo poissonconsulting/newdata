@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# newdata 0.1.0.9002
+
+- Same as previous version.
+
+
 # newdata 0.1.0.9001
 
 ## Chore
