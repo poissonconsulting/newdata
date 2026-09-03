@@ -1,5 +1,9 @@
 # Changelog
 
+## newdata 0.1.0.9002
+
+- Same as previous version.
+
 ## newdata 0.1.0.9001
 
 ### Chore
