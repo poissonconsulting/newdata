@@ -131,3 +131,39 @@ test_that("xnew_data factor with 100 levels", {
     xnew_data(data, fct, dbl, .length_out = 29)
   })
 })
+
+test_that("named symbol adds a new column with that name (#99)", {
+  data <- tibble::tibble(
+    lengths = 1:2,
+    x = c(1, 5)
+  )
+
+  new_data <- xnew_data(data, Length = lengths)
+  expect_named(new_data, c("lengths", "x", "Length"))
+  expect_identical(new_data$Length, 1:2)
+  expect_identical(new_data$Length, data$lengths)
+  expect_identical(new_data$lengths, c(1L, 1L))
+
+  lengths_vec <- 10:12
+  new_data <- xnew_data(data, Length = lengths_vec)
+  expect_named(new_data, c("lengths", "x", "Length"))
+  expect_identical(new_data$Length, 10:12)
+  expect_identical(new_data$Length, lengths_vec)
+  expect_identical(new_data$lengths, c(1L, 1L, 1L))
+})
+
+test_that("named symbol respects .length_out (#99)", {
+  data <- tibble::tibble(
+    a = 1:5 + 0.5,
+    b = factor(letters[1:5])
+  )
+
+  expect_identical(
+    xnew_data(data, z = a, .length_out = 3)$z,
+    c(1.5, 3.5, 5.5)
+  )
+  expect_identical(
+    xnew_data(data, z = b, .length_out = 2)$z,
+    factor(c("a", "b"), levels = letters[1:5])
+  )
+})
