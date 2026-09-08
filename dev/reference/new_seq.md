@@ -15,6 +15,9 @@ new_seq(
   obs_only = deprecated()
 )
 
+# Default S3 method
+new_seq(x, .length_out = NULL, ..., .obs_only = NULL)
+
 # S3 method for class 'logical'
 new_seq(
   x,
@@ -152,6 +155,9 @@ for hms vectors. For POSIXct vectors the time zone is preserved. For
 logical objects the longest possible sequence is `c(TRUE, FALSE)`.
 
 ## Methods (by class)
+
+- `new_seq(default)`: Informative error for unsupported objects such as
+  data frames and lists
 
 - `new_seq(logical)`: Generate new sequence of values for logical
   objects

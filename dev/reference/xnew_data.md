@@ -34,6 +34,15 @@ classes, factor levels and time zones are always preserved. The user can
 specify the length of each sequence, require that only observed values
 and combinations are used and add new variables.
 
+Naming an argument generates a new column of that name rather than
+varying an existing column. A bare vector or a one column data frame
+becomes the new column, so `Annual = annual` keeps `annual` at its
+reference value and adds `Annual` varying across its range. A data frame
+with more than one column, such as the result of
+[`tidyr::nesting()`](https://tidyr.tidyverse.org/reference/expand.html),
+is packed into a data frame column of that name. An argument that
+evaluates to `NULL` is dropped.
+
 ## See also
 
 [`xnew_value()`](https://poissonconsulting.github.io/newdata/dev/reference/xnew_value.md),
@@ -100,6 +109,29 @@ xnew_data(data, period, xnew_seq(annual, .length_out = 3, .obs_only = TRUE))
 #> 4 after      2 2     
 #> 5 after      2 3     
 #> 6 after      2 5     
+
+# Naming a variable generates a new column of that name
+xnew_data(data, Annual = annual)
+#> # A tibble: 5 × 4
+#>   period count annual Annual
+#>   <fct>  <int> <fct>  <fct> 
+#> 1 before     2 1      1     
+#> 2 before     2 1      2     
+#> 3 before     2 1      3     
+#> 4 before     2 1      5     
+#> 5 before     2 1      8     
+
+# The new variable can be generated using an external vector, too
+new_annual <- unique(data$annual)
+xnew_data(data, Annual = new_annual)
+#> # A tibble: 5 × 4
+#>   period count annual Annual
+#>   <fct>  <int> <fct>  <fct> 
+#> 1 before     2 1      1     
+#> 2 before     2 1      2     
+#> 3 before     2 1      3     
+#> 4 before     2 1      5     
+#> 5 before     2 1      8     
 
 # To only preserve observed combinations use
 xnew_data(data, xobs_only(period, annual))
