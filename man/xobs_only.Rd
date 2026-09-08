@@ -7,7 +7,10 @@
 xobs_only(..., .length_out = NULL, .data = xnew_data_env$data)
 }
 \arguments{
-\item{...}{One or more variables to generate combinations for.}
+\item{...}{One or more unnamed variables in \code{.data} to generate observed
+combinations for. Naming an argument is an error as a new column has no
+observed combinations to preserve; use a named argument to \code{\link[=xnew_data]{xnew_data()}}
+instead.}
 
 \item{.length_out}{A count to override the default length of sequences.}
 
