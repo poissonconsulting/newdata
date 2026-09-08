@@ -82,7 +82,7 @@ quo_translate_xnew_data <- function(quo, name, length_out) {
   }
   # the user's quosure is nested inside one evaluated in the package namespace
   # so that the internal xnew_column() is in scope
-  new_quosure(expr(xnew_column(!!quo, !!name)), ns_env("newdata"))
+  expr(!!xnew_column(quo, name))
 }
 
 # A named argument must reach tidyr::expand() as a one column data frame.
