@@ -12,7 +12,11 @@ xobs_only(..., .length_out = NULL, .data = xnew_data_env$data)
 
 - ...:
 
-  One or more variables to generate combinations for.
+  One or more unnamed variables in `.data` to generate observed
+  combinations for. Naming an argument is an error as a new column has
+  no observed combinations to preserve; use a named argument to
+  [`xnew_data()`](https://poissonconsulting.github.io/newdata/dev/reference/xnew_data.md)
+  instead.
 
 - .length_out:
 
