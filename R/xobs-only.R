@@ -1,6 +1,9 @@
 #' Generate Observed Combinations Only
 #'
-#' @param ... One or more variables to generate combinations for.
+#' @param ... One or more unnamed variables in `.data` to generate observed
+#'   combinations for. Naming an argument is an error as a new column has no
+#'   observed combinations to preserve; use a named argument to [xnew_data()]
+#'   instead.
 #' @param .length_out A count to override the default length of sequences.
 #' @inheritParams xcast
 #' @return A tibble of the observed combinations of the variables.
@@ -18,6 +21,15 @@
 #' xnew_data(data, xobs_only(period, xnew_seq(annual, .length_out = 3)))
 xobs_only <- function(..., .length_out = NULL, .data = xnew_data_env$data) {
   quos <- enquos(...)
+
+  named <- names2(quos)[nzchar(names2(quos))]
+  if (length(named)) {
+    err(
+      "`xobs_only()` arguments must not be named (",
+      cc(named, " and "),
+      ") as observed combinations must refer to columns of `.data`"
+    )
+  }
 
   translated <- map(quos, quo_translate_xobs_only, .length_out)
 
@@ -46,5 +58,14 @@ semi_crossing <- function(..., .data = xnew_data_env$data) {
   }
 
   out <- tidyr::crossing(...)
-  dplyr::semi_join(out, .data, by = intersect(names(out), names(.data)))
+
+  missing <- setdiff(names(out), names(.data))
+  if (length(missing)) {
+    err(
+      "`xobs_only()` arguments must refer to columns of `.data` (unrecognised: ",
+      cc(missing, " and "),
+      ")"
+    )
+  }
+  dplyr::semi_join(out, .data, by = names(out))
 }
