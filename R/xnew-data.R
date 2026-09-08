@@ -59,9 +59,9 @@ xnew_data <- function(.data, ..., .length_out = NULL) {
 
   translated <- imap(quos, quo_translate_xnew_data, .length_out)
 
-  # a symbol is translated into a one column tibble which is already named
-  symbol <- map_lgl(quos, function(quo) is_symbol(quo_get_expr(quo)))
-  names(translated)[symbol] <- ""
+  # the argument name is applied to the value itself by xnew_column() so the
+  # outer name is dropped to stop tidyr::expand() packing it into a df column
+  names(translated)[nzchar(names2(quos))] <- ""
 
   expand2(.data, !!!translated, .default = new_value, .order = TRUE)
 }
@@ -74,16 +74,25 @@ quo_translate_xnew_data <- function(quo, name, length_out) {
 }
 
 expr_translate_xnew_data <- function(expr, name, length_out) {
-  if (!is_symbol(expr)) {
+  if (is_symbol(expr)) {
+    expr <- expr(xnew_seq(!!expr, .length_out = !!length_out))
+  }
+  if (!nzchar(name)) {
     return(expr)
   }
-  seq <- expr(xnew_seq(!!expr, .length_out = !!length_out))
-  if (!nzchar(name)) {
-    return(seq)
+  # the function is inlined as the quosure is evaluated in the caller's
+  # environment where an internal function is not in scope
+  expr((!!xnew_column)(!!expr, !!name))
+}
+
+# A named argument must reach tidyr::expand() as a one column data frame.
+# expand() sorts and deduplicates either way, but expands a bare factor vector
+# to all of its levels, which discards .length_out and .obs_only.
+xnew_column <- function(x, name) {
+  if (is.data.frame(x) && ncol(x) == 1L) {
+    return(set_names(x, name))
   }
-  # renaming the one column tibble means a named symbol generates a new column
-  # of that name as opposed to a data frame column
-  expr(rlang::set_names(!!seq, !!name))
+  tibble::tibble(!!name := x)
 }
 
 # Environment to store the .data argument
