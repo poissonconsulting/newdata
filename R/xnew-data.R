@@ -64,7 +64,7 @@ xnew_data <- function(.data, ..., .length_out = NULL) {
   stopifnot(is.null(xnew_data_env$data))
   local_bindings(data = .data, .env = xnew_data_env)
 
-  exprs <- enexpr(...)
+  quos <- enquos(...)
 
   # the argument name is applied to the value itself by xnew_column() so the
   # outer name is dropped to stop tidyr::expand() packing it into a df column
