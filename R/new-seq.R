@@ -115,6 +115,23 @@ new_seq_args <- function(.length_out, .obs_only, length_out, obs_only) {
   list(.length_out = .length_out, .obs_only = .obs_only)
 }
 
+#' @describeIn new_seq Informative error for unsupported objects such as
+#' data frames and lists
+#' @export
+new_seq.default <- function(x, .length_out = NULL, ..., .obs_only = NULL) {
+  chk_unused(...)
+  abort_chk(
+    "`x` must be a logical, integer, double, character, factor, ",
+    "Date, POSIXct or hms vector, not ",
+    if (is.data.frame(x)) {
+      "a data frame"
+    } else {
+      paste0("class '", class(x)[1L], "'")
+    },
+    "."
+  )
+}
+
 #' @describeIn new_seq Generate new sequence of values for logical objects
 #' @export
 new_seq.logical <- function(

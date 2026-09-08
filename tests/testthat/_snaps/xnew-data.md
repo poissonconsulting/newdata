@@ -560,3 +560,21 @@
       10 1     32.8 
       # i 831 more rows
 
+# one column data frame passed instead of a vector errors informatively
+
+    Code
+      xnew_data(data, Length = new_lengths)
+    Condition
+      Error in `xnew_seq()`:
+      ! `x` must be a logical, integer, double, character, factor, Date, POSIXct or hms vector, not a data frame.
+    Code
+      xnew_data(data, new_lengths)
+    Condition
+      Error in `xnew_seq()`:
+      ! `x` must be a logical, integer, double, character, factor, Date, POSIXct or hms vector, not a data frame.
+    Code
+      xnew_data(data, xnew_seq(new_lengths))
+    Condition
+      Error in `xnew_seq()`:
+      ! `x` must be a logical, integer, double, character, factor, Date, POSIXct or hms vector, not a data frame.
+

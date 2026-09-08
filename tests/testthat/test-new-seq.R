@@ -2248,3 +2248,16 @@ test_that("new_seq hms", {
     as_hms(c(1:100))
   )
 })
+
+test_that("new_seq errors informatively for unsupported objects", {
+  expect_error(
+    new_seq(data.frame(y = 1:3)),
+    "`x` must be a logical, integer, double, character, factor, Date, POSIXct or hms vector, not a data frame\\.",
+    fixed = FALSE
+  )
+  expect_error(
+    new_value(data.frame(y = 1:3)),
+    "not a data frame\\."
+  )
+  expect_error(new_seq(list(1, 2)), "not class 'list'\\.")
+})

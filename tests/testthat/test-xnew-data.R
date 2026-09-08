@@ -219,3 +219,14 @@ test_that("named argument works from a function and a local environment", {
     c(1.5, 5.5)
   )
 })
+
+test_that("one column data frame passed instead of a vector errors informatively", {
+  data <- tibble::tibble(lengths = 1:2)
+  new_lengths <- data.frame(lengths = 10:12)
+
+  expect_snapshot(error = TRUE, {
+    xnew_data(data, Length = new_lengths)
+    xnew_data(data, new_lengths)
+    xnew_data(data, xnew_seq(new_lengths))
+  })
+})
