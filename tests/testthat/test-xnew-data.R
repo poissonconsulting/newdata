@@ -194,3 +194,28 @@ test_that("named non-symbol adds a new column with that name (#109)", {
   expect_named(new_data, c("a", "b", "z"))
   expect_named(new_data$z, c("a", "b"))
 })
+
+test_that("named argument that evaluates to NULL is dropped", {
+  data <- tibble::tibble(
+    a = 1:5 + 0.5,
+    b = factor(letters[1:5])
+  )
+
+  expect_identical(xnew_data(data, z = NULL), xnew_data(data))
+  expect_identical(xnew_data(data, z = NULL, a), xnew_data(data, a))
+})
+
+test_that("named argument works from a function and a local environment", {
+  data <- tibble::tibble(a = 1:5 + 0.5)
+
+  f <- function(data, n) xnew_data(data, z = new_seq(a, .length_out = n))
+  expect_identical(f(data, 3)$z, c(1.5, 3.5, 5.5))
+
+  expect_identical(
+    local({
+      n <- 2
+      xnew_data(data, z = new_seq(a, .length_out = n))$z
+    }),
+    c(1.5, 5.5)
+  )
+})
