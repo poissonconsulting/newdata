@@ -74,9 +74,11 @@ xnew_data <- function(.data, ..., .length_out = NULL) {
 }
 
 quo_translate_xnew_data <- function(quo, name, length_out) {
+  expr <- quo_get_expr(quo)
   if (is_symbol(expr)) {
-    expr <- expr(!!xnew_seq(expr, .length_out = length_out))
+    expr <- expr(xnew_seq(!!expr, .length_out = !!length_out))
   }
+  quo <- new_quosure(expr, quo_get_env(quo))
   if (!nzchar(name)) {
     return(quo)
   }
