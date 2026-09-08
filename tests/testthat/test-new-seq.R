@@ -2261,3 +2261,26 @@ test_that("new_seq errors informatively for unsupported objects", {
   )
   expect_error(new_seq(list(1, 2)), "not class 'list'\\.")
 })
+
+test_that("new_seq logical .length_out greater than 2 is capped at 2", {
+  expect_identical(new_seq(c(TRUE, FALSE), .length_out = 3), c(FALSE, TRUE))
+  expect_identical(new_seq(c(TRUE, FALSE), .length_out = Inf), c(FALSE, TRUE))
+  expect_identical(
+    new_seq(c(TRUE, TRUE), .length_out = 3, .obs_only = TRUE),
+    TRUE
+  )
+  expect_identical(
+    new_seq(c(TRUE, NA, FALSE), .length_out = 3, .obs_only = TRUE),
+    c(FALSE, TRUE)
+  )
+})
+
+test_that("new_data.length_out_lgl option greater than 2 is capped at 2", {
+  withr::local_options(list(new_data.length_out_lgl = 5L))
+  expect_identical(new_seq(c(TRUE, FALSE)), c(FALSE, TRUE))
+  expect_identical(new_seq(c(TRUE, TRUE), .obs_only = TRUE), TRUE)
+  expect_identical(xnew_data(old_data, lgl)$lgl, c(FALSE, TRUE))
+
+  withr::local_options(list(new_data.length_out_lgl = Inf))
+  expect_identical(new_seq(c(TRUE, FALSE)), c(FALSE, TRUE))
+})
