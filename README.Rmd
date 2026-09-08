@@ -78,7 +78,7 @@ By default the sequence depends on the class of the variable:
 
 These values can be overridden by setting the following options:
 
-- `new_data.length_out_lgl`, which is 2 by default, for logical vectors;
+- `new_data.length_out_lgl`, which is 2 by default, for logical vectors (values greater than 2 have no effect as a logical sequence is at most `c(FALSE, TRUE)`);
 - `new_data.length_out_dbl`, which is 30 by default, for double vectors;
 - `new_data.length_out_int`, which is 30 by default, for integer, Date, POSIXct and hms vectors^1;
 - `new_data.length_out_chr`, which is Inf by default, for character, factor and ordered vectors.
