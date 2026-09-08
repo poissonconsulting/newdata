@@ -8,6 +8,15 @@
 #' The user can specify the length of each sequence, require that only
 #' observed values and combinations are used and add new variables.
 #'
+#' Naming an argument generates a new column of that name
+#' rather than varying an existing column.
+#' A bare vector or a one column data frame becomes the new column,
+#' so `Annual = annual` keeps `annual` at its reference value and adds
+#' `Annual` varying across its range.
+#' A data frame with more than one column, such as the result of
+#' [tidyr::nesting()], is packed into a data frame column of that name.
+#' An argument that evaluates to `NULL` is dropped.
+#'
 #' @param .data The data frame to generate the new data from.
 #' @param .length_out NULL or a count specifying the maximum length
 #' of all sequences.
@@ -39,6 +48,13 @@
 #' # With multiple variables all combinations are produced
 #' xnew_data(data, period, xnew_seq(annual, .length_out = 3, .obs_only = TRUE))
 #'
+#' # Naming a variable generates a new column of that name
+#' xnew_data(data, Annual = annual)
+#'
+#' # The new variable can be generated using an external vector, too
+#' new_annual <- unique(data$annual)
+#' xnew_data(data, Annual = new_annual)
+#'
 #' # To only preserve observed combinations use
 #' xnew_data(data, xobs_only(period, annual))
 #'
@@ -50,24 +66,38 @@ xnew_data <- function(.data, ..., .length_out = NULL) {
 
   quos <- enquos(...)
 
-  translated <- map(quos, quo_translate_xnew_data, .length_out)
+  # the argument name is applied to the value itself by xnew_column() so the
+  # outer name is dropped to stop tidyr::expand() packing it into a df column
+  translated <- unname(imap(quos, quo_translate_xnew_data, .length_out))
 
   expand2(.data, !!!translated, .default = new_value, .order = TRUE)
 }
 
-quo_translate_xnew_data <- function(quo, length_out) {
-  new_quosure(
-    expr_translate_xnew_data(quo_get_expr(quo), length_out),
-    quo_get_env(quo)
-  )
+quo_translate_xnew_data <- function(quo, name, length_out) {
+  expr <- quo_get_expr(quo)
+  if (is_symbol(expr)) {
+    expr <- expr(xnew_seq(!!expr, .length_out = !!length_out))
+  }
+  quo <- new_quosure(expr, quo_get_env(quo))
+  if (!nzchar(name)) {
+    return(quo)
+  }
+  # the user's quosure is nested inside one evaluated in the package namespace
+  # so that the internal xnew_column() is in scope
+  new_quosure(expr(xnew_column(!!quo, !!name)), ns_env("newdata"))
 }
 
-expr_translate_xnew_data <- function(expr, length_out) {
-  if (is_symbol(expr)) {
-    expr(xnew_seq(!!expr, .length_out = !!length_out))
-  } else {
-    expr
+# A named argument must reach tidyr::expand() as a one column data frame.
+# expand() sorts and deduplicates either way, but expands a bare factor vector
+# to all of its levels, which discards .length_out and .obs_only.
+xnew_column <- function(x, name) {
+  if (is.null(x)) {
+    return(NULL)
   }
+  if (is.data.frame(x) && ncol(x) == 1L) {
+    return(set_names(x, name))
+  }
+  tibble::tibble(!!name := x)
 }
 
 # Environment to store the .data argument

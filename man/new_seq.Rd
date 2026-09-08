@@ -2,6 +2,7 @@
 % Please edit documentation in R/new-seq.R
 \name{new_seq}
 \alias{new_seq}
+\alias{new_seq.default}
 \alias{new_seq.logical}
 \alias{new_seq.integer}
 \alias{new_seq.double}
@@ -21,6 +22,8 @@ new_seq(
   length_out = deprecated(),
   obs_only = deprecated()
 )
+
+\method{new_seq}{default}(x, .length_out = NULL, ..., .obs_only = NULL)
 
 \method{new_seq}{logical}(
   x,
@@ -145,6 +148,9 @@ For logical objects the longest possible sequence is \code{c(TRUE, FALSE)}.
 }
 \section{Methods (by class)}{
 \itemize{
+\item \code{new_seq(default)}: Informative error for unsupported objects such as
+data frames and lists
+
 \item \code{new_seq(logical)}: Generate new sequence of values for logical objects
 
 \item \code{new_seq(integer)}: Generate new sequence of values for integer objects

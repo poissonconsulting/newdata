@@ -26,6 +26,15 @@ while all other variables are held constant at their reference value.
 Types, classes, factor levels and time zones are always preserved.
 The user can specify the length of each sequence, require that only
 observed values and combinations are used and add new variables.
+
+Naming an argument generates a new column of that name
+rather than varying an existing column.
+A bare vector or a one column data frame becomes the new column,
+so \code{Annual = annual} keeps \code{annual} at its reference value and adds
+\code{Annual} varying across its range.
+A data frame with more than one column, such as the result of
+\code{\link[tidyr:nesting]{tidyr::nesting()}}, is packed into a data frame column of that name.
+An argument that evaluates to \code{NULL} is dropped.
 }
 \examples{
 data <- tibble::tibble(
@@ -50,6 +59,13 @@ xnew_data(data, xnew_seq(annual, .length_out = 3, .obs_only = TRUE))
 
 # With multiple variables all combinations are produced
 xnew_data(data, period, xnew_seq(annual, .length_out = 3, .obs_only = TRUE))
+
+# Naming a variable generates a new column of that name
+xnew_data(data, Annual = annual)
+
+# The new variable can be generated using an external vector, too
+new_annual <- unique(data$annual)
+xnew_data(data, Annual = new_annual)
 
 # To only preserve observed combinations use
 xnew_data(data, xobs_only(period, annual))
