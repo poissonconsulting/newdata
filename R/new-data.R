@@ -3,33 +3,51 @@
 #' Generates a new data frame (in the form of a tibble) with each variable
 #' held constant or varying as a unique ordered sequence.
 #'
-#' Although superseded it is maintained for backwards compatibility with existing code.
+#' `new_data()` has been superseded by [xnew_data()],
+#' which accepts bare column names and provides
+#' finer control through [xnew_seq()], [xnew_value()], [xobs_only()] and [xcast()].
+#' `new_data()` remains fully functional and is maintained
+#' for backwards compatibility with existing code.
+#' All of its arguments continue to work.
+#' The `ref` and `obs_only` arguments are deprecated,
+#' which means that using them produces a warning
+#' but they still behave as documented.
 #'
-#' The code
+#' The call
 #' `new_data(data, seq = c("a", "b"), length_out = 30)`
-#' is effectively a wrapper for
-#' `xnew_data(data, a, b, .length_out = 30)`
-#' to allow a string of column names to be passed.
+#' is equivalent to
+#' `xnew_data(data, a, b, .length_out = 30)`.
 #'
 #' @param data The data frame to generate the new data from.
-#' @param seq A character vector of the variables in `data` to generate
-#' sequences for.
-#' @param ref `r lifecycle::badge("deprecated")` A named list of reference values for variables that are not in seq.
-#' Deprecated for `[xnew_value()]` in `[xnew_data()]`.
-#' @param obs_only `r lifecycle::badge("deprecated")` A list of character vectors
-#' indicating the sets of variables
-#' to only allow observed combinations for.
-#' If TRUE then obs_only is set to be seq.
-#' Deprecated for `[xobs_only()]` in `[xnew_data()]`.
-#' @param length_out
-#' A count indicating the maximum length of sequences for all
-#' types of variables except logical, character, factor and ordered factors.
+#' @param seq A character vector of the names of the variables in `data` to
+#' generate sequences for.
+#' All other variables are held constant at their reference value.
+#' @param ref `r lifecycle::badge("deprecated")` A named list of reference
+#' values for variables that are not in `seq`.
+#' Using it produces a warning.
+#' Instead name the value in [xnew_data()],
+#' for example `xnew_data(data, a, b = 1)`.
+#' @param obs_only `r lifecycle::badge("deprecated")` A list of character
+#' vectors indicating the sets of variables to only allow observed
+#' combinations for.
+#' If `TRUE` then `obs_only` is set to be `seq`.
+#' Using it produces a warning.
+#' Instead use [xobs_only()] in [xnew_data()],
+#' for example `xnew_data(data, xobs_only(a, b))`.
+#' @param length_out A count indicating the maximum length of sequences for
+#' all types of variables except logical, character, factor and ordered
+#' factors.
 #' @return A tibble of the new data.
-#' @seealso [xnew_data()].
+#' @seealso [xnew_data()]
 #' @examples
 #' new_data(old_data, "int")
 #' new_data(old_data, "dbl")
 #' new_data(old_data, c("int", "dbl"))
+#'
+#' # equivalent using xnew_data()
+#' xnew_data(old_data, int)
+#' xnew_data(old_data, dbl)
+#' xnew_data(old_data, int, dbl)
 #' @export
 new_data <- function(
   data,

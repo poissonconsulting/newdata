@@ -15,20 +15,27 @@ new_data(
 \arguments{
 \item{data}{The data frame to generate the new data from.}
 
-\item{seq}{A character vector of the variables in \code{data} to generate
-sequences for.}
+\item{seq}{A character vector of the names of the variables in \code{data} to
+generate sequences for.
+All other variables are held constant at their reference value.}
 
-\item{ref}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A named list of reference values for variables that are not in seq.
-Deprecated for \verb{[xnew_value()]} in \verb{[xnew_data()]}.}
+\item{ref}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A named list of reference
+values for variables that are not in \code{seq}.
+Using it produces a warning.
+Instead name the value in \code{\link[=xnew_data]{xnew_data()}},
+for example \code{xnew_data(data, a, b = 1)}.}
 
-\item{obs_only}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A list of character vectors
-indicating the sets of variables
-to only allow observed combinations for.
-If TRUE then obs_only is set to be seq.
-Deprecated for \verb{[xobs_only()]} in \verb{[xnew_data()]}.}
+\item{obs_only}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} A list of character
+vectors indicating the sets of variables to only allow observed
+combinations for.
+If \code{TRUE} then \code{obs_only} is set to be \code{seq}.
+Using it produces a warning.
+Instead use \code{\link[=xobs_only]{xobs_only()}} in \code{\link[=xnew_data]{xnew_data()}},
+for example \code{xnew_data(data, xobs_only(a, b))}.}
 
-\item{length_out}{A count indicating the maximum length of sequences for all
-types of variables except logical, character, factor and ordered factors.}
+\item{length_out}{A count indicating the maximum length of sequences for
+all types of variables except logical, character, factor and ordered
+factors.}
 }
 \value{
 A tibble of the new data.
@@ -38,19 +45,31 @@ Generates a new data frame (in the form of a tibble) with each variable
 held constant or varying as a unique ordered sequence.
 }
 \details{
-Although superseded it is maintained for backwards compatibility with existing code.
+\code{new_data()} has been superseded by \code{\link[=xnew_data]{xnew_data()}},
+which accepts bare column names and provides
+finer control through \code{\link[=xnew_seq]{xnew_seq()}}, \code{\link[=xnew_value]{xnew_value()}}, \code{\link[=xobs_only]{xobs_only()}} and \code{\link[=xcast]{xcast()}}.
+\code{new_data()} remains fully functional and is maintained
+for backwards compatibility with existing code.
+All of its arguments continue to work.
+The \code{ref} and \code{obs_only} arguments are deprecated,
+which means that using them produces a warning
+but they still behave as documented.
 
-The code
+The call
 \code{new_data(data, seq = c("a", "b"), length_out = 30)}
-is effectively a wrapper for
-\code{xnew_data(data, a, b, .length_out = 30)}
-to allow a string of column names to be passed.
+is equivalent to
+\code{xnew_data(data, a, b, .length_out = 30)}.
 }
 \examples{
 new_data(old_data, "int")
 new_data(old_data, "dbl")
 new_data(old_data, c("int", "dbl"))
+
+# equivalent using xnew_data()
+xnew_data(old_data, int)
+xnew_data(old_data, dbl)
+xnew_data(old_data, int, dbl)
 }
 \seealso{
-\code{\link[=xnew_data]{xnew_data()}}.
+\code{\link[=xnew_data]{xnew_data()}}
 }
