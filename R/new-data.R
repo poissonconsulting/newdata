@@ -45,6 +45,8 @@
 #' new_data(old_data, c("int", "dbl"))
 #'
 #' # equivalent using xnew_data()
+#' xnew_data(old_data, int)
+#' xnew_data(old_data, dbl)
 #' xnew_data(old_data, int, dbl)
 #' @export
 new_data <- function(
