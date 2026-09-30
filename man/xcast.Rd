@@ -24,6 +24,16 @@ vector.
 \code{xcast()} is a wrapper function on \code{\link[vctrs:vec_cast]{vctrs::vec_cast()}}
 for use in \code{\link[=xnew_data]{xnew_data()}} to avoid
 having to repeating the column name.
+
+The casts that are possible are those defined by vctrs and the
+packages that provide the classes.
+For example, numeric and character values can be cast to hms
+because the hms package provides those casts,
+but vctrs does not provide casts from numeric or character values
+to Date or POSIXct as they require an origin, format or time zone.
+Date and POSIXct values must therefore be created with the
+required class, for example using \code{\link[=as.Date]{as.Date()}} or \code{\link[=as.POSIXct]{as.POSIXct()}}.
+POSIXct values are converted to the time zone of the column.
 }
 \examples{
 data <- tibble::tibble(
@@ -35,6 +45,17 @@ data <- tibble::tibble(
 
 xnew_data(data, xcast(period = "before"))
 xnew_data(data, xcast(period = "before", annual = c("1", "3")))
+
+# numeric and character values can be cast to hms
+xnew_data(old_data, xcast(hms = "01:01:11"))
+# but Date and POSIXct values must be created with the required class
+xnew_data(
+  old_data,
+  xcast(
+    dte = as.Date("2024-01-01"),
+    dtt = as.POSIXct("2024-01-01 10:30:42", tz = "PST8PDT")
+  )
+)
 }
 \seealso{
 \code{\link[vctrs:vec_cast]{vctrs::vec_cast()}} and \code{\link[=xnew_data]{xnew_data()}}

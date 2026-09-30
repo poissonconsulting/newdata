@@ -24,3 +24,12 @@ test_that("xcast old_data", {
     "Can't convert"
   )
 })
+
+test_that("xcast Date and POSIXct values", {
+  date <- as.Date("2024-01-01")
+  datetime <- as.POSIXct("2024-01-01 10:30:42", tz = "UTC")
+  new_data <- xnew_data(old_data, xcast(dte = date, dtt = datetime))
+  expect_identical(new_data$dte, date)
+  expect_equal(new_data$dtt, datetime, ignore_attr = TRUE)
+  expect_identical(attr(new_data$dtt, "tzone"), "PST8PDT")
+})
