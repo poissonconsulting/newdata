@@ -48,6 +48,10 @@ test_that("new_seq logical length_out greater than 2 equivalent to 2", {
   withr::local_options(new_data.length_out_lgl = 3L)
   expect_identical(new_seq(x), c(FALSE, TRUE))
   expect_identical(nrow(xnew_data(data.frame(x = x), x)), 2L)
+  expect_identical(new_seq(TRUE, .obs_only = TRUE), TRUE)
+  expect_identical(xnew_data(old_data, lgl)$lgl, c(FALSE, TRUE))
+  withr::local_options(new_data.length_out_lgl = Inf)
+  expect_identical(new_seq(x), c(FALSE, TRUE))
 })
 
 test_that("new_seq logical", {
