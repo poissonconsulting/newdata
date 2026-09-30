@@ -1,4 +1,4 @@
-# Backports for R <= 4.2
+# Backports for R 4.1 and 4.2, which predate the base defaults these rely on.
 as.Date <- function(x, ...) {
   base::as.Date(x, ..., origin = structure(0, class = "Date"))
 }

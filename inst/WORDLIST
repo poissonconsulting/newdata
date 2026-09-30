@@ -2,7 +2,6 @@ CMD
 Lifecycle
 ORCID
 POSIXct
-Uncategorized
 args
 codecov
 cran
@@ -10,3 +9,4 @@ funder
 hms
 poissonconsulting
 tibble
+vctrs
