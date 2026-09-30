@@ -144,7 +144,8 @@ For ordered factors the intermediate levels are dropped first.
 For Date vectors it's the unique dates;
 same for hms vectors.
 For POSIXct vectors the time zone is preserved.
-For logical objects the longest possible sequence is \code{c(TRUE, FALSE)}.
+For logical objects the longest possible sequence is \code{c(FALSE, TRUE)}
+so values of \code{.length_out} greater than 2 are equivalent to 2.
 }
 \section{Methods (by class)}{
 \itemize{
@@ -212,7 +213,7 @@ new_seq(hms::as_hms(c("00:00:01", "00:00:04")))
 new_seq(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04"),
   tz = "PST8PDT"
 ))
-# for logical objects the longest possible sequence is `c(TRUE, FALSE)`
+# for logical objects the longest possible sequence is `c(FALSE, TRUE)`
 new_seq(c(TRUE, TRUE, FALSE), .length_out = 3)
 }
 \seealso{
