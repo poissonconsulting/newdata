@@ -1,36 +1,5 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# newdata 0.1.0.9004
-
-- Same as previous version.
-
-
-# newdata 0.1.0.9003
-
-- Internal changes only.
-
-
-# newdata 0.1.0.9002
-
-- Same as previous version.
-
-
-# newdata 0.1.0.9001
-
-## Chore
-
-- Format with air (#95).
-
-## Uncategorized
-
-- Standardize new_seq()/new_value() args to dotted names (#43) (#96).
-
-
-# newdata 0.1.0.9000
-
-- Switching to development version.
-
-
 # newdata 0.1.0
 
 - Initial CRAN release.
