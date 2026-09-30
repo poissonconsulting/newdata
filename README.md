@@ -91,7 +91,7 @@ xnew_data(old_data, int)
 
 By default the sequence depends on the class of the variable:
 
-- logical vectors are length 2 (TRUE and FALSE);
+- logical vectors are length 2 (FALSE and TRUE);
 - double vectors are 30 equally spaced values from the minimum value to
   the maximum value;
 - integer, Date, POSIXct and hms vectors are up to 30 discrete values
@@ -101,7 +101,8 @@ By default the sequence depends on the class of the variable:
 
 These values can be overridden by setting the following options:
 
-- `new_data.length_out_lgl`, which is 2 by default, for logical vectors;
+- `new_data.length_out_lgl`, which is 2 by default, for logical vectors
+  (values greater than 2 are equivalent to 2);
 - `new_data.length_out_dbl`, which is 30 by default, for double vectors;
 - `new_data.length_out_int`, which is 30 by default, for integer, Date,
   POSIXct and hms vectors^1;

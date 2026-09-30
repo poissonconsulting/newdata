@@ -32,6 +32,24 @@ test_that("new_seq logical", {
   expect_identical(new_seq(array(TRUE)), c(FALSE, TRUE))
 })
 
+test_that("new_seq logical length_out greater than 2 equivalent to 2", {
+  x <- c(TRUE, TRUE, FALSE, NA)
+  expect_identical(new_seq(x, .length_out = 3), c(FALSE, TRUE))
+  expect_identical(new_seq(x, .length_out = Inf), c(FALSE, TRUE))
+  expect_identical(
+    new_seq(x, .length_out = 3, .obs_only = TRUE),
+    c(FALSE, TRUE)
+  )
+  expect_identical(
+    new_seq(x, .length_out = Inf, .obs_only = TRUE),
+    c(FALSE, TRUE)
+  )
+  expect_identical(new_seq(TRUE, .length_out = 3, .obs_only = TRUE), TRUE)
+  withr::local_options(new_data.length_out_lgl = 3L)
+  expect_identical(new_seq(x), c(FALSE, TRUE))
+  expect_identical(nrow(xnew_data(data.frame(x = x), x)), 2L)
+})
+
 test_that("new_seq logical", {
   # zero length
   expect_identical(new_seq(logical()), c(FALSE, TRUE))

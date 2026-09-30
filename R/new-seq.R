@@ -18,7 +18,8 @@
 #' For Date vectors it's the unique dates;
 #' same for hms vectors.
 #' For POSIXct vectors the time zone is preserved.
-#' For logical objects the longest possible sequence is `c(TRUE, FALSE)`.
+#' For logical objects the longest possible sequence is `c(FALSE, TRUE)`
+#' so values of `.length_out` greater than 2 are equivalent to 2.
 #'
 #' @param x The object to generate the sequence from.
 #' @param .length_out The maximum length of the sequence.
@@ -72,7 +73,7 @@
 #' new_seq(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04"),
 #'   tz = "PST8PDT"
 #' ))
-#' # for logical objects the longest possible sequence is `c(TRUE, FALSE)`
+#' # for logical objects the longest possible sequence is `c(FALSE, TRUE)`
 #' new_seq(c(TRUE, TRUE, FALSE), .length_out = 3)
 #' @export
 new_seq <- function(
