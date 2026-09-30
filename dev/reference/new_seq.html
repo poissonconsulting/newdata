@@ -195,7 +195,8 @@ For ordered factors the intermediate levels are dropped first.
 For Date vectors it's the unique dates;
 same for hms vectors.
 For POSIXct vectors the time zone is preserved.
-For logical objects the longest possible sequence is <code>c(TRUE, FALSE)</code>.</p>
+For logical objects the longest possible sequence is <code>c(FALSE, TRUE)</code>
+so values of <code>.length_out</code> greater than 2 are equivalent to 2.</p>
     </div>
     <div class="section level2">
     <h2 id="methods-by-class-">Methods (by class)<a class="anchor" aria-label="anchor" href="#methods-by-class-"></a></h2>
@@ -292,7 +293,7 @@ data frames and lists</p></li>
 <span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2000-01-01 00:00:01 PST" "2000-01-01 00:00:02 PST"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3] "2000-01-01 00:00:03 PST" "2000-01-01 00:00:04 PST"</span>
-<span class="r-in"><span><span class="co"># for logical objects the longest possible sequence is `c(TRUE, FALSE)`</span></span></span>
+<span class="r-in"><span><span class="co"># for logical objects the longest possible sequence is `c(FALSE, TRUE)`</span></span></span>
 <span class="r-in"><span><span class="fu">new_seq</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, .length_out <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE  TRUE</span>
 </code></pre></div>

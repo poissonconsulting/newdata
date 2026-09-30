@@ -152,7 +152,8 @@ their actual value. For factors it's the factor levels in order with the
 trailing levels dropped first. For ordered factors the intermediate
 levels are dropped first. For Date vectors it's the unique dates; same
 for hms vectors. For POSIXct vectors the time zone is preserved. For
-logical objects the longest possible sequence is `c(TRUE, FALSE)`.
+logical objects the longest possible sequence is `c(FALSE, TRUE)` so
+values of `.length_out` greater than 2 are equivalent to 2.
 
 ## Methods (by class)
 
@@ -264,7 +265,7 @@ new_seq(as.POSIXct(c("2000-01-01 00:00:01", "2000-01-01 00:00:04"),
 ))
 #> [1] "2000-01-01 00:00:01 PST" "2000-01-01 00:00:02 PST"
 #> [3] "2000-01-01 00:00:03 PST" "2000-01-01 00:00:04 PST"
-# for logical objects the longest possible sequence is `c(TRUE, FALSE)`
+# for logical objects the longest possible sequence is `c(FALSE, TRUE)`
 new_seq(c(TRUE, TRUE, FALSE), .length_out = 3)
 #> [1] FALSE  TRUE
 ```

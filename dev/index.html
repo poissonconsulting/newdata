@@ -123,7 +123,7 @@
 <span><span class="co">#&gt; 6 FALSE     6  4.57 most  not obs a rarity 1970-01-04 1969-12-31 16:00:03 00'03"</span></span></code></pre></div>
 <p>By default the sequence depends on the class of the variable:</p>
 <ul>
-<li>logical vectors are length 2 (TRUE and FALSE);</li>
+<li>logical vectors are length 2 (FALSE and TRUE);</li>
 <li>double vectors are 30 equally spaced values from the minimum value to the maximum value;</li>
 <li>integer, Date, POSIXct and hms vectors are up to 30 discrete values from the minimum to the maximum value as evenly spaced as possible;</li>
 <li>character vectors are the number of unique values;</li>
@@ -132,7 +132,7 @@
 <p>These values can be overridden by setting the following options:</p>
 <ul>
 <li>
-<code>new_data.length_out_lgl</code>, which is 2 by default, for logical vectors;</li>
+<code>new_data.length_out_lgl</code>, which is 2 by default, for logical vectors (values greater than 2 are equivalent to 2);</li>
 <li>
 <code>new_data.length_out_dbl</code>, which is 30 by default, for double vectors;</li>
 <li>
