@@ -1,5 +1,9 @@
 # Changelog
 
+## newdata 0.1.0.9006
+
+- Same as previous version.
+
 ## newdata 0.1.0.9005
 
 - Internal changes only.
