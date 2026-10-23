@@ -1,6 +1,7 @@
 ## Test environments
 
 * local macOS 26.6.2, R 4.6.1
+* win-builder, R devel
 * GitHub Actions
   * macOS-latest, R release
   * windows-latest, R release
