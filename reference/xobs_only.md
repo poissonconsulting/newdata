@@ -1,6 +1,6 @@
 # Generate Observed Combinations Only
 
-Generate Observed Combinations Only
+Generates the observed combinations of one or more variables.
 
 ## Usage
 
@@ -12,7 +12,11 @@ xobs_only(..., .length_out = NULL, .data = xnew_data_env$data)
 
 - ...:
 
-  One or more variables to generate combinations for.
+  One or more unnamed variables in `.data` to generate observed
+  combinations for. Naming an argument is an error as a new column has
+  no observed combinations to preserve; use a named argument to
+  [`xnew_data()`](https://poissonconsulting.github.io/newdata/reference/xnew_data.md)
+  instead.
 
 - .length_out:
 
@@ -28,6 +32,13 @@ xobs_only(..., .length_out = NULL, .data = xnew_data_env$data)
 ## Value
 
 A tibble of the observed combinations of the variables.
+
+## Details
+
+By default
+[`xnew_data()`](https://poissonconsulting.github.io/newdata/reference/xnew_data.md)
+generates all the combinations of the variables it is given.
+`xobs_only()` drops the combinations that do not occur in the data.
 
 ## See also
 
