@@ -2,6 +2,8 @@
 
 ## newdata 0.1.0
 
+CRAN release: 2026-11-07
+
 - Initial CRAN release.
 
 - [`xnew_data()`](https://poissonconsulting.github.io/newdata/reference/xnew_data.md)
