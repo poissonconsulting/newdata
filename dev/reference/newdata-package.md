@@ -5,7 +5,9 @@ specified variables vary across their range while all other variables
 are held constant at the default reference value. Types, classes, factor
 levels and time zones are always preserved. The user can specify the
 length of each sequence, require that only observed values and
-combinations are used and add new variables.
+combinations are used and add new variables. The result is intended to
+be passed to the prediction method of a fitted model object to visualize
+the effect of one or more variables while controlling for the others.
 
 ## See also
 
