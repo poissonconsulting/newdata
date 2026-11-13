@@ -2,35 +2,6 @@
 
 ## newdata 0.1.0.9007
 
-- Internal changes only.
-
-## newdata 0.1.0.9004
-
-- Internal changes only.
-
-## newdata 0.1.0.9003
-
-- Internal changes only.
-
-## newdata 0.1.0.9002
-
-- Internal changes only.
-
-## newdata 0.1.0.9001
-
-### Chore
-
-- Format with air
-  ([\#95](https://github.com/poissonconsulting/newdata/issues/95)).
-
-### Uncategorized
-
-- Standardize new_seq()/new_value() args to dotted names
-  ([\#43](https://github.com/poissonconsulting/newdata/issues/43))
-  ([\#96](https://github.com/poissonconsulting/newdata/issues/96)).
-
-## newdata 0.1.0.9000
-
 - Switching to development version.
 
 ## newdata 0.1.0
